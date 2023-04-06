@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MonsterController : MonoBehaviour
 {
-    public Vector2 _playerPosition;
+    [Tooltip("몬스터가 추적할 플레이어의 위치입니다.")] public Vector2 _playerPosition;
     NavMeshAgent _agent;
 
     // NavMesh 에이전트의 회전과 Z축을 고정시킵니다.
