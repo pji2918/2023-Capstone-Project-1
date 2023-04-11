@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         // 오른쪽 마우스 클릭을 하면 플레이어를 클릭한 위치로 이동시킵니다.
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !PlayerController.instance._isDash)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             PlayerController.instance._PlayerAgent.SetDestination(mousePosition);

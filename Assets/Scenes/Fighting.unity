@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 684713800}
   - component: {fileID: 684713801}
   - component: {fileID: 684713802}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ GameObject:
   - component: {fileID: 937238579}
   - component: {fileID: 937238580}
   - component: {fileID: 937238581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +832,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937238572}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -885,8 +885,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
-  _dashSpeed: 3
+  _dashSpeed: 20
   _dashCoolDown: 0
+  _isDash: 0
 --- !u!195 &937238581
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashCoolDown;
+    public bool _isDash = false;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
@@ -82,6 +83,19 @@ public class PlayerController : MonoBehaviour
         {
             _dashCoolDown -= Time.deltaTime;
         }
+
+        // 플레이어가 돌진할 수 있는 상태라면, 플레이어의 투명도를 낮추고, 몬스터와의 충돌을 무시합니다.
+        if (_isDash)
+        {
+            Physics2D.IgnoreLayerCollision(6, 7);
+            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
+            _playerAgent.enabled = false;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            _playerAgent.enabled = true;
+        }
     }
 
     /// <summary>
@@ -93,13 +107,17 @@ public class PlayerController : MonoBehaviour
         if (_dashCoolDown <= 0)
         {
             _dashCoolDown = 10f;
-            // AddForce를 사용해 플레이어를 마우스가 있는 방향으로 일정 힘을 가해 이동시킵니다.
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = mousePosition - (Vector2)this.transform.position;
-            direction.Normalize();
-            _playerRigidbody.AddForce(direction * _dashSpeed, ForceMode2D.Impulse);
-            yield return new WaitForSeconds(1.5f);
+            _isDash = true;
+
+            // 마우스 방향으로 돌진합니다.
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 direction = (mousePosition - transform.position).normalized;
+            _playerRigidbody.velocity = direction * _dashSpeed;
+
+            yield return new WaitForSeconds(0.5f);
+
             _playerRigidbody.velocity = Vector2.zero;
+            _isDash = false;
         }
     }
 }
