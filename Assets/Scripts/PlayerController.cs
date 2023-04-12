@@ -34,8 +34,10 @@ public class PlayerController : MonoBehaviour
     // 플레이어의 이동 속도 및 돌진 속도, 쿨타임을 저장하는 변수입니다.
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed;
-    [SerializeField] private float _dashCoolDown;
+    public float _dashCoolDown;
     public bool _isDash = false;
+
+    [Range(0, 100)] public int _playerHp = 100;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
@@ -69,13 +71,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // 플레이어가 움직이는 방향에 따라, 플레이어를 좌우 반전합니다.
-        if (_playerAgent.velocity.x > 0)
+        if (_playerAgent.velocity.x > 0 || _playerRigidbody.velocity.x > 0)
         {
-            this.transform.localScale = new Vector3(-3, 3, 1);
+            this.transform.localScale = new Vector3(-2, 2, 1);
         }
-        else if (_playerAgent.velocity.x < 0)
+        else if (_playerAgent.velocity.x < 0 || _playerRigidbody.velocity.x < 0)
         {
-            this.transform.localScale = new Vector3(3, 3, 1);
+            this.transform.localScale = new Vector3(2, 2, 1);
         }
 
         // 플레이어의 쿨타임을 감소시킵니다.
