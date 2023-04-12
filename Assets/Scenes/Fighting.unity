@@ -465,7 +465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 684713798}
   - component: {fileID: 684713797}
-  - component: {fileID: 684713800}
+  - component: {fileID: 684713803}
   - component: {fileID: 684713801}
   - component: {fileID: 684713802}
   m_Layer: 0
@@ -535,26 +535,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684713796}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.67, y: -0.8, z: 0}
+  m_LocalPosition: {x: 3.14, y: -1.11, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &684713800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684713796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d201902a1d788fa478c0871c9957b718, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerPosition: {x: 0, y: 0}
 --- !u!195 &684713801
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -603,6 +590,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6610023, y: 0.15226328}
   m_EdgeRadius: 0
+--- !u!114 &684713803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684713796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d201902a1d788fa478c0871c9957b718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPosition: {x: 0, y: 0}
+  monsterNum: 0
+  monster: {fileID: 0}
 --- !u!1 &848001088
 GameObject:
   m_ObjectHideFlags: 0
