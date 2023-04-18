@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     private GameObject upgradeWindow;
     [SerializeField]
     private GameObject bookWindow;
+    [SerializeField]
+    private GameObject Option;
 
     #region 버튼 함수
     public void OnClickWeaponButton()
@@ -31,6 +33,11 @@ public class UIManager : MonoBehaviour
         WindowPopUp(bookWindow);
     }
 
+    public void OnClickOption()
+    {
+        WindowPopUp(Option);
+    }
+
     public void OnClickWeaponBackground()
     {
         WindowDisappear(weaponWindow);
@@ -44,6 +51,11 @@ public class UIManager : MonoBehaviour
     public void OnClickTableBackground()
     {
         WindowDisappear(bookWindow);
+    }
+
+    public void OnClickOptionBackground()
+    {
+        WindowDisappear(Option);
     }
     #endregion
 
