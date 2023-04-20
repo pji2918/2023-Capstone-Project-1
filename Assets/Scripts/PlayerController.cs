@@ -22,14 +22,10 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     // 플레이어 컨트롤러에 필요한 컴포넌트를 선언합니다.
-    private NavMeshAgent _playerAgent;
-    private Rigidbody2D _playerRigidbody;
-    private Animator _playerAnimator;
-
-    // 플레이어 컨트롤러에 필요한 컴포넌트를 가져오는 프로퍼티를 선언합니다.
-    public NavMeshAgent _PlayerAgent { get => _playerAgent; }
-    public Rigidbody2D _PlayerRigidbody { get => _playerRigidbody; }
-    public Animator _PlayerAnimator { get => _playerAnimator; }
+    public NavMeshAgent _playerAgent;
+    public Rigidbody2D _playerRigidbody;
+    public Animator _playerAnimator;
+    public GameObject _playerAttackEffect;
 
     // 플레이어의 이동 속도 및 돌진 속도, 쿨타임을 저장하는 변수입니다.
     [SerializeField] private float _moveSpeed = 5f;
@@ -57,6 +53,29 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #region 키 입력
+        // 오른쪽 마우스 클릭을 하면 플레이어를 클릭한 위치로 이동시킵니다.
+        if (Input.GetMouseButtonDown(1) && !PlayerController.instance._isDash)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            PlayerController.instance._playerAgent.SetDestination(mousePosition);
+        }
+
+        // 왼쪽 Shift 키를 누르면 플레이어를 돌진시키는 함수를 실행합니다.
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(PlayerController.instance.Dash());
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _playerAttackEffect.SetActive(true);
+            _playerAttackEffect.GetComponent<Animator>().Play("Attack");
+            // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
+            StartCoroutine(AttackEffect());
+        }
+        #endregion
+
         // 플레이어의 이동 속도를 설정합니다.
         _playerAgent.speed = _moveSpeed;
 
@@ -98,6 +117,12 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
             _playerAgent.enabled = true;
         }
+    }
+
+    IEnumerator AttackEffect()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _playerAttackEffect.SetActive(false);
     }
 
     /// <summary>
