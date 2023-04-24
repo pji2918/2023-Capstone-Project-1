@@ -1120,7 +1120,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uD50C\uB808\uC774\uC5B4\uAC00 \uC7A5\uD48D\uC744 \uB0A0\uB9BD\uB2C8\uB2E4.\n\uB9DE\uC740
-    \uC801\uC744 \uD53C\uD574\uB97C \uC785\uACE0 \uBC00\uB824\uB0A9\uB2C8\uB2E4."
+    \uC801\uC740 \uD53C\uD574\uB97C \uC785\uACE0 \uBC00\uB824\uB0A9\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a427231b113c95448b1ed6c2275746b, type: 2}
   m_sharedMaterial: {fileID: -187598000780568579, guid: 6a427231b113c95448b1ed6c2275746b, type: 2}
