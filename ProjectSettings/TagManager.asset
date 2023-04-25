@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bubble
+  - Harpoon
+  - Jangpung
+  - Mine
+  - Mine_Explosion
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -13,8 +19,8 @@ TagManager:
   - UI
   - Player
   - Monster
-  - 
-  - 
+  - Skill
+  - Map
   - 
   - 
   - 
