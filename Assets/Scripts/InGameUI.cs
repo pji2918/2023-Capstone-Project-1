@@ -20,8 +20,8 @@ public class InGameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _healthBar.fillAmount = PlayerController.instance._playerHp / 100f;
-        _dashCoolDownBar.fillAmount = PlayerController.instance._dashCoolDown / 10f;
+        _healthBar.fillAmount = PlayerController.Instance._playerHp / 100f;
+        _dashCoolDownBar.fillAmount = PlayerController.Instance._dashCoolDown / 10f;
 
         if (_isHovering[0])
         {

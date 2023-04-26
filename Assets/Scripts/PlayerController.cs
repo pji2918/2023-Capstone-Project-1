@@ -6,13 +6,13 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     #region 싱글톤 패턴 선언
-    public static PlayerController instance;
+    public static PlayerController Instance;
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -32,12 +32,14 @@ public class PlayerController : MonoBehaviour
     public Animator _PlayerAnimator { get => _playerAnimator; }
 
     // 플레이어의 이동 속도 및 돌진 속도, 쿨타임을 저장하는 변수입니다.
-    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] public float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed;
     public float _dashCoolDown;
     public bool _isDash = false;
 
-    [Range(0, 100)] public int _playerHp = 100;
+    public int _playerMaxHp = 100;
+
+    [Range(0, 100)] public int _playerHp;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
