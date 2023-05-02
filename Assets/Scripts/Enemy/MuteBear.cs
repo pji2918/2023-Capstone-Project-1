@@ -16,17 +16,16 @@ public class MuteBear : MonsterController
     // 스탯 설정
     protected override void Start()
     {
-        base.Start();
         speed = thisSpeed;
         attack = thisAttack;
         maxHp = thisMaxHp;
         attackCoolTime = thisAttackCoolTime;
+        base.Start();
     }
 
     // 공격
     protected override void Update()
     {
-        base.Update();
         if (_agent.remainingDistance < 6)
         {
             _agent.speed = 0;
@@ -40,6 +39,7 @@ public class MuteBear : MonsterController
         {
             _agent.speed = speed;
         }
+        base.Update();
     }
 
     public void Attack()

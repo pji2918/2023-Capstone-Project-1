@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    public int[] itemCounts;
+    public int sumCount;
+
     // 플레이어 컨트롤러에 필요한 컴포넌트를 선언합니다.
     private NavMeshAgent _playerAgent;
     private Rigidbody2D _playerRigidbody;

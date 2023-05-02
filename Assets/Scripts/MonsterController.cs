@@ -9,6 +9,7 @@ public class MonsterController : MonoBehaviour
     protected NavMeshAgent _agent;
 
     SpriteRenderer monsterRenderer;
+    ItemSpawn itemSpawn;
 
     protected float speed;
 
@@ -25,8 +26,10 @@ public class MonsterController : MonoBehaviour
     // NavMesh 에이전트의 회전과 Z축을 고정시킵니다.
     protected virtual void Start()
     {
+        currentHp = maxHp;
         monsterRenderer = this.GetComponent<SpriteRenderer>();
         _agent = this.GetComponent<NavMeshAgent>();
+        itemSpawn = this.GetComponent<ItemSpawn>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
     }
@@ -47,68 +50,12 @@ public class MonsterController : MonoBehaviour
         }
 
         attackCurrentTime += Time.deltaTime;
-    }
-}
 
-/*
-public class Octopus : MonsterController
-{
-    public Octopus()
-    {
-        speed = 5f;
-        attack = 10;
-        maxHp = 80;
-    }
-}
-
-public class MuteBear : MonsterController
-{
-    public MuteBear()
-    {
-        speed = 2f;
-        attack = 10;
-        maxHp = 100;
-        attackCoolTime = 4f;
-    }
-
-    public override void Attack()
-    {
-
-    }
-}
-
-public class MuteHuman : MonsterController
-{
-    public MuteHuman()
-    {
-        speed = 2f;
-        attack = 3;
-        maxHp = 30;
-        attackCoolTime = 3f;
-    }
-}
-
-public class LightFish : MonsterController
-{
-    public LightFish()
-    {
-        speed = 5f;
-        attack = 1;
-        maxHp = 50;
-        attackCoolTime = 5f;
-    }
-
-    public override void Attack()
-    {
-
-    }
-        IEnumerator StopPlayer()
+        if (currentHp <= 0)
         {
-            stopCurrentTime = stopTime;
-            while (stopCurrentTime < 0)
-            {
-
-            }
+            itemSpawn.RandomItem();
+            Destroy(gameObject);
+            return;
         }
     }
-*/
+}
