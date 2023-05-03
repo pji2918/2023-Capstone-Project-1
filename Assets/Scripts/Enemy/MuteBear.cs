@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MuteBear : MonsterController
 {
@@ -26,18 +27,21 @@ public class MuteBear : MonsterController
     // 공격
     protected override void Update()
     {
-        if (_agent.remainingDistance < 6)
+        if (!_isKnockback)
         {
-            _agent.speed = 0;
-            if (attackCurrentTime >= attackCoolTime)
+            if (_agent.remainingDistance < 6)
             {
-                Attack();
-                attackCurrentTime = 0;
+                _agent.speed = 0;
+                if (attackCurrentTime >= attackCoolTime)
+                {
+                    Attack();
+                    attackCurrentTime = 0;
+                }
             }
-        }
-        else
-        {
-            _agent.speed = speed;
+            else
+            {
+                _agent.speed = speed;
+            }
         }
         base.Update();
     }

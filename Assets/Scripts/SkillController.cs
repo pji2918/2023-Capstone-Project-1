@@ -28,7 +28,7 @@ public class SkillController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (this.CompareTag("Mine") && other.CompareTag("Monster"))
+        if (this.CompareTag("Mine") && other.CompareTag("Enemy"))
         {
             GameObject effect = Instantiate(_explosionEffect, this.transform.position, Quaternion.identity);
             Destroy(effect, 1f);
