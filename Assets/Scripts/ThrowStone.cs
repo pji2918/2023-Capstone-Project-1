@@ -16,7 +16,7 @@ public class ThrowStone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController.Instance._playerHp -= power;
+            PlayerController.instance._playerHp -= power;
             Destroy(gameObject);
         }
     }

@@ -39,6 +39,6 @@ public class MuteHuman : MonsterController
 
     public void Attack()
     {
-        PlayerController.Instance._playerHp -= attack;
+        PlayerController.instance._playerHp -= attack;
     }
 }

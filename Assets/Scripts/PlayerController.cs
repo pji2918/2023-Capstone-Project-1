@@ -6,13 +6,13 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     #region 싱글톤 패턴 선언
-    public static PlayerController Instance;
+    public static PlayerController instance;
 
     void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
         else
         {

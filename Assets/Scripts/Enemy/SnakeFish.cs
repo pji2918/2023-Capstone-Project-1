@@ -50,7 +50,7 @@ public class SnakeFish : MonsterController
         if (stopCurrentTime > stopTime && isStop)
         {
             isStop = false;
-            PlayerController.Instance._moveSpeed = 5f;
+            PlayerController.instance._moveSpeed = 5f;
         }
     }
 
@@ -71,7 +71,7 @@ public class SnakeFish : MonsterController
     {
         stopCurrentTime = 0;
         isStop = true;
-        PlayerController.Instance._moveSpeed = 0f;
+        PlayerController.instance._moveSpeed = 0f;
         yield return null;
     }
 }

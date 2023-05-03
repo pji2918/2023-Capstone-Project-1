@@ -46,8 +46,8 @@ public class MuteBear : MonsterController
     {
         GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
-        float angle = Mathf.Atan2(PlayerController.Instance.transform.position.y - stone.transform.position.y,
-                            PlayerController.Instance.transform.position.x - stone.transform.position.x)
+        float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
+                            PlayerController.instance.transform.position.x - stone.transform.position.x)
               * Mathf.Rad2Deg;
         stone.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }

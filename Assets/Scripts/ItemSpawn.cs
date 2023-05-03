@@ -20,7 +20,7 @@ public class ItemSpawn : MonoBehaviour
         float randomValue = Random.value * 100.0f;
         float culValue = 0;
 
-        PlayerController.Instance.sumCount++;
+        PlayerController.instance.sumCount++;
 
         for (int i = 0; i < _itemPercents.Length; i++)
         {
@@ -28,13 +28,13 @@ public class ItemSpawn : MonoBehaviour
             if (randomValue <= culValue && _itemPercents[i].itemNum != ItemNum.nullNum)
             {
                 //GameObject item = Instantiate(_items[(int)(_itemPercents[i].itemNum)]);
-                PlayerController.Instance.itemCounts[(int)(_itemPercents[i].itemNum)]++;
+                PlayerController.instance.itemCounts[(int)(_itemPercents[i].itemNum)]++;
                 //item.transform.position = transform.position;
                 break;
             }
             else if (_itemPercents[i].itemNum == ItemNum.nullNum)
             {
-                PlayerController.Instance.itemCounts[(int)(_itemPercents[5].itemNum)]++;
+                PlayerController.instance.itemCounts[(int)(_itemPercents[5].itemNum)]++;
             }
         }
     }

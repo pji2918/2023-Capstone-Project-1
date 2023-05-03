@@ -50,7 +50,7 @@ public class LightFish : MonsterController
     {
         for (int i = 0; i < 10; i++)
         {
-            PlayerController.Instance._playerHp -= attack;
+            PlayerController.instance._playerHp -= attack;
             yield return new WaitForSeconds(1f);
         }
     }
