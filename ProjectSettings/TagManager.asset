@@ -4,6 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Bubble
+  - Harpoon
+  - Jangpung
+  - Mine
+  - Mine_Explosion
+  - Monster
   - Enemy
   layers:
   - Default
@@ -14,8 +20,8 @@ TagManager:
   - UI
   - Player
   - Monster
-  - 
-  - 
+  - Skill
+  - Map
   - 
   - 
   - 
