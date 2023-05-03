@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    public int[] itemCounts;
+    public int sumCount;
+
     // 플레이어 컨트롤러에 필요한 컴포넌트를 선언합니다.
     public NavMeshAgent _playerAgent;
     public Rigidbody2D _playerRigidbody;
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public GameObject _playerAttackEffect;
 
     // 플레이어의 이동 속도 및 돌진 속도, 쿨타임을 저장하는 변수입니다.
-    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] public float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed;
     public float _dashCoolDown;
     public bool _isDash = false;
@@ -46,7 +49,9 @@ public class PlayerController : MonoBehaviour
     public GameObject _minePrefab;
     public float _mineCoolDown;
 
-    [Range(0, 100)] public int _playerHp = 100;
+    public int _playerMaxHp = 100;
+
+    [Range(0, 100)] public int _playerHp;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
