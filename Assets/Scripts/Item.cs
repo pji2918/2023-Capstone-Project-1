@@ -22,7 +22,11 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log(itemNum.ToString());
-            // 변수 이름 (itemNum.ToString());
+            if (System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum) >= 0)
+            {
+                InGameUI.instance._quest[System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum)]._amount++;
+            }
+            // 여기에 자원량을 추가하는 코드를 넣으십시오.
             Destroy(gameObject);
         }
     }

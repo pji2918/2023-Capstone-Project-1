@@ -29,6 +29,7 @@ public class ItemSpawn : MonoBehaviour
             {
                 //GameObject item = Instantiate(_items[(int)(_itemPercents[i].itemNum)]);
                 PlayerController.instance.itemCounts[(int)(_itemPercents[i].itemNum)]++;
+                InGameUI.instance._quest[System.Array.FindIndex(InGameUI.instance._quest, x => x._type == _itemPercents[i].itemNum)]._amount++;
                 //item.transform.position = transform.position;
                 break;
             }

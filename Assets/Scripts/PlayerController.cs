@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D _playerRigidbody;
     public Animator _playerAnimator;
     public GameObject _playerAttackEffect;
+    public GameObject _dieFade, _gameOverUI;
 
     // 플레이어의 이동 속도 및 돌진 속도, 쿨타임을 저장하는 변수입니다.
     [SerializeField] public float _moveSpeed = 5f;
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public GameObject _minePrefab;
     public float _mineCoolDown;
 
+
+    public bool _isDying = false;
     public int _playerMaxHp = 100;
 
     [Range(0, 100)] public int _playerHp;
@@ -202,6 +206,27 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         _playerAttackEffect.SetActive(false);
+    }
+
+    public void CallCoroutine()
+    {
+        StartCoroutine(CheckisDie());
+    }
+
+    public IEnumerator CheckisDie()
+    {
+        if (_playerHp <= 0)
+        {
+            _isDying = true;
+            _dieFade.SetActive(true);
+            for (int i = 0; i <= 255; i++)
+            {
+                _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+                yield return new WaitForSeconds(0.01f);
+            }
+            yield return new WaitForSecondsRealtime(3f);
+            _gameOverUI.SetActive(true);
+        }
     }
 
     /// <summary>
