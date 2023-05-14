@@ -11,6 +11,8 @@ public class MonsterController : MonoBehaviour
     SpriteRenderer monsterRenderer;
     ItemSpawn itemSpawn;
 
+    public GameObject _dieEffect;
+
     protected float speed;
 
     protected int attack;
@@ -52,6 +54,7 @@ public class MonsterController : MonoBehaviour
         if (currentHp <= 0)
         {
             itemSpawn.RandomItem();
+            Instantiate(_dieEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
             return;
         }
