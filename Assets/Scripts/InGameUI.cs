@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class InGameUI : MonoBehaviour
 {
@@ -58,6 +59,65 @@ public class InGameUI : MonoBehaviour
         _skillCoolDownBar[2].fillAmount = 1 - (PlayerController.instance._bubbleCoolDown / 15f);
         _skillCoolDownBar[3].fillAmount = 1 - (PlayerController.instance._jangpungCoolDown / 13f);
         _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
+        #endregion
+
+        #region 스킬 활성화 여부 표시
+
+        if (DataManager.instance._data.skillLevel >= 1)
+        {
+            _skillCoolDownBar[0].GetComponent<EventTrigger>().enabled = true;
+            _skillCoolDownBar[0].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            _skillCoolDownBar[0].GetComponent<EventTrigger>().enabled = false;
+            _skillCoolDownBar[0].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+        }
+
+        if (DataManager.instance._data.skillLevel >= 2)
+        {
+            _skillCoolDownBar[1].GetComponent<EventTrigger>().enabled = true;
+            _skillCoolDownBar[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            _skillCoolDownBar[1].GetComponent<EventTrigger>().enabled = false;
+            _skillCoolDownBar[1].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+        }
+
+        if (DataManager.instance._data.skillLevel >= 3)
+        {
+            _skillCoolDownBar[2].GetComponent<EventTrigger>().enabled = true;
+            _skillCoolDownBar[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            _skillCoolDownBar[2].GetComponent<EventTrigger>().enabled = false;
+            _skillCoolDownBar[2].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+        }
+
+        if (DataManager.instance._data.skillLevel >= 4)
+        {
+            _skillCoolDownBar[3].GetComponent<EventTrigger>().enabled = true;
+            _skillCoolDownBar[3].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            _skillCoolDownBar[3].GetComponent<EventTrigger>().enabled = false;
+            _skillCoolDownBar[3].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+        }
+
+        if (DataManager.instance._data.skillLevel >= 5)
+        {
+            _skillCoolDownBar[4].GetComponent<EventTrigger>().enabled = true;
+            _skillCoolDownBar[4].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            _skillCoolDownBar[4].GetComponent<EventTrigger>().enabled = false;
+            _skillCoolDownBar[4].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+        }
+
         #endregion
 
         #region 퀘스트 표시

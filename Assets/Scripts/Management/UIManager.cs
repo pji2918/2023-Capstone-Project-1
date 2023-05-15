@@ -7,7 +7,6 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject upgradeWindow;
     [SerializeField]
@@ -27,7 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject Option;
 
-    #region ¹öÆ° ÇÔ¼ö
+    #region ë²„íŠ¼ í•¨ìˆ˜
     public void OnClickUpgradeButton()
     {
         WindowPopUp(upgradeWindow);
@@ -41,7 +40,9 @@ public class UIManager : MonoBehaviour
     public void OnClickweaponUpgradeButton()
     {
         PopUpWidowChange(upgradeText.gameObject, needWeaponResource);
-        StartCoroutine(Typing(upgradeText, "°­ È­ Áß . . .", 0.5f, upgradeText.gameObject, needWeaponResource));
+        StartCoroutine(Typing(upgradeText, "ê°• í™” ì¤‘ . . .", 0.5f, upgradeText.gameObject, needWeaponResource));
+        DataManager.instance._data.skillLevel++;
+        DataManager.instance.Save();
     }
 
     public void OnClickHouseButton()
@@ -52,17 +53,17 @@ public class UIManager : MonoBehaviour
     public void OnClickHouseUpgradeButton()
     {
         PopUpWidowChange(buildText.gameObject, needHouseResource);
-        StartCoroutine(Typing(buildText, "°Ç ¼³ Áß . . .", 0.5f, buildText.gameObject, needHouseResource));
+        StartCoroutine(Typing(buildText, "ê±´ ì„¤ ì¤‘ . . .", 0.5f, buildText.gameObject, needHouseResource));
     }
 
     public void OnClickFoodButton()
     {
-        Debug.Log("½Ä·®Á¦ÀÛ¹öÆ° Å¬¸¯");
+        Debug.Log("ì‹ëŸ‰ì œì‘ë²„íŠ¼ í´ë¦­");
     }
 
     public void OnClickFoodRecallButton()
     {
-        Debug.Log("½Ä·®È¸¼ö¹öÆ° Å¬¸¯");
+        Debug.Log("ì‹ëŸ‰íšŒìˆ˜ë²„íŠ¼ í´ë¦­");
     }
 
     public void OnClickTableButton()
@@ -119,7 +120,7 @@ public class UIManager : MonoBehaviour
             typingText.text = message.Substring(0, i + 1);
             yield return new WaitForSeconds(speed);
         }
-        typingText.text = "¿Ï·á";
+        typingText.text = "ì™„ë£Œ";
         yield return new WaitForSeconds(1);
         PopUpWidowChange(popUp, window);
     }

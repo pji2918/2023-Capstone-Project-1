@@ -77,14 +77,14 @@ public class PlayerController : MonoBehaviour
     {
         #region 키 입력
         // 오른쪽 마우스 클릭을 하면 플레이어를 클릭한 위치로 이동시킵니다.
-        if (Input.GetMouseButtonDown(1) && !PlayerController.instance._isDash)
+        if (Input.GetMouseButtonDown(1) && !_isDash && !_isDying)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             PlayerController.instance._playerAgent.SetDestination(mousePosition);
         }
 
         // 왼쪽 Shift 키를 누르면 플레이어를 돌진시키는 함수를 실행합니다.
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && DataManager.instance._data.skillLevel >= 1)
         {
             StartCoroutine(PlayerController.instance.Dash());
         }
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(AttackEffect());
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && DataManager.instance._data.skillLevel >= 2)
         {
             if (_harpoonCoolDown <= 0)
             {
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && DataManager.instance._data.skillLevel >= 3)
         {
             if (_bubbleCoolDown <= 0)
             {
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && DataManager.instance._data.skillLevel >= 4)
         {
             if (_jangpungCoolDown <= 0)
             {
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && DataManager.instance._data.skillLevel >= 5)
         {
             if (_mineCoolDown <= 0)
             {
@@ -218,6 +218,8 @@ public class PlayerController : MonoBehaviour
         if (_playerHp <= 0)
         {
             _isDying = true;
+            _playerAgent.isStopped = true;
+            _playerRigidbody.bodyType = RigidbodyType2D.Static;
             _dieFade.SetActive(true);
             for (int i = 0; i <= 255; i++)
             {
@@ -226,6 +228,7 @@ public class PlayerController : MonoBehaviour
             }
             yield return new WaitForSecondsRealtime(3f);
             _gameOverUI.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 

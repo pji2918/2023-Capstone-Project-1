@@ -22,7 +22,7 @@ public class SkillController : MonoBehaviour
         if (this.CompareTag("Jangpung"))
         {
             // 게임오브젝트가 바라보는 방향으로 velocity를 적용하여 이동합니다.
-            this.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Vector2.right * 5000f * Time.deltaTime);
+            this.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Vector2.right * 10f);
         }
     }
 

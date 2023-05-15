@@ -5,9 +5,9 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 // 이 클래스에 저장할 변수가 담길 것입니다.
-class Data
+public class Data
 {
-
+    public int skillLevel = 0;
 }
 
 public class DataManager : MonoBehaviour
@@ -26,8 +26,14 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    private Data _data = new Data();
-    string _dataPath = Application.persistentDataPath + "/save.json";
+    void Start()
+    {
+        _dataPath = Path.Combine(Application.persistentDataPath, "save.json");
+        Load();
+    }
+
+    public Data _data = new Data();
+    string _dataPath;
 
     // Data의 내용을 JSON으로 저장합니다.
     public void Save()
