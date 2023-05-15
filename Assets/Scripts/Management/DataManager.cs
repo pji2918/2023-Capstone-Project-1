@@ -13,10 +13,10 @@ public class Data
     {
         {"iron", 10},
         {"concrete", 10},
-        {"bolt", 10},
         {"core", 10},
-        {"food", 10},
-        {"ingredient", 10}
+        {"bolt", 10},
+        {"ingredient", 10},
+        {"food", 10}
     };
 }
 

@@ -103,26 +103,29 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            _isAttacking = true;
-            _playerAttackEffect.SetActive(true);
-            _playerAttackEffect.GetComponent<Animator>().Play("Attack");
-
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // mousePosition이 플레이어의 왼쪽이면 플레이어를 왼쪽으로 바라보게 합니다.
-            if (mousePosition.x < transform.position.x)
+            if (!_isDying)
             {
-                Debug.Log("왼쪽");
-                transform.localScale = new Vector3(2, 2, 1);
-            }
-            else if (mousePosition.x > transform.position.x)
-            {
-                Debug.Log("오른쪽");
-                transform.localScale = new Vector3(-2, 2, 1);
-            }
+                _isAttacking = true;
+                _playerAttackEffect.SetActive(true);
+                _playerAttackEffect.GetComponent<Animator>().Play("Attack");
+
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                // mousePosition이 플레이어의 왼쪽이면 플레이어를 왼쪽으로 바라보게 합니다.
+                if (mousePosition.x < transform.position.x)
+                {
+                    Debug.Log("왼쪽");
+                    transform.localScale = new Vector3(2, 2, 1);
+                }
+                else if (mousePosition.x > transform.position.x)
+                {
+                    Debug.Log("오른쪽");
+                    transform.localScale = new Vector3(-2, 2, 1);
+                }
 
 
-            // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
-            StartCoroutine(AttackEffect());
+                // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
+                StartCoroutine(AttackEffect());
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && DataManager.instance._data.skillLevel >= 2)
@@ -197,7 +200,6 @@ public class PlayerController : MonoBehaviour
         // 플레이어가 움직이는 방향에 따라, 플레이어를 좌우 반전합니다.
         if (!_isAttacking)
         {
-            Debug.Log(_playerAgent.velocity.x);
             if (_playerAgent.velocity.x > 0 || _playerRigidbody.velocity.x > 0)
             {
                 this.transform.localScale = new Vector3(-2, 2, 1);

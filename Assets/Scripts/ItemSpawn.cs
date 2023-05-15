@@ -35,7 +35,7 @@ public class ItemSpawn : MonoBehaviour
                 }
                 catch
                 {
-                    Debug.Log("아이템이 없습니다.");
+                    Debug.Log("퀘스트에 없는 아이템");
                 }
                 //item.transform.position = transform.position;
                 break;
