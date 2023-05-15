@@ -8,6 +8,16 @@ using Newtonsoft.Json;
 public class Data
 {
     public int skillLevel = 0;
+
+    public Dictionary<string, int> resources = new Dictionary<string, int>()
+    {
+        {"iron", 10},
+        {"concrete", 10},
+        {"bolt", 10},
+        {"core", 10},
+        {"food", 10},
+        {"ingredient", 10}
+    };
 }
 
 public class DataManager : MonoBehaviour
