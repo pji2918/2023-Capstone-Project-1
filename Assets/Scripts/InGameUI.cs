@@ -54,7 +54,7 @@ public class InGameUI : MonoBehaviour
         _healthBar.fillAmount = PlayerController.instance._playerHp / 100f;
 
         #region 스킬 쿨타임 표시
-        _skillCoolDownBar[0].fillAmount = 1 - (PlayerController.instance._dashCoolDown / 10f);
+        _skillCoolDownBar[0].fillAmount = 1 - (PlayerController.instance._dashCoolDown / 7f);
         _skillCoolDownBar[1].fillAmount = 1 - (PlayerController.instance._harpoonCoolDown / 8f);
         _skillCoolDownBar[2].fillAmount = 1 - (PlayerController.instance._bubbleCoolDown / 15f);
         _skillCoolDownBar[3].fillAmount = 1 - (PlayerController.instance._jangpungCoolDown / 13f);

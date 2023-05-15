@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     public GameObject _minePrefab;
     public float _mineCoolDown;
 
-
+    bool _isAttacking;
     public bool _isDying = false;
     public int _playerMaxHp = 100;
 
@@ -89,10 +89,28 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PlayerController.instance.Dash());
         }
 
+
+
         if (Input.GetMouseButtonDown(0))
         {
+            _isAttacking = true;
             _playerAttackEffect.SetActive(true);
             _playerAttackEffect.GetComponent<Animator>().Play("Attack");
+
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // mousePosition이 플레이어의 왼쪽이면 플레이어를 왼쪽으로 바라보게 합니다.
+            if (mousePosition.x < transform.position.x)
+            {
+                Debug.Log("왼쪽");
+                transform.localScale = new Vector3(2, 2, 1);
+            }
+            else if (mousePosition.x > transform.position.x)
+            {
+                Debug.Log("오른쪽");
+                transform.localScale = new Vector3(-2, 2, 1);
+            }
+
+
             // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
             StartCoroutine(AttackEffect());
         }
@@ -157,13 +175,17 @@ public class PlayerController : MonoBehaviour
         }
 
         // 플레이어가 움직이는 방향에 따라, 플레이어를 좌우 반전합니다.
-        if (_playerAgent.velocity.x > 0 || _playerRigidbody.velocity.x > 0)
+        if (!_isAttacking)
         {
-            this.transform.localScale = new Vector3(-2, 2, 1);
-        }
-        else if (_playerAgent.velocity.x < 0 || _playerRigidbody.velocity.x < 0)
-        {
-            this.transform.localScale = new Vector3(2, 2, 1);
+            Debug.Log(_playerAgent.velocity.x);
+            if (_playerAgent.velocity.x > 0 || _playerRigidbody.velocity.x > 0)
+            {
+                this.transform.localScale = new Vector3(-2, 2, 1);
+            }
+            else if (_playerAgent.velocity.x < 0 || _playerRigidbody.velocity.x < 0)
+            {
+                this.transform.localScale = new Vector3(2, 2, 1);
+            }
         }
 
         // 플레이어의 쿨타임을 감소시킵니다.
@@ -206,6 +228,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         _playerAttackEffect.SetActive(false);
+        _isAttacking = false;
     }
 
     public void CallCoroutine()
@@ -226,7 +249,7 @@ public class PlayerController : MonoBehaviour
                 _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
                 yield return new WaitForSeconds(0.01f);
             }
-            yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitForSecondsRealtime(2f);
             _gameOverUI.SetActive(true);
             Time.timeScale = 0;
         }
@@ -240,7 +263,7 @@ public class PlayerController : MonoBehaviour
         // 플레이어가 돌진할 수 있는 상태라면, 플레이어를 돌진시킵니다.
         if (_dashCoolDown <= 0)
         {
-            _dashCoolDown = 10f;
+            _dashCoolDown = 7f;
             _isDash = true;
 
             // 마우스 방향으로 돌진합니다.

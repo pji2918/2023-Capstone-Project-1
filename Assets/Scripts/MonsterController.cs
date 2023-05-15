@@ -9,7 +9,7 @@ public class MonsterController : MonoBehaviour
     protected NavMeshAgent _agent;
 
     SpriteRenderer monsterRenderer;
-    ItemSpawn itemSpawn;
+    protected ItemSpawn itemSpawn;
 
     public GameObject _dieEffect;
 
