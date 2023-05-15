@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
     public void IncreseResource(string resourceName, int amount)
     {
         DataManager.instance._data.resources[resourceName] += amount;
+        DataManager.instance.Save();
     }
 
     public void ResourceReduction(string resourceName, int amount)
     {
         DataManager.instance._data.resources[resourceName] -= amount;
+        DataManager.instance.Save();
     }
 }

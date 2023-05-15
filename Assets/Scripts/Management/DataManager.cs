@@ -60,5 +60,9 @@ public class DataManager : MonoBehaviour
             string json = File.ReadAllText(_dataPath);
             _data = JsonConvert.DeserializeObject<Data>(json);
         }
+        else
+        {
+            Save();
+        }
     }
 }

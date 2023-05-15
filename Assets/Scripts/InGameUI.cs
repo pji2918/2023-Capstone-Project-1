@@ -17,10 +17,12 @@ public class InGameUI : MonoBehaviour
 
     public Image _healthBar;
     public Image[] _skillCoolDownBar;
-    private bool[] _isHovering = new bool[4] { false, false, false, false };
+    public Image _foodCoolDownBar;
+    private bool[] _isHovering = new bool[5] { false, false, false, false, false };
     public GameObject[] _skillTooltip;
+    public GameObject _foodTooltip;
     public TextMeshProUGUI[] _questText = new TextMeshProUGUI[3];
-
+    public TextMeshProUGUI _foodCountText;
     public Resource[] _quest = new Resource[3];
 
     public static InGameUI instance;
@@ -59,7 +61,11 @@ public class InGameUI : MonoBehaviour
         _skillCoolDownBar[2].fillAmount = 1 - (PlayerController.instance._bubbleCoolDown / 15f);
         _skillCoolDownBar[3].fillAmount = 1 - (PlayerController.instance._jangpungCoolDown / 13f);
         _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
+        _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
+        _foodCoolDownBar.fillAmount = 1 - (PlayerController.instance._foodCoolDown / 10f);
         #endregion
+
+        _foodCountText.text = string.Format("남은 식량 : {0}개", DataManager.instance._data.resources["food"]);
 
         #region 스킬 활성화 여부 표시
 
@@ -116,6 +122,15 @@ public class InGameUI : MonoBehaviour
         {
             _skillCoolDownBar[4].GetComponent<EventTrigger>().enabled = false;
             _skillCoolDownBar[4].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+        }
+
+        if (DataManager.instance._data.resources["food"] >= 1)
+        {
+            _foodCoolDownBar.GetComponent<Image>().color = new Color32(255, 100, 100, 255);
+        }
+        else
+        {
+            _foodCoolDownBar.GetComponent<Image>().color = new Color32(94, 94, 94, 255);
         }
 
         #endregion
@@ -180,5 +195,15 @@ public class InGameUI : MonoBehaviour
     public void OnNotHoverFive()
     {
         _skillTooltip[4].SetActive(false);
+    }
+
+    public void OnHoverFood()
+    {
+        _foodTooltip.SetActive(true);
+    }
+
+    public void OnNotHoverFood()
+    {
+        _foodTooltip.SetActive(false);
     }
 }

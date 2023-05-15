@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour
     public GameObject _minePrefab;
     public float _mineCoolDown;
 
+    public float _foodCoolDown;
+
     bool _isAttacking;
     public bool _isDying = false;
     public int _playerMaxHp = 100;
@@ -80,7 +83,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && !_isDash && !_isDying)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            PlayerController.instance._playerAgent.SetDestination(mousePosition);
+            try
+            {
+                PlayerController.instance._playerAgent.SetDestination(mousePosition);
+            }
+            catch
+            {
+                Debug.LogError("플레이어가 NavMesh 위에 없습니다.");
+            }
         }
 
         // 왼쪽 Shift 키를 누르면 플레이어를 돌진시키는 함수를 실행합니다.
@@ -159,6 +169,16 @@ public class PlayerController : MonoBehaviour
                 GameObject mine = Instantiate(_minePrefab, transform.position, Quaternion.identity);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (DataManager.instance._data.resources["food"] >= 1 && _foodCoolDown <= 0 && !_isDying)
+            {
+                _foodCoolDown = 10f;
+                StartCoroutine(Eat());
+            }
+        }
+
         #endregion
 
         // 플레이어의 이동 속도를 설정합니다.
@@ -209,6 +229,10 @@ public class PlayerController : MonoBehaviour
         {
             _mineCoolDown -= Time.deltaTime;
         }
+        if (_foodCoolDown > 0)
+        {
+            _foodCoolDown -= Time.deltaTime;
+        }
 
         // 플레이어가 돌진할 수 있는 상태라면, 플레이어의 투명도를 낮추고, 몬스터와의 충돌을 무시합니다.
         if (_isDash)
@@ -234,6 +258,31 @@ public class PlayerController : MonoBehaviour
     public void CallCoroutine()
     {
         StartCoroutine(CheckisDie());
+    }
+
+    IEnumerator Eat()
+    {
+        DataManager.instance._data.resources["food"] -= 1;
+        DataManager.instance.Save();
+        for (int i = 0; i < 15; i++)
+        {
+            if (_playerHp < 100)
+            {
+                if (_playerHp + 1 >= 100)
+                {
+                    _playerHp = 100;
+                }
+                else
+                {
+                    _playerHp += 1;
+                }
+                yield return new WaitForSeconds(0.3f);
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 
     public IEnumerator CheckisDie()
@@ -274,6 +323,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
             _playerRigidbody.velocity = Vector2.zero;
+            yield return new WaitForSeconds(0.3f);
             _isDash = false;
         }
     }
