@@ -9,7 +9,9 @@ public class MonsterController : MonoBehaviour
     protected NavMeshAgent _agent;
 
     SpriteRenderer monsterRenderer;
-    ItemSpawn itemSpawn;
+    protected ItemSpawn itemSpawn;
+
+    public GameObject _dieEffect;
 
     protected float speed;
 
@@ -52,6 +54,7 @@ public class MonsterController : MonoBehaviour
         if (currentHp <= 0)
         {
             itemSpawn.RandomItem();
+            Instantiate(_dieEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
             return;
         }
