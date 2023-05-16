@@ -1,0 +1,350 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Story Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Story
+  m_TableCollectionNameGuidString: ad86363328121794c8f4b7b5d02025ff
+  m_Entries:
+  - m_Id: 11970383314944
+    m_Key: randomStoryAfterDay13Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314945
+    m_Key: randomStoryAfterDay13TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013760
+    m_Key: randomStoryAfterDay13TextChoice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013761
+    m_Key: randomStoryAfterDay13TextChoice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314946
+    m_Key: randomStoryAfterDay13TextChoice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013762
+    m_Key: randomStoryAfterDay13TextChoice2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013770
+    m_Key: randomStoryAfterDay18Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013771
+    m_Key: randomStoryAfterDay18TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013773
+    m_Key: randomStoryAfterDay18TextChoice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013774
+    m_Key: randomStoryAfterDay18TextChoice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013772
+    m_Key: randomStoryAfterDay18TextChoice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013775
+    m_Key: randomStoryAfterDay18TextChoice2Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013776
+    m_Key: randomStoryAfterDay18TextChoice2Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401805217792
+    m_Key: randomStoryAfterDay04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412096
+    m_Key: randomStoryAfterDay04Choice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412097
+    m_Key: randomStoryAfterDay04Choice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412098
+    m_Key: randomStoryAfterDay04Choice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412099
+    m_Key: randomStoryAfterDay04Choice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412100
+    m_Key: randomStoryAfterDay04Choice2Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412101
+    m_Key: randomStoryAfterDay04Choice2Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412102
+    m_Key: randomStoryAfterDay6Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412103
+    m_Key: randomStoryAfterDay6TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412104
+    m_Key: randomStoryAfterDay6TextChoice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412105
+    m_Key: randomStoryAfterDay6TextChoice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412106
+    m_Key: randomStoryAfterDay6TextChoice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412107
+    m_Key: randomStoryAfterDay6TextChoice2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10380989562883
+    m_Key: randomStoryUntilDay13Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10380989562884
+    m_Key: randomStoryUntilDay13TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10380989562885
+    m_Key: randomStoryUntilDay13TextChoice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10380989562886
+    m_Key: randomStoryUntilDay13TextChoice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10380989562887
+    m_Key: randomStoryUntilDay13TextChoice2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10380989562888
+    m_Key: randomStoryUntilDay13TextChoiceText1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2091383914496
+    m_Key: storyDay01Text
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554739
+  - m_Id: 17129675030545
+    m_Key: storyDay023Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2964738670592
+    m_Key: storyDay02Text
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554728
+  - m_Id: 4254600396802
+    m_Key: storyDay03Choice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030535
+    m_Key: storyDay03Choice1Text1
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554744
+  - m_Id: 17129675030536
+    m_Key: storyDay03Choice1Text2
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554745
+  - m_Id: 17129675030537
+    m_Key: storyDay03Choice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030538
+    m_Key: storyDay03Choice2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4254600396800
+    m_Key: storyDay03Text1
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554742
+  - m_Id: 4254600396801
+    m_Key: storyDay03Text2
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554743
+  - m_Id: 17129675030539
+    m_Key: storyDay05Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030540
+    m_Key: storyDay07Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030541
+    m_Key: storyDay08Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030542
+    m_Key: storyDay09Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314947
+    m_Key: storyDay13Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314948
+    m_Key: storyDay13TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314949
+    m_Key: storyDay13TextChoice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314950
+    m_Key: storyDay13TextChoice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314951
+    m_Key: storyDay13TextChoice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11970383314952
+    m_Key: storyDay13TextChoice2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013763
+    m_Key: storyDay15Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013764
+    m_Key: storyDay18Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013765
+    m_Key: storyDay18TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013767
+    m_Key: storyDay18TextChoice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013768
+    m_Key: storyDay18TextChoice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013766
+    m_Key: storyDay18TextChoice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14803233013769
+    m_Key: storyDay18TextChoice2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030543
+    m_Key: storyDay20Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030544
+    m_Key: storyDay21Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030546
+    m_Key: storyDay24Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030547
+    m_Key: storyDay26Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17129675030548
+    m_Key: storyDay28Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960128
+    m_Key: storyDay28TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960129
+    m_Key: storyDay28TextChoice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960130
+    m_Key: storyDay28TextChoice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960131
+    m_Key: storyDay28TextChoice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960132
+    m_Key: storyDay28TextChoice2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960133
+    m_Key: storyDay34Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960134
+    m_Key: storyDay35Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17834422960135
+    m_Key: storyEndText
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5056674134845554714
+  references:
+    version: 2
+    RefIds:
+    - rid: 5056674134845554714
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1684215489678
+    - rid: 5056674134845554728
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "2\uC77C\uCC28\uC758 \uC2A4\uD1A0\uB9AC."
+    - rid: 5056674134845554739
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "1\uC77C\uCC28\uC758 \uC2A4\uD1A0\uB9AC."
+    - rid: 5056674134845554742
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "3\uC77C\uCC28\uC758 \uC2A4\uD1A0\uB9AC 1\uBC88\uC9F8 \uBD80\uBD84."
+    - rid: 5056674134845554743
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "3\uC77C\uCC28\uC758 \uC2A4\uD1A0\uB9AC 2\uBC88\uC9F8 \uBD80\uBD84."
+    - rid: 5056674134845554744
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "3\uC77C\uCC28\uC758 \uC2A4\uD1A0\uB9AC\uC5D0\uC11C \"\uB2E4\uC2DC
+          \uAC16\uB2E4\uB454\uB2E4\"\uB97C \uACE8\uB790\uC744 \uACBD\uC6B0 70%\n\uD655\uB960\uB85C
+          \uCD9C\uB825."
+    - rid: 5056674134845554745
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "3\uC77C\uCC28\uC758 \uC2A4\uD1A0\uB9AC\uC5D0\uC11C \"\uB2E4\uC2DC
+          \uAC16\uB2E4\uB454\uB2E4\"\uB97C \uACE8\uB790\uC744 \uACBD\uC6B0 30% \uD655\uB960\uB85C
+          \uCD9C\uB825."

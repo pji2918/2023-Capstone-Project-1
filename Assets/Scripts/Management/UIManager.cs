@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -38,6 +40,11 @@ public class UIManager : MonoBehaviour
     private GameObject needHouseResource;
     [SerializeField]//재료 개수 확인 텍스트의 부모 오브잭트(빈 오브잭트)
     private GameObject ResourceTextsParent;
+
+    // 책 텍스트
+    public TextMeshProUGUI _title, _desc;
+
+    public Button _choiceOne, _choiceTwo;
 
     //음식 제작 게이지
     private Slider foodSlider;
@@ -234,5 +241,186 @@ public class UIManager : MonoBehaviour
         text.text = messege;
         yield return new WaitForSeconds(1f);
         text.text = " ";
+    }
+
+    public void BookOpen()
+    {
+        _title.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "report"), DataManager.instance._data.day);
+        if (DataManager.instance._data.day == 1)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay01Text");
+        }
+        else if (DataManager.instance._data.day == 2)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay02Text");
+        }
+        else if (DataManager.instance._data.day == 3)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03Text");
+        }
+        else if (DataManager.instance._data.day == 5)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay05Text");
+        }
+        else if (DataManager.instance._data.day == 7)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay07Text");
+        }
+        else if (DataManager.instance._data.day == 8)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay08Text");
+        }
+        else if (DataManager.instance._data.day == 9)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay09Text");
+        }
+        else if (DataManager.instance._data.day == 13)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13Text");
+        }
+        else if (DataManager.instance._data.day == 15)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay15Text");
+        }
+        else if (DataManager.instance._data.day == 18)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18Text");
+        }
+        else if (DataManager.instance._data.day == 20)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay20Text");
+        }
+        else if (DataManager.instance._data.day == 21)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay21Text");
+        }
+        else if (DataManager.instance._data.day == 23)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay23Text");
+        }
+        else if (DataManager.instance._data.day == 24)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay24Text");
+        }
+        else if (DataManager.instance._data.day == 26)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay26Text");
+        }
+        else if (DataManager.instance._data.day == 28)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28Text");
+        }
+        else if (DataManager.instance._data.day == 34)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay34Text");
+        }
+        else if (DataManager.instance._data.day == 35)
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28Text");
+        }
+        else if (false) // 이건 모든 게 완성되었을 때 추가됩니다.
+        {
+            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyEndText");
+        }
+        else
+        {
+            while (true)
+            {
+                switch (Random.Range(0, 5))
+                {
+                    case 0:
+                        {
+                            if (DataManager.instance._data.day >= 4)
+                            {
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04");
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (DataManager.instance._data.day < 13)
+                            {
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13");
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (DataManager.instance._data.day >= 6)
+                            {
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06");
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (DataManager.instance._data.day > 13)
+                            {
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13");
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (DataManager.instance._data.day > 18)
+                            {
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18");
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+    }
+
+    public enum ButtonType
+    {
+        Normal,
+        Choice
+    }
+
+    public void ShowStoryButton(ButtonType type)
+    {
+        switch (type)
+        {
+            case ButtonType.Normal:
+                {
+                    break;
+                }
+            case ButtonType.Choice:
+                {
+                    break;
+                }
+        }
+    }
+
+    public void ChoiceOne()
+    {
+
+    }
+
+    public void ChoiceTwo()
+    {
+
     }
 }
