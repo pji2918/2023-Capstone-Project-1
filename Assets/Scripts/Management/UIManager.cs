@@ -25,10 +25,23 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI upgradeText;
     [SerializeField]//건축중... 타이핑 텍스트
     private TextMeshProUGUI buildText;
-    [SerializeField]//음식 제작 상태확인 텍스트
+    [SerializeField]//무기 강화 상태 확인 텍스트
+    private TextMeshProUGUI upgradeSubText;
+    [SerializeField]//집 강화 상태 확인 텍스트
+    private TextMeshProUGUI buildSubText;
+    [SerializeField]//음식 제작 상태확인 텍스트(남은 시간 확인용 텍스트)
     private TextMeshProUGUI foodText;
+    [SerializeField]//음식 제작 상태확인 텍스트
+    private TextMeshProUGUI foodSubText;
     [SerializeField]//제작 완료된 음식 개수 확인 텍스트
     private TextMeshProUGUI foodCountText;
+
+    //재료 개수 확인 텍스트 모음
+    private TextMeshProUGUI[] resourceTexts = new TextMeshProUGUI[6];
+    //무기 필요 재료 확인 텍스트 모음
+    private TextMeshProUGUI[] needWeaponTexts = new TextMeshProUGUI[4];
+    //집 필요 재료 확인 텍스트 모음
+    private TextMeshProUGUI[] needBuildTexts = new TextMeshProUGUI[4];
     #endregion
 
     #region 기타
@@ -36,14 +49,15 @@ public class UIManager : MonoBehaviour
     private GameObject needWeaponResource;
     [SerializeField]//집 강화시 필요한 재료 확인 텍스트 묶음(빈 오브젝트)
     private GameObject needHouseResource;
-    [SerializeField]//재료 개수 확인 텍스트의 부모 오브잭트(빈 오브잭트)
+    [SerializeField]//재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트)
     private GameObject ResourceTextsParent;
+    [SerializeField]//필요 재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트, 무기업글)
+    private GameObject needWeaponResourceTextsParent;
+    [SerializeField]//필요 재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트, 집 업글)
+    private GameObject needHouseResourceTextsParent;
 
     //음식 제작 게이지
     private Slider foodSlider;
-
-    //재료 개수 확인 텍스트 모음
-    private TextMeshProUGUI[] resourceTexts = new TextMeshProUGUI[6];
 
     //음식 제작 시간
     private float cookingTime = 30;
@@ -51,6 +65,8 @@ public class UIManager : MonoBehaviour
     private float currentCookingTime = 0;
     //제작 상태
     private bool isCooking = false;
+
+    NeedResourse _needResourse = new NeedResourse();
     #endregion
 
     private void Start()
@@ -58,10 +74,22 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             resourceTexts[i] = ResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
-            Debug.Log(resourceTexts[i].name);
+            Debug.Log("재료 텍스트 : " + resourceTexts[i].name);
+
+            if(i < 4)
+            {
+                needWeaponTexts[i] = needWeaponResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+                needBuildTexts[i] = needHouseResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+            
+                Debug.Log("무기 강화 필요 재료 텍스트" +needWeaponTexts[i].name);
+                Debug.Log("쉘터 강화 필요 재료 텍스트" +needBuildTexts[i].name);
+            }
         }
 
         foodSlider = GameObject.Find("Slider").GetComponent<Slider>();
+
+        foodText.text = "";
+        foodSubText.text = "";
     }
 
     private void Update()
@@ -97,30 +125,76 @@ public class UIManager : MonoBehaviour
 
     //무기 업그레이드 창 팝업
     public void OnClickWeaponButton()
-    {
+    {        
+        ShowNeedWeaponResourse();
+        
         PopUpWidowChange(weaponWindow, upgradeWindow);
     }
 
-    //무기 강화 버튼 클릭(아직 아이템 제거하는거 없음)
+    //무기 강화 버튼 클릭
     public void OnClickweaponUpgradeButton()
     {
-        PopUpWidowChange(upgradeText.gameObject, needWeaponResource);
-        StartCoroutine(Typing(upgradeText, "강 화 중 . . .", 0.5f, upgradeText.gameObject, needWeaponResource));
-        DataManager.instance._data.skillLevel++;
-        DataManager.instance.Save();
+        if(DataManager.instance._data.resources["iron"] >= DataManager.instance._data.weaponUpgrade["iron"] 
+        && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.weaponUpgrade["concrete"] 
+        && DataManager.instance._data.resources["bolt"] >= DataManager.instance._data.weaponUpgrade["bolt"] 
+        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.weaponUpgrade["core"])
+        {
+            PopUpWidowChange(upgradeText.gameObject, needWeaponResource);
+        
+            DataManager.instance._data.resources["iron"] -= DataManager.instance._data.weaponUpgrade["iron"];
+            DataManager.instance._data.resources["concrete"] -= DataManager.instance._data.weaponUpgrade["concrete"];
+            DataManager.instance._data.resources["bolt"] -= DataManager.instance._data.weaponUpgrade["bolt"];
+            DataManager.instance._data.resources["core"] -= DataManager.instance._data.weaponUpgrade["core"];
+
+            StartCoroutine(Typing(upgradeText, "강 화 중 . . .", 0.5f, upgradeText.gameObject, needWeaponResource));
+
+            DataManager.instance._data.skillLevel++;
+            
+            ShowNeedWeaponResourse();
+
+            DataManager.instance.Save();
+        }
+        else
+        {
+            StartCoroutine(TextClear(upgradeSubText, "재료가 부족합니다"));
+        }
     }
 
     //집 업그레이드 창 팝업
     public void OnClickHouseButton()
     {
-        PopUpWidowChange(houseWindow, upgradeWindow);
+        ShowNeedBuildResourse();
+        
+        PopUpWidowChange(houseWindow, upgradeWindow);  
     }
 
     //집 강화 버튼 클릭(위와 같이 아직 기능 부족)
     public void OnClickHouseUpgradeButton()
     {
-        PopUpWidowChange(buildText.gameObject, needHouseResource);
-        StartCoroutine(Typing(buildText, "건 설 중 . . .", 0.5f, buildText.gameObject, needHouseResource));
+        if(DataManager.instance._data.resources["iron"] >= DataManager.instance._data.HouseUpgrade["iron"] 
+        && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.HouseUpgrade["concrete"] 
+        && DataManager.instance._data.resources["bolt"] >= DataManager.instance._data.HouseUpgrade["bolt"] 
+        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.HouseUpgrade["core"])
+        {
+            PopUpWidowChange(buildText.gameObject, needHouseResource);
+
+            DataManager.instance._data.resources["iron"] -= DataManager.instance._data.HouseUpgrade["iron"];
+            DataManager.instance._data.resources["concrete"] -= DataManager.instance._data.HouseUpgrade["concrete"];
+            DataManager.instance._data.resources["bolt"] -= DataManager.instance._data.HouseUpgrade["bolt"];
+            DataManager.instance._data.resources["core"] -= DataManager.instance._data.HouseUpgrade["core"];
+
+            StartCoroutine(Typing(buildText, "건 설 중 . . .", 0.5f, buildText.gameObject, needHouseResource));
+
+            DataManager.instance._data.buildLevel++;
+            
+            ShowNeedBuildResourse();
+            
+            DataManager.instance.Save();
+        }
+        else
+        {
+            StartCoroutine(TextClear(buildSubText, "재료가 부족합니다"));
+        }
     }
 
     //음식 제작(재료 아이템 제거하는거 있음)
@@ -131,9 +205,13 @@ public class UIManager : MonoBehaviour
             GameManager.instance.ResourceReduction("ingredient", 5);
             isCooking = true;
         }
+        else if(!isCooking)
+        {
+            StartCoroutine(TextClear(foodSubText, "재료가 부족합니다..."));
+        }
         else
         {
-            StartCoroutine(TextClear(foodText, "재료가 부족합니다..."));
+            StartCoroutine(TextClear(foodSubText, "제작 중 추가 제작을 할 수 없습니다"));
         }
 
         Debug.Log("식량제작버튼 클릭");
@@ -142,9 +220,17 @@ public class UIManager : MonoBehaviour
     //식량 회수
     public void OnClickFoodRecallButton()
     {
-        GameManager.instance.IncreseResource("food", GameManager.instance.foodCount);
+        if(GameManager.instance.foodCount != 0)
+        {
+            GameManager.instance.IncreseResource("food", GameManager.instance.foodCount);
+            GameManager.instance.foodCount = 0;
+        }
+        else
+        {
+            StartCoroutine(TextClear(foodSubText, "제작 완료된 음식이 없습니다"));
+        }
+        
         Debug.Log("식량회수버튼 클릭");
-        GameManager.instance.foodCount = 0;
     }
 
     //스토리 팝업
@@ -204,7 +290,7 @@ public class UIManager : MonoBehaviour
     }
 
     //식량 개수 표시
-    public void ShowResource()
+    private void ShowResource()
     {
         resourceTexts[0].text = DataManager.instance._data.resources["iron"].ToString();
         resourceTexts[1].text = DataManager.instance._data.resources["concrete"].ToString();
@@ -213,6 +299,28 @@ public class UIManager : MonoBehaviour
         resourceTexts[4].text = DataManager.instance._data.resources["food"].ToString();
         resourceTexts[5].text = DataManager.instance._data.resources["ingredient"].ToString();
         foodCountText.text = GameManager.instance.foodCount.ToString();
+    }
+
+    //무기 강화 재료 필요 개수 표시
+    private void ShowNeedWeaponResourse()
+    {
+        _needResourse.ChangeResourseAmount();
+
+        needWeaponTexts[0].text = DataManager.instance._data.weaponUpgrade["iron"].ToString();
+        needWeaponTexts[1].text = DataManager.instance._data.weaponUpgrade["concrete"].ToString();
+        needWeaponTexts[2].text = DataManager.instance._data.weaponUpgrade["bolt"].ToString();
+        needWeaponTexts[3].text = DataManager.instance._data.weaponUpgrade["core"].ToString();
+    }
+
+    //집 강화 재료 필요 개수 표시
+    private void ShowNeedBuildResourse()
+    {
+        _needResourse.ChangeResourseAmount();              
+
+        needBuildTexts[0].text = DataManager.instance._data.HouseUpgrade["iron"].ToString();
+        needBuildTexts[1].text = DataManager.instance._data.HouseUpgrade["concrete"].ToString();
+        needBuildTexts[2].text = DataManager.instance._data.HouseUpgrade["bolt"].ToString();
+        needBuildTexts[3].text = DataManager.instance._data.HouseUpgrade["core"].ToString();
     }
 
     //타이핑 효과 코루틴
@@ -234,5 +342,105 @@ public class UIManager : MonoBehaviour
         text.text = messege;
         yield return new WaitForSeconds(1f);
         text.text = " ";
+    }
+}
+
+public class NeedResourse
+{
+    public void ChangeResourseAmount()
+    {
+        #region 무기
+        switch(DataManager.instance._data.skillLevel)
+        {
+            case 0:
+                DataManager.instance._data.weaponUpgrade["iron"] = 1;
+                DataManager.instance._data.weaponUpgrade["concrete"] = 0;
+                DataManager.instance._data.weaponUpgrade["bolt"] = 0;
+                DataManager.instance._data.weaponUpgrade["core"] = 0;
+            break;
+            
+            case 1:
+                DataManager.instance._data.weaponUpgrade["iron"] = 1;
+                DataManager.instance._data.weaponUpgrade["concrete"] = 1;
+                DataManager.instance._data.weaponUpgrade["bolt"] = 0;
+                DataManager.instance._data.weaponUpgrade["core"] = 0;
+            break;
+            
+            case 2:
+                DataManager.instance._data.weaponUpgrade["iron"] = 1;
+                DataManager.instance._data.weaponUpgrade["concrete"] = 1;
+                DataManager.instance._data.weaponUpgrade["bolt"] = 1;
+                DataManager.instance._data.weaponUpgrade["core"] = 0;
+            break;
+
+            case 3:
+                DataManager.instance._data.weaponUpgrade["iron"] = 1;
+                DataManager.instance._data.weaponUpgrade["concrete"] = 1;
+                DataManager.instance._data.weaponUpgrade["bolt"] = 1;
+                DataManager.instance._data.weaponUpgrade["core"] = 1;
+            break;
+
+            case 4:
+                DataManager.instance._data.weaponUpgrade["iron"] = 1;
+                DataManager.instance._data.weaponUpgrade["concrete"] = 2;
+                DataManager.instance._data.weaponUpgrade["bolt"] = 3;
+                DataManager.instance._data.weaponUpgrade["core"] = 4;
+            break;
+
+            default:
+                DataManager.instance._data.weaponUpgrade["iron"] = 5;
+                DataManager.instance._data.weaponUpgrade["concrete"] = 5;
+                DataManager.instance._data.weaponUpgrade["bolt"] = 5;
+                DataManager.instance._data.weaponUpgrade["core"] = 5;
+            break;
+        }
+        #endregion
+
+        #region 집
+        switch(DataManager.instance._data.buildLevel)
+        {
+            case 0:
+                DataManager.instance._data.HouseUpgrade["iron"] = 1;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 0;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 0;
+                DataManager.instance._data.HouseUpgrade["core"] = 0;
+            break;
+            
+            case 1:
+                DataManager.instance._data.HouseUpgrade["iron"] = 1;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 1;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 0;
+                DataManager.instance._data.HouseUpgrade["core"] = 0;
+            break;
+            
+            case 2:
+                DataManager.instance._data.HouseUpgrade["iron"] = 1;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 1;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 1;
+                DataManager.instance._data.HouseUpgrade["core"] = 0;
+            break;
+
+            case 3:
+                DataManager.instance._data.HouseUpgrade["iron"] = 1;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 1;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 1;
+                DataManager.instance._data.HouseUpgrade["core"] = 1;
+            break;
+
+            case 4:
+                DataManager.instance._data.HouseUpgrade["iron"] = 1;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 2;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 3;
+                DataManager.instance._data.HouseUpgrade["core"] = 4;
+            break;
+
+            default:
+                DataManager.instance._data.HouseUpgrade["iron"] = 5;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 5;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 5;
+                DataManager.instance._data.HouseUpgrade["core"] = 5;
+            break;
+        }
+        #endregion
     }
 }
