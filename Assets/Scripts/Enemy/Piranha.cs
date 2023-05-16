@@ -30,9 +30,8 @@ public class Piranha : MonsterController
         base.Update();
     }
 
-    protected override void OnTriggerStay2D(Collider2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
-        base.OnTriggerStay2D(other);
         if (other.gameObject.tag == "Player")
         {
             if (attackCurrentTime >= attackCoolTime)

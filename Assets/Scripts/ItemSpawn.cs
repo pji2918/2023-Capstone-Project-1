@@ -27,22 +27,10 @@ public class ItemSpawn : MonoBehaviour
             culValue += _itemPercents[i].percent;
             if (randomValue <= culValue && _itemPercents[i].itemNum != ItemNum.nullNum)
             {
-                //GameObject item = Instantiate(_items[(int)(_itemPercents[i].itemNum)]);
-                PlayerController.instance.itemCounts[(int)(_itemPercents[i].itemNum)]++;
-                try
-                {
-                    InGameUI.instance._quest[System.Array.FindIndex(InGameUI.instance._quest, x => x._type == _itemPercents[i].itemNum)]._amount++;
-                }
-                catch
-                {
-                    Debug.Log("퀘스트에 없는 아이템");
-                }
-                //item.transform.position = transform.position;
+                GameObject item = Instantiate(_items[(int)(_itemPercents[i].itemNum)]);
+                // PlayerController.instance.itemCounts[(int)(_itemPercents[i].itemNum)]++;
+                item.transform.position = transform.position;
                 break;
-            }
-            else if (_itemPercents[i].itemNum == ItemNum.nullNum)
-            {
-                PlayerController.instance.itemCounts[(int)(_itemPercents[5].itemNum)]++;
             }
         }
     }

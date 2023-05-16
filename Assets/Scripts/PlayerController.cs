@@ -83,14 +83,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && !_isDash && !_isDying)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            try
-            {
-                PlayerController.instance._playerAgent.SetDestination(mousePosition);
-            }
-            catch
-            {
-                Debug.LogError("플레이어가 NavMesh 위에 없습니다.");
-            }
+            PlayerController.instance._playerAgent.SetDestination(mousePosition);
         }
 
         // 왼쪽 Shift 키를 누르면 플레이어를 돌진시키는 함수를 실행합니다.
