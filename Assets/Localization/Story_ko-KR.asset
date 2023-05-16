@@ -633,6 +633,10 @@ MonoBehaviour:
       \uC178\uD130\uB85C \uB3CC\uC544\uAC00\uB294\uAC8C \uB9DE\uB294\uAC70 \uAC19\uB2E4."
     m_Metadata:
       m_Items: []
+  - m_Id: 45819934932992
+    m_Localized: "\uAE08\uC77C \uBCF4\uACE0\uC11C \uC5C6\uC74C"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -15,236 +15,40 @@ MonoBehaviour:
   m_TableCollectionName: UI
   m_TableCollectionNameGuidString: eeb64497c13ff9947aca820a772ceecc
   m_Entries:
-  - m_Id: 12519698726912
-    m_Key: randomStoryAfterDay13Text
+  - m_Id: 44527984443392
+    m_Key: iron
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892736
-    m_Key: randomStoryDay4
+  - m_Id: 44527992832000
+    m_Key: concrete
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892737
-    m_Key: randomStoryDay4Choice1
+  - m_Id: 44527992832001
+    m_Key: core
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892738
-    m_Key: randomStoryDay4Choice1Text1
+  - m_Id: 44527992832002
+    m_Key: bolt
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892739
-    m_Key: randomStoryDay4Choice1Text2
+  - m_Id: 44527992832003
+    m_Key: igredient
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892740
-    m_Key: randomStoryDay4Choice2
+  - m_Id: 44527992832004
+    m_Key: cooltime
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892741
-    m_Key: randomStoryDay4Choice2Text1
+  - m_Id: 44527992832005
+    m_Key: report
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892742
-    m_Key: randomStoryDay4Choice2Text2
+  - m_Id: 44527992832006
+    m_Key: dash
     m_Metadata:
       m_Items: []
-  - m_Id: 12519723892743
-    m_Key: randomStoryDay6Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892744
-    m_Key: randomStoryDay6TextChoice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892745
-    m_Key: randomStoryDay6TextChoice1Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892746
-    m_Key: randomStoryDay6TextChoice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892747
-    m_Key: randomStoryDay6TextChoice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892748
-    m_Key: randomStoryDay6TextChoice2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892749
-    m_Key: randomStoryUntilDay13Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892750
-    m_Key: randomStoryUntilDay13TextChoice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892751
-    m_Key: randomStoryUntilDay13TextChoice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892752
-    m_Key: randomStoryUntilDay13TextChoice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892753
-    m_Key: randomStoryUntilDay13TextChoice2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892754
-    m_Key: randomStoryUntilDay13TextChoiceText1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892755
-    m_Key: storyDay13Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892756
-    m_Key: storyDay13TextChoice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892757
-    m_Key: storyDay13TextChoice1Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892758
-    m_Key: storyDay13TextChoice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892759
-    m_Key: storyDay13TextChoice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519723892760
-    m_Key: storyDay13TextChoice2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2091383914496
-    m_Key: storyDay1Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2964738670592
-    m_Key: storyDay2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4254600396802
-    m_Key: storyDay3Choice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087040
-    m_Key: storyDay3Choice1Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087041
-    m_Key: storyDay3Choice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087042
-    m_Key: storyDay3Choice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087043
-    m_Key: storyDay3Choice2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4254600396800
-    m_Key: storyDay3Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4254600396801
-    m_Key: storyDay3Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087044
-    m_Key: storyDay5Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087045
-    m_Key: storyDay7Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087046
-    m_Key: storyDay8Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087047
-    m_Key: storyDay9Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087048
-    m_Key: randomStoryAfterDay13TextChoice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087049
-    m_Key: randomStoryAfterDay13TextChoice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087050
-    m_Key: randomStoryAfterDay13TextChoice1Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087051
-    m_Key: randomStoryAfterDay13TextChoice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087052
-    m_Key: randomStoryAfterDay13TextChoice2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087053
-    m_Key: storyDay15Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087054
-    m_Key: storyDay18Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087055
-    m_Key: storyDay18TextChoice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087056
-    m_Key: storyDay18TextChoice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087057
-    m_Key: storyDay18TextChoice1Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087058
-    m_Key: storyDay18TextChoice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087059
-    m_Key: storyDay18TextChoice2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087060
-    m_Key: randomStoryAfterDay18Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087061
-    m_Key: randomStoryAfterDay18TextChoice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087062
-    m_Key: randomStoryAfterDay18TextChoice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087063
-    m_Key: randomStoryAfterDay18TextChoice1Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087064
-    m_Key: randomStoryAfterDay18TextChoice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087065
-    m_Key: randomStoryAfterDay18TextChoice2Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12519728087066
-    m_Key: randomStoryAfterDay18TextChoice2Text2
+  - m_Id: 44527992832007
+    m_Key: dash_description
     m_Metadata:
       m_Items: []
   m_Metadata:

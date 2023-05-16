@@ -6718,7 +6718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1256996212
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7535,12 +7535,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1492254750}
   m_Layer: 5
-  m_Name: Book_Default
+  m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1492254750
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7880,6 +7880,11 @@ MonoBehaviour:
   ResourceTextsParent: {fileID: 264597308}
   _title: {fileID: 920210908}
   _desc: {fileID: 2139227144}
+  _choice: {fileID: 1256996211}
+  _normal: {fileID: 1581541446}
+  _choiceButtons:
+  - {fileID: 669717716}
+  - {fileID: 1744442491}
 --- !u!4 &1540332660
 Transform:
   m_ObjectHideFlags: 0
@@ -8388,7 +8393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1581541447
 RectTransform:
   m_ObjectHideFlags: 0

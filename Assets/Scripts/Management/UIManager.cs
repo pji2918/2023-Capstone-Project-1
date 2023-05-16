@@ -44,8 +44,6 @@ public class UIManager : MonoBehaviour
     // 책 텍스트
     public TextMeshProUGUI _title, _desc;
 
-    public Button _choiceOne, _choiceTwo;
-
     //음식 제작 게이지
     private Slider foodSlider;
 
@@ -158,6 +156,7 @@ public class UIManager : MonoBehaviour
     public void OnClickTableButton()
     {
         WindowPopUp(bookWindow);
+        BookOpen();
     }
 
     //설정 팝업
@@ -249,83 +248,104 @@ public class UIManager : MonoBehaviour
         if (DataManager.instance._data.day == 1)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay01Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 2)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay02Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 3)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03Text");
+            ShowStoryButton(ButtonType.Choice, 6);
         }
         else if (DataManager.instance._data.day == 5)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay05Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 7)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay07Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 8)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay08Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 9)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay09Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 13)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13Text");
+            ShowStoryButton(ButtonType.Choice, 7);
         }
         else if (DataManager.instance._data.day == 15)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay15Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 18)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18Text");
+            ShowStoryButton(ButtonType.Choice, 8);
         }
         else if (DataManager.instance._data.day == 20)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay20Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 21)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay21Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 23)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay23Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 24)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay24Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 26)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay26Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 28)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28Text");
+            ShowStoryButton(ButtonType.Choice, 9);
         }
         else if (DataManager.instance._data.day == 34)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay34Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (DataManager.instance._data.day == 35)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28Text");
+            ShowStoryButton(ButtonType.Normal);
         }
         else if (false) // 이건 모든 게 완성되었을 때 추가됩니다.
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyEndText");
+            ShowStoryButton(ButtonType.Normal);
         }
         else
         {
-            while (true)
+            int loop = 0;
+            while (loop <= 5)
             {
+                ++loop;
                 switch (Random.Range(0, 5))
                 {
                     case 0:
@@ -333,6 +353,7 @@ public class UIManager : MonoBehaviour
                             if (DataManager.instance._data.day >= 4)
                             {
                                 _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04");
+                                ShowStoryButton(ButtonType.Choice, 1);
                             }
                             else
                             {
@@ -345,6 +366,7 @@ public class UIManager : MonoBehaviour
                             if (DataManager.instance._data.day < 13)
                             {
                                 _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13");
+                                ShowStoryButton(ButtonType.Choice, 2);
                             }
                             else
                             {
@@ -357,6 +379,7 @@ public class UIManager : MonoBehaviour
                             if (DataManager.instance._data.day >= 6)
                             {
                                 _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06");
+                                ShowStoryButton(ButtonType.Choice, 3);
                             }
                             else
                             {
@@ -369,6 +392,7 @@ public class UIManager : MonoBehaviour
                             if (DataManager.instance._data.day > 13)
                             {
                                 _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13");
+                                ShowStoryButton(ButtonType.Choice, 4);
                             }
                             else
                             {
@@ -381,6 +405,7 @@ public class UIManager : MonoBehaviour
                             if (DataManager.instance._data.day > 18)
                             {
                                 _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18");
+                                ShowStoryButton(ButtonType.Choice, 5);
                             }
                             else
                             {
@@ -389,6 +414,11 @@ public class UIManager : MonoBehaviour
                             break;
                         }
                 }
+            }
+            if (loop > 5)
+            {
+                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryDefault");
+                ShowStoryButton(ButtonType.Normal);
             }
         }
     }
@@ -399,20 +429,86 @@ public class UIManager : MonoBehaviour
         Choice
     }
 
-    public void ShowStoryButton(ButtonType type)
+    public void ShowStoryButton(ButtonType type, int eventNum = 0)
     {
         switch (type)
         {
             case ButtonType.Normal:
                 {
+                    _normal.SetActive(true);
                     break;
                 }
             case ButtonType.Choice:
                 {
+                    switch (eventNum)
+                    {
+                        case 1:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2");
+                                break;
+                            }
+                        case 2:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice2");
+                                break;
+                            }
+                        case 3:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice2");
+                                break;
+                            }
+                        case 4:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice2");
+                                break;
+                            }
+                        case 5:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice2");
+                                break;
+                            }
+                        case 6:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice2");
+                                break;
+                            }
+                        case 7:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice2");
+                                break;
+                            }
+                        case 8:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice2");
+                                break;
+                            }
+                        case 9:
+                            {
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice2");
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                    _choice.SetActive(true);
                     break;
                 }
         }
     }
+
+    public GameObject _choice, _normal;
+    public GameObject[] _choiceButtons;
 
     public void ChoiceOne()
     {

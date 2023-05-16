@@ -158,25 +158,25 @@ MonoBehaviour:
       m_Items:
       - rid: 5056674134845554728
   - m_Id: 4254600396802
-    m_Key: storyDay03Choice1
+    m_Key: storyDay03TextChoice1
     m_Metadata:
       m_Items: []
   - m_Id: 17129675030535
-    m_Key: storyDay03Choice1Text1
+    m_Key: storyDay03TextChoice1Text1
     m_Metadata:
       m_Items:
       - rid: 5056674134845554744
   - m_Id: 17129675030536
-    m_Key: storyDay03Choice1Text2
+    m_Key: storyDay03TextChoice1Text2
     m_Metadata:
       m_Items:
       - rid: 5056674134845554745
   - m_Id: 17129675030537
-    m_Key: storyDay03Choice2
+    m_Key: storyDay03TextChoice2
     m_Metadata:
       m_Items: []
   - m_Id: 17129675030538
-    m_Key: storyDay03Choice2Text
+    m_Key: storyDay03TextChoice2Text
     m_Metadata:
       m_Items: []
   - m_Id: 4254600396800
@@ -307,6 +307,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 17834422960135
     m_Key: storyEndText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45819934932992
+    m_Key: randomStoryDefault
     m_Metadata:
       m_Items: []
   m_Metadata:
