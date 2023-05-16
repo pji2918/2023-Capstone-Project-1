@@ -15,6 +15,34 @@ MonoBehaviour:
   m_TableCollectionName: Story
   m_TableCollectionNameGuidString: ad86363328121794c8f4b7b5d02025ff
   m_Entries:
+  - m_Id: 31401805217792
+    m_Key: randomStoryAfterDay04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412096
+    m_Key: randomStoryAfterDay04Choice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412097
+    m_Key: randomStoryAfterDay04Choice1Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412098
+    m_Key: randomStoryAfterDay04Choice1Text2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412099
+    m_Key: randomStoryAfterDay04Choice2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412100
+    m_Key: randomStoryAfterDay04Choice2Text1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31401809412101
+    m_Key: randomStoryAfterDay04Choice2Text2
+    m_Metadata:
+      m_Items: []
   - m_Id: 11970383314944
     m_Key: randomStoryAfterDay13Text
     m_Metadata:
@@ -67,34 +95,6 @@ MonoBehaviour:
     m_Key: randomStoryAfterDay18TextChoice2Text2
     m_Metadata:
       m_Items: []
-  - m_Id: 31401805217792
-    m_Key: randomStoryAfterDay04
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31401809412096
-    m_Key: randomStoryAfterDay04Choice1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31401809412097
-    m_Key: randomStoryAfterDay04Choice1Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31401809412098
-    m_Key: randomStoryAfterDay04Choice1Text2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31401809412099
-    m_Key: randomStoryAfterDay04Choice2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31401809412100
-    m_Key: randomStoryAfterDay04Choice2Text1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31401809412101
-    m_Key: randomStoryAfterDay04Choice2Text2
-    m_Metadata:
-      m_Items: []
   - m_Id: 31401809412102
     m_Key: randomStoryAfterDay6Text
     m_Metadata:
@@ -119,12 +119,20 @@ MonoBehaviour:
     m_Key: randomStoryAfterDay6TextChoice2Text
     m_Metadata:
       m_Items: []
+  - m_Id: 45819934932992
+    m_Key: randomStoryDefault
+    m_Metadata:
+      m_Items: []
   - m_Id: 10380989562883
     m_Key: randomStoryUntilDay13Text
     m_Metadata:
       m_Items: []
   - m_Id: 10380989562884
     m_Key: randomStoryUntilDay13TextChoice1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10380989562888
+    m_Key: randomStoryUntilDay13TextChoice1Text1
     m_Metadata:
       m_Items: []
   - m_Id: 10380989562885
@@ -137,10 +145,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10380989562887
     m_Key: randomStoryUntilDay13TextChoice2Text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 10380989562888
-    m_Key: randomStoryUntilDay13TextChoiceText1
     m_Metadata:
       m_Items: []
   - m_Id: 2091383914496
@@ -157,6 +161,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5056674134845554728
+  - m_Id: 4254600396800
+    m_Key: storyDay03Text1
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554742
+  - m_Id: 4254600396801
+    m_Key: storyDay03Text2
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554743
   - m_Id: 4254600396802
     m_Key: storyDay03TextChoice1
     m_Metadata:
@@ -179,16 +193,6 @@ MonoBehaviour:
     m_Key: storyDay03TextChoice2Text
     m_Metadata:
       m_Items: []
-  - m_Id: 4254600396800
-    m_Key: storyDay03Text1
-    m_Metadata:
-      m_Items:
-      - rid: 5056674134845554742
-  - m_Id: 4254600396801
-    m_Key: storyDay03Text2
-    m_Metadata:
-      m_Items:
-      - rid: 5056674134845554743
   - m_Id: 17129675030539
     m_Key: storyDay05Text
     m_Metadata:
@@ -307,10 +311,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 17834422960135
     m_Key: storyEndText
-    m_Metadata:
-      m_Items: []
-  - m_Id: 45819934932992
-    m_Key: randomStoryDefault
     m_Metadata:
       m_Items: []
   m_Metadata:

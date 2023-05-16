@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
     public bool _isDying = false;
     public int _playerMaxHp = 100;
 
-    [Range(0, 100)] public int _playerHp;
+    public int _playerHp;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
@@ -73,6 +74,11 @@ public class PlayerController : MonoBehaviour
 
         // 플레이어의 Animator 컴포넌트를 가져옵니다.
         _playerAnimator = GetComponent<Animator>();
+
+        if (GameManager.instance._healthReduce > 0)
+        {
+            _playerHp = _playerMaxHp - (_playerMaxHp * (GameManager.instance._healthReduce / 100));
+        }
     }
 
     // Update is called once per frame
@@ -253,6 +259,32 @@ public class PlayerController : MonoBehaviour
     public void CallCoroutine()
     {
         StartCoroutine(CheckisDie());
+    }
+
+    public void CallComplete()
+    {
+        StartCoroutine(CheckisComplete());
+    }
+
+    public GameObject _completeFade;
+
+    IEnumerator CheckisComplete()
+    {
+        if (InGameUI.instance._isQuestComplete[0] && InGameUI.instance._isQuestComplete[1] && InGameUI.instance._isQuestComplete[2])
+        {
+            _playerAgent.isStopped = true;
+            _playerRigidbody.bodyType = RigidbodyType2D.Static;
+            _completeFade.SetActive(true);
+            for (int i = 0; i <= 255; i++)
+            {
+                _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+                yield return new WaitForSeconds(0.01f);
+            }
+            yield return new WaitForSeconds(1f);
+            DataManager.instance._data.day += 1;
+            DataManager.instance.Save();
+            SceneManager.LoadScene("Home");
+        }
     }
 
     IEnumerator Eat()

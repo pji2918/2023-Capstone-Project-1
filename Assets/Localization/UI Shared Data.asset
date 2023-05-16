@@ -51,8 +51,8 @@ MonoBehaviour:
     m_Key: dash_description
     m_Metadata:
       m_Items: []
-  - m_Id: 48557590708224
-    m_Key: skill_food
+  - m_Id: 83643497177088
+    m_Key: food
     m_Metadata:
       m_Items: []
   - m_Id: 48557590708225

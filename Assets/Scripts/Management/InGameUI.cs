@@ -49,12 +49,14 @@ public class InGameUI : MonoBehaviour
         _quest[2]._objectiveAmount = 10;
     }
 
+    public bool[] _isQuestComplete = new bool[3] { false, false, false };
+
     public string[] _resourcename = new string[5] { "철근", "콘크리트", "코어", "볼트와 너트", "식량" };
 
     // Update is called once per frame
     void Update()
     {
-        _healthBar.fillAmount = PlayerController.instance._playerHp / 100f;
+        _healthBar.fillAmount = PlayerController.instance._playerHp / PlayerController.instance._playerMaxHp;
 
         #region 스킬 쿨타임 표시
         _skillCoolDownBar[0].fillAmount = 1 - (PlayerController.instance._dashCoolDown / 7f);
@@ -143,6 +145,7 @@ public class InGameUI : MonoBehaviour
             if (_quest[i]._amount >= _quest[i]._objectiveAmount)
             {
                 _questText[i].color = new Color32(0, 255, 0, 255);
+                _isQuestComplete[i] = true;
             }
         }
         #endregion

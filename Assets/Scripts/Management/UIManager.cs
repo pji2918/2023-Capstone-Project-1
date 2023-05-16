@@ -56,6 +56,8 @@ public class UIManager : MonoBehaviour
     private float currentCookingTime = 0;
     //제작 상태
     private bool isCooking = false;
+
+    private bool _lookingStory = false;
     #endregion
 
     private void Start()
@@ -174,7 +176,10 @@ public class UIManager : MonoBehaviour
     //스토리 팝업 나가기
     public void OnClickTableBackground()
     {
-        WindowDisappear(bookWindow);
+        if (!_lookingStory)
+        {
+            WindowDisappear(bookWindow);
+        }
     }
 
     //설정 팝업 나가기
@@ -206,6 +211,7 @@ public class UIManager : MonoBehaviour
     //씬 넘기기
     public void HomeToFighting()
     {
+        DataManager.instance.Save();
         SceneManager.LoadScene("Fighting");
     }
 
@@ -429,8 +435,14 @@ public class UIManager : MonoBehaviour
         Choice
     }
 
-    public void ShowStoryButton(ButtonType type, int eventNum = 0)
+    int eventNum = 0;
+
+    public void ShowStoryButton(ButtonType type, int eNum = 0)
     {
+        foreach (GameObject obj in _choiceButtons)
+        {
+            obj.SetActive(false);
+        }
         switch (type)
         {
             case ButtonType.Normal:
@@ -440,6 +452,7 @@ public class UIManager : MonoBehaviour
                 }
             case ButtonType.Choice:
                 {
+                    eventNum = eNum;
                     switch (eventNum)
                     {
                         case 1:
@@ -512,11 +525,240 @@ public class UIManager : MonoBehaviour
 
     public void ChoiceOne()
     {
-
+        _lookingStory = true;
+        switch (eventNum)
+        {
+            case 1:
+                {
+                    if (Random.Range(0, 100) <= 70)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1Text1");
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1Text2");
+                        ShowStoryButton(ButtonType.Normal);
+                        GameManager.instance._healthReduce = 10;
+                    }
+                    break;
+                }
+            case 2:
+                {
+                    if (Random.Range(0, 100) <= 20)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1Text1");
+                        DataManager.instance._data.resources["core"] += 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1Text1");
+                        ShowStoryButton(ButtonType.Normal);
+                        GameManager.instance._healthReduce = 5;
+                    }
+                    break;
+                }
+            case 3:
+                {
+                    if (Random.Range(0, 100) <= 20)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice1Text1");
+                        DataManager.instance._data.resources["food"] += 2;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice1Text2");
+                        ShowStoryButton(ButtonType.Normal);
+                        GameManager.instance._healthReduce = 5;
+                    }
+                    break;
+                }
+            case 4:
+                {
+                    if (Random.Range(0, 100) <= 80)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice1Text1");
+                        DataManager.instance._data.resources["core"] -= 1;
+                        DataManager.instance._data.resources["concrete"] += 5;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice1Text2");
+                        DataManager.instance._data.resources["core"] -= 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    break;
+                }
+            case 5:
+                {
+                    if (Random.Range(0, 100) <= 40)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice1Text1");
+                        DataManager.instance._data.resources["bolt"] -= 3;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice1Text2");
+                        DataManager.instance._data.resources["bolt"] -= 3;
+                        DataManager.instance._data.resources["food"] += 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    break;
+                }
+            case 6:
+                {
+                    if (Random.Range(0, 100) <= 70)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice1Text1");
+                        GameManager.instance._healthReduce = 10;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice1Text2");
+                        DataManager.instance._data.resources["ingredient"] += 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    break;
+                }
+            case 7:
+                {
+                    if (Random.Range(0, 100) <= 80)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice1Text1");
+                        DataManager.instance._data.resources["iron"] += 5;
+                        DataManager.instance._data.resources["food"] -= 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice1Text2");
+                        DataManager.instance._data.resources["ingredient"] -= 2;
+                        DataManager.instance._data.resources["food"] -= 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    break;
+                }
+            case 8:
+                {
+                    if (Random.Range(0, 100) <= 60)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice1Text1");
+                        DataManager.instance._data.resources["iron"] -= 3;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice1Text2");
+                        DataManager.instance._data.resources["ingredient"] += 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    break;
+                }
+            case 9:
+                {
+                    if (Random.Range(0, 100) <= 60)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice1Text1");
+                        DataManager.instance._data.resources["bolt"] += 15;
+                        DataManager.instance._data.resources["core"] -= 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice1Text2");
+                        DataManager.instance._data.resources["bolt"] += 15;
+                        DataManager.instance._data.resources["core"] += 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    break;
+                }
+        }
     }
 
     public void ChoiceTwo()
     {
-
+        _lookingStory = true;
+        switch (eventNum)
+        {
+            case 1:
+                {
+                    if (Random.Range(0, 100) <= 50)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2Text1");
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2Text2");
+                        ShowStoryButton(ButtonType.Normal);
+                        GameManager.instance._healthReduce = 10;
+                    }
+                    break;
+                }
+            case 2:
+                {
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice2Text");
+                    ShowStoryButton(ButtonType.Normal);
+                    break;
+                }
+            case 3:
+                {
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice2Text");
+                    ShowStoryButton(ButtonType.Normal);
+                    break;
+                }
+            case 4:
+                {
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice2Text");
+                    ShowStoryButton(ButtonType.Normal);
+                    break;
+                }
+            case 5:
+                {
+                    if (Random.Range(0, 100) <= 20)
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice1Text1");
+                        DataManager.instance._data.resources["concrete"] -= 1;
+                        DataManager.instance._data.resources["core"] += 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    else
+                    {
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice1Text2");
+                        DataManager.instance._data.resources["concrete"] -= 1;
+                        ShowStoryButton(ButtonType.Normal);
+                    }
+                    break;
+                }
+            case 6:
+                {
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice2Text");
+                    ShowStoryButton(ButtonType.Normal);
+                    break;
+                }
+            case 7:
+                {
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice2Text");
+                    ShowStoryButton(ButtonType.Normal);
+                    break;
+                }
+            case 8:
+                {
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice2Text");
+                    ShowStoryButton(ButtonType.Normal);
+                    break;
+                }
+            case 9:
+                {
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice2Text");
+                    ShowStoryButton(ButtonType.Normal);
+                    break;
+                }
+        }
     }
 }
