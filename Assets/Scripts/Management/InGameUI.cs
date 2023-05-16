@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Settings;
 using TMPro;
 using UnityEngine.EventSystems;
 
@@ -65,7 +66,7 @@ public class InGameUI : MonoBehaviour
         _foodCoolDownBar.fillAmount = 1 - (PlayerController.instance._foodCoolDown / 10f);
         #endregion
 
-        _foodCountText.text = string.Format("남은 식량 : {0}개", DataManager.instance._data.resources["food"]);
+        _foodCountText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "skill_foodcount"), DataManager.instance._data.resources["food"]);
 
         #region 스킬 활성화 여부 표시
 
