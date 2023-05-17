@@ -61,10 +61,11 @@ public class PlayerController : MonoBehaviour
     public int _playerHp;
 
     private float _attackCoolDown = 0f;
-    
+
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
     {
+        Debug.Log(_playerMaxHp);
         // 플레이어의 NavMesh 에이전트 컴포넌트를 가져오고, 자동 회전을 끕니다.
         _playerAgent = GetComponent<NavMeshAgent>();
         _playerAgent.updateRotation = false;

@@ -7081,6 +7081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodCount: 0
+  _healthReduce: 0
 --- !u!4 &1322824911
 Transform:
   m_ObjectHideFlags: 0
@@ -10819,7 +10820,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC5EC\uAE30\uC5D0 \uB2E4\uC591\uD55C \uD14D\uC2A4\uD2B8\uAC00 \uB4E4\uC5B4\uAC11\uB2C8\uB2E4..."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c26cd506f0c0f2b4ea9bac2b43eca922, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6a427231b113c95448b1ed6c2275746b, type: 2}
   m_sharedMaterial: {fileID: -7182402614306206172, guid: c26cd506f0c0f2b4ea9bac2b43eca922, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -10883,7 +10884,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2139227145

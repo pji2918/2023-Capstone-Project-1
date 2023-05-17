@@ -56,7 +56,7 @@ public class InGameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _healthBar.fillAmount = PlayerController.instance._playerHp / PlayerController.instance._playerMaxHp;
+        _healthBar.fillAmount = (float)PlayerController.instance._playerHp / PlayerController.instance._playerMaxHp;
 
         #region 스킬 쿨타임 표시
         _skillCoolDownBar[0].fillAmount = 1 - (PlayerController.instance._dashCoolDown / 7f);
