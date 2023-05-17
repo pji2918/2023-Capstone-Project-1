@@ -24,7 +24,7 @@ public class InGameUI : MonoBehaviour
     public GameObject[] _skillTooltip, _statusTooltip;
     public GameObject _foodTooltip;
     public TextMeshProUGUI[] _questText = new TextMeshProUGUI[3];
-    public TextMeshProUGUI _foodCountText;
+    public TextMeshProUGUI _foodCountText, _timerText;
     public Resource[] _quest = new Resource[3];
 
 
@@ -152,10 +152,12 @@ public class InGameUI : MonoBehaviour
         }
         #endregion
 
-        if (PlayerController.instance.isStop)
+        _timerText.text = string.Format("{0:00}:{1:00}", (int)PlayerController.instance._timer / 60 % 60, (int)PlayerController.instance._timer % 60);
+
+        if (PlayerController.instance.isSlow)
         {
             _statusPanel[0].SetActive(true);
-            _statusPanel[0].transform.GetChild(0).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance.stopCurrentTime / PlayerController.instance._stopTime);
+            _statusPanel[0].transform.GetChild(0).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance.slowCurrentTime / PlayerController.instance._slowTime);
         }
         else
         {

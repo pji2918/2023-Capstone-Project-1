@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
     public GameObject _playerAttackEffect;
     public GameObject _dieFade, _gameOverUI;
 
-    public float stopCurrentTime;
-    public bool isStop = false;
+    public float slowCurrentTime;
+    public bool isSlow = false;
 
     // 플레이어의 이동 속도 및 돌진 속도, 쿨타임을 저장하는 변수입니다.
     [SerializeField] public float _moveSpeed = 5f;
@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
     public bool _isDying = false;
     public int _playerMaxHp = 100;
     public int _playerHp;
+
+    public float _timer = 0f;
 
     private float _attackCoolDown = 0f;
 
@@ -90,12 +92,14 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(Fade());
     }
 
+    public bool _isFinishing = false;
+
     // Update is called once per frame
     void Update()
     {
         #region 키 입력
         // 오른쪽 마우스 클릭을 하면 플레이어를 클릭한 위치로 이동시킵니다.
-        if (Input.GetMouseButtonDown(1) && !_isDash && !_isDying)
+        if (Input.GetMouseButtonDown(1) && !_isDash && !_isDying && !_isFinishing)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             PlayerController.instance._playerAgent.SetDestination(mousePosition);
@@ -107,7 +111,18 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PlayerController.instance.Dash());
         }
 
-
+        if (!_isDash)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _playerAgent.isStopped = true;
+                _playerAgent.velocity = Vector2.zero;
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))
+            {
+                _playerAgent.isStopped = false;
+            }
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -193,6 +208,15 @@ public class PlayerController : MonoBehaviour
         // 플레이어의 이동 속도를 설정합니다.
         _playerAgent.speed = _moveSpeed;
 
+        if (_timer >= 180 && !_isFinishing)
+        {
+            CallComplete();
+        }
+        else
+        {
+            _timer += Time.deltaTime;
+        }
+
         // 플레이어가 움직이지 않으면, Idle 애니메이션을 재생합니다.
         if (_playerAgent.velocity == Vector3.zero)
         {
@@ -246,26 +270,26 @@ public class PlayerController : MonoBehaviour
             _attackCoolDown -= Time.deltaTime;
         }
 
-        if (isStop)
+        if (isSlow)
         {
-            stopCurrentTime += Time.deltaTime;
+            slowCurrentTime += Time.deltaTime;
         }
 
-        if (stopCurrentTime > _stopTime && isStop)
+        if (slowCurrentTime > _slowTime && isSlow)
         {
-            isStop = false;
+            isSlow = false;
             PlayerController.instance._moveSpeed = 5f;
         }
     }
 
-    public float _stopTime;
+    public float _slowTime;
 
-    public IEnumerator StopPlayer(float stopTime)
+    public IEnumerator SlowPlayer(float stopTime)
     {
-        _stopTime = stopTime;
-        stopCurrentTime = 0;
-        isStop = true;
-        PlayerController.instance._moveSpeed = 0f;
+        _slowTime = stopTime;
+        slowCurrentTime = 0;
+        isSlow = true;
+        PlayerController.instance._moveSpeed = 2f;
         yield return null;
     }
 
@@ -310,8 +334,12 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator CheckisComplete()
     {
-        if (InGameUI.instance._isQuestComplete[0] && InGameUI.instance._isQuestComplete[1] && InGameUI.instance._isQuestComplete[2])
+        if (_timer >= 180
+        || (InGameUI.instance._isQuestComplete[0]
+        && InGameUI.instance._isQuestComplete[1]
+        && InGameUI.instance._isQuestComplete[2]))
         {
+            _isFinishing = true;
             _playerAgent.isStopped = true;
             _playerRigidbody.bodyType = RigidbodyType2D.Static;
             _completeFade.SetActive(true);

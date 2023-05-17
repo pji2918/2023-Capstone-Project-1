@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SnakeFish : MonsterController
 {
-    [SerializeField] private float stopTime = 2.5f;
+    [SerializeField] private float ccTime = 1f;
 
 
     [Space(10f)]
@@ -27,34 +27,39 @@ public class SnakeFish : MonsterController
     // 공격
     protected override void Update()
     {
-        if (!_isKnockback)
+        if (_isKnockback)
         {
-            if (_agent.remainingDistance < 2)
+            return;
+        }
+        if (_agent.remainingDistance < 2)
+        {
+            if (_isKnockback)
             {
-                if (attackCurrentTime >= attackCoolTime)
-                {
-                    Attack();
-                    attackCurrentTime = 0;
-                }
+                return;
             }
-            else
+            else if (attackCurrentTime >= attackCoolTime)
             {
-                _agent.speed = speed;
+                Attack();
+                attackCurrentTime = 0;
             }
+        }
+        else
+        {
+            _agent.speed = speed;
         }
         base.Update();
     }
 
     public void Attack()
     {
-        if (PlayerController.instance.isStop)
+        if (PlayerController.instance.isSlow)
         {
-            PlayerController.instance.stopCurrentTime = 0;
+            PlayerController.instance.slowCurrentTime = 0;
             Debug.Log("경직 시간 초기화");
         }
         else
         {
-            StartCoroutine(PlayerController.instance.StopPlayer(stopTime));
+            StartCoroutine(PlayerController.instance.SlowPlayer(ccTime));
         }
     }
 

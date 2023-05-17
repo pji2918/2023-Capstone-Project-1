@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Tips Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Tips
+  m_TableCollectionNameGuidString: 0c4e8a1cc802af8489398b65e27aa7d4
+  m_Entries:
+  - m_Id: 5272759304192
+    m_Key: Tip001
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247232
+    m_Key: Tip002
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247233
+    m_Key: Tip003
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247234
+    m_Key: Tip004
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247235
+    m_Key: Tip005
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247236
+    m_Key: Tip006
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247237
+    m_Key: Tip007
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247238
+    m_Key: Tip008
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247239
+    m_Key: Tip009
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247240
+    m_Key: Tip010
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247241
+    m_Key: Tip011
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247242
+    m_Key: Tip012
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247243
+    m_Key: Tip013
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247244
+    m_Key: Tip014
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5272801247245
+    m_Key: Tip015
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5056674160072982530
+  references:
+    version: 2
+    RefIds:
+    - rid: 5056674160072982530
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1684311468949

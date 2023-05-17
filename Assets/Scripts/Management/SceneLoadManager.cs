@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using TMPro;
@@ -10,18 +11,60 @@ public class SceneLoadManager : MonoBehaviour
 {
     public Slider _loadingBar;
     public GameObject _sceneChangeFade;
-    public TextMeshProUGUI _loadingText;
+    public TextMeshProUGUI _loadingText, _tipText;
+    private float _tipTimer = 5f;
+    private LocalizedStringTable _table = new LocalizedStringTable { TableReference = "Tips" };
+    bool _isTextFading = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        NextTip();
         StartCoroutine(Fade());
     }
 
     // Update is called once per frame
     void Update()
     {
+        _tipTimer -= Time.deltaTime;
+        if (_tipTimer <= 0f)
+        {
+            if (!_isTextFading)
+            {
+                StartCoroutine(ShowTip());
+            }
+        }
+    }
 
+    public void NextTip()
+    {
+        _tipTimer = 5f;
+        if (!_isTextFading)
+        {
+            StartCoroutine(ShowTip());
+        }
+    }
+
+    public IEnumerator ShowTip()
+    {
+        _isTextFading = true;
+        for (int i = 255; i >= 0; i--)
+        {
+            _tipText.color = new Color32(255, 255, 255, (byte)i);
+            yield return new WaitForSeconds(0.001f);
+        }
+        var table = _table.GetTableAsync();
+        _tipTimer = 5f;
+        int randomIndex = Random.Range(0, table.Result.SharedData.Entries.Count);
+        var randomEntry = table.Result.SharedData.Entries[randomIndex];
+        var entry = table.Result.GetEntry(randomEntry.Id);
+        _tipText.text = entry.LocalizedValue;
+        for (int i = 0; i <= 255; i++)
+        {
+            _tipText.color = new Color32(255, 255, 255, (byte)i);
+            yield return new WaitForSeconds(0.001f);
+        }
+        _isTextFading = false;
     }
 
     IEnumerator Fade()
@@ -50,7 +93,7 @@ public class SceneLoadManager : MonoBehaviour
 
             if (asyncLoad.progress < 0.9f)
             {
-                _loadingText.text = (_loadingBar.value * 100f) + "%";
+                _loadingText.text = Mathf.FloorToInt(_loadingBar.value * 100f) + "%";
                 _loadingBar.value = Mathf.Lerp(asyncLoad.progress, 1f, timer);
 
                 if (_loadingBar.value >= asyncLoad.progress)
@@ -65,7 +108,7 @@ public class SceneLoadManager : MonoBehaviour
 
                 if (_loadingBar.value == 1f)
                 {
-                    if (Input.anyKeyDown)
+                    if (Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2))
                     {
                         _sceneChangeFade.SetActive(true);
                         for (int i = 0; i <= 255; i++)

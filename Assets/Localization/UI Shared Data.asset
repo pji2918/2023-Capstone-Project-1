@@ -68,11 +68,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 312300702662656
-    m_Key: cc_stop
+    m_Key: cc_slow
     m_Metadata:
       m_Items: []
   - m_Id: 312300744605696
-    m_Key: cc_stop_description
+    m_Key: cc_slow_description
     m_Metadata:
       m_Items: []
   m_Metadata:

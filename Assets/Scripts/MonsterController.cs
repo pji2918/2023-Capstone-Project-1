@@ -77,6 +77,7 @@ public class MonsterController : MonoBehaviour
         {
             // 여기에 몬스터가 비눗방울에 닿았을 때 HP가 서서히 감소하는 코드를 작성합니다.
             currentHp -= 1;
+            DamageEffect();
         }
     }
 
@@ -86,16 +87,19 @@ public class MonsterController : MonoBehaviour
         {
             // 여기에 몬스터가 작살에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 30;
+            DamageEffect();
         }
         if (other.name == "Attack_Effect")
         {
             // 여기에 기본 공격에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 10;
+            DamageEffect();
         }
         if (other.CompareTag("Mine_Explosion"))
         {
             // 여기에 지뢰에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 50;
+            DamageEffect();
         }
     }
 
@@ -107,6 +111,19 @@ public class MonsterController : MonoBehaviour
             this.GetComponent<NavMeshAgent>().enabled = false;
             // 여기에 몬스터가 장풍에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 5;
+            DamageEffect();
         }
+    }
+
+    protected void DamageEffect()
+    {
+        StartCoroutine(DamageEffectCoroutine());
+    }
+
+    public IEnumerator DamageEffectCoroutine()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 170, 170, 255);
+        yield return new WaitForSeconds(0.3f);
+        this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
