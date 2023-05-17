@@ -58,9 +58,10 @@ public class PlayerController : MonoBehaviour
     bool _isAttacking;
     public bool _isDying = false;
     public int _playerMaxHp = 100;
-
     public int _playerHp;
 
+    private float _attackCoolDown = 0f;
+    
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
     {
@@ -102,25 +103,25 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!_isDying)
+            if (!_isDying && _attackCoolDown <= 0f)
             {
+                _attackCoolDown = 0.5f;
                 _isAttacking = true;
-                _playerAttackEffect.SetActive(true);
-                _playerAttackEffect.GetComponent<Animator>().Play("Attack");
+
+                StartCoroutine(Attack());
+
+                _playerAnimator.SetTrigger("Attack");
 
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 // mousePosition이 플레이어의 왼쪽이면 플레이어를 왼쪽으로 바라보게 합니다.
                 if (mousePosition.x < transform.position.x)
                 {
-                    Debug.Log("왼쪽");
                     transform.localScale = new Vector3(2, 2, 1);
                 }
                 else if (mousePosition.x > transform.position.x)
                 {
-                    Debug.Log("오른쪽");
                     transform.localScale = new Vector3(-2, 2, 1);
                 }
-
 
                 // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
                 StartCoroutine(AttackEffect());
@@ -234,6 +235,10 @@ public class PlayerController : MonoBehaviour
         {
             _foodCoolDown -= Time.deltaTime;
         }
+        if (_attackCoolDown > 0)
+        {
+            _attackCoolDown -= Time.deltaTime;
+        }
 
         // 플레이어가 돌진할 수 있는 상태라면, 플레이어의 투명도를 낮추고, 몬스터와의 충돌을 무시합니다.
         if (_isDash)
@@ -247,6 +252,14 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
             _playerAgent.enabled = true;
         }
+    }
+
+    IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(0.25f);
+        _playerAttackEffect.SetActive(true);
+        _playerAttackEffect.GetComponent<Animator>().Play("Attack");
+        Debug.Log("Attack");
     }
 
     IEnumerator AttackEffect()
