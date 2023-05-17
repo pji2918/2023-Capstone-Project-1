@@ -54,6 +54,7 @@ public class LightFish : MonsterController
         for (int i = 0; i < 15; i++)
         {
             PlayerController.instance._playerHp -= attack;
+            PlayerController.instance.CallCoroutine();
             yield return new WaitForSeconds(0.1f);
         }
     }

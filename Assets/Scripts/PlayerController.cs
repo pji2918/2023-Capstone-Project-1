@@ -248,19 +248,6 @@ public class PlayerController : MonoBehaviour
             _attackCoolDown -= Time.deltaTime;
         }
 
-        // 플레이어가 돌진할 수 있는 상태라면, 플레이어의 투명도를 낮추고, 몬스터와의 충돌을 무시합니다.
-        if (_isDash)
-        {
-            Physics2D.IgnoreLayerCollision(6, 7);
-            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
-            _playerAgent.enabled = false;
-        }
-        else
-        {
-            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-            _playerAgent.enabled = true;
-        }
-
         if (isStop)
         {
             stopCurrentTime += Time.deltaTime;
@@ -312,7 +299,10 @@ public class PlayerController : MonoBehaviour
 
     public void CallCoroutine()
     {
-        StartCoroutine(CheckisDie());
+        if (!_isDying)
+        {
+            StartCoroutine(CheckisDie());
+        }
     }
 
     public void CallComplete()
@@ -396,6 +386,10 @@ public class PlayerController : MonoBehaviour
             _dashCoolDown = 7f;
             _isDash = true;
 
+            Physics2D.IgnoreLayerCollision(6, 7);
+            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
+            _playerAgent.enabled = false;
+
             // 마우스 방향으로 돌진합니다.
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 direction = (mousePosition - transform.position).normalized;
@@ -404,7 +398,8 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
 
             _playerRigidbody.velocity = Vector2.zero;
-            yield return new WaitForSeconds(0.3f);
+            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            _playerAgent.enabled = true;
             _isDash = false;
         }
     }

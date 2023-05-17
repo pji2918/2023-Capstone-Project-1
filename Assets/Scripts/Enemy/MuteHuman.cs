@@ -42,6 +42,7 @@ public class MuteHuman : MonsterController
 
     public void Attack()
     {
+        PlayerController.instance.CallCoroutine();
         PlayerController.instance._playerHp -= attack;
     }
 }

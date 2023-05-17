@@ -48,6 +48,7 @@ public class MuteBear : MonsterController
 
     public void Attack()
     {
+        PlayerController.instance.CallCoroutine();
         GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
         float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
