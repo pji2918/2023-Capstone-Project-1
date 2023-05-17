@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     public GameObject _playerAttackEffect;
     public GameObject _dieFade, _gameOverUI;
 
+    public float stopCurrentTime;
+    public bool isStop = false;
+
     // 플레이어의 이동 속도 및 돌진 속도, 쿨타임을 저장하는 변수입니다.
     [SerializeField] public float _moveSpeed = 5f;
     [SerializeField] private float _dashSpeed;
@@ -65,7 +68,6 @@ public class PlayerController : MonoBehaviour
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
     {
-        Debug.Log(_playerMaxHp);
         // 플레이어의 NavMesh 에이전트 컴포넌트를 가져오고, 자동 회전을 끕니다.
         _playerAgent = GetComponent<NavMeshAgent>();
         _playerAgent.updateRotation = false;
@@ -77,10 +79,15 @@ public class PlayerController : MonoBehaviour
         // 플레이어의 Animator 컴포넌트를 가져옵니다.
         _playerAnimator = GetComponent<Animator>();
 
-        if (GameManager.instance._healthReduce > 0)
+        if (GameManager.instance is not null)
         {
-            _playerHp = _playerMaxHp - (_playerMaxHp * (GameManager.instance._healthReduce / 100));
+            if (GameManager.instance._healthReduce > 0)
+            {
+                _playerHp = _playerMaxHp - (_playerMaxHp * (GameManager.instance._healthReduce / 100));
+            }
         }
+
+        StartCoroutine(Fade());
     }
 
     // Update is called once per frame
@@ -201,11 +208,11 @@ public class PlayerController : MonoBehaviour
         // 플레이어가 움직이는 방향에 따라, 플레이어를 좌우 반전합니다.
         if (!_isAttacking)
         {
-            if (_playerAgent.velocity.x > 0 || _playerRigidbody.velocity.x > 0)
+            if (_playerAgent.velocity.x > 1 || _playerRigidbody.velocity.x > 1)
             {
                 this.transform.localScale = new Vector3(-2, 2, 1);
             }
-            else if (_playerAgent.velocity.x < 0 || _playerRigidbody.velocity.x < 0)
+            else if (_playerAgent.velocity.x < 1 || _playerRigidbody.velocity.x < 1)
             {
                 this.transform.localScale = new Vector3(2, 2, 1);
             }
@@ -253,6 +260,28 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
             _playerAgent.enabled = true;
         }
+
+        if (isStop)
+        {
+            stopCurrentTime += Time.deltaTime;
+        }
+
+        if (stopCurrentTime > _stopTime && isStop)
+        {
+            isStop = false;
+            PlayerController.instance._moveSpeed = 5f;
+        }
+    }
+
+    private float _stopTime;
+
+    public IEnumerator StopPlayer(float stopTime)
+    {
+        _stopTime = stopTime;
+        stopCurrentTime = 0;
+        isStop = true;
+        PlayerController.instance._moveSpeed = 0f;
+        yield return null;
     }
 
     IEnumerator Attack()
@@ -268,6 +297,17 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         _playerAttackEffect.SetActive(false);
         _isAttacking = false;
+    }
+
+    IEnumerator Fade()
+    {
+        _completeFade.SetActive(true);
+        for (int i = 255; i >= 0; i--)
+        {
+            _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+            yield return new WaitForSeconds(0.0001f);
+        }
+        _completeFade.SetActive(false);
     }
 
     public void CallCoroutine()

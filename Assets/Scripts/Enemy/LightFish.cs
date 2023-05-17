@@ -10,35 +10,38 @@ public class LightFish : MonsterController
     [SerializeField] private float thisSpeed = 8.0f;
     [SerializeField] private int thisAttack = 1;
     [SerializeField] private int thisMaxHp = 50;
-    [SerializeField] private float thisAttackCoolTime = 5f;
+    [SerializeField] private float thisAttackCoolTime = 1f;
 
     // 스탯 설정
     protected override void Start()
     {
-        base.Start();
         speed = thisSpeed;
         attack = thisAttack;
         maxHp = thisMaxHp;
         attackCoolTime = thisAttackCoolTime;
+        base.Start();
     }
 
     // 공격
     protected override void Update()
     {
-        base.Update();
-        if (_agent.remainingDistance < 2)
+        if (!_isKnockback)
         {
-            _agent.speed = 0;
-            if (attackCurrentTime >= attackCoolTime)
+            if (_agent.remainingDistance < 2)
             {
-                Attack();
-                attackCurrentTime = 0;
+                _agent.speed = 0;
+                if (attackCurrentTime >= attackCoolTime)
+                {
+                    Attack();
+                    attackCurrentTime = 0;
+                }
+            }
+            else
+            {
+                _agent.speed = speed;
             }
         }
-        else
-        {
-            _agent.speed = speed;
-        }
+        base.Update();
     }
 
     public void Attack()
@@ -48,10 +51,10 @@ public class LightFish : MonsterController
 
     IEnumerator DOTDamage()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
             PlayerController.instance._playerHp -= attack;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

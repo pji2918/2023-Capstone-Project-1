@@ -11,30 +11,33 @@ public class MuteHuman : MonsterController
     // 스탯 설정
     protected override void Start()
     {
-        base.Start();
         speed = thisSpeed;
         attack = thisAttack;
         maxHp = thisMaxHp;
         attackCoolTime = thisAttackCoolTime;
+        base.Start();
     }
 
     // 공격
     protected override void Update()
     {
-        base.Update();
-        if (_agent.remainingDistance < 2)
+        if (!_isKnockback)
         {
-            _agent.speed = 0;
-            if (attackCurrentTime >= attackCoolTime)
+            if (_agent.remainingDistance < 2)
             {
-                Attack();
-                attackCurrentTime = 0;
+                _agent.speed = 0;
+                if (attackCurrentTime >= attackCoolTime)
+                {
+                    Attack();
+                    attackCurrentTime = 0;
+                }
+            }
+            else
+            {
+                _agent.speed = speed;
             }
         }
-        else
-        {
-            _agent.speed = speed;
-        }
+        base.Update();
     }
 
     public void Attack()

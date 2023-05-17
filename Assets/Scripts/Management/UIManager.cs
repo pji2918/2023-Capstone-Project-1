@@ -212,7 +212,21 @@ public class UIManager : MonoBehaviour
     public void HomeToFighting()
     {
         DataManager.instance.Save();
-        SceneManager.LoadScene("Fighting");
+        StartCoroutine(Fade());
+    }
+
+    public GameObject _sceneChangeFade;
+
+    IEnumerator Fade()
+    {
+        _sceneChangeFade.SetActive(true);
+        for (int i = 0; i <= 255; i++)
+        {
+            _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+            yield return new WaitForSeconds(0.01f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene("Loading");
     }
 
     //식량 개수 표시

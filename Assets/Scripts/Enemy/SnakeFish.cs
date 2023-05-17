@@ -5,8 +5,7 @@ using UnityEngine;
 public class SnakeFish : MonsterController
 {
     [SerializeField] private float stopTime = 2.5f;
-    private float stopCurrentTime;
-    private bool isStop = false;
+
 
     [Space(10f)]
 
@@ -18,60 +17,46 @@ public class SnakeFish : MonsterController
     // 스탯 설정
     protected override void Start()
     {
-        base.Start();
         speed = thisSpeed;
         attack = thisAttack;
         maxHp = thisMaxHp;
         attackCoolTime = thisAttackCoolTime;
+        base.Start();
     }
 
     // 공격
     protected override void Update()
     {
-        base.Update();
-        if (_agent.remainingDistance < 2)
+        if (!_isKnockback)
         {
-            if (attackCurrentTime >= attackCoolTime)
+            if (_agent.remainingDistance < 2)
             {
-                Attack();
-                attackCurrentTime = 0;
+                if (attackCurrentTime >= attackCoolTime)
+                {
+                    Attack();
+                    attackCurrentTime = 0;
+                }
+            }
+            else
+            {
+                _agent.speed = speed;
             }
         }
-        else
-        {
-            _agent.speed = speed;
-        }
-
-        if (isStop)
-        {
-            stopCurrentTime += Time.deltaTime;
-        }
-
-        if (stopCurrentTime > stopTime && isStop)
-        {
-            isStop = false;
-            PlayerController.instance._moveSpeed = 5f;
-        }
+        base.Update();
     }
 
     public void Attack()
     {
-        if (isStop)
+        if (PlayerController.instance.isStop)
         {
-            stopCurrentTime = 0;
+            PlayerController.instance.stopCurrentTime = 0;
             Debug.Log("경직 시간 초기화");
         }
         else
         {
-            StartCoroutine(StopPlayer());
+            StartCoroutine(PlayerController.instance.StopPlayer(stopTime));
         }
     }
 
-    IEnumerator StopPlayer()
-    {
-        stopCurrentTime = 0;
-        isStop = true;
-        PlayerController.instance._moveSpeed = 0f;
-        yield return null;
-    }
+
 }
