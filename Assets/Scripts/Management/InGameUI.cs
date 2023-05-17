@@ -19,12 +19,14 @@ public class InGameUI : MonoBehaviour
     public Image _healthBar;
     public Image[] _skillCoolDownBar;
     public Image _foodCoolDownBar;
+    public GameObject[] _statusPanel;
     private bool[] _isHovering = new bool[5] { false, false, false, false, false };
-    public GameObject[] _skillTooltip;
+    public GameObject[] _skillTooltip, _statusTooltip;
     public GameObject _foodTooltip;
     public TextMeshProUGUI[] _questText = new TextMeshProUGUI[3];
     public TextMeshProUGUI _foodCountText;
     public Resource[] _quest = new Resource[3];
+
 
     public static InGameUI instance;
 
@@ -149,6 +151,27 @@ public class InGameUI : MonoBehaviour
             }
         }
         #endregion
+
+        if (PlayerController.instance.isStop)
+        {
+            _statusPanel[0].SetActive(true);
+            _statusPanel[0].transform.GetChild(0).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance.stopCurrentTime / PlayerController.instance._stopTime);
+        }
+        else
+        {
+            _statusPanel[0].SetActive(false);
+            _statusTooltip[0].SetActive(false);
+        }
+    }
+
+    public void OnHoverStop()
+    {
+        _statusTooltip[0].SetActive(true);
+    }
+
+    public void OnNotHoverStop()
+    {
+        _statusTooltip[0].SetActive(false);
     }
 
     public void OnHoverOne()

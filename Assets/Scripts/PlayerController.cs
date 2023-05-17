@@ -113,10 +113,8 @@ public class PlayerController : MonoBehaviour
         {
             if (!_isDying && _attackCoolDown <= 0f)
             {
-                _attackCoolDown = 0.5f;
+                _attackCoolDown = 0.7f;
                 _isAttacking = true;
-
-                StartCoroutine(Attack());
 
                 _playerAnimator.SetTrigger("Attack");
 
@@ -260,7 +258,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private float _stopTime;
+    public float _stopTime;
 
     public IEnumerator StopPlayer(float stopTime)
     {
@@ -271,12 +269,10 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Attack()
+    public void Attack()
     {
-        yield return new WaitForSeconds(0.25f);
         _playerAttackEffect.SetActive(true);
         _playerAttackEffect.GetComponent<Animator>().Play("Attack");
-        Debug.Log("Attack");
     }
 
     IEnumerator AttackEffect()
@@ -360,6 +356,10 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerHp <= 0)
         {
+            if (!_playerAgent.enabled)
+            {
+                _playerAgent.enabled = true;
+            }
             _isDying = true;
             _playerAgent.isStopped = true;
             _playerRigidbody.bodyType = RigidbodyType2D.Static;

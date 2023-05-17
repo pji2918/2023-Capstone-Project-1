@@ -30,10 +30,9 @@ public class LightFish : MonsterController
             if (_agent.remainingDistance < 2)
             {
                 _agent.speed = 0;
-                if (attackCurrentTime >= attackCoolTime)
+                if (!_isAttack)
                 {
-                    Attack();
-                    attackCurrentTime = 0;
+                    StartCoroutine(DOTDamage());
                 }
             }
             else
@@ -44,18 +43,14 @@ public class LightFish : MonsterController
         base.Update();
     }
 
-    public void Attack()
-    {
-        StartCoroutine(DOTDamage());
-    }
+    private bool _isAttack = false;
 
     IEnumerator DOTDamage()
     {
-        for (int i = 0; i < 15; i++)
-        {
-            PlayerController.instance._playerHp -= attack;
-            PlayerController.instance.CallCoroutine();
-            yield return new WaitForSeconds(0.1f);
-        }
+        _isAttack = true;
+        PlayerController.instance._playerHp -= attack;
+        PlayerController.instance.CallCoroutine();
+        yield return new WaitForSeconds(0.8f);
+        _isAttack = false;
     }
 }
