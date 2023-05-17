@@ -353,45 +353,27 @@ public class NeedResourse
         switch(DataManager.instance._data.skillLevel)
         {
             case 0:
-                DataManager.instance._data.weaponUpgrade["iron"] = 1;
-                DataManager.instance._data.weaponUpgrade["concrete"] = 0;
-                DataManager.instance._data.weaponUpgrade["bolt"] = 0;
-                DataManager.instance._data.weaponUpgrade["core"] = 0;
+                DataManager.instance.NeedWeaponResourseChange(1, 0, 0, 0);
             break;
             
             case 1:
-                DataManager.instance._data.weaponUpgrade["iron"] = 1;
-                DataManager.instance._data.weaponUpgrade["concrete"] = 1;
-                DataManager.instance._data.weaponUpgrade["bolt"] = 0;
-                DataManager.instance._data.weaponUpgrade["core"] = 0;
+                DataManager.instance.NeedWeaponResourseChange(1, 1, 0, 0);
             break;
             
             case 2:
-                DataManager.instance._data.weaponUpgrade["iron"] = 1;
-                DataManager.instance._data.weaponUpgrade["concrete"] = 1;
-                DataManager.instance._data.weaponUpgrade["bolt"] = 1;
-                DataManager.instance._data.weaponUpgrade["core"] = 0;
+                DataManager.instance.NeedWeaponResourseChange(1, 1, 1, 0);
             break;
 
             case 3:
-                DataManager.instance._data.weaponUpgrade["iron"] = 1;
-                DataManager.instance._data.weaponUpgrade["concrete"] = 1;
-                DataManager.instance._data.weaponUpgrade["bolt"] = 1;
-                DataManager.instance._data.weaponUpgrade["core"] = 1;
+                DataManager.instance.NeedWeaponResourseChange(1, 1, 1, 1);
             break;
 
             case 4:
-                DataManager.instance._data.weaponUpgrade["iron"] = 1;
-                DataManager.instance._data.weaponUpgrade["concrete"] = 2;
-                DataManager.instance._data.weaponUpgrade["bolt"] = 3;
-                DataManager.instance._data.weaponUpgrade["core"] = 4;
+                DataManager.instance.NeedWeaponResourseChange(1, 2, 3, 4);
             break;
 
             default:
-                DataManager.instance._data.weaponUpgrade["iron"] = 5;
-                DataManager.instance._data.weaponUpgrade["concrete"] = 5;
-                DataManager.instance._data.weaponUpgrade["bolt"] = 5;
-                DataManager.instance._data.weaponUpgrade["core"] = 5;
+                DataManager.instance.NeedWeaponResourseChange(5, 5, 5, 5);
             break;
         }
         #endregion
@@ -400,45 +382,27 @@ public class NeedResourse
         switch(DataManager.instance._data.buildLevel)
         {
             case 0:
-                DataManager.instance._data.HouseUpgrade["iron"] = 1;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 0;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 0;
-                DataManager.instance._data.HouseUpgrade["core"] = 0;
+                DataManager.instance.NeedHouseResourseChange(1, 0, 0, 0);
             break;
             
             case 1:
-                DataManager.instance._data.HouseUpgrade["iron"] = 1;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 1;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 0;
-                DataManager.instance._data.HouseUpgrade["core"] = 0;
+                DataManager.instance.NeedHouseResourseChange(1, 1, 0, 0);
             break;
             
             case 2:
-                DataManager.instance._data.HouseUpgrade["iron"] = 1;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 1;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 1;
-                DataManager.instance._data.HouseUpgrade["core"] = 0;
+                DataManager.instance.NeedHouseResourseChange(1, 1, 1, 0);
             break;
 
             case 3:
-                DataManager.instance._data.HouseUpgrade["iron"] = 1;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 1;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 1;
-                DataManager.instance._data.HouseUpgrade["core"] = 1;
+                DataManager.instance.NeedHouseResourseChange(1, 1, 1, 1);
             break;
 
             case 4:
-                DataManager.instance._data.HouseUpgrade["iron"] = 1;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 2;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 3;
-                DataManager.instance._data.HouseUpgrade["core"] = 4;
+                DataManager.instance.NeedHouseResourseChange(1, 2, 3, 4);
             break;
 
             default:
-                DataManager.instance._data.HouseUpgrade["iron"] = 5;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 5;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 5;
-                DataManager.instance._data.HouseUpgrade["core"] = 5;
+                DataManager.instance.NeedHouseResourseChange(5, 5, 5, 5);
             break;
         }
         #endregion

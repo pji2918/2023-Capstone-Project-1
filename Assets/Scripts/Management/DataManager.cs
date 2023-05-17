@@ -81,4 +81,24 @@ public class DataManager : MonoBehaviour
             Save();
         }
     }
+
+    public void NeedWeaponResourseChange(int iron, int concrete, int bolt, int core)
+    {
+        _data.weaponUpgrade["iron"] = iron;
+        _data.weaponUpgrade["concrete"] = concrete;
+        _data.weaponUpgrade["bolt"] = bolt;
+        _data.weaponUpgrade["core"] = core;
+
+        Save();
+    }
+
+    public void NeedHouseResourseChange(int iron, int concrete, int bolt, int core)
+    {
+        _data.weaponUpgrade["iron"] = iron;
+        _data.weaponUpgrade["concrete"] = concrete;
+        _data.weaponUpgrade["bolt"] = bolt;
+        _data.weaponUpgrade["core"] = core;
+
+        Save();
+    }
 }
