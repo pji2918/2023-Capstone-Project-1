@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: eeb64497c13ff9947aca820a772ceecc, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: a3df6131664747b4fae580211a3e9a97, type: 2}
+  - {fileID: 11400000, guid: 3428148b301c4fd4284e064f0fed73c3, type: 2}
+  m_Extensions:
+  - rid: 5056674134845554721
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds:
+    - rid: 5056674134845554721
+      type: {class: GoogleSheetsExtension, ns: UnityEditor.Localization.Plugins.Google, asm: Unity.Localization.Editor}
+      data:
+        m_Collection: {fileID: 11400000}
+        m_SheetsServiceProvider: {fileID: 11400000, guid: 52d005f8c281bbe4095ca708e1332cbb, type: 2}
+        m_SpreadsheetId: 1J3F-BODMuQlLEEwcqh2PSYWWumpnHuy91DBdKwI7LWc
+        m_SheetId: 13720262
+        m_Columns:
+        - rid: 5056674134845554722
+        - rid: 5056674134845554723
+        - rid: 5056674134845554724
+        m_RemoveMissingPulledKeys: 1
+    - rid: 5056674134845554722
+      type: {class: KeyColumn, ns: UnityEditor.Localization.Plugins.Google.Columns, asm: Unity.Localization.Editor}
+      data:
+        m_Column: A
+    - rid: 5056674134845554723
+      type: {class: LocaleColumn, ns: UnityEditor.Localization.Plugins.Google.Columns, asm: Unity.Localization.Editor}
+      data:
+        m_Column: B
+        m_LocaleIdentifier:
+          m_Code: en
+        m_IncludeComments: 0
+    - rid: 5056674134845554724
+      type: {class: LocaleColumn, ns: UnityEditor.Localization.Plugins.Google.Columns, asm: Unity.Localization.Editor}
+      data:
+        m_Column: C
+        m_LocaleIdentifier:
+          m_Code: ko-KR
+        m_IncludeComments: 0

@@ -5,13 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Home.unity
     guid: 000919a1afd0c994fa573aad6adfb795
   - enabled: 1
     path: Assets/Scenes/Fighting.unity
     guid: 262e521dc1a35694694e9d895d598462
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 422413d1969426c429bf698dbbf0bea7, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 2d1e11a5951fece49b3b0fa9cb0fbf97, type: 2}

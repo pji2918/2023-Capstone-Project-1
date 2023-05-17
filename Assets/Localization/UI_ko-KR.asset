@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_ko-KR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ko-KR
+  m_SharedData: {fileID: 11400000, guid: eeb64497c13ff9947aca820a772ceecc, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 5056674134845554757
+  m_TableData:
+  - m_Id: 44527984443392
+    m_Localized: "\uCCA0\uADFC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832000
+    m_Localized: "\uCF58\uD06C\uB9AC\uD2B8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832001
+    m_Localized: "\uCF54\uC5B4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832002
+    m_Localized: "\uBCFC\uD2B8\uC640 \uB108\uD2B8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832003
+    m_Localized: "\uC2DD\uC7AC\uB8CC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832004
+    m_Localized: "\uC7AC\uC0AC\uC6A9 \uB300\uAE30\uC2DC\uAC04 {0}\uCD08"
+    m_Metadata:
+      m_Items:
+      - rid: 5056674134845554757
+  - m_Id: 44527992832005
+    m_Localized: "{0}\uC77C\uCC28 \uBCF4\uACE0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832006
+    m_Localized: "\uB3CC\uC9C4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832007
+    m_Localized: "\uB9C8\uC6B0\uC2A4 \uCEE4\uC11C \uBC29\uD5A5\uC73C\uB85C \uB3CC\uC9C4\uD569\uB2C8\uB2E4.\n\uB3CC\uC9C4
+      \uC911\uC5D0\uB294 \uC801\uC744 \uD1B5\uACFC\uD558\uBA70, \uBB34\uC801 \uC0C1\uD0DC\uAC00
+      \uB429\uB2C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48557590708225
+    m_Localized: "\uBA39\uC73C\uBA74 \uC2DD\uB7C9\uC744 1\uAC1C \uC18C\uBAA8\uD558\uC5EC\n5\uCD08\uC5D0
+      \uAC78\uCCD0 \uCCB4\uB825\uC744 \uC11C\uC11C\uD788 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48557590708226
+    m_Localized: "\uB0A8\uC740 \uC2DD\uB7C9 : {0}\uAC1C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83643497177088
+    m_Localized: "\uC2DD\uB7C9"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5056674134845554757
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0400327b7f280000

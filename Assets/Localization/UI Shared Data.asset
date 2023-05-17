@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: eeb64497c13ff9947aca820a772ceecc
+  m_Entries:
+  - m_Id: 44527984443392
+    m_Key: iron
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832000
+    m_Key: concrete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832001
+    m_Key: core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832002
+    m_Key: bolt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832003
+    m_Key: igredient
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832004
+    m_Key: cooltime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832005
+    m_Key: report
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832006
+    m_Key: dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832007
+    m_Key: dash_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83643497177088
+    m_Key: food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48557590708225
+    m_Key: skill_food_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48557590708226
+    m_Key: skill_foodcount
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5056674134845554720
+  references:
+    version: 2
+    RefIds:
+    - rid: 5056674134845554720
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1684216072379

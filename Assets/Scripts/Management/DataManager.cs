@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 public class Data
 {
     public int skillLevel = 0;
+    public int day = 1;
 
     public Dictionary<string, int> resources = new Dictionary<string, int>()
     {

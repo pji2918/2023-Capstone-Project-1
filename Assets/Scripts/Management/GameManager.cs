@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public int foodCount = 0;
 
+    public int _healthReduce = 0;
+
     private void Awake()
     {
         if (instance == null)
