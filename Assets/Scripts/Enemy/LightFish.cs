@@ -47,10 +47,13 @@ public class LightFish : MonsterController
 
     IEnumerator DOTDamage()
     {
-        _isAttack = true;
-        PlayerController.instance._playerHp -= attack;
-        PlayerController.instance.CallCoroutine();
-        yield return new WaitForSeconds(0.8f);
-        _isAttack = false;
+        if (!_isKnockback)
+        {
+            _isAttack = true;
+            PlayerController.instance._playerHp -= attack;
+            PlayerController.instance.CallCoroutine();
+            yield return new WaitForSeconds(0.8f);
+            _isAttack = false;
+        }
     }
 }

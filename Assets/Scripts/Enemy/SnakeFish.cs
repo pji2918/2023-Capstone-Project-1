@@ -52,14 +52,17 @@ public class SnakeFish : MonsterController
 
     public void Attack()
     {
-        if (PlayerController.instance.isSlow)
+        if (!_isKnockback)
         {
-            PlayerController.instance.slowCurrentTime = 0;
-            Debug.Log("경직 시간 초기화");
-        }
-        else
-        {
-            StartCoroutine(PlayerController.instance.SlowPlayer(ccTime));
+            if (PlayerController.instance.isSlow)
+            {
+                PlayerController.instance.slowCurrentTime = 0;
+                Debug.Log("경직 시간 초기화");
+            }
+            else
+            {
+                StartCoroutine(PlayerController.instance.SlowPlayer(ccTime));
+            }
         }
     }
 

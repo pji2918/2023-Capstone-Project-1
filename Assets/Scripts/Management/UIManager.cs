@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]//재료 개수 확인 텍스트의 부모 오브잭트(빈 오브잭트)
     private GameObject ResourceTextsParent;
 
+    int _storyNum;
+
     // 책 텍스트
     public TextMeshProUGUI _title, _desc;
 
@@ -62,6 +64,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        _storyNum = Random.Range(0, 5);
         for (int i = 0; i < 6; i++)
         {
             resourceTexts[i] = ResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
@@ -366,79 +369,83 @@ public class UIManager : MonoBehaviour
             while (loop <= 5)
             {
                 ++loop;
-                switch (Random.Range(0, 5))
+                switch (_storyNum)
                 {
                     case 0:
                         {
                             if (DataManager.instance._data.day >= 4)
                             {
-                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04");
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Text");
                                 ShowStoryButton(ButtonType.Choice, 1);
+                                goto Escape;
                             }
                             else
                             {
                                 continue;
                             }
-                            break;
                         }
                     case 1:
                         {
                             if (DataManager.instance._data.day < 13)
                             {
-                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13");
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13Text");
                                 ShowStoryButton(ButtonType.Choice, 2);
+                                goto Escape;
                             }
                             else
                             {
                                 continue;
                             }
-                            break;
                         }
                     case 2:
                         {
                             if (DataManager.instance._data.day >= 6)
                             {
-                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06");
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06Text");
                                 ShowStoryButton(ButtonType.Choice, 3);
+                                goto Escape;
                             }
                             else
                             {
                                 continue;
                             }
-                            break;
                         }
                     case 3:
                         {
                             if (DataManager.instance._data.day > 13)
                             {
-                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13");
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13Text");
                                 ShowStoryButton(ButtonType.Choice, 4);
+                                goto Escape;
                             }
                             else
                             {
                                 continue;
                             }
-                            break;
                         }
                     case 4:
                         {
                             if (DataManager.instance._data.day > 18)
                             {
-                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18");
+                                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18Text");
                                 ShowStoryButton(ButtonType.Choice, 5);
+                                goto Escape;
                             }
                             else
                             {
                                 continue;
                             }
-                            break;
                         }
                 }
             }
             if (loop > 5)
             {
-                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryDefault");
+                _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryDefaultText");
                 ShowStoryButton(ButtonType.Normal);
+            }
+        Escape:
+            {
+
             }
         }
     }
@@ -470,8 +477,8 @@ public class UIManager : MonoBehaviour
                     {
                         case 1:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice2");
                                 break;
                             }
                         case 2:
@@ -482,8 +489,8 @@ public class UIManager : MonoBehaviour
                             }
                         case 3:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice1");
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice2");
                                 break;
                             }
                         case 4:
@@ -576,13 +583,13 @@ public class UIManager : MonoBehaviour
                 {
                     if (Random.Range(0, 100) <= 20)
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice1Text1");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice1Text1");
                         DataManager.instance._data.resources["food"] += 2;
                         ShowStoryButton(ButtonType.Normal);
                     }
                     else
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice1Text2");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice1Text2");
                         ShowStoryButton(ButtonType.Normal);
                         GameManager.instance._healthReduce = 5;
                     }
@@ -721,7 +728,7 @@ public class UIManager : MonoBehaviour
                 }
             case 3:
                 {
-                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay6TextChoice2Text");
+                    _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice2Text");
                     ShowStoryButton(ButtonType.Normal);
                     break;
                 }

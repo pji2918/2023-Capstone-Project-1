@@ -48,12 +48,15 @@ public class MuteBear : MonsterController
 
     public void Attack()
     {
-        PlayerController.instance.CallCoroutine();
-        GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
+        if (!_isKnockback)
+        {
+            PlayerController.instance.CallCoroutine();
+            GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
-        float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
-                            PlayerController.instance.transform.position.x - stone.transform.position.x)
-              * Mathf.Rad2Deg;
-        stone.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+            float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
+                                PlayerController.instance.transform.position.x - stone.transform.position.x)
+                  * Mathf.Rad2Deg;
+            stone.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        }
     }
 }
