@@ -277,7 +277,7 @@ public class UIManager : MonoBehaviour
         }
         else if (DataManager.instance._data.day == 3)
         {
-            _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03Text");
+            _desc.text = string.Format("{0}\n\n{1}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03Text1"), LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03Text2"));
             ShowStoryButton(ButtonType.Choice, 6);
         }
         else if (DataManager.instance._data.day == 5)
@@ -453,10 +453,8 @@ public class UIManager : MonoBehaviour
 
     public void ShowStoryButton(ButtonType type, int eNum = 0)
     {
-        foreach (GameObject obj in _choiceButtons)
-        {
-            obj.SetActive(false);
-        }
+        _normal.SetActive(false);
+        _choice.SetActive(false);
         switch (type)
         {
             case ButtonType.Normal:
@@ -466,6 +464,7 @@ public class UIManager : MonoBehaviour
                 }
             case ButtonType.Choice:
                 {
+                    _choice.SetActive(true);
                     eventNum = eNum;
                     switch (eventNum)
                     {

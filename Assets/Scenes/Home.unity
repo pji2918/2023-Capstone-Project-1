@@ -3270,7 +3270,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1540332659}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: HomeToFighting
+        m_MethodName: ChoiceOne
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8997,7 +8997,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1540332659}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: HomeToFighting
+        m_MethodName: ChoiceTwo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
