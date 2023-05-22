@@ -25,7 +25,7 @@ public class LightFish : MonsterController
     // 공격
     protected override void Update()
     {
-        if (!_isKnockback)
+        if (_agent.enabled)
         {
             if (_agent.remainingDistance < 2)
             {
@@ -47,13 +47,10 @@ public class LightFish : MonsterController
 
     IEnumerator DOTDamage()
     {
-        if (!_isKnockback)
-        {
-            _isAttack = true;
-            PlayerController.instance._playerHp -= attack;
-            PlayerController.instance.CallCoroutine();
-            yield return new WaitForSeconds(0.8f);
-            _isAttack = false;
-        }
+        _isAttack = true;
+        PlayerController.instance._playerHp -= attack;
+        PlayerController.instance.CallCoroutine();
+        yield return new WaitForSeconds(0.8f);
+        _isAttack = false;
     }
 }

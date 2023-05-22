@@ -58,7 +58,7 @@ public class MonsterController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (!_isKnockback)
+        if (this.gameObject.GetComponent<NavMeshAgent>().enabled)
         {
             _playerPosition = GameObject.Find("Player").transform.position;
             _agent.SetDestination(_playerPosition);
@@ -66,7 +66,7 @@ public class MonsterController : MonoBehaviour
         if (!PlayerController.instance._jangpungOn)
         {
             _isKnockback = false;
-            this.GetComponent<NavMeshAgent>().enabled = true;
+            this.GetComponent<NavMeshAgent>().isStopped = false;
             this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
@@ -108,7 +108,7 @@ public class MonsterController : MonoBehaviour
         if (other.gameObject.CompareTag("Jangpung"))
         {
             _isKnockback = true;
-            this.GetComponent<NavMeshAgent>().enabled = false;
+            this.GetComponent<NavMeshAgent>().isStopped = true;
             // 여기에 몬스터가 장풍에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 5;
             DamageEffect();

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPosition: {x: 0, y: 0}
   _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f, type: 3}
-  stopTime: 1
+  ccTime: 1
   thisSpeed: 3
   thisAttack: 0
   thisMaxHp: 50
@@ -199,7 +199,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Whale : MonsterController
 {
@@ -23,10 +22,7 @@ public class Whale : MonsterController
     // 공격
     protected override void Update()
     {
-        if (!_isKnockback)
-        {
-            _agent.speed = speed;
-        }
+        _agent.speed = speed;
         base.Update();
     }
 

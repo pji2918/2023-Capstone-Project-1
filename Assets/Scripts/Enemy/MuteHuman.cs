@@ -21,7 +21,7 @@ public class MuteHuman : MonsterController
     // 공격
     protected override void Update()
     {
-        if (!_isKnockback)
+        if (_agent.enabled)
         {
             if (_agent.remainingDistance < 2)
             {
@@ -42,10 +42,7 @@ public class MuteHuman : MonsterController
 
     public void Attack()
     {
-        if (!_isKnockback)
-        {
-            PlayerController.instance.CallCoroutine();
-            PlayerController.instance._playerHp -= attack;
-        }
+        PlayerController.instance.CallCoroutine();
+        PlayerController.instance._playerHp -= attack;
     }
 }

@@ -6,7 +6,6 @@ public class SnakeFish : MonsterController
 {
     [SerializeField] private float ccTime = 1f;
 
-
     [Space(10f)]
 
     [SerializeField] private float thisSpeed = 8.0f;
@@ -27,44 +26,35 @@ public class SnakeFish : MonsterController
     // 공격
     protected override void Update()
     {
-        if (_isKnockback)
+        if (_agent.enabled)
         {
-            return;
-        }
-        if (_agent.remainingDistance < 2)
-        {
-            if (_isKnockback)
+            if (_agent.remainingDistance < 2)
             {
-                return;
+                if (attackCurrentTime >= attackCoolTime)
+                {
+                    Debug.Log("뱀장어 공격");
+                    Attack();
+                    attackCurrentTime = 0;
+                }
             }
-            else if (attackCurrentTime >= attackCoolTime)
+            else
             {
-                Attack();
-                attackCurrentTime = 0;
+                _agent.speed = speed;
             }
-        }
-        else
-        {
-            _agent.speed = speed;
         }
         base.Update();
     }
 
     public void Attack()
     {
-        if (!_isKnockback)
+        if (PlayerController.instance.isSlow)
         {
-            if (PlayerController.instance.isSlow)
-            {
-                PlayerController.instance.slowCurrentTime = 0;
-                Debug.Log("경직 시간 초기화");
-            }
-            else
-            {
-                StartCoroutine(PlayerController.instance.SlowPlayer(ccTime));
-            }
+            PlayerController.instance.slowCurrentTime = 0;
+            Debug.Log("경직 시간 초기화");
+        }
+        else
+        {
+            StartCoroutine(PlayerController.instance.SlowPlayer(ccTime));
         }
     }
-
-
 }

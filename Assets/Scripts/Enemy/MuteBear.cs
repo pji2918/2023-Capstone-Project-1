@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MuteBear : MonsterController
 {
@@ -27,7 +26,7 @@ public class MuteBear : MonsterController
     // 공격
     protected override void Update()
     {
-        if (!_isKnockback)
+        if (_agent.enabled)
         {
             if (_agent.remainingDistance < 6)
             {
@@ -48,15 +47,12 @@ public class MuteBear : MonsterController
 
     public void Attack()
     {
-        if (!_isKnockback)
-        {
-            PlayerController.instance.CallCoroutine();
-            GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
+        PlayerController.instance.CallCoroutine();
+        GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
-            float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
-                                PlayerController.instance.transform.position.x - stone.transform.position.x)
-                  * Mathf.Rad2Deg;
-            stone.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-        }
+        float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
+                            PlayerController.instance.transform.position.x - stone.transform.position.x)
+              * Mathf.Rad2Deg;
+        stone.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 }
