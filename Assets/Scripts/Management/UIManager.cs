@@ -584,56 +584,56 @@ public class UIManager : MonoBehaviour
                     {
                         case 1:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice2"));
                                 break;
                             }
                         case 2:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice2"));
                                 break;
                             }
                         case 3:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay06TextChoice2"));
                                 break;
                             }
                         case 4:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay13TextChoice2"));
                                 break;
                             }
                         case 5:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay18TextChoice2"));
                                 break;
                             }
                         case 6:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03TextChoice2"));
                                 break;
                             }
                         case 7:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13TextChoice2"));
                                 break;
                             }
                         case 8:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay18TextChoice2"));
                                 break;
                             }
                         case 9:
                             {
-                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice1");
-                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice2");
+                                _choiceButtons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice1"));
+                                _choiceButtons[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("▶ {0}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28TextChoice2"));
                                 break;
                             }
                         default:
