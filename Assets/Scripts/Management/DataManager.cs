@@ -10,14 +10,31 @@ public class Data
     public int skillLevel = 0;
     public int day = 1;
 
+    public int buildLevel = 0;
     public Dictionary<string, int> resources = new Dictionary<string, int>()
     {
         {"iron", 10},
         {"concrete", 10},
-        {"core", 10},
         {"bolt", 10},
+        {"core", 10},
         {"ingredient", 10},
         {"food", 10}
+    };
+    
+    public Dictionary<string, int> weaponUpgrade = new Dictionary<string, int>()
+    {
+        {"iron", 1},
+        {"concrete", 0},
+        {"bolt", 0},
+        {"core", 0}
+    };
+
+    public Dictionary<string, int> HouseUpgrade = new Dictionary<string, int>()
+    {
+        {"iron", 1},
+        {"concrete", 0},
+        {"bolt", 0},
+        {"core", 0}
     };
 }
 
@@ -65,5 +82,25 @@ public class DataManager : MonoBehaviour
         {
             Save();
         }
+    }
+
+    public void NeedWeaponResourseChange(int iron, int concrete, int bolt, int core)
+    {
+        _data.weaponUpgrade["iron"] = iron;
+        _data.weaponUpgrade["concrete"] = concrete;
+        _data.weaponUpgrade["bolt"] = bolt;
+        _data.weaponUpgrade["core"] = core;
+
+        Save();
+    }
+
+    public void NeedHouseResourseChange(int iron, int concrete, int bolt, int core)
+    {
+        _data.weaponUpgrade["iron"] = iron;
+        _data.weaponUpgrade["concrete"] = concrete;
+        _data.weaponUpgrade["bolt"] = bolt;
+        _data.weaponUpgrade["core"] = core;
+
+        Save();
     }
 }

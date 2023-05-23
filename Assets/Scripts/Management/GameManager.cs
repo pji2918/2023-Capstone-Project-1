@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     public void IncreseResource(string resourceName, int amount)
