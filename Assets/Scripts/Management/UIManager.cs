@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using TMPro;
 
@@ -121,6 +121,11 @@ public class UIManager : MonoBehaviour
                 isCooking = false;
                 currentCookingTime = 0;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            _storyNum = Random.Range(0, 5);
         }
     }
 
@@ -349,6 +354,18 @@ public class UIManager : MonoBehaviour
         needBuildTexts[1].text = DataManager.instance._data.HouseUpgrade["concrete"].ToString();
         needBuildTexts[2].text = DataManager.instance._data.HouseUpgrade["bolt"].ToString();
         needBuildTexts[3].text = DataManager.instance._data.HouseUpgrade["core"].ToString();
+
+        for (int i = 0; i <= 3; i++)
+        {
+            if (DataManager.instance._data.resources.ElementAt(i).Value < DataManager.instance._data.HouseUpgrade.ElementAt(i).Value)
+            {
+                needBuildTexts[i].color = Color.red;
+            }
+            else
+            {
+                needBuildTexts[i].color = Color.white;
+            }
+        }
     }
 
     //타이핑 효과 코루틴
@@ -415,7 +432,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13Text");
             ShowStoryButton(ButtonType.Choice, 7);
         }
-        else if (DataManager.instance._data.day == 15)
+        else if (DataManager.instance._data.day == 15 && DataManager.instance._data.buildLevel >= 2)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay15Text");
             ShowStoryButton(ButtonType.Normal);
@@ -430,7 +447,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay20Text");
             ShowStoryButton(ButtonType.Normal);
         }
-        else if (DataManager.instance._data.day == 21)
+        else if (DataManager.instance._data.day == 21 && DataManager.instance._data.buildLevel >= 5)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay21Text");
             ShowStoryButton(ButtonType.Normal);
@@ -445,7 +462,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay24Text");
             ShowStoryButton(ButtonType.Normal);
         }
-        else if (DataManager.instance._data.day == 26)
+        else if (DataManager.instance._data.day == 26 && DataManager.instance._data.buildLevel >= 8)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay26Text");
             ShowStoryButton(ButtonType.Normal);
@@ -465,7 +482,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28Text");
             ShowStoryButton(ButtonType.Normal);
         }
-        else if (false) // 이건 모든 게 완성되었을 때 추가됩니다.
+        else if (DataManager.instance._data.buildLevel == 10) // 이건 모든 게 완성되었을 때 추가됩니다.
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyEndText");
             ShowStoryButton(ButtonType.Normal);
@@ -659,12 +676,12 @@ public class UIManager : MonoBehaviour
                 {
                     if (Random.Range(0, 100) <= 70)
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1Text1");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice1Text1");
                         ShowStoryButton(ButtonType.Normal);
                     }
                     else
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1Text2");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice1Text2");
                         ShowStoryButton(ButtonType.Normal);
                         GameManager.instance._healthReduce = 10;
                     }
@@ -680,7 +697,7 @@ public class UIManager : MonoBehaviour
                     }
                     else
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1Text1");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1Text2");
                         ShowStoryButton(ButtonType.Normal);
                         GameManager.instance._healthReduce = 5;
                     }
@@ -816,12 +833,12 @@ public class UIManager : MonoBehaviour
                 {
                     if (Random.Range(0, 100) <= 50)
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2Text1");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice2Text1");
                         ShowStoryButton(ButtonType.Normal);
                     }
                     else
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2Text2");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice2Text2");
                         ShowStoryButton(ButtonType.Normal);
                         GameManager.instance._healthReduce = 10;
                     }
@@ -927,27 +944,64 @@ public class NeedResourse
         switch (DataManager.instance._data.buildLevel)
         {
             case 0:
-                DataManager.instance.NeedHouseResourseChange(1, 0, 0, 0);
+                DataManager.instance._data.HouseUpgrade["iron"] = 35;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 35;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 25;
+                DataManager.instance._data.HouseUpgrade["core"] = 0;
                 break;
-
             case 1:
-                DataManager.instance.NeedHouseResourseChange(1, 1, 0, 0);
+                DataManager.instance._data.HouseUpgrade["iron"] = 42;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 42;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 62;
+                DataManager.instance._data.HouseUpgrade["core"] = 1;
                 break;
-
             case 2:
-                DataManager.instance.NeedHouseResourseChange(1, 1, 1, 0);
+                DataManager.instance._data.HouseUpgrade["iron"] = 56;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 56;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 41;
+                DataManager.instance._data.HouseUpgrade["core"] = 0;
                 break;
-
             case 3:
-                DataManager.instance.NeedHouseResourseChange(1, 1, 1, 1);
+                DataManager.instance._data.HouseUpgrade["iron"] = 72;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 72;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 58;
+                DataManager.instance._data.HouseUpgrade["core"] = 0;
                 break;
-
             case 4:
-                DataManager.instance.NeedHouseResourseChange(1, 2, 3, 4);
+                DataManager.instance._data.HouseUpgrade["iron"] = 95;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 95;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 102;
+                DataManager.instance._data.HouseUpgrade["core"] = 1;
                 break;
-
-            default:
-                DataManager.instance.NeedHouseResourseChange(5, 5, 5, 5);
+            case 5:
+                DataManager.instance._data.HouseUpgrade["iron"] = 112;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 112;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 78;
+                DataManager.instance._data.HouseUpgrade["core"] = 1;
+                break;
+            case 6:
+                DataManager.instance._data.HouseUpgrade["iron"] = 134;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 134;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 110;
+                DataManager.instance._data.HouseUpgrade["core"] = 1;
+                break;
+            case 7:
+                DataManager.instance._data.HouseUpgrade["iron"] = 158;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 158;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 164;
+                DataManager.instance._data.HouseUpgrade["core"] = 2;
+                break;
+            case 8:
+                DataManager.instance._data.HouseUpgrade["iron"] = 174;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 174;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 154;
+                DataManager.instance._data.HouseUpgrade["core"] = 2;
+                break;
+            case 9:
+                DataManager.instance._data.HouseUpgrade["iron"] = 224;
+                DataManager.instance._data.HouseUpgrade["concrete"] = 224;
+                DataManager.instance._data.HouseUpgrade["bolt"] = 243;
+                DataManager.instance._data.HouseUpgrade["core"] = 3;
                 break;
         }
         #endregion

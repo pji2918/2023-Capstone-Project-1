@@ -81,11 +81,83 @@ public class PlayerController : MonoBehaviour
         // 플레이어의 Animator 컴포넌트를 가져옵니다.
         _playerAnimator = GetComponent<Animator>();
 
+        switch (DataManager.instance._data.buildLevel)
+        {
+            case 0:
+                {
+                    _playerMaxHp = 100;
+                    _moveSpeed = 5f;
+                    break;
+                }
+            case 1:
+                {
+                    _playerMaxHp = 105;
+                    _moveSpeed = 5.2f;
+                    break;
+                }
+            case 2:
+                {
+                    _playerMaxHp = 115;
+                    _moveSpeed = 5.5f;
+                    break;
+                }
+            case 3:
+                {
+                    _playerMaxHp = 120;
+                    _moveSpeed = 5.7f;
+                    break;
+                }
+            case 4:
+                {
+                    _playerMaxHp = 125;
+                    _moveSpeed = 5.9f;
+                    break;
+                }
+            case 5:
+                {
+                    _playerMaxHp = 135;
+                    _moveSpeed = 6.3f;
+                    break;
+                }
+            case 6:
+                {
+                    _playerMaxHp = 140;
+                    _moveSpeed = 6.5f;
+                    break;
+                }
+            case 7:
+                {
+                    _playerMaxHp = 145;
+                    _moveSpeed = 6.7f;
+                    break;
+                }
+            case 8:
+                {
+                    _playerMaxHp = 155;
+                    _moveSpeed = 7f;
+                    break;
+                }
+            case 9:
+                {
+                    _playerMaxHp = 160;
+                    _moveSpeed = 7.2f;
+                    break;
+                }
+            case 10:
+                {
+                    _playerMaxHp = 180;
+                    _moveSpeed = 7.5f;
+                    break;
+                }
+        }
+
         if (GameManager.instance is not null)
         {
+            Debug.Log(GameManager.instance._healthReduce);
             if (GameManager.instance._healthReduce > 0)
             {
-                _playerHp = _playerMaxHp - (_playerMaxHp * (GameManager.instance._healthReduce / 100));
+                // Player의 HP를 healthReduce의 백분율만큼 감소시킵니다.
+                _playerHp = _playerMaxHp - (int)(_playerMaxHp * (GameManager.instance._healthReduce / 100f));
             }
         }
 

@@ -14,7 +14,7 @@ public class ThrowStone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !PlayerController.instance._isDash && !PlayerController.instance._isDying)
+        if (other.CompareTag("Player") && !PlayerController.instance._isDash && !PlayerController.instance._isDying && !PlayerController.instance._isFinishing)
         {
             PlayerController.instance._playerHp -= power;
             PlayerController.instance.CallCoroutine();

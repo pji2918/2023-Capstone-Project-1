@@ -104,10 +104,11 @@ public class SceneLoadManager : MonoBehaviour
             else
             {
                 _loadingBar.value = Mathf.Lerp(_loadingBar.value, 1f, timer);
-                _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
+                _loadingText.text = Mathf.FloorToInt(_loadingBar.value * 100f) + "%";
 
                 if (_loadingBar.value == 1f)
                 {
+                    _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
                     if (Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2))
                     {
                         _sceneChangeFade.SetActive(true);

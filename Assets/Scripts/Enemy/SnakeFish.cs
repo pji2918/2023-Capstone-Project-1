@@ -28,7 +28,7 @@ public class SnakeFish : MonsterController
     {
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 2)
+            if (_agent.remainingDistance < 2 && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
             {
                 if (attackCurrentTime >= attackCoolTime)
                 {

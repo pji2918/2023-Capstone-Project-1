@@ -23,7 +23,7 @@ public class MuteHuman : MonsterController
     {
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 2)
+            if (_agent.remainingDistance < 2 && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
             {
                 _agent.speed = 0;
                 if (attackCurrentTime >= attackCoolTime)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class MonsterController : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class MonsterController : MonoBehaviour
 
     protected float speed;
 
-    protected int attack;
+    protected float _damagecool;
 
+    protected int attack;
     protected float attackCurrentTime = 0;
     protected float attackCoolTime;
 
@@ -49,6 +51,11 @@ public class MonsterController : MonoBehaviour
             monsterRenderer.flipX = true;
         }
 
+        if (_damagecool > 0)
+        {
+            _damagecool -= Time.deltaTime;
+        }
+
         attackCurrentTime += Time.deltaTime;
 
         if (currentHp <= 0)
@@ -73,11 +80,12 @@ public class MonsterController : MonoBehaviour
 
     protected virtual void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Bubble"))
+        if (other.CompareTag("Bubble") && _damagecool <= 0)
         {
             // 여기에 몬스터가 비눗방울에 닿았을 때 HP가 서서히 감소하는 코드를 작성합니다.
-            currentHp -= 1;
-            DamageEffect();
+            currentHp -= 2;
+            DamageEffect(2);
+            _damagecool = 0.1f;
         }
     }
 
@@ -87,19 +95,19 @@ public class MonsterController : MonoBehaviour
         {
             // 여기에 몬스터가 작살에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 30;
-            DamageEffect();
+            DamageEffect(30);
         }
         if (other.name == "Attack_Effect")
         {
             // 여기에 기본 공격에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 10;
-            DamageEffect();
+            DamageEffect(10);
         }
         if (other.CompareTag("Mine_Explosion"))
         {
             // 여기에 지뢰에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 50;
-            DamageEffect();
+            DamageEffect(50);
         }
     }
 
@@ -111,13 +119,15 @@ public class MonsterController : MonoBehaviour
             this.GetComponent<NavMeshAgent>().isStopped = true;
             // 여기에 몬스터가 장풍에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 5;
-            DamageEffect();
+            DamageEffect(5);
         }
     }
 
-    protected void DamageEffect()
+    protected void DamageEffect(int damage)
     {
         StartCoroutine(DamageEffectCoroutine());
+        var text = Instantiate(Resources.Load("Damage"), transform.position, Quaternion.identity) as GameObject;
+        text.GetComponent<TextMeshPro>().text = damage.ToString();
     }
 
     public IEnumerator DamageEffectCoroutine()

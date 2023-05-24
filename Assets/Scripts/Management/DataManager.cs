@@ -8,9 +8,9 @@ using Newtonsoft.Json;
 public class Data
 {
     public int skillLevel = 0;
+    public int buildLevel = 0;
     public int day = 1;
 
-    public int buildLevel = 0;
     public Dictionary<string, int> resources = new Dictionary<string, int>()
     {
         {"iron", 10},
@@ -20,7 +20,7 @@ public class Data
         {"ingredient", 10},
         {"food", 10}
     };
-    
+
     public Dictionary<string, int> weaponUpgrade = new Dictionary<string, int>()
     {
         {"iron", 1},
@@ -66,7 +66,7 @@ public class DataManager : MonoBehaviour
     // Data의 내용을 JSON으로 저장합니다.
     public void Save()
     {
-        string json = JsonConvert.SerializeObject(_data);
+        string json = JsonConvert.SerializeObject(_data, Formatting.Indented);
         File.WriteAllText(_dataPath, json);
     }
 
