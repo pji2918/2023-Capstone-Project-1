@@ -81,6 +81,19 @@ public class SceneLoadManager : MonoBehaviour
 
     IEnumerator LoadScene(string sceneName)
     {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Loading":
+                {
+                    sceneName = "Fighting";
+                    break;
+                }
+            case "Loading_ToHome":
+                {
+                    sceneName = "Home";
+                    break;
+                }
+        }
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
 

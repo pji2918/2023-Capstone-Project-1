@@ -423,7 +423,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             DataManager.instance._data.day += 1;
             DataManager.instance.Save();
-            SceneManager.LoadScene("Home");
+            SceneManager.LoadScene("Loading_ToHome");
         }
     }
 
