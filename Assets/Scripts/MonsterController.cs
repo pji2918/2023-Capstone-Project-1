@@ -93,7 +93,6 @@ public class MonsterController : MonoBehaviour
         if (other.CompareTag("Harpoon"))
         {
             // 여기에 몬스터가 작살에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 30;
             Damage(30);
         }
         if (other.name == "Attack_Effect")
@@ -122,9 +121,9 @@ public class MonsterController : MonoBehaviour
     protected void Damage(int damage)
     {
         currentHp -= damage;
-        StartCoroutine(DamageEffectCoroutine());
         var text = Instantiate(Resources.Load("Damage"), transform.position, Quaternion.identity) as GameObject;
         text.GetComponent<TextMeshPro>().text = damage.ToString();
+        StartCoroutine(DamageEffectCoroutine());
     }
 
     public IEnumerator DamageEffectCoroutine()
