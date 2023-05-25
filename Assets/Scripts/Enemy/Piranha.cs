@@ -22,24 +22,42 @@ public class Piranha : MonsterController
     // 공격
     protected override void Update()
     {
-        if (!_isKnockback)
+        if (_agent.enabled)
         {
-            _agent.speed = speed;
+            if (_agent.remainingDistance < 2 && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
+            {
+                _agent.speed = 0;
+                if (attackCurrentTime >= attackCoolTime)
+                {
+                    Attack();
+                    attackCurrentTime = 0;
+                }
+            }
+            else
+            {
+                _agent.speed = speed;
+            }
         }
         base.Update();
     }
 
-    void OnCollisionStay2D(Collision2D other)
+    public void Attack()
     {
-        if (other.gameObject.tag == "Player" && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
-        {
-            if (attackCurrentTime >= attackCoolTime)
-            {
-                other.gameObject.GetComponent<PlayerController>()._playerHp -= attack;
-                PlayerController.instance.CallCoroutine();
-                attackCoolTime = thisAttackCoolTime;
-                attackCurrentTime = 0;
-            }
-        }
+        PlayerController.instance.CallCoroutine();
+        PlayerController.instance._playerHp -= attack;
     }
+
+    // void OnCollisionStay2D(Collision2D other)
+    // {
+    //     if (other.gameObject.tag == "Player" && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
+    //     {
+    //         if (attackCurrentTime >= attackCoolTime)
+    //         {
+    //             other.gameObject.GetComponent<PlayerController>()._playerHp -= attack;
+    //             PlayerController.instance.CallCoroutine();
+    //             attackCoolTime = thisAttackCoolTime;
+    //             attackCurrentTime = 0;
+    //         }
+    //     }
+    // }
 }
