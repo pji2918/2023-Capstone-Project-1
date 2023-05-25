@@ -83,8 +83,7 @@ public class MonsterController : MonoBehaviour
         if (other.CompareTag("Bubble") && _damagecool <= 0)
         {
             // 여기에 몬스터가 비눗방울에 닿았을 때 HP가 서서히 감소하는 코드를 작성합니다.
-            currentHp -= 2;
-            DamageEffect(2);
+            Damage(2);
             _damagecool = 0.1f;
         }
     }
@@ -95,19 +94,17 @@ public class MonsterController : MonoBehaviour
         {
             // 여기에 몬스터가 작살에 닿았을 때 HP가 감소하는 코드를 작성합니다.
             currentHp -= 30;
-            DamageEffect(30);
+            Damage(30);
         }
         if (other.name == "Attack_Effect")
         {
             // 여기에 기본 공격에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 10;
-            DamageEffect(10);
+            Damage(10);
         }
         if (other.CompareTag("Mine_Explosion"))
         {
             // 여기에 지뢰에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 50;
-            DamageEffect(50);
+            Damage(50);
         }
     }
 
@@ -118,13 +115,13 @@ public class MonsterController : MonoBehaviour
             _isKnockback = true;
             this.GetComponent<NavMeshAgent>().isStopped = true;
             // 여기에 몬스터가 장풍에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 5;
-            DamageEffect(5);
+            Damage(5);
         }
     }
 
-    protected void DamageEffect(int damage)
+    protected void Damage(int damage)
     {
+        currentHp -= damage;
         StartCoroutine(DamageEffectCoroutine());
         var text = Instantiate(Resources.Load("Damage"), transform.position, Quaternion.identity) as GameObject;
         text.GetComponent<TextMeshPro>().text = damage.ToString();

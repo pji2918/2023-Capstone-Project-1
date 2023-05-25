@@ -11,7 +11,7 @@ public class MonsterSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        // StartCoroutine(SpawnMonsterInOrder());
     }
 
     // Update is called once per frame
@@ -30,4 +30,13 @@ public class MonsterSpawner : MonoBehaviour
     {
         Instantiate(_monsterPrefab[Random.Range(0, _monsterPrefab.Length)], new Vector2(Random.Range(-17, 17), Random.Range(-17, 17)), Quaternion.identity);
     }
+
+    // IEnumerator SpawnMonsterInOrder()
+    // {
+    //     for (int i = 0; i < _monsterPrefab.Length; i++)
+    //     {
+    //         Instantiate(_monsterPrefab[i], new Vector3(8, 0, 0), Quaternion.identity);
+    //         yield return new WaitForSeconds(30f);
+    //     }
+    // }
 }
