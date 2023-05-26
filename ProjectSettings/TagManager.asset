@@ -54,3 +54,6 @@ TagManager:
   - name: Skills
     uniqueID: 2646216009
     locked: 0
+  - name: Indicator
+    uniqueID: 3007531953
+    locked: 0

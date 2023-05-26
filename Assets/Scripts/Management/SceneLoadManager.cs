@@ -72,7 +72,7 @@ public class SceneLoadManager : MonoBehaviour
         for (int i = 255; i >= 0; i--)
         {
             _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.00001f);
         }
         _sceneChangeFade.SetActive(false);
         yield return new WaitForSeconds(0.1f);
@@ -128,7 +128,7 @@ public class SceneLoadManager : MonoBehaviour
                         for (int i = 0; i <= 255; i++)
                         {
                             _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                            yield return new WaitForSeconds(0.005f);
+                            yield return new WaitForSeconds(0.00005f);
                         }
                         asyncLoad.allowSceneActivation = true;
                         yield break;

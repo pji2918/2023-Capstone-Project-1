@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D _playerRigidbody;
     public Animator _playerAnimator;
     public GameObject _playerAttackEffect;
-    public GameObject _dieFade, _gameOverUI;
 
     public float slowCurrentTime;
     public bool isSlow = false;
@@ -384,7 +383,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 255; i >= 0; i--)
         {
             _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.0001f);
+            yield return new WaitForSeconds(0.000001f);
         }
         _completeFade.SetActive(false);
     }
@@ -393,7 +392,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_isDying)
         {
-            StartCoroutine(CheckisDie());
+            StartCoroutine(InGameUI.instance.CheckisDie());
         }
     }
 
@@ -449,29 +448,6 @@ public class PlayerController : MonoBehaviour
             {
                 break;
             }
-        }
-    }
-
-    public IEnumerator CheckisDie()
-    {
-        if (_playerHp <= 0)
-        {
-            if (!_playerAgent.enabled)
-            {
-                _playerAgent.enabled = true;
-            }
-            _isDying = true;
-            _playerAgent.isStopped = true;
-            _playerRigidbody.bodyType = RigidbodyType2D.Static;
-            _dieFade.SetActive(true);
-            for (int i = 0; i <= 255; i++)
-            {
-                _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                yield return new WaitForSeconds(0.01f);
-            }
-            yield return new WaitForSecondsRealtime(2f);
-            _gameOverUI.SetActive(true);
-            Time.timeScale = 0;
         }
     }
 

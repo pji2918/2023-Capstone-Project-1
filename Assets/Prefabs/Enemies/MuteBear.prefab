@@ -177,17 +177,17 @@ MonoBehaviour:
   - {fileID: 489368551200082246, guid: ebb536ea5eda66e49b3009bd1fd8f121, type: 3}
   _itemPercents:
   - itemNum: 0
-    percent: 4
+    percent: 10
   - itemNum: 1
-    percent: 4
+    percent: 10
   - itemNum: 2
-    percent: 0.1
+    percent: 3
   - itemNum: 3
-    percent: 6
+    percent: 15
   - itemNum: 4
-    percent: 1
+    percent: 7
   - itemNum: 5
-    percent: 85.9
+    percent: 55
 --- !u!50 &8948901811764515693
 Rigidbody2D:
   serializedVersion: 4

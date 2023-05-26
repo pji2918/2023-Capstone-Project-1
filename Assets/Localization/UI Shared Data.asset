@@ -75,6 +75,26 @@ MonoBehaviour:
     m_Key: cc_slow_description
     m_Metadata:
       m_Items: []
+  - m_Id: 3570450536988672
+    m_Key: getItem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3583303125958656
+    m_Key: deathReport_day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3583303155318784
+    m_Key: deathReport_weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3583303155318785
+    m_Key: deathReport_shelter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3584847720349696
+    m_Key: day
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

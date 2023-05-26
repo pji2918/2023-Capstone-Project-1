@@ -235,4 +235,33 @@ public class InGameUI : MonoBehaviour
     {
         _foodTooltip.SetActive(false);
     }
+
+    public TextMeshProUGUI _deathReportText;
+    public GameObject _dieFade, _gameOverUI, _dieReportUI;
+
+    public IEnumerator CheckisDie()
+    {
+        if (PlayerController.instance._playerHp <= 0)
+        {
+            PlayerController.instance._isDying = true;
+            PlayerController.instance._playerAgent.isStopped = true;
+            PlayerController.instance._playerRigidbody.bodyType = RigidbodyType2D.Static;
+            _dieFade.SetActive(true);
+            for (int i = 0; i <= 255; i++)
+            {
+                _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+                yield return new WaitForSeconds(0.001f);
+            }
+            yield return new WaitForSecondsRealtime(2f);
+            _gameOverUI.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    public void DeathReport()
+    {
+        _gameOverUI.SetActive(false);
+        _dieReportUI.SetActive(true);
+        _deathReportText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_day"), DataManager.instance._data.day) + "\n" + string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_weapon"), DataManager.instance._data.skillLevel) + "\n" + string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_shelter"), DataManager.instance._data.buildLevel);
+    }
 }
