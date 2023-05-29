@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
     public float _dashCoolDown;
     public bool _isDash = false;
 
+    public bool _isInvincible = false;
+    public bool _isPowerUp = false;
+
     public GameObject _bubblePrefab;
     public float _bubbleCoolDown;
 
@@ -164,6 +167,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public bool _isFinishing = false;
+    public float _foodTimer = 0f;
 
     // Update is called once per frame
     void Update()
@@ -269,12 +273,22 @@ public class PlayerController : MonoBehaviour
         {
             if (DataManager.instance._data.resources["food"] >= 1 && _foodCoolDown <= 0 && !_isDying)
             {
+                _foodTimer = 4.5f;
                 _foodCoolDown = 10f;
                 StartCoroutine(Eat());
             }
         }
 
         #endregion
+
+        if (_foodTimer > 0)
+        {
+            _foodTimer -= Time.deltaTime;
+        }
+        else
+        {
+            _foodTimer = 0;
+        }
 
         // 플레이어의 이동 속도를 설정합니다.
         _playerAgent.speed = _moveSpeed;

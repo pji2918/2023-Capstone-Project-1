@@ -33,7 +33,8 @@ public class Whale : MonsterController
 
     void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player" && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
+        if (other.gameObject.tag == "Player" && !PlayerController.instance._isDash &&
+        !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
         {
             if (attackCurrentTime >= attackCoolTime)
             {

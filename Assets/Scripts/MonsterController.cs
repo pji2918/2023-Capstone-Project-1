@@ -120,6 +120,10 @@ public class MonsterController : MonoBehaviour
 
     protected void Damage(int damage)
     {
+        if (PlayerController.instance._isPowerUp)
+        {
+            damage = int.MaxValue;
+        }
         currentHp -= damage;
         var text = Instantiate(Resources.Load("Damage"), transform.position, Quaternion.identity) as GameObject;
         text.GetComponent<TextMeshPro>().text = damage.ToString();

@@ -95,6 +95,42 @@ MonoBehaviour:
     m_Key: day
     m_Metadata:
       m_Items: []
+  - m_Id: 4696555876646912
+    m_Key: foodbuff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555910201344
+    m_Key: foodbuff_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555910201345
+    m_Key: dashbuff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555910201346
+    m_Key: dashbuff_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555914395648
+    m_Key: invincible
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555914395649
+    m_Key: invincible_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555914395650
+    m_Key: power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555914395651
+    m_Key: power_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555914395652
+    m_Key: cheat_tip
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

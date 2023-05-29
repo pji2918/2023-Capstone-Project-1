@@ -154,16 +154,73 @@ public class InGameUI : MonoBehaviour
 
         _timerText.text = string.Format("{0:00}:{1:00}", (int)PlayerController.instance._timer / 60 % 60, (int)PlayerController.instance._timer % 60);
 
+        #region 상태 표시
         if (PlayerController.instance.isSlow)
         {
             _statusPanel[0].SetActive(true);
-            _statusPanel[0].transform.GetChild(0).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance.slowCurrentTime / PlayerController.instance._slowTime);
+            _statusPanel[0].transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance.slowCurrentTime / PlayerController.instance._slowTime);
         }
         else
         {
             _statusPanel[0].SetActive(false);
             _statusTooltip[0].SetActive(false);
         }
+
+        if (PlayerController.instance._foodTimer > 0f)
+        {
+            _statusPanel[1].SetActive(true);
+            _statusPanel[1].transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance._foodTimer / 4.5f);
+        }
+        else
+        {
+            _statusPanel[1].SetActive(false);
+            _statusTooltip[1].SetActive(false);
+        }
+
+        if (PlayerController.instance._isDash)
+        {
+            _statusPanel[2].SetActive(true);
+        }
+        else
+        {
+            _statusPanel[2].SetActive(false);
+            _statusTooltip[2].SetActive(false);
+        }
+
+        if (PlayerController.instance._isInvincible)
+        {
+            _statusPanel[3].SetActive(true);
+        }
+        else
+        {
+            _statusPanel[3].SetActive(false);
+            _statusTooltip[3].SetActive(false);
+        }
+
+        if (PlayerController.instance._isPowerUp)
+        {
+            _statusPanel[4].SetActive(true);
+        }
+        else
+        {
+            _statusPanel[4].SetActive(false);
+            _statusTooltip[4].SetActive(false);
+        }
+        #endregion
+
+        #region 치트 기능
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            PlayerController.instance._isInvincible = !PlayerController.instance._isInvincible;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            PlayerController.instance._isPowerUp = !PlayerController.instance._isPowerUp;
+        }
+#endif
+        #endregion
     }
 
     public void OnHoverStop()
@@ -174,6 +231,46 @@ public class InGameUI : MonoBehaviour
     public void OnNotHoverStop()
     {
         _statusTooltip[0].SetActive(false);
+    }
+
+    public void OnHoverFoodBuff()
+    {
+        _statusTooltip[1].SetActive(true);
+    }
+
+    public void OnNotHoverFoodBuff()
+    {
+        _statusTooltip[1].SetActive(false);
+    }
+
+    public void OnHoverDash()
+    {
+        _statusTooltip[2].SetActive(true);
+    }
+
+    public void OnNotHoverDash()
+    {
+        _statusTooltip[2].SetActive(false);
+    }
+
+    public void OnHoverInvincible()
+    {
+        _statusTooltip[3].SetActive(true);
+    }
+
+    public void OnNotHoverInvincible()
+    {
+        _statusTooltip[3].SetActive(false);
+    }
+
+    public void OnHoverPower()
+    {
+        _statusTooltip[4].SetActive(true);
+    }
+
+    public void OnNotHoverPower()
+    {
+        _statusTooltip[4].SetActive(false);
     }
 
     public void OnHoverOne()
