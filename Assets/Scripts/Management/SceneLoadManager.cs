@@ -51,7 +51,7 @@ public class SceneLoadManager : MonoBehaviour
         for (int i = 255; i >= 0; i--)
         {
             _tipText.color = new Color32(255, 255, 255, (byte)i);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.00001f);
         }
         var table = _table.GetTableAsync();
         _tipTimer = 5f;
@@ -62,7 +62,7 @@ public class SceneLoadManager : MonoBehaviour
         for (int i = 0; i <= 255; i++)
         {
             _tipText.color = new Color32(255, 255, 255, (byte)i);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.00001f);
         }
         _isTextFading = false;
     }
