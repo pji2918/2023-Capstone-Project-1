@@ -67,7 +67,7 @@ public class InGameUI : MonoBehaviour
         _skillCoolDownBar[3].fillAmount = 1 - (PlayerController.instance._jangpungCoolDown / 13f);
         _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
         _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
-        _foodCoolDownBar.fillAmount = 1 - (PlayerController.instance._foodCoolDown / 10f);
+        _foodCoolDownBar.fillAmount = PlayerController.instance._foodCoolDown / 10f;
         #endregion
 
         _foodCountText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "skill_foodcount"), DataManager.instance._data.resources["food"]);
@@ -129,13 +129,9 @@ public class InGameUI : MonoBehaviour
             _skillCoolDownBar[4].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
         }
 
-        if (DataManager.instance._data.resources["food"] >= 1)
+        if (DataManager.instance._data.resources["food"] <= 0)
         {
-            _foodCoolDownBar.GetComponent<Image>().color = new Color32(255, 100, 100, 255);
-        }
-        else
-        {
-            _foodCoolDownBar.GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+            _foodCoolDownBar.fillAmount = 1;
         }
 
         #endregion
@@ -169,7 +165,7 @@ public class InGameUI : MonoBehaviour
         if (PlayerController.instance._foodTimer > 0f)
         {
             _statusPanel[1].SetActive(true);
-            _statusPanel[1].transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance._foodTimer / 4.5f);
+            _statusPanel[1].transform.GetChild(2).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance._foodTimer / 4.5f);
         }
         else
         {

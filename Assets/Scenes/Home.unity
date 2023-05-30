@@ -1178,7 +1178,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e03852e25ba3be4bb568275bcd126bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c3528b46247fcc548a32c6bbb421d8d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1244,9 +1244,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.049999997
     width: 1
-    height: 1
+    height: 0.9
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -3458,7 +3458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 39c260fc618eb9249b73988ffab2bfc5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 85835e7114036a44bb81af16bcf31074, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5170,7 +5170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b16c6cfc1635b0a41b2f4045d5d4007d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c96339ff129b30d4caf2bf02c2c7b0e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5934,7 +5934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c76aba6483b94114d98e5cf3d72c42b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88c5d6b7523538d44ba3e65d5deb365c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7764,7 +7764,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -850, y: 450}
-  m_SizeDelta: {x: 75, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1422960670
 MonoBehaviour:
@@ -7786,7 +7786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6ab5749b8ff92ae4e9256e2494f98faa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec6e8a2110b6459419f874c9ee3dd27e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8179,8 +8179,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8288,7 +8288,6 @@ MonoBehaviour:
   foodText: {fileID: 50962918}
   foodSubText: {fileID: 1477469873}
   foodCountText: {fileID: 1196563560}
-  _dayText: {fileID: 0}
   needWeaponResource: {fileID: 784860192}
   needHouseResource: {fileID: 1110105421}
   ResourceTextsParent: {fileID: 264597308}
@@ -8777,7 +8776,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 29ddd84f03efd114e9ac21db45a7b7e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bb57c5f81a015f646864d16e806ebf58, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
