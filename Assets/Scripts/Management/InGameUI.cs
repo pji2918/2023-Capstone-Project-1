@@ -53,7 +53,7 @@ public class InGameUI : MonoBehaviour
 
     public bool[] _isQuestComplete = new bool[3] { false, false, false };
 
-    public string[] _resourcename = new string[5] { "철근", "콘크리트", "코어", "볼트와 너트", "식량" };
+    public string[] _resourcename = new string[5] { "철근", "콘크리트", "코어", "볼트와 너트", "식재료" };
 
     // Update is called once per frame
     void Update()
