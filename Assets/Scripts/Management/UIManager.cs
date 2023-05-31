@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
             {
                 StartCoroutine(TextClear(foodText, "제작이 완료되었습니다"));
 
-                GameManager.instance.foodCount++;
+                GameManager.instance.foodCount += 2;
                 foodSlider.value = 0;
                 isCooking = false;
                 currentCookingTime = 0;
@@ -329,8 +329,8 @@ public class UIManager : MonoBehaviour
         resourceTexts[1].text = DataManager.instance._data.resources["concrete"].ToString();
         resourceTexts[2].text = DataManager.instance._data.resources["bolt"].ToString();
         resourceTexts[3].text = DataManager.instance._data.resources["core"].ToString();
-        resourceTexts[4].text = DataManager.instance._data.resources["food"].ToString();
-        resourceTexts[5].text = DataManager.instance._data.resources["ingredient"].ToString();
+        resourceTexts[4].text = DataManager.instance._data.resources["ingredient"].ToString();
+        resourceTexts[5].text = DataManager.instance._data.resources["food"].ToString();
         foodCountText.text = GameManager.instance.foodCount.ToString();
     }
 
