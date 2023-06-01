@@ -3702,7 +3702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &579561807
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3804,7 +3804,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08124709, y: -0.16550604}
+  m_Offset: {x: 0.11504647, y: -0.040478587}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3815,7 +3815,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2160616, y: 2.2725375}
+  m_Size: {x: 1.450315, y: 2.0011315}
   m_EdgeRadius: 0
 --- !u!1 &609301572
 GameObject:
@@ -9253,7 +9253,7 @@ MonoBehaviour:
   - "\uCF58\uD06C\uB9AC\uD2B8"
   - "\uCF54\uC5B4"
   - "\uBCFC\uD2B8\uC640 \uB108\uD2B8"
-  - "\uC2DD\uB7C9"
+  - "\uC2DD\uC7AC\uB8CC"
   _deathReportText: {fileID: 1133399142}
   _dieFade: {fileID: 326522078}
   _gameOverUI: {fileID: 977575822}

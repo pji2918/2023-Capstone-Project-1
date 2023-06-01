@@ -49,6 +49,12 @@ public class InGameUI : MonoBehaviour
         _quest[2]._type = ItemNum.bolt;
         _quest[2]._amount = 0;
         _quest[2]._objectiveAmount = 10;
+
+        _resourcename[0] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "iron");
+        _resourcename[1] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "concrete");
+        _resourcename[2] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "core");
+        _resourcename[3] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "bolt");
+        _resourcename[4] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "ingredient");
     }
 
     public bool[] _isQuestComplete = new bool[3] { false, false, false };
