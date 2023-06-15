@@ -28,7 +28,16 @@ public class MonsterSpawner : MonoBehaviour
 
     void SpawnMonster()
     {
-        Instantiate(_monsterPrefab[Random.Range(0, _monsterPrefab.Length)], new Vector2(Random.Range(-17, 17), Random.Range(-17, 17)), Quaternion.identity);
+    SetPosition:
+        Vector2 spawnPos = new Vector2(Random.Range(-60, 60), Random.Range(-60, 60));
+
+        // 만약 스폰 위치와 플레이어 간의 거리가 5 이하이면, 범위 재지정
+        if (Vector2.Distance(spawnPos, PlayerController.instance.transform.position) <= 5)
+        {
+            goto SetPosition;
+        }
+
+        Instantiate(_monsterPrefab[Random.Range(0, _monsterPrefab.Length)], spawnPos, Quaternion.identity);
     }
 
     // IEnumerator SpawnMonsterInOrder()

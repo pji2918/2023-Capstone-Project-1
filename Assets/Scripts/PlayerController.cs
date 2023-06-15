@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -68,6 +69,8 @@ public class PlayerController : MonoBehaviour
     public float _timer = 0f;
 
     private float _attackCoolDown = 0f;
+
+    public CinemachineImpulseSource _impulseSource;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
@@ -164,6 +167,8 @@ public class PlayerController : MonoBehaviour
         }
 
         StartCoroutine(Fade());
+
+        SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Be yourself"));
     }
 
     public bool _isFinishing = false;
@@ -368,6 +373,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public float _slowTime;
+
+    public void OnDamage()
+    {
+        _impulseSource.GenerateImpulse();
+    }
 
     public IEnumerator SlowPlayer(float stopTime)
     {

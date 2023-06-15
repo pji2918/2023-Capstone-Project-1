@@ -38,6 +38,7 @@ public class Whale : MonsterController
         {
             if (attackCurrentTime >= attackCoolTime)
             {
+                PlayerController.instance.OnDamage();
                 other.gameObject.GetComponent<PlayerController>()._playerHp -= attack;
                 PlayerController.instance.CallCoroutine();
                 attackCoolTime = thisAttackCoolTime;

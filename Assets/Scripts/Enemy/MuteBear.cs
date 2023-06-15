@@ -47,6 +47,7 @@ public class MuteBear : MonsterController
 
     public void Attack()
     {
+        PlayerController.instance.OnDamage();
         PlayerController.instance.CallCoroutine();
         GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
