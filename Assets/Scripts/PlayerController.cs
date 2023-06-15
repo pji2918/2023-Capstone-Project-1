@@ -293,6 +293,26 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    public bool _isAttackedByKraken = false;
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("KrakenLeg"))
+        {
+            Debug.Log("Enter");
+            _isAttackedByKraken = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("KrakenLeg"))
+        {
+            Debug.Log("Exit");
+            _isAttackedByKraken = false;
+        }
+    }
+
     public void Attack()
     {
         _playerAttackEffect.SetActive(true);

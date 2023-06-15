@@ -11,6 +11,8 @@ TagManager:
   - Mine_Explosion
   - Monster
   - Enemy
+  - Ground
+  - KrakenLeg
   layers:
   - Default
   - TransparentFX

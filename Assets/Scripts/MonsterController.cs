@@ -23,6 +23,8 @@ public class MonsterController : MonoBehaviour
     protected int currentHp;
     protected int maxHp;
 
+    protected bool doRotate = true;
+
     public int Hp { get { return currentHp; } set { currentHp = value; } }
     protected bool _isKnockback = false;
 
@@ -36,17 +38,19 @@ public class MonsterController : MonoBehaviour
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
     }
-
     // 플레이어의 위치를 변수에 저장한 다음, 에이전트의 목적지를 플레이어의 위치로 설정합니다.
     protected virtual void Update()
     {
-        if (transform.position.x > _playerPosition.x)
+        if (doRotate)
         {
-            monsterRenderer.flipX = false;
-        }
-        else if (transform.position.x < _playerPosition.x)
-        {
-            monsterRenderer.flipX = true;
+            if (transform.position.x > _playerPosition.x)
+            {
+                monsterRenderer.flipX = false;
+            }
+            else if (transform.position.x < _playerPosition.x)
+            {
+                monsterRenderer.flipX = true;
+            }
         }
 
         attackCurrentTime += Time.deltaTime;
@@ -58,16 +62,24 @@ public class MonsterController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (this.gameObject.GetComponent<NavMeshAgent>().enabled)
+        try
         {
-            _playerPosition = GameObject.Find("Player").transform.position;
-            _agent.SetDestination(_playerPosition);
+            if (this.gameObject.GetComponent<NavMeshAgent>().enabled)
+            {
+                _playerPosition = GameObject.Find("Player").transform.position;
+                _agent.SetDestination(_playerPosition);
+            }
+
+            if (!PlayerController.instance._jangpungOn)
+            {
+                _isKnockback = false;
+                this.GetComponent<NavMeshAgent>().isStopped = false;
+                this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
         }
-        if (!PlayerController.instance._jangpungOn)
+        catch (System.Exception e)
         {
-            _isKnockback = false;
-            this.GetComponent<NavMeshAgent>().isStopped = false;
-            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Debug.Log(e);
         }
     }
 
