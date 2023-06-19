@@ -376,7 +376,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnDamage()
     {
+        StartCoroutine(CameraMovement());
+    }
+
+    public IEnumerator CameraMovement()
+    {
         _impulseSource.GenerateImpulse();
+        yield return new WaitForSeconds(1f);
+        CinemachineImpulseManager.Instance.Clear();
     }
 
     public IEnumerator SlowPlayer(float stopTime)

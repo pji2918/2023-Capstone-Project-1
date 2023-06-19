@@ -19,6 +19,10 @@ public class SoundManager : MonoBehaviour
     }
 
     [SerializeField] private AudioSource _musicPlayer;
+    public AudioSource _playerAudio;
+
+    public int _musicVolume = 100;
+    public int _effectVolume = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +33,7 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        _musicPlayer.volume = _musicVolume / 100f;
     }
 
     public void PlayMusic(AudioClip clip)
@@ -61,5 +65,22 @@ public class SoundManager : MonoBehaviour
         {
             _musicPlayer.UnPause();
         }
+    }
+
+    public GameObject AddAndPlayEffects(GameObject obj, AudioClip clip)
+    {
+        obj.AddComponent<AudioSource>();
+        obj.GetComponent<AudioSource>().volume = _effectVolume / 100f;
+        obj.GetComponent<AudioSource>().spatialBlend = 1f;
+        obj.AddComponent<AudioPlayer>();
+        obj.GetComponent<AudioSource>().clip = clip;
+        return obj;
+    }
+
+    public void PlayPlayerEffects(AudioClip clip)
+    {
+        _playerAudio.volume = _effectVolume / 100f;
+        _playerAudio.clip = clip;
+        _playerAudio.Play();
     }
 }

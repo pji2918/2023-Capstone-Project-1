@@ -18,6 +18,7 @@ public class ThrowStone : MonoBehaviour
         !PlayerController.instance._isDying && !PlayerController.instance._isFinishing
         && !PlayerController.instance._isInvincible)
         {
+            PlayerController.instance.OnDamage();
             PlayerController.instance._playerHp -= power;
             PlayerController.instance.CallCoroutine();
             Destroy(gameObject);

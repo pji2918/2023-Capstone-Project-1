@@ -12,6 +12,7 @@ public class MuteBear : MonsterController
     [Space(10f)]
 
     [SerializeField] private GameObject stonePrefab;
+    bool _isSoundOn = true;
 
     // 스탯 설정
     protected override void Start()
@@ -47,10 +48,18 @@ public class MuteBear : MonsterController
 
     public void Attack()
     {
-        PlayerController.instance.OnDamage();
         PlayerController.instance.CallCoroutine();
-        GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
+        GameObject stone;
+
+        if (_isSoundOn)
+        {
+            stone = Instantiate(SoundManager.instance.AddAndPlayEffects(stonePrefab, SoundManager.instance.GetAudioClip("Ocean_Game_Weapons_Toolkit_Boom_01")), transform.position, transform.rotation);
+        }
+        else
+        {
+            stone = Instantiate(SoundManager.instance.AddAndPlayEffects(stonePrefab, SoundManager.instance.GetAudioClip("Ocean_Game_Weapons_Toolkit_Boom_01")), transform.position, transform.rotation);
+        }
         float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
                             PlayerController.instance.transform.position.x - stone.transform.position.x)
               * Mathf.Rad2Deg;
