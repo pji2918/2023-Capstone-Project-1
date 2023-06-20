@@ -7673,7 +7673,7 @@ MonoBehaviour:
   slowCurrentTime: 0
   isSlow: 0
   _moveSpeed: 5
-  _dashSpeed: 20
+  _dashSpeed: 0
   _dashCoolDown: 0
   _isDash: 0
   _isInvincible: 0
@@ -7689,8 +7689,10 @@ MonoBehaviour:
   _mineCoolDown: 0
   _foodCoolDown: 0
   _isDying: 0
-  _playerMaxHp: 100
-  _playerHp: 100
+  _playerMaxHp: 0
+  _playerHp: 0
+  _playerAtk: 0
+  _skillDamageMultiplier: 0
   _timer: 0
   _impulseSource: {fileID: 937238584}
   _isFinishing: 0

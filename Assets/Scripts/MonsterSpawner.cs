@@ -22,7 +22,7 @@ public class MonsterSpawner : MonoBehaviour
 
         if (_spawnCoolDown <= 0)
         {
-            _spawnCoolDown = 5f;
+            _spawnCoolDown = 1f;
             SpawnMonster();
         }
     }

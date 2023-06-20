@@ -83,7 +83,7 @@ public class MonsterController : MonoBehaviour
         if (other.CompareTag("Bubble") && _damagecool <= 0)
         {
             // 여기에 몬스터가 비눗방울에 닿았을 때 HP가 서서히 감소하는 코드를 작성합니다.
-            Damage(2);
+            Damage((int)(2 + (2 * PlayerController.instance._skillDamageMultiplier)));
             _damagecool = 0.1f;
         }
     }
@@ -93,17 +93,17 @@ public class MonsterController : MonoBehaviour
         if (other.CompareTag("Harpoon"))
         {
             // 여기에 몬스터가 작살에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            Damage(30);
+            Damage((int)(30 + (30 * PlayerController.instance._skillDamageMultiplier)));
         }
         if (other.name == "Attack_Effect")
         {
             // 여기에 기본 공격에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            Damage(10);
+            Damage(PlayerController.instance._playerAtk);
         }
         if (other.CompareTag("Mine_Explosion"))
         {
             // 여기에 지뢰에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            Damage(50);
+            Damage((int)(50 + (50 * PlayerController.instance._skillDamageMultiplier)));
         }
     }
 
@@ -114,7 +114,7 @@ public class MonsterController : MonoBehaviour
             _isKnockback = true;
             this.GetComponent<NavMeshAgent>().isStopped = true;
             // 여기에 몬스터가 장풍에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            Damage(5);
+            Damage((int)(5 + (5 * PlayerController.instance._skillDamageMultiplier)));
         }
     }
 

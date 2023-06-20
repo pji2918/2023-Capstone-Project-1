@@ -978,6 +978,11 @@ public class NeedResourse
                     DataManager.instance.NeedWeaponResourseChange(39, 39, 45, 1);
                     break;
                 }
+            default:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(999999, 999999, 999999, 999999);
+                    break;
+                }
         }
         #endregion
 
@@ -1032,6 +1037,11 @@ public class NeedResourse
             case 9:
                 {
                     DataManager.instance.NeedHouseResourseChange(224, 224, 243, 3);
+                    break;
+                }
+            default:
+                {
+                    DataManager.instance.NeedHouseResourseChange(999999, 999999, 999999, 999999);
                     break;
                 }
         }

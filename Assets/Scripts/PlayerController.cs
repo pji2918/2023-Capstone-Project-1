@@ -63,8 +63,10 @@ public class PlayerController : MonoBehaviour
 
     bool _isAttacking;
     public bool _isDying = false;
-    public int _playerMaxHp = 100;
+    public int _playerMaxHp;
     public int _playerHp;
+    public int _playerAtk;
+    public double _skillDamageMultiplier = 0;
 
     public float _timer = 0f;
 
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
         // 플레이어의 Animator 컴포넌트를 가져옵니다.
         _playerAnimator = GetComponent<Animator>();
 
-        switch (DataManager.instance._data.buildLevel)
+        switch (DataManager.instance._data.buildLevel) // 건물 레벨에 따라 플레이어의 최대 체력과 이동 속도를 설정합니다.
         {
             case 0:
                 {
@@ -156,6 +158,112 @@ public class PlayerController : MonoBehaviour
                 }
         }
 
+        switch (DataManager.instance._data.skillLevel) // 스킬 레벨에 따라 플레이어의 공격력을 설정합니다.
+        {
+            case 0:
+                {
+                    _playerAtk = 10;
+                    _skillDamageMultiplier = 0;
+                    break;
+                }
+            case 1:
+                {
+                    _playerAtk = 11;
+                    _skillDamageMultiplier = 0.2;
+                    break;
+                }
+            case 2:
+                {
+                    _playerAtk = 12;
+                    _skillDamageMultiplier = 0.2;
+                    break;
+                }
+            case 3:
+                {
+                    _playerAtk = 14;
+                    _skillDamageMultiplier = 0.3;
+                    break;
+                }
+            case 4:
+                {
+                    _playerAtk = 15;
+                    _skillDamageMultiplier = 0.5;
+                    break;
+                }
+            case 5:
+                {
+                    _playerAtk = 16;
+                    _skillDamageMultiplier = 0.5;
+                    break;
+                }
+            case 6:
+                {
+                    _playerAtk = 18;
+                    _skillDamageMultiplier = 1;
+                    break;
+                }
+            case 7:
+                {
+                    _playerAtk = 19;
+                    _skillDamageMultiplier = 1;
+                    break;
+                }
+            case 8:
+                {
+                    _playerAtk = 20;
+                    _skillDamageMultiplier = 1;
+                    break;
+                }
+            case 9:
+                {
+                    _playerAtk = 23;
+                    _skillDamageMultiplier = 1.5;
+                    break;
+                }
+            case 10:
+                {
+                    _playerAtk = 25;
+                    _skillDamageMultiplier = 1.5;
+                    break;
+                }
+            case 11:
+                {
+                    _playerAtk = 28;
+                    _skillDamageMultiplier = 1.7;
+                    break;
+                }
+            case 12:
+                {
+                    _playerAtk = 30;
+                    _skillDamageMultiplier = 2;
+                    break;
+                }
+            case 13:
+                {
+                    _playerAtk = 33;
+                    _skillDamageMultiplier = 2;
+                    break;
+                }
+            case 14:
+                {
+                    _playerAtk = 36;
+                    _skillDamageMultiplier = 2;
+                    break;
+                }
+            case 15:
+                {
+                    _playerAtk = 40;
+                    _skillDamageMultiplier = 2.5;
+                    break;
+                }
+            default:
+                {
+                    _playerAtk = 0;
+                    _skillDamageMultiplier = 0;
+                    break;
+                }
+        }
+
         if (GameManager.instance is not null)
         {
             Debug.Log(GameManager.instance._healthReduce);
@@ -164,6 +272,14 @@ public class PlayerController : MonoBehaviour
                 // Player의 HP를 healthReduce의 백분율만큼 감소시킵니다.
                 _playerHp = _playerMaxHp - (int)(_playerMaxHp * (GameManager.instance._healthReduce / 100f));
             }
+            else
+            {
+                _playerHp = _playerMaxHp;
+            }
+        }
+        else
+        {
+            _playerHp = _playerMaxHp;
         }
 
         StartCoroutine(Fade());
@@ -463,11 +579,11 @@ public class PlayerController : MonoBehaviour
         DataManager.instance.Save();
         for (int i = 0; i < 15; i++)
         {
-            if (_playerHp < 100)
+            if (_playerHp < _playerMaxHp)
             {
-                if (_playerHp + 1 >= 100)
+                if (_playerHp + 1 >= _playerMaxHp)
                 {
-                    _playerHp = 100;
+                    _playerHp = _playerMaxHp;
                 }
                 else
                 {
