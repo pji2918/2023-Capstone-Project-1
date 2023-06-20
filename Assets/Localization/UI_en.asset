@@ -20,10 +20,94 @@ MonoBehaviour:
     - rid: 5056674134845554750
   m_TableData:
   - m_Id: 44527984443392
-    m_Localized: 
+    m_Localized: Rebar
     m_Metadata:
       m_Items:
       - rid: 5056674134845554750
+  - m_Id: 44527992832000
+    m_Localized: Concrete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832001
+    m_Localized: Core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832002
+    m_Localized: Bolts & Nuts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832003
+    m_Localized: Ingredients
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832004
+    m_Localized: '{0}s Cooldown'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832005
+    m_Localized: Day {0}'s Report
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44527992832006
+    m_Localized: Dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83643497177088
+    m_Localized: Food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 305003188322304
+    m_Localized: Press a Key to Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3584847720349696
+    m_Localized: Day {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555914395652
+    m_Localized: '"With great power comes great responsibility."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12672688987439104
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12672689012604928
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12672689012604929
+    m_Localized: Return To Home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3570450536988672
+    m_Localized: You Got a {0}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3583303125958656
+    m_Localized: You Survived {0} Day.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4696555910201345
+    m_Localized: Dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12682350495399936
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12682350495399937
+    m_Localized: Music Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12682350495399938
+    m_Localized: SFX Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12682872652693504
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -11,6 +11,9 @@ public class Data
     public int buildLevel = 0;
     public int day = 1;
 
+    public int musicVolume = 100;
+    public int effectVolume = 100;
+
     public Dictionary<string, int> resources = new Dictionary<string, int>()
     {
         {"iron", 10},

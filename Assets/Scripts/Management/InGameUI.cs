@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization.Settings;
-using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-
+using TMPro;
 public class InGameUI : MonoBehaviour
 {
     public struct Resource
@@ -23,11 +23,13 @@ public class InGameUI : MonoBehaviour
     private bool[] _isHovering = new bool[5] { false, false, false, false, false };
     public GameObject[] _skillTooltip, _statusTooltip;
     public GameObject _foodTooltip;
+    public GameObject _pauseUI;
     public TextMeshProUGUI[] _questText = new TextMeshProUGUI[3];
     public TextMeshProUGUI _foodCountText, _timerText;
     public Resource[] _quest = new Resource[3];
-
-
+    public bool _isPause = false;
+    public Slider[] _volumeSlider = new Slider[2];
+    public TextMeshProUGUI[] _volumeText = new TextMeshProUGUI[2];
     public static InGameUI instance;
 
     void Awake()
@@ -223,6 +225,28 @@ public class InGameUI : MonoBehaviour
         }
 #endif
         #endregion
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!_isPause)
+            {
+                if (!PlayerController.instance._isDying || !PlayerController.instance._isFinishing)
+                {
+                    Time.timeScale = 0;
+                    _pauseUI.SetActive(true);
+                    _isPause = true;
+                }
+            }
+            else
+            {
+                Time.timeScale = 1;
+                _pauseUI.SetActive(false);
+                _isPause = false;
+            }
+        }
+
+        _volumeText[0].text = string.Format("{0}%", (int)_volumeSlider[0].value);
+        _volumeText[1].text = string.Format("{0}%", (int)_volumeSlider[1].value);
     }
 
     public void OnHoverStop()
@@ -362,5 +386,56 @@ public class InGameUI : MonoBehaviour
         _gameOverUI.SetActive(false);
         _dieReportUI.SetActive(true);
         _deathReportText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_day"), DataManager.instance._data.day) + "\n" + string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_weapon"), DataManager.instance._data.skillLevel) + "\n" + string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_shelter"), DataManager.instance._data.buildLevel);
+    }
+
+    public void PauseMenu_Resume()
+    {
+        Time.timeScale = 1;
+        _pauseUI.SetActive(false);
+        _isPause = false;
+    }
+
+    public void PauseMenu_Options()
+    {
+        _pauseUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        _pauseUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        _volumeSlider[0].value = DataManager.instance._data.musicVolume;
+        _volumeSlider[1].value = DataManager.instance._data.effectVolume;
+        _isActivated = true;
+    }
+
+    public void PauseMenu_Quit()
+    {
+        Time.timeScale = 1;
+        StartCoroutine(ReturnToHomeFade());
+    }
+
+    bool _isActivated = false;
+
+    public void OnSliderValueChanged()
+    {
+        if (_isActivated)
+        {
+            DataManager.instance._data.musicVolume = (int)_volumeSlider[0].value;
+            DataManager.instance._data.effectVolume = (int)_volumeSlider[1].value;
+            DataManager.instance.Save();
+        }
+    }
+
+    public void PauseMenu_Options_Back()
+    {
+        _pauseUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        _pauseUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+    }
+
+    public IEnumerator ReturnToHomeFade()
+    {
+        PlayerController.instance._completeFade.SetActive(true);
+        for (int i = 0; i <= 255; i++)
+        {
+            PlayerController.instance._completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+            yield return new WaitForSeconds(0.001f);
+        }
+        SceneManager.LoadScene("Loading_ToHome");
     }
 }

@@ -122,6 +122,8 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _musicVolume = DataManager.instance._data.musicVolume;
+        _effectVolume = DataManager.instance._data.effectVolume;
         _musicPlayer.volume = _musicVolume / 100f; // 음악 음량 설정
     }
 
