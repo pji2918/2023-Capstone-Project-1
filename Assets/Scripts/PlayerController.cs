@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(Fade());
 
-        SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Be yourself"));
+        SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
     }
 
     public bool _isFinishing = false;

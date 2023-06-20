@@ -5,7 +5,6 @@ using UnityEngine;
 public class LightFish : MonsterController
 {
     private float stopCurrentTime;
-    private bool isStop = false;
 
     [SerializeField] private float thisSpeed = 8.0f;
     [SerializeField] private int thisAttack = 1;

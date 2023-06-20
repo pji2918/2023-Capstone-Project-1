@@ -12,7 +12,6 @@ public class MonsterSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Resources.Load<TextAsset>("MonsterSpawnCap").text);
         // StartCoroutine(SpawnMonsterInOrder());
     }
 
