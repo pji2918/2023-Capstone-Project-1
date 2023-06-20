@@ -363,7 +363,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                needBuildTexts[i].color = Color.white;
+                needBuildTexts[i].color = Color.black;
             }
         }
     }
@@ -915,28 +915,65 @@ public class NeedResourse
         switch (DataManager.instance._data.skillLevel)
         {
             case 0:
-                DataManager.instance.NeedWeaponResourseChange(1, 0, 0, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(10, 10, 14, 0);
+                    break;
+                }
             case 1:
-                DataManager.instance.NeedWeaponResourseChange(1, 1, 0, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(14, 14, 20, 0);
+                    break;
+                }
             case 2:
-                DataManager.instance.NeedWeaponResourseChange(1, 1, 1, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(24, 24, 31, 1);
+                    break;
+                }
             case 3:
-                DataManager.instance.NeedWeaponResourseChange(1, 1, 1, 1);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(21, 21, 28, 0);
+                    break;
+                }
             case 4:
-                DataManager.instance.NeedWeaponResourseChange(1, 2, 3, 4);
-                break;
-
-            default:
-                DataManager.instance.NeedWeaponResourseChange(5, 5, 5, 5);
-                break;
+                {
+                    DataManager.instance.NeedWeaponResourseChange(29, 29, 36, 0);
+                    break;
+                }
+            case 5:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(39, 39, 45, 1);
+                    break;
+                }
+            case 6:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(45, 45, 51, 0);
+                    break;
+                }
+            case 7:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(53, 53, 66, 1);
+                    break;
+                }
+            case 8:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(68, 68, 81, 2);
+                    break;
+                }
+            case 9:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(84, 84, 103, 1);
+                    break;
+                }
+            case 10:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(98, 98, 124, 1);
+                    break;
+                }
+            case 11:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(39, 39, 45, 1);
+                    break;
+                }
         }
         #endregion
 
@@ -944,65 +981,55 @@ public class NeedResourse
         switch (DataManager.instance._data.buildLevel)
         {
             case 0:
-                DataManager.instance._data.HouseUpgrade["iron"] = 35;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 35;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 25;
-                DataManager.instance._data.HouseUpgrade["core"] = 0;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(35, 35, 25, 0);
+                    break;
+                }
             case 1:
-                DataManager.instance._data.HouseUpgrade["iron"] = 42;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 42;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 62;
-                DataManager.instance._data.HouseUpgrade["core"] = 1;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(42, 42, 62, 1);
+                    break;
+                }
             case 2:
-                DataManager.instance._data.HouseUpgrade["iron"] = 56;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 56;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 41;
-                DataManager.instance._data.HouseUpgrade["core"] = 0;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(56, 56, 41, 0);
+                    break;
+                }
             case 3:
-                DataManager.instance._data.HouseUpgrade["iron"] = 72;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 72;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 58;
-                DataManager.instance._data.HouseUpgrade["core"] = 0;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(72, 72, 58, 0);
+                    break;
+                }
             case 4:
-                DataManager.instance._data.HouseUpgrade["iron"] = 95;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 95;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 102;
-                DataManager.instance._data.HouseUpgrade["core"] = 1;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(95, 95, 102, 1);
+                    break;
+                }
             case 5:
-                DataManager.instance._data.HouseUpgrade["iron"] = 112;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 112;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 78;
-                DataManager.instance._data.HouseUpgrade["core"] = 1;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(112, 112, 78, 1);
+                    break;
+                }
             case 6:
-                DataManager.instance._data.HouseUpgrade["iron"] = 134;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 134;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 110;
-                DataManager.instance._data.HouseUpgrade["core"] = 1;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(134, 134, 110, 1);
+                    break;
+                }
             case 7:
-                DataManager.instance._data.HouseUpgrade["iron"] = 158;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 158;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 164;
-                DataManager.instance._data.HouseUpgrade["core"] = 2;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(158, 158, 164, 2);
+                    break;
+                }
             case 8:
-                DataManager.instance._data.HouseUpgrade["iron"] = 174;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 174;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 154;
-                DataManager.instance._data.HouseUpgrade["core"] = 2;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(174, 174, 154, 2);
+                    break;
+                }
             case 9:
-                DataManager.instance._data.HouseUpgrade["iron"] = 224;
-                DataManager.instance._data.HouseUpgrade["concrete"] = 224;
-                DataManager.instance._data.HouseUpgrade["bolt"] = 243;
-                DataManager.instance._data.HouseUpgrade["core"] = 3;
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(224, 224, 243, 3);
+                    break;
+                }
         }
         #endregion
     }
