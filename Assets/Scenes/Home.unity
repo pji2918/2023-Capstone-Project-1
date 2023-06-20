@@ -8444,6 +8444,7 @@ MonoBehaviour:
   ResourceTextsParent: {fileID: 264597308}
   needWeaponResourceTextsParent: {fileID: 690791278}
   needHouseResourceTextsParent: {fileID: 333769595}
+  _bookFit: {fileID: 563266693}
   _title: {fileID: 920210908}
   _desc: {fileID: 1360983813}
   _sceneChangeFade: {fileID: 29978040}

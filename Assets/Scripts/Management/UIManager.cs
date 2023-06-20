@@ -58,6 +58,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]//필요 재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트, 집 업글)
     private GameObject needHouseResourceTextsParent;
 
+    [SerializeField]
+    private RectTransform _bookFit;
+
     int _storyNum;
 
     // 책 텍스트
@@ -252,6 +255,7 @@ public class UIManager : MonoBehaviour
     {
         WindowPopUp(bookWindow);
         BookOpen();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_bookFit);
     }
 
     //설정 팝업
