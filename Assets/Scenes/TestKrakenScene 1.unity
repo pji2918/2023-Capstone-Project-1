@@ -1860,6 +1860,9 @@ MonoBehaviour:
   smallUpTime: 1
   earthquakePrefab: {fileID: 5261454590438282514, guid: 9f5f8225e645e0d4ca1a32b8f5a5d355, type: 3}
   earthquakeTime: 3
+  hpBar: {fileID: 388474795}
+  hp: 0
+  maxHp: 100
 --- !u!4 &321198437
 Transform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Kraken : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class Kraken : MonoBehaviour
     private GameObject earthquakePrefab;
     [SerializeField]
     private float earthquakeTime;
+
+    [Space(10)]
+    [SerializeField]
+    private Slider hpBar;
+    [SerializeField]
+    public float hp;
+    [SerializeField]
+    private float maxHp;
 
     private void Update()
     {
@@ -107,5 +116,7 @@ public class Kraken : MonoBehaviour
         yield return new WaitForSeconds(6.0f);
         Destroy(krakenUpLeg);
     }
+
+    //public void Hit(float dam  )
 }
 

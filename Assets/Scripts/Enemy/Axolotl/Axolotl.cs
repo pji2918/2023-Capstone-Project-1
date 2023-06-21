@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+
 
 public class Axolotl : MonsterController
 {
@@ -10,10 +12,11 @@ public class Axolotl : MonsterController
     [SerializeField] private float thisAttackCoolTime = 3f;
 
     [SerializeField] private float dashCoolTime = 10f;
-    [SerializeField] private float dashCurrentTime;
     [SerializeField] private float dashTime = 1.5f;
 
     [SerializeField] private float dashPower = 5.0f;
+
+    [SerializeField] private Ease ease;
 
     private Rigidbody2D rb;
 
@@ -51,12 +54,13 @@ public class Axolotl : MonsterController
         base.Update();
     }
 
+
+
     public void Attack()
     {
         PlayerController.instance.CallCoroutine();
         PlayerController.instance._playerHp -= attack;
     }
-
     public IEnumerator Dash()
     {
         GameObject player = PlayerController.instance.gameObject;
@@ -64,11 +68,21 @@ public class Axolotl : MonsterController
 
         for (int i = 0; i < 3; i++)
         {
-            yield return new WaitForSeconds(2.0f);
-            Vector2 dir = (player.transform.position - transform.position).normalized;
+            yield return new WaitForSeconds(dashTime);
+            Vector2 dir = (player.transform.position - transform.position).normalized * dashPower;
+            dir = new Vector2(transform.position.x + dir.x, transform.position.y + dir.y);
 
-            Debug.Log("dol");
-            rb.AddForce(dir * dashPower, ForceMode2D.Impulse);
+            Debug.Log(dir);
+
+            //Debug.Log("dol");
+            //transform.position = new Vector2(transform.position.x + dir.x, transform.position.y + dir.y);
+            rb.DOMove(dir, 1f).SetEase(ease);
+            //DOTween.Init();
         }
+
+        speed = thisSpeed;
+        yield return new WaitForSeconds(dashCoolTime);
+
+        StartCoroutine(Dash());
     }
 }
