@@ -5,7 +5,6 @@ using UnityEngine;
 public class LightFish : MonsterController
 {
     private float stopCurrentTime;
-    private bool isStop = false;
 
     [SerializeField] private float thisSpeed = 8.0f;
     [SerializeField] private int thisAttack = 1;
@@ -27,7 +26,8 @@ public class LightFish : MonsterController
     {
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 2)
+            if (Vector2.Distance(transform.position, _playerPosition) < 2 && !PlayerController.instance._isDash &&
+            !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
             {
                 _agent.speed = 0;
                 if (!_isAttack)

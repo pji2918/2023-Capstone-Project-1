@@ -23,7 +23,8 @@ public class MuteHuman : MonsterController
     {
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 2)
+            if (Vector2.Distance(transform.position, _playerPosition) < 2 && !PlayerController.instance._isDash &&
+            !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
             {
                 _agent.speed = 0;
                 if (attackCurrentTime >= attackCoolTime)
@@ -42,6 +43,7 @@ public class MuteHuman : MonsterController
 
     public void Attack()
     {
+        PlayerController.instance.OnDamage();
         PlayerController.instance.CallCoroutine();
         PlayerController.instance._playerHp -= attack;
     }

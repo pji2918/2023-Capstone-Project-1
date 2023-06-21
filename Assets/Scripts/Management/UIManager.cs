@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using TMPro;
 
@@ -57,6 +57,9 @@ public class UIManager : MonoBehaviour
     private GameObject needWeaponResourceTextsParent;
     [SerializeField]//필요 재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트, 집 업글)
     private GameObject needHouseResourceTextsParent;
+
+    [SerializeField]
+    private RectTransform _bookFit;
 
     int _storyNum;
 
@@ -116,11 +119,16 @@ public class UIManager : MonoBehaviour
             {
                 StartCoroutine(TextClear(foodText, "제작이 완료되었습니다"));
 
-                GameManager.instance.foodCount++;
+                GameManager.instance.foodCount += 2;
                 foodSlider.value = 0;
                 isCooking = false;
                 currentCookingTime = 0;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            _storyNum = Random.Range(0, 5);
         }
     }
 
@@ -146,7 +154,7 @@ public class UIManager : MonoBehaviour
         if (DataManager.instance._data.resources["iron"] >= DataManager.instance._data.weaponUpgrade["iron"]
         && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.weaponUpgrade["concrete"]
         && DataManager.instance._data.resources["bolt"] >= DataManager.instance._data.weaponUpgrade["bolt"]
-        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.weaponUpgrade["core"])
+        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.weaponUpgrade["core"] && DataManager.instance._data.skillLevel < 15)
         {
             PopUpWidowChange(upgradeText.gameObject, needWeaponResource);
 
@@ -162,6 +170,10 @@ public class UIManager : MonoBehaviour
             ShowNeedWeaponResourse();
 
             DataManager.instance.Save();
+        }
+        else if (DataManager.instance._data.skillLevel >= 15)
+        {
+            StartCoroutine(TextClear(upgradeSubText, "이미 무기를 최대로 강화했습니다"));
         }
         else
         {
@@ -183,7 +195,8 @@ public class UIManager : MonoBehaviour
         if (DataManager.instance._data.resources["iron"] >= DataManager.instance._data.HouseUpgrade["iron"]
         && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.HouseUpgrade["concrete"]
         && DataManager.instance._data.resources["bolt"] >= DataManager.instance._data.HouseUpgrade["bolt"]
-        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.HouseUpgrade["core"])
+        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.HouseUpgrade["core"]
+        && DataManager.instance._data.buildLevel < 10)
         {
             PopUpWidowChange(buildText.gameObject, needHouseResource);
 
@@ -199,6 +212,10 @@ public class UIManager : MonoBehaviour
             ShowNeedBuildResourse();
 
             DataManager.instance.Save();
+        }
+        else if (DataManager.instance._data.buildLevel >= 10)
+        {
+            StartCoroutine(TextClear(buildSubText, "이미 집을 최대로 강화했습니다"));
         }
         else
         {
@@ -247,6 +264,7 @@ public class UIManager : MonoBehaviour
     {
         WindowPopUp(bookWindow);
         BookOpen();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_bookFit);
     }
 
     //설정 팝업
@@ -311,7 +329,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i <= 255; i++)
         {
             _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.00005f);
         }
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("Loading");
@@ -324,8 +342,8 @@ public class UIManager : MonoBehaviour
         resourceTexts[1].text = DataManager.instance._data.resources["concrete"].ToString();
         resourceTexts[2].text = DataManager.instance._data.resources["bolt"].ToString();
         resourceTexts[3].text = DataManager.instance._data.resources["core"].ToString();
-        resourceTexts[4].text = DataManager.instance._data.resources["food"].ToString();
-        resourceTexts[5].text = DataManager.instance._data.resources["ingredient"].ToString();
+        resourceTexts[4].text = DataManager.instance._data.resources["ingredient"].ToString();
+        resourceTexts[5].text = DataManager.instance._data.resources["food"].ToString();
         foodCountText.text = GameManager.instance.foodCount.ToString();
     }
 
@@ -349,6 +367,18 @@ public class UIManager : MonoBehaviour
         needBuildTexts[1].text = DataManager.instance._data.HouseUpgrade["concrete"].ToString();
         needBuildTexts[2].text = DataManager.instance._data.HouseUpgrade["bolt"].ToString();
         needBuildTexts[3].text = DataManager.instance._data.HouseUpgrade["core"].ToString();
+
+        for (int i = 0; i <= 3; i++)
+        {
+            if (DataManager.instance._data.resources.ElementAt(i).Value < DataManager.instance._data.HouseUpgrade.ElementAt(i).Value)
+            {
+                needBuildTexts[i].color = Color.red;
+            }
+            else
+            {
+                needBuildTexts[i].color = Color.black;
+            }
+        }
     }
 
     //타이핑 효과 코루틴
@@ -415,7 +445,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay13Text");
             ShowStoryButton(ButtonType.Choice, 7);
         }
-        else if (DataManager.instance._data.day == 15)
+        else if (DataManager.instance._data.day == 15 && DataManager.instance._data.buildLevel >= 2)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay15Text");
             ShowStoryButton(ButtonType.Normal);
@@ -430,7 +460,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay20Text");
             ShowStoryButton(ButtonType.Normal);
         }
-        else if (DataManager.instance._data.day == 21)
+        else if (DataManager.instance._data.day == 21 && DataManager.instance._data.buildLevel >= 5)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay21Text");
             ShowStoryButton(ButtonType.Normal);
@@ -445,7 +475,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay24Text");
             ShowStoryButton(ButtonType.Normal);
         }
-        else if (DataManager.instance._data.day == 26)
+        else if (DataManager.instance._data.day == 26 && DataManager.instance._data.buildLevel >= 8)
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay26Text");
             ShowStoryButton(ButtonType.Normal);
@@ -465,7 +495,7 @@ public class UIManager : MonoBehaviour
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay28Text");
             ShowStoryButton(ButtonType.Normal);
         }
-        else if (false) // 이건 모든 게 완성되었을 때 추가됩니다.
+        else if (DataManager.instance._data.buildLevel == 10) // 이건 모든 게 완성되었을 때 추가됩니다.
         {
             _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyEndText");
             ShowStoryButton(ButtonType.Normal);
@@ -659,12 +689,12 @@ public class UIManager : MonoBehaviour
                 {
                     if (Random.Range(0, 100) <= 70)
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1Text1");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice1Text1");
                         ShowStoryButton(ButtonType.Normal);
                     }
                     else
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice1Text2");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice1Text2");
                         ShowStoryButton(ButtonType.Normal);
                         GameManager.instance._healthReduce = 10;
                     }
@@ -680,7 +710,7 @@ public class UIManager : MonoBehaviour
                     }
                     else
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1Text1");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryUntilDay13TextChoice1Text2");
                         ShowStoryButton(ButtonType.Normal);
                         GameManager.instance._healthReduce = 5;
                     }
@@ -816,12 +846,12 @@ public class UIManager : MonoBehaviour
                 {
                     if (Random.Range(0, 100) <= 50)
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2Text1");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice2Text1");
                         ShowStoryButton(ButtonType.Normal);
                     }
                     else
                     {
-                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04Choice2Text2");
+                        _desc.text = LocalizationSettings.StringDatabase.GetLocalizedString("Story", "randomStoryAfterDay04TextChoice2Text2");
                         ShowStoryButton(ButtonType.Normal);
                         GameManager.instance._healthReduce = 10;
                     }
@@ -898,28 +928,85 @@ public class NeedResourse
         switch (DataManager.instance._data.skillLevel)
         {
             case 0:
-                DataManager.instance.NeedWeaponResourseChange(1, 0, 0, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(10, 10, 14, 0);
+                    break;
+                }
             case 1:
-                DataManager.instance.NeedWeaponResourseChange(1, 1, 0, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(14, 14, 20, 0);
+                    break;
+                }
             case 2:
-                DataManager.instance.NeedWeaponResourseChange(1, 1, 1, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(24, 24, 31, 1);
+                    break;
+                }
             case 3:
-                DataManager.instance.NeedWeaponResourseChange(1, 1, 1, 1);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(21, 21, 28, 0);
+                    break;
+                }
             case 4:
-                DataManager.instance.NeedWeaponResourseChange(1, 2, 3, 4);
-                break;
-
+                {
+                    DataManager.instance.NeedWeaponResourseChange(29, 29, 36, 0);
+                    break;
+                }
+            case 5:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(39, 39, 45, 1);
+                    break;
+                }
+            case 6:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(45, 45, 51, 0);
+                    break;
+                }
+            case 7:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(53, 53, 66, 1);
+                    break;
+                }
+            case 8:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(68, 68, 81, 2);
+                    break;
+                }
+            case 9:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(84, 84, 103, 1);
+                    break;
+                }
+            case 10:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(98, 98, 124, 1);
+                    break;
+                }
+            case 11:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(117, 117, 148, 3);
+                    break;
+                }
+            case 12:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(142, 142, 178, 2);
+                    break;
+                }
+            case 13:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(167, 167, 197, 2);
+                    break;
+                }
+            case 14:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(201, 201, 214, 2);
+                    break;
+                }
             default:
-                DataManager.instance.NeedWeaponResourseChange(5, 5, 5, 5);
-                break;
+                {
+                    DataManager.instance.NeedWeaponResourseChange(999999, 999999, 999999, 999999);
+                    break;
+                }
         }
         #endregion
 
@@ -927,28 +1014,60 @@ public class NeedResourse
         switch (DataManager.instance._data.buildLevel)
         {
             case 0:
-                DataManager.instance.NeedHouseResourseChange(1, 0, 0, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedHouseResourseChange(35, 35, 25, 0);
+                    break;
+                }
             case 1:
-                DataManager.instance.NeedHouseResourseChange(1, 1, 0, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedHouseResourseChange(42, 42, 62, 1);
+                    break;
+                }
             case 2:
-                DataManager.instance.NeedHouseResourseChange(1, 1, 1, 0);
-                break;
-
+                {
+                    DataManager.instance.NeedHouseResourseChange(56, 56, 41, 0);
+                    break;
+                }
             case 3:
-                DataManager.instance.NeedHouseResourseChange(1, 1, 1, 1);
-                break;
-
+                {
+                    DataManager.instance.NeedHouseResourseChange(72, 72, 58, 0);
+                    break;
+                }
             case 4:
-                DataManager.instance.NeedHouseResourseChange(1, 2, 3, 4);
-                break;
-
+                {
+                    DataManager.instance.NeedHouseResourseChange(95, 95, 102, 1);
+                    break;
+                }
+            case 5:
+                {
+                    DataManager.instance.NeedHouseResourseChange(112, 112, 78, 1);
+                    break;
+                }
+            case 6:
+                {
+                    DataManager.instance.NeedHouseResourseChange(134, 134, 110, 1);
+                    break;
+                }
+            case 7:
+                {
+                    DataManager.instance.NeedHouseResourseChange(158, 158, 164, 2);
+                    break;
+                }
+            case 8:
+                {
+                    DataManager.instance.NeedHouseResourseChange(174, 174, 154, 2);
+                    break;
+                }
+            case 9:
+                {
+                    DataManager.instance.NeedHouseResourseChange(224, 224, 243, 3);
+                    break;
+                }
             default:
-                DataManager.instance.NeedHouseResourseChange(5, 5, 5, 5);
-                break;
+                {
+                    DataManager.instance.NeedHouseResourseChange(999999, 999999, 999999, 999999);
+                    break;
+                }
         }
         #endregion
     }

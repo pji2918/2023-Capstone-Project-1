@@ -28,7 +28,7 @@ public class MuteBear : MonsterController
     {
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 6)
+            if (Vector2.Distance(transform.position, _playerPosition) < 6 && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
             {
                 _agent.speed = 0;
                 if (attackCurrentTime >= attackCoolTime)
@@ -48,8 +48,10 @@ public class MuteBear : MonsterController
     public void Attack()
     {
         PlayerController.instance.CallCoroutine();
-        GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
+        GameObject stone;
+        stone = Instantiate(stonePrefab, transform.position, transform.rotation);
+        SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip("Ocean_Game_Weapons_Toolkit_Boom_01"));
         float angle = Mathf.Atan2(PlayerController.instance.transform.position.y - stone.transform.position.y,
                             PlayerController.instance.transform.position.x - stone.transform.position.x)
               * Mathf.Rad2Deg;

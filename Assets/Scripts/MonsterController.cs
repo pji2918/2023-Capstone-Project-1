@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class MonsterController : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class MonsterController : MonoBehaviour
 
     protected float speed;
 
-    protected int attack;
+    protected float _damagecool;
 
+    protected int attack;
     protected float attackCurrentTime = 0;
     protected float attackCoolTime;
 
@@ -53,6 +55,11 @@ public class MonsterController : MonoBehaviour
             }
         }
 
+        if (_damagecool > 0)
+        {
+            _damagecool -= Time.deltaTime;
+        }
+
         attackCurrentTime += Time.deltaTime;
 
         if (currentHp <= 0)
@@ -85,11 +92,11 @@ public class MonsterController : MonoBehaviour
 
     protected virtual void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Bubble"))
+        if (other.CompareTag("Bubble") && _damagecool <= 0)
         {
             // 여기에 몬스터가 비눗방울에 닿았을 때 HP가 서서히 감소하는 코드를 작성합니다.
-            currentHp -= 1;
-            DamageEffect();
+            Damage((int)(2 + (2 * PlayerController.instance._skillDamageMultiplier)));
+            _damagecool = 0.1f;
         }
     }
 
@@ -98,20 +105,17 @@ public class MonsterController : MonoBehaviour
         if (other.CompareTag("Harpoon"))
         {
             // 여기에 몬스터가 작살에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 30;
-            DamageEffect();
+            Damage((int)(30 + (30 * PlayerController.instance._skillDamageMultiplier)));
         }
         if (other.name == "Attack_Effect")
         {
             // 여기에 기본 공격에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 10;
-            DamageEffect();
+            Damage(PlayerController.instance._playerAtk);
         }
         if (other.CompareTag("Mine_Explosion"))
         {
             // 여기에 지뢰에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 50;
-            DamageEffect();
+            Damage((int)(50 + (50 * PlayerController.instance._skillDamageMultiplier)));
         }
     }
 
@@ -122,13 +126,19 @@ public class MonsterController : MonoBehaviour
             _isKnockback = true;
             this.GetComponent<NavMeshAgent>().isStopped = true;
             // 여기에 몬스터가 장풍에 닿았을 때 HP가 감소하는 코드를 작성합니다.
-            currentHp -= 5;
-            DamageEffect();
+            Damage((int)(5 + (5 * PlayerController.instance._skillDamageMultiplier)));
         }
     }
 
-    protected void DamageEffect()
+    protected void Damage(int damage)
     {
+        if (PlayerController.instance._isPowerUp)
+        {
+            damage = int.MaxValue;
+        }
+        currentHp -= damage;
+        var text = Instantiate(Resources.Load("Damage"), transform.position, Quaternion.identity) as GameObject;
+        text.GetComponent<TextMeshPro>().text = damage.ToString();
         StartCoroutine(DamageEffectCoroutine());
     }
 

@@ -2,6 +2,8 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using TMPro;
 
 // 이거 다르면 고치면 됨
 public enum ItemNum
@@ -23,6 +25,8 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Player") && itemNum != ItemNum.nullNum)
         {
             Debug.Log(itemNum.ToString());
+            var itemIndicator = Instantiate(Resources.Load("ItemIndicator"), transform.position, Quaternion.identity) as GameObject;
+            itemIndicator.GetComponent<TextMeshPro>().text = StringUtil.KoreanParticle(string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "getItem"), InGameUI.instance._resourcename[(int)itemNum]));
             if (System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum) >= 0)
             {
                 InGameUI.instance._quest[System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum)]._amount++;

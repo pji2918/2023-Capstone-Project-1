@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization.Settings;
-using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-
+using TMPro;
 public class InGameUI : MonoBehaviour
 {
     public struct Resource
@@ -23,11 +23,13 @@ public class InGameUI : MonoBehaviour
     private bool[] _isHovering = new bool[5] { false, false, false, false, false };
     public GameObject[] _skillTooltip, _statusTooltip;
     public GameObject _foodTooltip;
+    public GameObject _pauseUI;
     public TextMeshProUGUI[] _questText = new TextMeshProUGUI[3];
     public TextMeshProUGUI _foodCountText, _timerText;
     public Resource[] _quest = new Resource[3];
-
-
+    public bool _isPause = false;
+    public Slider[] _volumeSlider = new Slider[2];
+    public TextMeshProUGUI[] _volumeText = new TextMeshProUGUI[2];
     public static InGameUI instance;
 
     void Awake()
@@ -49,11 +51,17 @@ public class InGameUI : MonoBehaviour
         _quest[2]._type = ItemNum.bolt;
         _quest[2]._amount = 0;
         _quest[2]._objectiveAmount = 10;
+
+        _resourcename[0] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "iron");
+        _resourcename[1] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "concrete");
+        _resourcename[2] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "core");
+        _resourcename[3] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "bolt");
+        _resourcename[4] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "ingredient");
     }
 
     public bool[] _isQuestComplete = new bool[3] { false, false, false };
 
-    public string[] _resourcename = new string[5] { "철근", "콘크리트", "코어", "볼트와 너트", "식량" };
+    public string[] _resourcename = new string[5] { "철근", "콘크리트", "코어", "볼트와 너트", "식재료" };
 
     // Update is called once per frame
     void Update()
@@ -67,7 +75,7 @@ public class InGameUI : MonoBehaviour
         _skillCoolDownBar[3].fillAmount = 1 - (PlayerController.instance._jangpungCoolDown / 13f);
         _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
         _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
-        _foodCoolDownBar.fillAmount = 1 - (PlayerController.instance._foodCoolDown / 10f);
+        _foodCoolDownBar.fillAmount = PlayerController.instance._foodCoolDown / 10f;
         #endregion
 
         _foodCountText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "skill_foodcount"), DataManager.instance._data.resources["food"]);
@@ -129,13 +137,9 @@ public class InGameUI : MonoBehaviour
             _skillCoolDownBar[4].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
         }
 
-        if (DataManager.instance._data.resources["food"] >= 1)
+        if (DataManager.instance._data.resources["food"] <= 0)
         {
-            _foodCoolDownBar.GetComponent<Image>().color = new Color32(255, 100, 100, 255);
-        }
-        else
-        {
-            _foodCoolDownBar.GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+            _foodCoolDownBar.fillAmount = 1;
         }
 
         #endregion
@@ -154,16 +158,95 @@ public class InGameUI : MonoBehaviour
 
         _timerText.text = string.Format("{0:00}:{1:00}", (int)PlayerController.instance._timer / 60 % 60, (int)PlayerController.instance._timer % 60);
 
+        #region 상태 표시
         if (PlayerController.instance.isSlow)
         {
             _statusPanel[0].SetActive(true);
-            _statusPanel[0].transform.GetChild(0).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance.slowCurrentTime / PlayerController.instance._slowTime);
+            _statusPanel[0].transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance.slowCurrentTime / PlayerController.instance._slowTime);
         }
         else
         {
             _statusPanel[0].SetActive(false);
             _statusTooltip[0].SetActive(false);
         }
+
+        if (PlayerController.instance._foodTimer > 0f)
+        {
+            _statusPanel[1].SetActive(true);
+            _statusPanel[1].transform.GetChild(2).GetComponent<Image>().fillAmount = 1 - (PlayerController.instance._foodTimer / 4.5f);
+        }
+        else
+        {
+            _statusPanel[1].SetActive(false);
+            _statusTooltip[1].SetActive(false);
+        }
+
+        if (PlayerController.instance._isDash)
+        {
+            _statusPanel[2].SetActive(true);
+        }
+        else
+        {
+            _statusPanel[2].SetActive(false);
+            _statusTooltip[2].SetActive(false);
+        }
+
+        if (PlayerController.instance._isInvincible)
+        {
+            _statusPanel[3].SetActive(true);
+        }
+        else
+        {
+            _statusPanel[3].SetActive(false);
+            _statusTooltip[3].SetActive(false);
+        }
+
+        if (PlayerController.instance._isPowerUp)
+        {
+            _statusPanel[4].SetActive(true);
+        }
+        else
+        {
+            _statusPanel[4].SetActive(false);
+            _statusTooltip[4].SetActive(false);
+        }
+        #endregion
+
+        #region 치트 기능
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            PlayerController.instance._isInvincible = !PlayerController.instance._isInvincible;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            PlayerController.instance._isPowerUp = !PlayerController.instance._isPowerUp;
+        }
+#endif
+        #endregion
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!_isPause)
+            {
+                if (!PlayerController.instance._isDying || !PlayerController.instance._isFinishing)
+                {
+                    Time.timeScale = 0;
+                    _pauseUI.SetActive(true);
+                    _isPause = true;
+                }
+            }
+            else
+            {
+                Time.timeScale = 1;
+                _pauseUI.SetActive(false);
+                _isPause = false;
+            }
+        }
+
+        _volumeText[0].text = string.Format("{0}%", (int)_volumeSlider[0].value);
+        _volumeText[1].text = string.Format("{0}%", (int)_volumeSlider[1].value);
     }
 
     public void OnHoverStop()
@@ -174,6 +257,46 @@ public class InGameUI : MonoBehaviour
     public void OnNotHoverStop()
     {
         _statusTooltip[0].SetActive(false);
+    }
+
+    public void OnHoverFoodBuff()
+    {
+        _statusTooltip[1].SetActive(true);
+    }
+
+    public void OnNotHoverFoodBuff()
+    {
+        _statusTooltip[1].SetActive(false);
+    }
+
+    public void OnHoverDash()
+    {
+        _statusTooltip[2].SetActive(true);
+    }
+
+    public void OnNotHoverDash()
+    {
+        _statusTooltip[2].SetActive(false);
+    }
+
+    public void OnHoverInvincible()
+    {
+        _statusTooltip[3].SetActive(true);
+    }
+
+    public void OnNotHoverInvincible()
+    {
+        _statusTooltip[3].SetActive(false);
+    }
+
+    public void OnHoverPower()
+    {
+        _statusTooltip[4].SetActive(true);
+    }
+
+    public void OnNotHoverPower()
+    {
+        _statusTooltip[4].SetActive(false);
     }
 
     public void OnHoverOne()
@@ -234,5 +357,85 @@ public class InGameUI : MonoBehaviour
     public void OnNotHoverFood()
     {
         _foodTooltip.SetActive(false);
+    }
+
+    public TextMeshProUGUI _deathReportText;
+    public GameObject _dieFade, _gameOverUI, _dieReportUI;
+
+    public IEnumerator CheckisDie()
+    {
+        if (PlayerController.instance._playerHp <= 0)
+        {
+            PlayerController.instance._isDying = true;
+            PlayerController.instance._playerAgent.isStopped = true;
+            PlayerController.instance._playerRigidbody.bodyType = RigidbodyType2D.Static;
+            _dieFade.SetActive(true);
+            for (int i = 0; i <= 255; i++)
+            {
+                _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+                yield return new WaitForSeconds(0.001f);
+            }
+            yield return new WaitForSecondsRealtime(2f);
+            _gameOverUI.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    public void DeathReport()
+    {
+        _gameOverUI.SetActive(false);
+        _dieReportUI.SetActive(true);
+        _deathReportText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_day"), DataManager.instance._data.day) + "\n" + string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_weapon"), DataManager.instance._data.skillLevel) + "\n" + string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "deathReport_shelter"), DataManager.instance._data.buildLevel);
+    }
+
+    public void PauseMenu_Resume()
+    {
+        Time.timeScale = 1;
+        _pauseUI.SetActive(false);
+        _isPause = false;
+    }
+
+    public void PauseMenu_Options()
+    {
+        _pauseUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        _pauseUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        _volumeSlider[0].value = DataManager.instance._data.musicVolume;
+        _volumeSlider[1].value = DataManager.instance._data.effectVolume;
+        _isActivated = true;
+    }
+
+    public void PauseMenu_Quit()
+    {
+        Time.timeScale = 1;
+        StartCoroutine(ReturnToHomeFade());
+    }
+
+    bool _isActivated = false;
+
+    public void OnSliderValueChanged()
+    {
+        if (_isActivated)
+        {
+            DataManager.instance._data.musicVolume = (int)_volumeSlider[0].value;
+            DataManager.instance._data.effectVolume = (int)_volumeSlider[1].value;
+            DataManager.instance.Save();
+        }
+    }
+
+    public void PauseMenu_Options_Back()
+    {
+        _pauseUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        _pauseUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+    }
+
+    public IEnumerator ReturnToHomeFade()
+    {
+        PlayerController.instance._completeFade.SetActive(true);
+        for (int i = 0; i <= 255; i++)
+        {
+            PlayerController.instance._completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
+            yield return new WaitForSeconds(0.001f);
+        }
+        SceneManager.LoadScene("Loading_ToHome");
     }
 }

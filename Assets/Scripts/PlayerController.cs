@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,7 +33,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D _playerRigidbody;
     public Animator _playerAnimator;
     public GameObject _playerAttackEffect;
-    public GameObject _dieFade, _gameOverUI;
 
     public float slowCurrentTime;
     public bool isSlow = false;
@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashSpeed;
     public float _dashCoolDown;
     public bool _isDash = false;
+
+    public bool _isInvincible = false;
+    public bool _isPowerUp = false;
 
     public GameObject _bubblePrefab;
     public float _bubbleCoolDown;
@@ -60,12 +63,16 @@ public class PlayerController : MonoBehaviour
 
     bool _isAttacking;
     public bool _isDying = false;
-    public int _playerMaxHp = 100;
+    public int _playerMaxHp;
     public int _playerHp;
+    public int _playerAtk;
+    public double _skillDamageMultiplier = 0;
 
     public float _timer = 0f;
 
     private float _attackCoolDown = 0f;
+
+    public CinemachineImpulseSource _impulseSource;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
@@ -81,18 +88,207 @@ public class PlayerController : MonoBehaviour
         // 플레이어의 Animator 컴포넌트를 가져옵니다.
         _playerAnimator = GetComponent<Animator>();
 
+        switch (DataManager.instance._data.buildLevel) // 건물 레벨에 따라 플레이어의 최대 체력과 이동 속도를 설정합니다.
+        {
+            case 0:
+                {
+                    _playerMaxHp = 100;
+                    _moveSpeed = 5f;
+                    break;
+                }
+            case 1:
+                {
+                    _playerMaxHp = 105;
+                    _moveSpeed = 5.2f;
+                    break;
+                }
+            case 2:
+                {
+                    _playerMaxHp = 115;
+                    _moveSpeed = 5.5f;
+                    break;
+                }
+            case 3:
+                {
+                    _playerMaxHp = 120;
+                    _moveSpeed = 5.7f;
+                    break;
+                }
+            case 4:
+                {
+                    _playerMaxHp = 125;
+                    _moveSpeed = 5.9f;
+                    break;
+                }
+            case 5:
+                {
+                    _playerMaxHp = 135;
+                    _moveSpeed = 6.3f;
+                    break;
+                }
+            case 6:
+                {
+                    _playerMaxHp = 140;
+                    _moveSpeed = 6.5f;
+                    break;
+                }
+            case 7:
+                {
+                    _playerMaxHp = 145;
+                    _moveSpeed = 6.7f;
+                    break;
+                }
+            case 8:
+                {
+                    _playerMaxHp = 155;
+                    _moveSpeed = 7f;
+                    break;
+                }
+            case 9:
+                {
+                    _playerMaxHp = 160;
+                    _moveSpeed = 7.2f;
+                    break;
+                }
+            case 10:
+                {
+                    _playerMaxHp = 180;
+                    _moveSpeed = 7.5f;
+                    break;
+                }
+        }
+
+        switch (DataManager.instance._data.skillLevel) // 스킬 레벨에 따라 플레이어의 공격력을 설정합니다.
+        {
+            case 0:
+                {
+                    _playerAtk = 10;
+                    _skillDamageMultiplier = 0;
+                    break;
+                }
+            case 1:
+                {
+                    _playerAtk = 11;
+                    _skillDamageMultiplier = 0.2;
+                    break;
+                }
+            case 2:
+                {
+                    _playerAtk = 12;
+                    _skillDamageMultiplier = 0.2;
+                    break;
+                }
+            case 3:
+                {
+                    _playerAtk = 14;
+                    _skillDamageMultiplier = 0.3;
+                    break;
+                }
+            case 4:
+                {
+                    _playerAtk = 15;
+                    _skillDamageMultiplier = 0.5;
+                    break;
+                }
+            case 5:
+                {
+                    _playerAtk = 16;
+                    _skillDamageMultiplier = 0.5;
+                    break;
+                }
+            case 6:
+                {
+                    _playerAtk = 18;
+                    _skillDamageMultiplier = 1;
+                    break;
+                }
+            case 7:
+                {
+                    _playerAtk = 19;
+                    _skillDamageMultiplier = 1;
+                    break;
+                }
+            case 8:
+                {
+                    _playerAtk = 20;
+                    _skillDamageMultiplier = 1;
+                    break;
+                }
+            case 9:
+                {
+                    _playerAtk = 23;
+                    _skillDamageMultiplier = 1.5;
+                    break;
+                }
+            case 10:
+                {
+                    _playerAtk = 25;
+                    _skillDamageMultiplier = 1.5;
+                    break;
+                }
+            case 11:
+                {
+                    _playerAtk = 28;
+                    _skillDamageMultiplier = 1.7;
+                    break;
+                }
+            case 12:
+                {
+                    _playerAtk = 30;
+                    _skillDamageMultiplier = 2;
+                    break;
+                }
+            case 13:
+                {
+                    _playerAtk = 33;
+                    _skillDamageMultiplier = 2;
+                    break;
+                }
+            case 14:
+                {
+                    _playerAtk = 36;
+                    _skillDamageMultiplier = 2;
+                    break;
+                }
+            case 15:
+                {
+                    _playerAtk = 40;
+                    _skillDamageMultiplier = 2.5;
+                    break;
+                }
+            default:
+                {
+                    _playerAtk = 0;
+                    _skillDamageMultiplier = 0;
+                    break;
+                }
+        }
+
         if (GameManager.instance is not null)
         {
+            Debug.Log(GameManager.instance._healthReduce);
             if (GameManager.instance._healthReduce > 0)
             {
-                _playerHp = _playerMaxHp - (_playerMaxHp * (GameManager.instance._healthReduce / 100));
+                // Player의 HP를 healthReduce의 백분율만큼 감소시킵니다.
+                _playerHp = _playerMaxHp - (int)(_playerMaxHp * (GameManager.instance._healthReduce / 100f));
             }
+            else
+            {
+                _playerHp = _playerMaxHp;
+            }
+        }
+        else
+        {
+            _playerHp = _playerMaxHp;
         }
 
         StartCoroutine(Fade());
+
+        SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
     }
 
     public bool _isFinishing = false;
+    public float _foodTimer = 0f;
 
     // Update is called once per frame
     void Update()
@@ -198,12 +394,22 @@ public class PlayerController : MonoBehaviour
         {
             if (DataManager.instance._data.resources["food"] >= 1 && _foodCoolDown <= 0 && !_isDying)
             {
+                _foodTimer = 4.5f;
                 _foodCoolDown = 10f;
                 StartCoroutine(Eat());
             }
         }
 
         #endregion
+
+        if (_foodTimer > 0)
+        {
+            _foodTimer -= Time.deltaTime;
+        }
+        else
+        {
+            _foodTimer = 0;
+        }
 
         // 플레이어의 이동 속도를 설정합니다.
         _playerAgent.speed = _moveSpeed;
@@ -284,6 +490,18 @@ public class PlayerController : MonoBehaviour
 
     public float _slowTime;
 
+    public void OnDamage()
+    {
+        StartCoroutine(CameraMovement());
+    }
+
+    public IEnumerator CameraMovement()
+    {
+        _impulseSource.GenerateImpulse();
+        yield return new WaitForSeconds(0.5f);
+        CinemachineImpulseManager.Instance.Clear();
+    }
+
     public IEnumerator SlowPlayer(float stopTime)
     {
         _slowTime = stopTime;
@@ -332,7 +550,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 255; i >= 0; i--)
         {
             _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.0001f);
+            yield return new WaitForSeconds(0.000001f);
         }
         _completeFade.SetActive(false);
     }
@@ -341,7 +559,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!_isDying)
         {
-            StartCoroutine(CheckisDie());
+            StartCoroutine(InGameUI.instance.CheckisDie());
         }
     }
 
@@ -371,7 +589,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             DataManager.instance._data.day += 1;
             DataManager.instance.Save();
-            SceneManager.LoadScene("Home");
+            SceneManager.LoadScene("Loading_ToHome");
         }
     }
 
@@ -381,15 +599,15 @@ public class PlayerController : MonoBehaviour
         DataManager.instance.Save();
         for (int i = 0; i < 15; i++)
         {
-            if (_playerHp < 100)
+            if (_playerHp < _playerMaxHp)
             {
-                if (_playerHp + 1 >= 100)
+                if (_playerHp + (int)(_playerMaxHp * 0.01) >= _playerMaxHp)
                 {
-                    _playerHp = 100;
+                    _playerHp = _playerMaxHp;
                 }
                 else
                 {
-                    _playerHp += 1;
+                    _playerHp += (int)(_playerMaxHp * 0.01);
                 }
                 yield return new WaitForSeconds(0.3f);
             }
@@ -397,29 +615,6 @@ public class PlayerController : MonoBehaviour
             {
                 break;
             }
-        }
-    }
-
-    public IEnumerator CheckisDie()
-    {
-        if (_playerHp <= 0)
-        {
-            if (!_playerAgent.enabled)
-            {
-                _playerAgent.enabled = true;
-            }
-            _isDying = true;
-            _playerAgent.isStopped = true;
-            _playerRigidbody.bodyType = RigidbodyType2D.Static;
-            _dieFade.SetActive(true);
-            for (int i = 0; i <= 255; i++)
-            {
-                _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                yield return new WaitForSeconds(0.01f);
-            }
-            yield return new WaitForSecondsRealtime(2f);
-            _gameOverUI.SetActive(true);
-            Time.timeScale = 0;
         }
     }
 

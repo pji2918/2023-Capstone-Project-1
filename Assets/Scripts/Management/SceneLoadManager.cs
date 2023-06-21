@@ -51,7 +51,7 @@ public class SceneLoadManager : MonoBehaviour
         for (int i = 255; i >= 0; i--)
         {
             _tipText.color = new Color32(255, 255, 255, (byte)i);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.00001f);
         }
         var table = _table.GetTableAsync();
         _tipTimer = 5f;
@@ -62,7 +62,7 @@ public class SceneLoadManager : MonoBehaviour
         for (int i = 0; i <= 255; i++)
         {
             _tipText.color = new Color32(255, 255, 255, (byte)i);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.00001f);
         }
         _isTextFading = false;
     }
@@ -72,7 +72,7 @@ public class SceneLoadManager : MonoBehaviour
         for (int i = 255; i >= 0; i--)
         {
             _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.00001f);
         }
         _sceneChangeFade.SetActive(false);
         yield return new WaitForSeconds(0.1f);
@@ -81,6 +81,19 @@ public class SceneLoadManager : MonoBehaviour
 
     IEnumerator LoadScene(string sceneName)
     {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Loading":
+                {
+                    sceneName = "Fighting";
+                    break;
+                }
+            case "Loading_ToHome":
+                {
+                    sceneName = "Home";
+                    break;
+                }
+        }
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
 
@@ -104,17 +117,18 @@ public class SceneLoadManager : MonoBehaviour
             else
             {
                 _loadingBar.value = Mathf.Lerp(_loadingBar.value, 1f, timer);
-                _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
+                _loadingText.text = Mathf.FloorToInt(_loadingBar.value * 100f) + "%";
 
                 if (_loadingBar.value == 1f)
                 {
+                    _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
                     if (Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2))
                     {
                         _sceneChangeFade.SetActive(true);
                         for (int i = 0; i <= 255; i++)
                         {
                             _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                            yield return new WaitForSeconds(0.005f);
+                            yield return new WaitForSeconds(0.00005f);
                         }
                         asyncLoad.allowSceneActivation = true;
                         yield break;

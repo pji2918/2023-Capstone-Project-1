@@ -50,3 +50,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Entity
+    uniqueID: 2265946137
+    locked: 0
+  - name: Skills
+    uniqueID: 2646216009
+    locked: 0
+  - name: Indicator
+    uniqueID: 3007531953
+    locked: 0
