@@ -68,7 +68,7 @@ public class MonsterController : MonoBehaviour
         if (this.gameObject.GetComponent<NavMeshAgent>().enabled)
         {
             _playerPosition = GameObject.Find("Player").transform.position;
-            _agent.SetDestination(_playerPosition);
+            this._agent.SetDestination(_playerPosition);
         }
         if (!PlayerController.instance._jangpungOn)
         {

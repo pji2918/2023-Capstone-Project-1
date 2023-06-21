@@ -7666,14 +7666,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCounts: 000000000000000000000000000000000000000000000000
   sumCount: 0
-  _playerAgent: {fileID: 0}
-  _playerRigidbody: {fileID: 0}
-  _playerAnimator: {fileID: 0}
+  _playerAgent: {fileID: 937238581}
+  _playerRigidbody: {fileID: 937238575}
+  _playerAnimator: {fileID: 937238579}
   _playerAttackEffect: {fileID: 579561806}
   slowCurrentTime: 0
   isSlow: 0
   _moveSpeed: 5
-  _dashSpeed: 0
+  _dashSpeed: 20
   _dashCoolDown: 0
   _isDash: 0
   _isInvincible: 0

@@ -154,7 +154,7 @@ public class UIManager : MonoBehaviour
         if (DataManager.instance._data.resources["iron"] >= DataManager.instance._data.weaponUpgrade["iron"]
         && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.weaponUpgrade["concrete"]
         && DataManager.instance._data.resources["bolt"] >= DataManager.instance._data.weaponUpgrade["bolt"]
-        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.weaponUpgrade["core"])
+        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.weaponUpgrade["core"] && DataManager.instance._data.skillLevel < 15)
         {
             PopUpWidowChange(upgradeText.gameObject, needWeaponResource);
 
@@ -170,6 +170,10 @@ public class UIManager : MonoBehaviour
             ShowNeedWeaponResourse();
 
             DataManager.instance.Save();
+        }
+        else if (DataManager.instance._data.skillLevel >= 15)
+        {
+            StartCoroutine(TextClear(upgradeSubText, "이미 무기를 최대로 강화했습니다"));
         }
         else
         {
@@ -191,7 +195,8 @@ public class UIManager : MonoBehaviour
         if (DataManager.instance._data.resources["iron"] >= DataManager.instance._data.HouseUpgrade["iron"]
         && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.HouseUpgrade["concrete"]
         && DataManager.instance._data.resources["bolt"] >= DataManager.instance._data.HouseUpgrade["bolt"]
-        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.HouseUpgrade["core"])
+        && DataManager.instance._data.resources["core"] >= DataManager.instance._data.HouseUpgrade["core"]
+        && DataManager.instance._data.buildLevel < 10)
         {
             PopUpWidowChange(buildText.gameObject, needHouseResource);
 
@@ -207,6 +212,10 @@ public class UIManager : MonoBehaviour
             ShowNeedBuildResourse();
 
             DataManager.instance.Save();
+        }
+        else if (DataManager.instance._data.buildLevel >= 10)
+        {
+            StartCoroutine(TextClear(buildSubText, "이미 집을 최대로 강화했습니다"));
         }
         else
         {
@@ -975,7 +984,22 @@ public class NeedResourse
                 }
             case 11:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(39, 39, 45, 1);
+                    DataManager.instance.NeedWeaponResourseChange(117, 117, 148, 3);
+                    break;
+                }
+            case 12:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(142, 142, 178, 2);
+                    break;
+                }
+            case 13:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(167, 167, 197, 2);
+                    break;
+                }
+            case 14:
+                {
+                    DataManager.instance.NeedWeaponResourseChange(201, 201, 214, 2);
                     break;
                 }
             default:

@@ -7,7 +7,7 @@ public class Piranha : MonsterController
     [SerializeField] private float thisSpeed = 2.0f;
     [SerializeField] private int thisAttack = 10;
     [SerializeField] private int thisMaxHp = 50;
-    [SerializeField] private float thisAttackCoolTime = 0.1f;
+    [SerializeField] private float thisAttackCoolTime = 1f;
 
     // 스탯 설정
     protected override void Start()
@@ -22,13 +22,13 @@ public class Piranha : MonsterController
     // 공격
     protected override void Update()
     {
-        if (_agent.enabled)
+        if (this._agent.enabled)
         {
-            if (_agent.remainingDistance < 2 && !PlayerController.instance._isDash &&
+            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < 2 && !PlayerController.instance._isDash &&
             !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
             {
-                _agent.speed = 0;
-                if (attackCurrentTime >= attackCoolTime)
+                this._agent.speed = 0;
+                if (this.attackCurrentTime >= attackCoolTime)
                 {
                     Attack();
                     attackCurrentTime = 0;
@@ -36,7 +36,7 @@ public class Piranha : MonsterController
             }
             else
             {
-                _agent.speed = speed;
+                this._agent.speed = speed;
             }
         }
         base.Update();

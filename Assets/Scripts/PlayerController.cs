@@ -498,7 +498,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator CameraMovement()
     {
         _impulseSource.GenerateImpulse();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         CinemachineImpulseManager.Instance.Clear();
     }
 
