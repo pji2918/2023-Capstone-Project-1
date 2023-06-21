@@ -124,7 +124,10 @@ public class SoundManager : MonoBehaviour
     {
         _musicVolume = DataManager.instance._data.musicVolume;
         _effectVolume = DataManager.instance._data.effectVolume;
-        _musicPlayer.volume = _musicVolume / 100f; // 음악 음량 설정
+        if (_musicPlayer is not null)
+        {
+            _musicPlayer.volume = _musicVolume / 100f; // 음악 음량 설정
+        }
     }
 
     /// <summary>
@@ -190,7 +193,7 @@ public class SoundManager : MonoBehaviour
         obj.AddComponent<AudioSource>();
         obj.GetComponent<AudioSource>().volume = _effectVolume / 100f;
         obj.GetComponent<AudioSource>().loop = false;
-        obj.GetComponent<AudioSource>().spatialBlend = 1f;
+        obj.GetComponent<AudioSource>().spatialBlend = 1f; // 3D 사운드로 설정
         obj.AddComponent<AudioPlayer>();
         obj.GetComponent<AudioSource>().clip = clip;
         return obj;
@@ -221,7 +224,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="clip">재생할 효과음을 여기에 지정하십시오.</param>
     public void PlayMonsterEffects(GameObject obj, AudioClip clip)
     {
-        if (SceneManager.GetActiveScene().name.Equals("Fighting"))
+        if (SceneManager.GetActiveScene().name.Equals("Fighting")) // 전투 Scene에서만 사용할 수 있도록 함
         {
             obj.GetComponent<AudioSource>().volume = _effectVolume / 100f;
             obj.GetComponent<AudioSource>().spatialBlend = 1f;

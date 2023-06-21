@@ -581,13 +581,13 @@ public class PlayerController : MonoBehaviour
         {
             if (_playerHp < _playerMaxHp)
             {
-                if (_playerHp + 1 >= _playerMaxHp)
+                if (_playerHp + (int)(_playerMaxHp * 0.01) >= _playerMaxHp)
                 {
                     _playerHp = _playerMaxHp;
                 }
                 else
                 {
-                    _playerHp += 1;
+                    _playerHp += (int)(_playerMaxHp * 0.01);
                 }
                 yield return new WaitForSeconds(0.3f);
             }

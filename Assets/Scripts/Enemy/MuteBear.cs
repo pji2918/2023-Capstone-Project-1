@@ -28,7 +28,7 @@ public class MuteBear : MonsterController
     {
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 6 && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
+            if (Vector2.Distance(transform.position, _playerPosition) < 6 && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
             {
                 _agent.speed = 0;
                 if (attackCurrentTime >= attackCoolTime)

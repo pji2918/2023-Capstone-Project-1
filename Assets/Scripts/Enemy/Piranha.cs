@@ -24,7 +24,7 @@ public class Piranha : MonsterController
     {
         if (this._agent.enabled)
         {
-            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < 2 && !PlayerController.instance._isDash &&
+            if (Vector3.Distance(transform.position, _playerPosition) < 2 && !PlayerController.instance._isDash &&
             !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
             {
                 this._agent.speed = 0;

@@ -26,7 +26,7 @@ public class LightFish : MonsterController
     {
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 2 && !PlayerController.instance._isDash &&
+            if (Vector2.Distance(transform.position, _playerPosition) < 2 && !PlayerController.instance._isDash &&
             !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
             {
                 _agent.speed = 0;
