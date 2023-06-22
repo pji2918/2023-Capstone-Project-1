@@ -26,7 +26,7 @@ public class InGameUI : MonoBehaviour
     public GameObject _pauseUI;
     public TextMeshProUGUI[] _questText = new TextMeshProUGUI[3];
     public TextMeshProUGUI _foodCountText, _timerText;
-    public Resource[] _quest = new Resource[3];
+    public Resource[] _quest = new Resource[5];
     public bool _isPause = false;
     public Slider[] _volumeSlider = new Slider[2];
     public TextMeshProUGUI[] _volumeText = new TextMeshProUGUI[2];
@@ -40,17 +40,1161 @@ public class InGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _quest[0]._type = ItemNum.iron;
-        _quest[0]._amount = 0;
-        _quest[0]._objectiveAmount = 10;
+        #region 퀘스트 설정
+        switch (DataManager.instance._data.day)
+        {
+            case 1:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 1;
 
-        _quest[1]._type = ItemNum.concrete;
-        _quest[1]._amount = 0;
-        _quest[1]._objectiveAmount = 10;
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 1;
 
-        _quest[2]._type = ItemNum.bolt;
-        _quest[2]._amount = 0;
-        _quest[2]._objectiveAmount = 10;
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 3;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 2:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 6;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 6;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 13;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 4;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 3:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 13;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 8;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 15;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 4:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 5;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 16;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 21;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 4;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 5:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 24;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 3;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 6;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 6:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 5;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 8;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 24;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 8;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 7:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 34;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 13;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 1;
+                    break;
+                }
+            case 8:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 31;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 5;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 7;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 18;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 9:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 28;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 28;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 51;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 10:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 45;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 53;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 11:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 31;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 28;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 62;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 12:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 64;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 23;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 13:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 23;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 23;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 31;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 3;
+                    break;
+                }
+            case 14:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 17;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 17;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 13;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 5;
+                    break;
+                }
+            case 15:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 42;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 42;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 25;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 16:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 81;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 6;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 17:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 53;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 53;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 31;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 8;
+                    break;
+                }
+            case 18:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 38;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 38;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 74;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 19:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 48;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 48;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 53;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 23;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 20:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 87;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 34;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 21:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 74;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 35;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 1;
+                    break;
+                }
+            case 22:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 81;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 24;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 2;
+                    break;
+                }
+            case 23:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 45;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 45;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 77;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 1;
+                    break;
+                }
+            case 24:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 85;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 23;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 2;
+                    break;
+                }
+            case 25:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 31;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 75;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 38;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 26:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 33;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 33;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 56;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 3;
+                    break;
+                }
+            case 27:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 56;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 81;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 28:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 48;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 76;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 15;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 29:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 34;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 24;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 3;
+                    break;
+                }
+            case 30:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 51;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 34;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 31:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 27;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 28;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 34;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 12;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 2;
+                    break;
+                }
+            case 32:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 31;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 48;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 28;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 3;
+                    break;
+                }
+            case 33:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 0;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 0;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 13;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 5;
+                    break;
+                }
+            case 34:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 21;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 21;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 0;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 36;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 0;
+                    break;
+                }
+            case 35:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 65;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 65;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 88;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 8;
+                    break;
+                }
+            case 36:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 31;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 31;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 48;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 13;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 5;
+                    break;
+                }
+            case 37:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 28;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 34;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 51;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 14;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 5;
+                    break;
+                }
+            case 38:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 28;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 26;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 53;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 12;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 5;
+                    break;
+                }
+            case 39:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 31;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 31;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 45;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 15;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 5;
+                    break;
+                }
+            case 40:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 24;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 24;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 31;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 24;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 5;
+                    break;
+                }
+            case 41:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 34;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 34;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 28;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 11;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 8;
+                    break;
+                }
+            case 42:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 41;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 41;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 23;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 15;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 8;
+                    break;
+                }
+            case 43:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 38;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 38;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 21;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 21;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 8;
+                    break;
+                }
+            case 44:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 51;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 51;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 38;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 8;
+                    break;
+                }
+            case 45:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 22;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 22;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 58;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 23;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 12;
+                    break;
+                }
+            case 46:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 24;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 24;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 53;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 28;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 12;
+                    break;
+                }
+            case 47:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 58;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 58;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 34;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 14;
+                    break;
+                }
+            case 48:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 26;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 26;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 53;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 28;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 14;
+                    break;
+                }
+            case 49:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 31;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 31;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 44;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 31;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 16;
+                    break;
+                }
+            case 50:
+                {
+                    _quest[0]._type = ItemNum.iron;
+                    _quest[0]._amount = 0;
+                    _quest[0]._objectiveAmount = 60;
+
+                    _quest[1]._type = ItemNum.concrete;
+                    _quest[1]._amount = 0;
+                    _quest[1]._objectiveAmount = 60;
+
+                    _quest[2]._type = ItemNum.bolt;
+                    _quest[2]._amount = 0;
+                    _quest[2]._objectiveAmount = 88;
+
+                    _quest[3]._type = ItemNum.ingredient;
+                    _quest[3]._amount = 0;
+                    _quest[3]._objectiveAmount = 0;
+
+                    _quest[4]._type = ItemNum.core;
+                    _quest[4]._amount = 0;
+                    _quest[4]._objectiveAmount = 18;
+                    break;
+                }
+        }
+        #endregion
 
         _resourcename[0] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "iron");
         _resourcename[1] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "concrete");
@@ -61,7 +1205,7 @@ public class InGameUI : MonoBehaviour
 
     public bool[] _isQuestComplete = new bool[3] { false, false, false };
 
-    public string[] _resourcename = new string[5] { "철근", "콘크리트", "코어", "볼트와 너트", "식재료" };
+    public string[] _resourcename = new string[6] { "철근", "콘크리트", "코어", "볼트와 너트", "식재료", "null" };
 
     // Update is called once per frame
     void Update()
@@ -145,13 +1289,20 @@ public class InGameUI : MonoBehaviour
         #endregion
 
         #region 퀘스트 표시
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
-            _questText[i].text = string.Format("{0} ({1}/{2})", _resourcename[(int)_quest[i]._type], _quest[i]._amount, _quest[i]._objectiveAmount);
-            if (_quest[i]._amount >= _quest[i]._objectiveAmount)
+            if (_quest[i]._objectiveAmount <= 0)
             {
-                _questText[i].color = new Color32(0, 255, 0, 255);
-                _isQuestComplete[i] = true;
+                _questText[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                _questText[i].text = string.Format("{0} ({1}/{2})", _resourcename[(int)_quest[i]._type], _quest[i]._amount, _quest[i]._objectiveAmount);
+                if (_quest[i]._amount >= _quest[i]._objectiveAmount)
+                {
+                    _questText[i].color = new Color32(0, 255, 0, 255);
+                    _isQuestComplete[i] = true;
+                }
             }
         }
         #endregion

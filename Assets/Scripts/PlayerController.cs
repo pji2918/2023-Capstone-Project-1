@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     private float _attackCoolDown = 0f;
 
+    public GameObject _playerArrow;
+
     public CinemachineImpulseSource _impulseSource;
 
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
@@ -306,6 +308,18 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(PlayerController.instance.Dash());
         }
+
+        if (_playerAgent.velocity.magnitude > 0.1f)
+        {
+            _playerArrow.SetActive(true);
+            _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _playerAgent.velocity);
+        }
+        else
+        {
+            _playerArrow.SetActive(false);
+        }
+
+
 
         if (!_isDash)
         {
