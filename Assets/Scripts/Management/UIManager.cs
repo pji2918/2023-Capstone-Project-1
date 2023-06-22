@@ -69,6 +69,8 @@ public class UIManager : MonoBehaviour
     //음식 제작 게이지
     private Slider foodSlider;
 
+    public Animator _cooker;
+
     //음식 제작 시간
     private float cookingTime = 30;
     //현재 제작 시간
@@ -125,6 +127,7 @@ public class UIManager : MonoBehaviour
                 currentCookingTime = 0;
             }
         }
+        _cooker.SetBool("isCooking", isCooking);
 
         if (Input.GetKeyDown(KeyCode.F10))
         {
