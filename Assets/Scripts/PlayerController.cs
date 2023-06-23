@@ -630,7 +630,7 @@ public class PlayerController : MonoBehaviour
 
             Physics2D.IgnoreLayerCollision(6, 7);
             this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
-            _playerAgent.enabled = false;
+            _playerAgent.isStopped = true;
 
             // 마우스 방향으로 돌진합니다.
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -641,7 +641,7 @@ public class PlayerController : MonoBehaviour
 
             _playerRigidbody.velocity = Vector2.zero;
             this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-            _playerAgent.enabled = true;
+            _playerAgent.isStopped = false;
             _isDash = false;
         }
     }

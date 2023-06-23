@@ -31,12 +31,12 @@ public class MonsterController : MonoBehaviour
     // NavMesh 에이전트의 회전과 Z축을 고정시킵니다.
     protected virtual void Start()
     {
+        _agent = this.GetComponent<NavMeshAgent>();
+        _agent.updateUpAxis = false;
+        _agent.updateRotation = false;
         currentHp = maxHp;
         monsterRenderer = this.GetComponent<SpriteRenderer>();
-        _agent = this.GetComponent<NavMeshAgent>();
         itemSpawn = this.GetComponent<ItemSpawn>();
-        _agent.updateRotation = false;
-        _agent.updateUpAxis = false;
     }
 
     // 플레이어의 위치를 변수에 저장한 다음, 에이전트의 목적지를 플레이어의 위치로 설정합니다.
