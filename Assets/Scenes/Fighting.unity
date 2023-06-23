@@ -4302,7 +4302,7 @@ SpriteRenderer:
   m_SortingLayerID: -1648751287
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 8bd2e12cc21ddfa40809342329daa2a8, type: 3}
+  m_Sprite: {fileID: 1657709705, guid: 275e690971b1df44c904da6863dc6306, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4320,14 +4320,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579561806}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7815834, w: 0.6238008}
-  m_LocalPosition: {x: -0.266, y: -0.26, z: 0}
-  m_LocalScale: {x: -0.56307924, y: -0.56307924, z: 1.8769306}
+  m_LocalRotation: {x: -0, y: -0, z: -0.3826839, w: 0.9238794}
+  m_LocalPosition: {x: -0.329, y: -0.26, z: 0}
+  m_LocalScale: {x: -1, y: -1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 937238574}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 102.812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!95 &579561809
 Animator:
   serializedVersion: 5
@@ -4362,18 +4362,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11504647, y: -0.040478587}
+  m_Offset: {x: -0.023574382, y: 0.021661907}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9375, y: 2}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1.9375, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.450315, y: 2.0011315}
+  m_Size: {x: 1.0583522, y: 0.49382824}
   m_EdgeRadius: 0
 --- !u!1 &609301572
 GameObject:
@@ -7918,6 +7918,7 @@ MonoBehaviour:
   _impulseSource: {fileID: 937238584}
   _isFinishing: 0
   _foodTimer: 0
+  _clickAnimation: {fileID: 253237080785500232, guid: 5e19ca25783b4db4eaa1bd60e2073834, type: 3}
   _slowTime: 0
   _completeFade: {fileID: 1395171712}
 --- !u!195 &937238581
@@ -11612,7 +11613,7 @@ MonoBehaviour:
   _volumeText:
   - {fileID: 673938609}
   - {fileID: 934999185}
-  _isQuestComplete: 000000
+  _isQuestComplete: 0000000000
   _resourcename:
   - "\uCCA0\uADFC"
   - "\uCF58\uD06C\uB9AC\uD2B8"

@@ -7,6 +7,7 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using TMPro;
+
 public class InGameUI : MonoBehaviour
 {
     public struct Resource
@@ -1203,7 +1204,7 @@ public class InGameUI : MonoBehaviour
         _resourcename[4] = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "ingredient");
     }
 
-    public bool[] _isQuestComplete = new bool[3] { false, false, false };
+    public bool[] _isQuestComplete = new bool[5] { false, false, false, false, false };
 
     public string[] _resourcename = new string[6] { "철근", "콘크리트", "코어", "볼트와 너트", "식재료", "null" };
 
@@ -1294,15 +1295,17 @@ public class InGameUI : MonoBehaviour
             if (_quest[i]._objectiveAmount <= 0)
             {
                 _questText[i].gameObject.SetActive(false);
+
             }
             else
             {
                 _questText[i].text = string.Format("{0} ({1}/{2})", _resourcename[(int)_quest[i]._type], _quest[i]._amount, _quest[i]._objectiveAmount);
-                if (_quest[i]._amount >= _quest[i]._objectiveAmount)
-                {
-                    _questText[i].color = new Color32(0, 255, 0, 255);
-                    _isQuestComplete[i] = true;
-                }
+            }
+
+            if (_quest[i]._amount >= _quest[i]._objectiveAmount || _quest[i]._objectiveAmount == 0)
+            {
+                _questText[i].color = new Color32(0, 255, 0, 255);
+                _isQuestComplete[i] = true;
             }
         }
         #endregion

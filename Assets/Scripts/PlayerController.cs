@@ -292,6 +292,8 @@ public class PlayerController : MonoBehaviour
     public bool _isFinishing = false;
     public float _foodTimer = 0f;
 
+    public GameObject _clickAnimation;
+
     // Update is called once per frame
     void Update()
     {
@@ -300,6 +302,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && !_isDash && !_isDying && !_isFinishing)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Instantiate(_clickAnimation, mousePosition, Quaternion.identity);
             PlayerController.instance._playerAgent.SetDestination(mousePosition);
         }
 
@@ -569,7 +572,9 @@ public class PlayerController : MonoBehaviour
         if (_timer >= 180
         || (InGameUI.instance._isQuestComplete[0]
         && InGameUI.instance._isQuestComplete[1]
-        && InGameUI.instance._isQuestComplete[2]))
+        && InGameUI.instance._isQuestComplete[2]
+        && InGameUI.instance._isQuestComplete[3]
+        && InGameUI.instance._isQuestComplete[4]))
         {
             _isFinishing = true;
             _playerAgent.isStopped = true;
