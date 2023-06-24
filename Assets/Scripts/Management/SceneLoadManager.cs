@@ -58,7 +58,15 @@ public class SceneLoadManager : MonoBehaviour
         int randomIndex = Random.Range(0, table.Result.SharedData.Entries.Count);
         var randomEntry = table.Result.SharedData.Entries[randomIndex];
         var entry = table.Result.GetEntry(randomEntry.Id);
-        _tipText.text = entry.LocalizedValue;
+        try
+        {
+            _tipText.text = entry.LocalizedValue;
+        }
+        catch
+        {
+            _tipText.text = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "tiperror");
+        }
+
         for (int i = 0; i <= 255; i++)
         {
             _tipText.color = new Color32(255, 255, 255, (byte)i);

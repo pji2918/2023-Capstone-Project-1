@@ -193,7 +193,14 @@ public class SoundManager : MonoBehaviour
         obj.AddComponent<AudioSource>();
         obj.GetComponent<AudioSource>().volume = _effectVolume / 100f;
         obj.GetComponent<AudioSource>().loop = false;
-        obj.GetComponent<AudioSource>().spatialBlend = 1f; // 3D 사운드로 설정
+        if (DataManager.instance._data.is3dAudio)
+        {
+            obj.GetComponent<AudioSource>().spatialBlend = 1f;
+        }
+        else
+        {
+            obj.GetComponent<AudioSource>().spatialBlend = 0f;
+        }
         obj.AddComponent<AudioPlayer>();
         obj.GetComponent<AudioSource>().clip = clip;
         return obj;
@@ -227,7 +234,14 @@ public class SoundManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name.Equals("Fighting")) // 전투 Scene에서만 사용할 수 있도록 함
         {
             obj.GetComponent<AudioSource>().volume = _effectVolume / 100f;
-            obj.GetComponent<AudioSource>().spatialBlend = 1f;
+            if (DataManager.instance._data.is3dAudio)
+            {
+                obj.GetComponent<AudioSource>().spatialBlend = 1f;
+            }
+            else
+            {
+                obj.GetComponent<AudioSource>().spatialBlend = 0f;
+            }
             obj.GetComponent<AudioSource>().clip = clip;
             obj.GetComponent<AudioSource>().Play();
         }

@@ -147,12 +147,24 @@ MonoBehaviour:
     m_Key: options_back
     m_Metadata:
       m_Items: []
+  - m_Id: 14248356267294720
+    m_Key: options_volume
+    m_Metadata:
+      m_Items: []
   - m_Id: 12682350495399937
     m_Key: options_volume_music
     m_Metadata:
       m_Items: []
   - m_Id: 12682350495399938
     m_Key: options_volume_effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14248356267294721
+    m_Key: options_sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14248356267294722
+    m_Key: options_3daudio
     m_Metadata:
       m_Items: []
   - m_Id: 12682872652693504
@@ -165,6 +177,90 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14080695138910208
     m_Key: options_info_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662766723072
+    m_Key: options_lang_usesystem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888896
+    m_Key: options_lang_warn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888897
+    m_Key: options_lang
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888898
+    m_Key: options_audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888899
+    m_Key: options_video
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888900
+    m_Key: options_other
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888901
+    m_Key: options_program
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888902
+    m_Key: game_exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888903
+    m_Key: options_datamanagement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544128
+    m_Key: options_display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544129
+    m_Key: options_resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544130
+    m_Key: options_fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544131
+    m_Key: options_borderless
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544132
+    m_Key: options_windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14274975308578816
+    m_Key: tiperror
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14275161221103616
+    m_Key: tip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14276854423879680
+    m_Key: home_make_food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14276854423879681
+    m_Key: home_upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14277487432433664
+    m_Key: game_start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14280989063905280
+    m_Key: options_delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14280989063905281
+    m_Key: options_deletewarn
     m_Metadata:
       m_Items: []
   m_Metadata:

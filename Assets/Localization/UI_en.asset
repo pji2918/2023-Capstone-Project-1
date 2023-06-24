@@ -22,8 +22,7 @@ MonoBehaviour:
   - m_Id: 44527984443392
     m_Localized: Rebar
     m_Metadata:
-      m_Items:
-      - rid: 5056674134845554750
+      m_Items: []
   - m_Id: 44527992832000
     m_Localized: Concrete
     m_Metadata:
@@ -43,11 +42,13 @@ MonoBehaviour:
   - m_Id: 44527992832004
     m_Localized: '{0}s Cooldown'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5056674134845554750
   - m_Id: 44527992832005
     m_Localized: Day {0}'s Report
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5056674134845554750
   - m_Id: 44527992832006
     m_Localized: Dash
     m_Metadata:
@@ -63,7 +64,8 @@ MonoBehaviour:
   - m_Id: 3584847720349696
     m_Localized: Day {0}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5056674134845554750
   - m_Id: 4696555914395652
     m_Localized: '"With great power comes great responsibility."'
     m_Metadata:
@@ -83,11 +85,13 @@ MonoBehaviour:
   - m_Id: 3570450536988672
     m_Localized: You Got a {0}.
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5056674134845554750
   - m_Id: 3583303125958656
     m_Localized: You Survived {0} Day.
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5056674134845554750
   - m_Id: 4696555910201345
     m_Localized: Dash
     m_Metadata:
@@ -108,10 +112,118 @@ MonoBehaviour:
     m_Localized: Options
     m_Metadata:
       m_Items: []
+  - m_Id: 14080695109550080
+    m_Localized: Information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14080695138910208
+    m_Localized: 'Mute by Team Factory
+
+      v{0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662766723072
+    m_Localized: '[Use System Defaults]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888896
+    m_Localized: (Translations may not be 100% accurate)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888897
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888898
+    m_Localized: Audio Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888899
+    m_Localized: Video Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888900
+    m_Localized: Other Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888901
+    m_Localized: Program
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888902
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14246662791888903
+    m_Localized: Data Management
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14248356267294720
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14248356267294721
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14248356267294722
+    m_Localized: 3D Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544128
+    m_Localized: Display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544129
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544130
+    m_Localized: Full Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544131
+    m_Localized: Windowed(Borderless)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14250913018544132
+    m_Localized: Windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14274975308578816
+    m_Localized: Good Luck!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14275161221103616
+    m_Localized: Tips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14276854423879680
+    m_Localized: Cook
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14276854423879681
+    m_Localized: 'Upgrade
+
+      Home or Weapon'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14277487432433664
+    m_Localized: "\u25B6 Let's Go!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14280989063905280
+    m_Localized: '[!] Delete All Data'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14280989063905281
+    m_Localized: Press {0} more times to delete
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
     - rid: 5056674134845554750
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0000b27a7f280000
+        m_Entries: 0500327b7f2800000400327b7f2800000000f2c5feba0c000000f24b4eaf0c000000f26666bc0c00

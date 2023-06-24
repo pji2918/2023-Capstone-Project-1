@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
+using System.Globalization;
 using UnityEngine.Localization.Settings;
 using TMPro;
 
@@ -81,25 +83,50 @@ public class UIManager : MonoBehaviour
     private bool _lookingStory = false;
     NeedResourse _needResourse = new NeedResourse();
 
+    private int _deleteCount = 0;
+
     [SerializeField] private Button[] _optionTabs;
     [SerializeField] private GameObject[] _optionPanels;
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
     [SerializeField] private List<Resolution> _resolutions = new List<Resolution>();
-    [SerializeField] private FullScreenMode _fullScreenMode;
     [SerializeField] private TMP_Dropdown _fullScreenModeDropdown;
+    [SerializeField] private Button[] _upgradeButtons;
+    private bool _resolutionLocked = true;
+    private bool _languageLocked = true;
     #endregion
+
+    IEnumerator ChangeLang()
+    {
+        // Wait for the localization system to initialize
+        yield return LocalizationSettings.InitializationOperation;
+
+        if (DataManager.instance._data.language == Language.Auto)
+        {
+            Debug.Log("시스템 언어 : " + Application.systemLanguage);
+            switch (Application.systemLanguage)
+            {
+                case SystemLanguage.Korean:
+                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+                    break;
+                case SystemLanguage.English:
+                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
+                    break;
+            }
+        }
+        else
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[(int)DataManager.instance._data.language - 1];
+        }
+    }
 
     private void Start()
     {
+        StartCoroutine(ChangeLang());
         List<string> args = System.Environment.GetCommandLineArgs().ToList();
 
         if (args.Contains("--safemode"))
         {
-            Screen.SetResolution(800, 600, FullScreenMode.Windowed);
-        }
-        else
-        {
-            Screen.SetResolution(DataManager.instance._data.resolution.width, DataManager.instance._data.resolution.height, DataManager.instance._data.fullScreenMode, DataManager.instance._data.resolution.refreshRate);
+            Screen.SetResolution(1280, 720, FullScreenMode.Windowed);
         }
 
         _storyNum = Random.Range(0, 5);
@@ -172,11 +199,13 @@ public class UIManager : MonoBehaviour
     //무기 강화 버튼 클릭
     public void OnClickweaponUpgradeButton()
     {
+        StopCoroutine("Typing");
         if (DataManager.instance._data.resources["iron"] >= DataManager.instance._data.weaponUpgrade["iron"]
         && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.weaponUpgrade["concrete"]
         && DataManager.instance._data.resources["bolt"] >= DataManager.instance._data.weaponUpgrade["bolt"]
         && DataManager.instance._data.resources["core"] >= DataManager.instance._data.weaponUpgrade["core"] && DataManager.instance._data.skillLevel < 15)
         {
+            _upgradeButtons[0].interactable = false;
             PopUpWidowChange(upgradeText.gameObject, needWeaponResource);
 
             DataManager.instance._data.resources["iron"] -= DataManager.instance._data.weaponUpgrade["iron"];
@@ -219,6 +248,7 @@ public class UIManager : MonoBehaviour
         && DataManager.instance._data.resources["core"] >= DataManager.instance._data.HouseUpgrade["core"]
         && DataManager.instance._data.buildLevel < 10)
         {
+            _upgradeButtons[1].interactable = false;
             PopUpWidowChange(buildText.gameObject, needHouseResource);
 
             DataManager.instance._data.resources["iron"] -= DataManager.instance._data.HouseUpgrade["iron"];
@@ -313,7 +343,11 @@ public class UIManager : MonoBehaviour
     //설정 팝업 나가기
     public void OnClickOptionBackground()
     {
+        _deleteCount = 0;
+        _deleteButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_delete");
+        DataManager.instance._data.resolution = Screen.currentResolution;
         DataManager.instance.Save();
+        _resolutionLocked = true;
         WindowDisappear(Option);
     }
     #endregion
@@ -414,6 +448,8 @@ public class UIManager : MonoBehaviour
         }
         typingText.text = "완료";
         yield return new WaitForSeconds(1);
+        _upgradeButtons[0].interactable = true;
+        _upgradeButtons[1].interactable = true;
         PopUpWidowChange(popUp, window);
     }
 
@@ -423,6 +459,12 @@ public class UIManager : MonoBehaviour
         text.text = messege;
         yield return new WaitForSeconds(1f);
         text.text = " ";
+    }
+
+    public void Exit()
+    {
+        DataManager.instance.Save();
+        Application.Quit();
     }
 
     public void BookOpen()
@@ -617,6 +659,21 @@ public class UIManager : MonoBehaviour
     }
 
     int eventNum = 0;
+
+    public Button _deleteButton;
+    public void DeleteFile()
+    {
+        _deleteCount++;
+        if (_deleteCount < 5)
+        {
+            _deleteButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_deletewarn"), 5 - _deleteCount);
+        }
+        else
+        {
+            DataManager.instance.Delete();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 
     public void ShowStoryButton(ButtonType type, int eNum = 0)
     {
@@ -945,6 +1002,7 @@ public class UIManager : MonoBehaviour
     }
 
     public TextMeshProUGUI _infoText;
+    public TMP_Dropdown _languageDropdown;
 
     public void OptionTabs(string button)
     {
@@ -952,6 +1010,11 @@ public class UIManager : MonoBehaviour
         {
             case "audio":
                 {
+                    _deleteCount = 0;
+                    _deleteButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_delete");
+
+                    _languageLocked = true;
+                    _resolutionLocked = true;
                     _optionTabs[0].interactable = false;
                     _optionTabs[1].interactable = true;
                     _optionTabs[2].interactable = true;
@@ -969,6 +1032,10 @@ public class UIManager : MonoBehaviour
                 }
             case "video":
                 {
+                    _deleteCount = 0;
+                    _deleteButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_delete");
+
+                    _languageLocked = true;
                     _optionTabs[0].interactable = true;
                     _optionTabs[1].interactable = false;
                     _optionTabs[2].interactable = true;
@@ -977,7 +1044,15 @@ public class UIManager : MonoBehaviour
                     _optionPanels[1].SetActive(true);
                     _optionPanels[2].SetActive(false);
 
-                    _fullScreenModeDropdown.value = (int)Screen.fullScreenMode;
+                    _fullScreenModeDropdown.options.Clear();
+
+                    _fullScreenModeDropdown.options.Add(new TMP_Dropdown.OptionData(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_fullscreen")));
+                    _fullScreenModeDropdown.options.Add(new TMP_Dropdown.OptionData(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_borderless")));
+                    _fullScreenModeDropdown.options.Add(new TMP_Dropdown.OptionData(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_windowed")));
+
+                    _fullScreenModeDropdown.value = (int)DataManager.instance._data.fullScreenMode;
+
+                    _resolutions.Clear();
 
                     for (int i = 0; i < Screen.resolutions.Length; i++)
                     {
@@ -998,19 +1073,21 @@ public class UIManager : MonoBehaviour
                     _resolutionDropdown.RefreshShownValue();
                     try
                     {
-                        if (_resolutionDropdown.value != _resolutions.IndexOf(DataManager.instance._data.resolution))
-                        {
-                            _resolutionDropdown.value = _resolutions.IndexOf(DataManager.instance._data.resolution);
-                        }
+                        _resolutionDropdown.value = _resolutions.IndexOf(Screen.currentResolution);
                     }
                     catch
                     {
                         _resolutionDropdown.value = 0;
                     }
+                    _resolutionLocked = false;
                     break;
                 }
             case "other":
                 {
+                    _deleteCount = 0;
+                    _deleteButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_delete");
+
+                    _resolutionLocked = true;
                     _optionTabs[0].interactable = true;
                     _optionTabs[1].interactable = true;
                     _optionTabs[2].interactable = false;
@@ -1018,6 +1095,30 @@ public class UIManager : MonoBehaviour
                     _optionPanels[0].SetActive(false);
                     _optionPanels[1].SetActive(false);
                     _optionPanels[2].SetActive(true);
+
+                    _languageDropdown.options.Clear();
+
+                    _languageDropdown.options.Add(new TMP_Dropdown.OptionData(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_lang_usesystem").ToString()));
+
+                    // 게임이 지원하는 모든 언어를 가져온다.
+                    for (int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++)
+                    {
+                        TMP_Dropdown.OptionData optionData = new TMP_Dropdown.OptionData();
+                        // optionData에 언어 이름을 넣는다. 형식은 "현지화된 언어 이름 (영어로 된 언어 이름)"이다.
+                        if (LocalizationSettings.AvailableLocales.Locales[i].Identifier.Code == "en")
+                        {
+                            optionData.text = string.Format("[WIP] {0} ({1})", new CultureInfo(LocalizationSettings.AvailableLocales.Locales[i].Identifier.Code).NativeName, new CultureInfo(LocalizationSettings.AvailableLocales.Locales[i].Identifier.Code));
+                            _languageDropdown.options.Add(optionData);
+                        }
+                        else
+                        {
+                            optionData.text = string.Format("{0} ({1})", new CultureInfo(LocalizationSettings.AvailableLocales.Locales[i].Identifier.Code).NativeName, new CultureInfo(LocalizationSettings.AvailableLocales.Locales[i].Identifier.Code));
+                            _languageDropdown.options.Add(optionData);
+                        }
+                    }
+
+                    _languageDropdown.value = (int)DataManager.instance._data.language;
+                    _languageLocked = false;
 
                     _infoText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_info_text"), Application.version);
                     break;
@@ -1029,8 +1130,22 @@ public class UIManager : MonoBehaviour
 
     public void OnChangeFullScreen(int value)
     {
-        DataManager.instance._data.fullScreenMode = (FullScreenMode)value + 1;
-        Screen.fullScreenMode = DataManager.instance._data.fullScreenMode;
+        if (!_resolutionLocked)
+        {
+            DataManager.instance._data.fullScreenMode = (FullScreenMode)value + 1;
+            Screen.fullScreenMode = DataManager.instance._data.fullScreenMode;
+        }
+    }
+
+    public void OnLanguageChange(int value)
+    {
+        if (!_languageLocked)
+        {
+            DataManager.instance._data.language = (Language)value;
+            DataManager.instance.Save();
+            StartCoroutine(ChangeLang());
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public Slider[] _soundSliders;
@@ -1063,7 +1178,11 @@ public class UIManager : MonoBehaviour
 
     public void OnResolutionChange(int x)
     {
-        Screen.SetResolution(_resolutions[x].width, _resolutions[x].height, _fullScreenMode, _resolutions[x].refreshRate);
+        if (!_resolutionLocked)
+        {
+            Screen.SetResolution(_resolutions[x].width, _resolutions[x].height, DataManager.instance._data.fullScreenMode, _resolutions[x].refreshRate);
+            DataManager.instance._data.resolution = _resolutions[x];
+        }
     }
 }
 

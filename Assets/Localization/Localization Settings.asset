@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartupSelectors:
   - rid: 5056674134845554688
+  - rid: 9063017616146432024
   - rid: 5056674134845554690
   m_AvailableLocales:
     rid: 5056674134845554691
@@ -51,8 +52,8 @@ MonoBehaviour:
       data:
         m_DefaultTableReference:
           m_TableCollectionName: 
-        m_UseFallback: 0
-        m_MissingTranslationState: 1
+        m_UseFallback: 1
+        m_MissingTranslationState: 2
         m_NoTranslationFoundMessage: nullStr
         m_SmartFormat:
           rid: 5056674134845554694
@@ -182,3 +183,5 @@ MonoBehaviour:
         - default
         - d
         - 
+    - rid: 9063017616146432024
+      type: {class: SystemLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
