@@ -15,11 +15,16 @@ MonoBehaviour:
   m_Identifier:
     m_Code: en
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 9063017616146432029
   m_LocaleName: English (en)
   m_CustomFormatCultureCode: 
   m_UseCustomFormatter: 0
   m_SortOrder: 1
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 9063017616146432029
+      type: {class: FallbackLocale, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Locale: {fileID: 11400000, guid: b10d52063fc074f419ecbd79264289e7, type: 2}

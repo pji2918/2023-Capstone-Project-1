@@ -4,6 +4,13 @@ using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 
+public enum Language
+{
+    Auto,
+    Korean,
+    English
+}
+
 // 이 클래스에 저장할 변수가 담길 것입니다.
 public class Data
 {
@@ -13,6 +20,10 @@ public class Data
 
     public int musicVolume = 100;
     public int effectVolume = 100;
+    public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
+    public Resolution resolution;
+    public bool is3dAudio = true;
+    public Language language = Language.Auto;
 
     public Dictionary<string, int> resources = new Dictionary<string, int>()
     {
@@ -83,7 +94,19 @@ public class DataManager : MonoBehaviour
         }
         else
         {
+            if (_data.resolution.width < Screen.resolutions[0].width || _data.resolution.height < Screen.resolutions[0].height || _data.resolution.refreshRate < Screen.resolutions[0].refreshRate)
+            {
+                _data.resolution = Screen.resolutions[Screen.resolutions.Length - 1];
+            }
             Save();
+        }
+    }
+
+    public void Delete()
+    {
+        if (File.Exists(_dataPath))
+        {
+            File.Delete(_dataPath);
         }
     }
 
