@@ -159,6 +159,14 @@ MonoBehaviour:
     m_Key: options
     m_Metadata:
       m_Items: []
+  - m_Id: 14080695109550080
+    m_Key: options_info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14080695138910208
+    m_Key: options_info_text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

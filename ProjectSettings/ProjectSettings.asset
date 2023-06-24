@@ -14,8 +14,8 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Factory
   productName: Mute
-  defaultCursor: {fileID: 2800000, guid: 1ccbcd71ef9ddbc4eafba9f5d9ee807e, type: 3}
-  cursorHotspot: {x: 0, y: 0}
+  defaultCursor: {fileID: 2800000, guid: 8002d8837a11fe04892eba31a765fba5, type: 3}
+  cursorHotspot: {x: 4, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 0
   m_ShowUnitySplashLogo: 1

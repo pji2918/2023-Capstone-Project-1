@@ -80,10 +80,28 @@ public class UIManager : MonoBehaviour
 
     private bool _lookingStory = false;
     NeedResourse _needResourse = new NeedResourse();
+
+    [SerializeField] private Button[] _optionTabs;
+    [SerializeField] private GameObject[] _optionPanels;
+    [SerializeField] private TMP_Dropdown _resolutionDropdown;
+    [SerializeField] private List<Resolution> _resolutions = new List<Resolution>();
+    [SerializeField] private FullScreenMode _fullScreenMode;
+    [SerializeField] private TMP_Dropdown _fullScreenModeDropdown;
     #endregion
 
     private void Start()
     {
+        List<string> args = System.Environment.GetCommandLineArgs().ToList();
+
+        if (args.Contains("--safemode"))
+        {
+            Screen.SetResolution(800, 600, FullScreenMode.Windowed);
+        }
+        else
+        {
+            Screen.SetResolution(DataManager.instance._data.resolution.width, DataManager.instance._data.resolution.height, DataManager.instance._data.fullScreenMode, DataManager.instance._data.resolution.refreshRate);
+        }
+
         _storyNum = Random.Range(0, 5);
         for (int i = 0; i < 6; i++)
         {
@@ -274,6 +292,7 @@ public class UIManager : MonoBehaviour
     public void OnClickOption()
     {
         WindowPopUp(Option);
+        OptionTabs("audio");
     }
 
     //업그레이드 팝업 나가기
@@ -294,6 +313,7 @@ public class UIManager : MonoBehaviour
     //설정 팝업 나가기
     public void OnClickOptionBackground()
     {
+        DataManager.instance.Save();
         WindowDisappear(Option);
     }
     #endregion
@@ -838,6 +858,7 @@ public class UIManager : MonoBehaviour
                     break;
                 }
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_bookFit);
     }
 
     public void ChoiceTwo()
@@ -920,6 +941,129 @@ public class UIManager : MonoBehaviour
                     break;
                 }
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_bookFit);
+    }
+
+    public TextMeshProUGUI _infoText;
+
+    public void OptionTabs(string button)
+    {
+        switch (button)
+        {
+            case "audio":
+                {
+                    _optionTabs[0].interactable = false;
+                    _optionTabs[1].interactable = true;
+                    _optionTabs[2].interactable = true;
+
+                    _optionPanels[0].SetActive(true);
+                    _optionPanels[1].SetActive(false);
+                    _optionPanels[2].SetActive(false);
+
+                    _soundSliders[0].value = DataManager.instance._data.musicVolume;
+                    _soundSliders[1].value = DataManager.instance._data.effectVolume;
+                    _soundTexts[0].text = DataManager.instance._data.musicVolume.ToString();
+                    _soundTexts[1].text = DataManager.instance._data.effectVolume.ToString();
+                    _3dAudioToggle.isOn = DataManager.instance._data.is3dAudio;
+                    break;
+                }
+            case "video":
+                {
+                    _optionTabs[0].interactable = true;
+                    _optionTabs[1].interactable = false;
+                    _optionTabs[2].interactable = true;
+
+                    _optionPanels[0].SetActive(false);
+                    _optionPanels[1].SetActive(true);
+                    _optionPanels[2].SetActive(false);
+
+                    _fullScreenModeDropdown.value = (int)Screen.fullScreenMode;
+
+                    for (int i = 0; i < Screen.resolutions.Length; i++)
+                    {
+                        if (Screen.resolutions[i].refreshRate == 60 || Screen.resolutions[i].refreshRate == 120 || Screen.resolutions[i].refreshRate == 144 || Screen.resolutions[i].refreshRate == 240)
+                        {
+                            _resolutions.Add(Screen.resolutions[i]);
+                        }
+                    }
+
+                    _resolutionDropdown.options.Clear();
+
+                    foreach (Resolution item in _resolutions)
+                    {
+                        TMP_Dropdown.OptionData optionData = new TMP_Dropdown.OptionData();
+                        optionData.text = string.Format("{0}x{1} ({2}Hz)", item.width, item.height, item.refreshRate);
+                        _resolutionDropdown.options.Add(optionData);
+                    }
+                    _resolutionDropdown.RefreshShownValue();
+                    try
+                    {
+                        if (_resolutionDropdown.value != _resolutions.IndexOf(DataManager.instance._data.resolution))
+                        {
+                            _resolutionDropdown.value = _resolutions.IndexOf(DataManager.instance._data.resolution);
+                        }
+                    }
+                    catch
+                    {
+                        _resolutionDropdown.value = 0;
+                    }
+                    break;
+                }
+            case "other":
+                {
+                    _optionTabs[0].interactable = true;
+                    _optionTabs[1].interactable = true;
+                    _optionTabs[2].interactable = false;
+
+                    _optionPanels[0].SetActive(false);
+                    _optionPanels[1].SetActive(false);
+                    _optionPanels[2].SetActive(true);
+
+                    _infoText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_info_text"), Application.version);
+                    break;
+                }
+        }
+    }
+
+
+
+    public void OnChangeFullScreen(int value)
+    {
+        DataManager.instance._data.fullScreenMode = (FullScreenMode)value + 1;
+        Screen.fullScreenMode = DataManager.instance._data.fullScreenMode;
+    }
+
+    public Slider[] _soundSliders;
+    public Toggle _3dAudioToggle;
+    public TextMeshProUGUI[] _soundTexts;
+
+    public void OnValueChange(string type)
+    {
+        switch (type)
+        {
+            case "music":
+                {
+                    DataManager.instance._data.musicVolume = System.Convert.ToInt32(_soundSliders[0].value);
+                    _soundTexts[0].text = DataManager.instance._data.musicVolume.ToString();
+                    break;
+                }
+            case "sound":
+                {
+                    DataManager.instance._data.effectVolume = System.Convert.ToInt32(_soundSliders[1].value);
+                    _soundTexts[1].text = DataManager.instance._data.effectVolume.ToString();
+                    break;
+                }
+            case "3dAudio":
+                {
+                    DataManager.instance._data.is3dAudio = _3dAudioToggle.isOn;
+                    break;
+                }
+        }
+    }
+
+    public void OnResolutionChange(int x)
+    {
+        Screen.SetResolution(_resolutions[x].width, _resolutions[x].height, _fullScreenMode, _resolutions[x].refreshRate);
     }
 }
 

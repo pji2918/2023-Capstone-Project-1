@@ -13,6 +13,9 @@ public class Data
 
     public int musicVolume = 100;
     public int effectVolume = 100;
+    public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
+    public Resolution resolution;
+    public bool is3dAudio = true;
 
     public Dictionary<string, int> resources = new Dictionary<string, int>()
     {
@@ -83,6 +86,7 @@ public class DataManager : MonoBehaviour
         }
         else
         {
+            _data.resolution = Screen.currentResolution;
             Save();
         }
     }

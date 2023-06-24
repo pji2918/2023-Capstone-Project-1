@@ -169,6 +169,16 @@ MonoBehaviour:
     m_Localized: "\uC124\uC815"
     m_Metadata:
       m_Items: []
+  - m_Id: 14080695109550080
+    m_Localized: "\uC815\uBCF4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14080695138910208
+    m_Localized: 'Mute by Team Factory
+
+      v{0}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
