@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Localization;
 using System.Globalization;
 using UnityEngine.Localization.Settings;
 using TMPro;
