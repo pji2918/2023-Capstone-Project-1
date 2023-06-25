@@ -101,16 +101,19 @@ public class UIManager : MonoBehaviour
 
         if (DataManager.instance._data.language == Language.Auto)
         {
-            Debug.Log("시스템 언어 : " + Application.systemLanguage);
-            switch (Application.systemLanguage)
-            {
-                case SystemLanguage.Korean:
-                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
-                    break;
-                case SystemLanguage.English:
-                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
-                    break;
-            }
+            // Debug.Log("시스템 언어 : " + Application.systemLanguage);
+            // switch (Application.systemLanguage)
+            // {
+            //     case SystemLanguage.Korean:
+            //         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+            //         break;
+            //     case SystemLanguage.English:
+            //         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
+            //         break;
+            // }
+            // Get Current System Language Locale using CultureInfo
+            var currentCulture = CultureInfo.InstalledUICulture;
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(currentCulture.Name);
         }
         else
         {
