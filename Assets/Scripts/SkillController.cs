@@ -39,4 +39,9 @@ public class SkillController : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+    public void Disable()
+    {
+        this.gameObject.SetActive(false);
+    }
 }

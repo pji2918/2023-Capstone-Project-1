@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D _playerRigidbody;
     public Animator _playerAnimator;
     public GameObject _playerAttackEffect;
+    public GameObject _playerDashEffect;
 
     public float slowCurrentTime;
     public bool isSlow = false;
@@ -628,6 +629,9 @@ public class PlayerController : MonoBehaviour
         // 플레이어가 돌진할 수 있는 상태라면, 플레이어를 돌진시킵니다.
         if (_dashCoolDown <= 0)
         {
+            _playerDashEffect.SetActive(true);
+            _playerDashEffect.GetComponent<Animator>().Play("Dash");
+
             _dashCoolDown = 7f;
             _isDash = true;
 
