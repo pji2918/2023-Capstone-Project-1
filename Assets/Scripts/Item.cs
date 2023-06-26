@@ -29,13 +29,18 @@ public class Item : MonoBehaviour
             itemIndicator.GetComponent<TextMeshPro>().text = StringUtil.KoreanParticle(string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "getItem"), InGameUI.instance._resourcename[(int)itemNum]));
             if (System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum) >= 0)
             {
-                InGameUI.instance._quest[System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum)]._amount++;
+                ++InGameUI.instance._quest[System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum)]._amount;
             }
             // 여기에 자원량을 추가하는 코드를 넣으십시오.
-            DataManager.instance._data.resources[itemNum.ToString()]++;
+            ++DataManager.instance._data.resources[itemNum.ToString()];
             DataManager.instance.Save();
             PlayerController.instance.CallComplete();
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        PlayerController.instance.CallComplete();
     }
 }

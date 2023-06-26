@@ -369,7 +369,7 @@ public class PlayerController : MonoBehaviour
                 _harpoonCoolDown = 8f;
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 float angle = Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) * Mathf.Rad2Deg;
-                GameObject harpoon = Instantiate(_harpoonPrefab, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
+                GameObject harpoon = Instantiate(_harpoonPrefab, transform.position, Quaternion.AngleAxis(angle - 90, Vector3.forward));
                 Destroy(harpoon, 5f);
             }
         }
@@ -392,7 +392,7 @@ public class PlayerController : MonoBehaviour
                 _jangpungCoolDown = 13f;
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 float angle = Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) * Mathf.Rad2Deg;
-                GameObject jang = Instantiate(_jangpungPrefab, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
+                GameObject jang = Instantiate(_jangpungPrefab, transform.position, Quaternion.AngleAxis(angle - 90, Vector3.forward));
                 Destroy(jang, 1f);
                 _jangpungOn = false;
             }

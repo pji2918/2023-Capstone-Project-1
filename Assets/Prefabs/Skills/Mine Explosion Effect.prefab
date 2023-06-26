@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 631426361781647632}
   - component: {fileID: 631426361781647638}
   - component: {fileID: 631426361781647639}
+  - component: {fileID: 2442492474262278776}
   m_Layer: 8
   m_Name: Mine Explosion Effect
   m_TagString: Mine_Explosion
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631426361781647635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.621, y: -3.937, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,10 +73,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1648751287
+  m_SortingLayer: 2
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 2210eaeb0269b4749bf396dde466d020, type: 3}
+  m_Sprite: {fileID: -100424640, guid: 835e04b50c82c324e86ad6736f4f8267, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,7 +125,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.25, y: 2}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 3.25, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -132,15 +133,32 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.875, y: -1}
-      - {x: 1.3125, y: -1}
-      - {x: 1.375, y: -0.6875}
-      - {x: 1.375, y: 0.0625}
-      - {x: 1.125, y: 0.9375}
-      - {x: -0.875, y: 0.9375}
-      - {x: -1.5625, y: 0.375}
-      - {x: -1.5625, y: -1}
-      - {x: -0.1875, y: -1}
-      - {x: 0, y: -0.75}
-      - {x: -0.5625, y: -0.1875}
-      - {x: 0.375, y: -0.8125}
+    - - {x: -0.039212525, y: -0.31023467}
+      - {x: 0.20948508, y: -0.28886598}
+      - {x: 0.47876185, y: -0.13724968}
+      - {x: 0.6001487, y: -0.0891425}
+      - {x: 0.59679693, y: 0.0019598529}
+      - {x: 0.5141098, y: 0.27423164}
+      - {x: 0.45497647, y: 0.34686828}
+      - {x: 0.22491017, y: 0.4127641}
+      - {x: -0.1195429, y: 0.46670783}
+      - {x: -0.29793036, y: 0.41879463}
+      - {x: -0.54974973, y: 0.237198}
+      - {x: -0.5488056, y: 0.0839169}
+      - {x: -0.6053288, y: 0.027678002}
+      - {x: -0.55290705, y: -0.054760456}
+      - {x: -0.46943644, y: -0.14917974}
+      - {x: -0.33666247, y: -0.2103239}
+--- !u!114 &2442492474262278776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631426361781647635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a171ce5a0879d18439da813cab318616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionEffect: {fileID: 0}
