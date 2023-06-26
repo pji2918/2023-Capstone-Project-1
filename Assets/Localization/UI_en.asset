@@ -216,6 +216,22 @@ MonoBehaviour:
     m_Localized: Press {0} more times to delete
     m_Metadata:
       m_Items: []
+  - m_Id: 14896530958974976
+    m_Localized: Accessibility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14896531000918016
+    m_Localized: Screen Vibration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14896813592150016
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14896813592150017
+    m_Localized: VFX
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

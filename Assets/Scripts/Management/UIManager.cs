@@ -101,17 +101,6 @@ public class UIManager : MonoBehaviour
 
         if (DataManager.instance._data.language == Language.Auto)
         {
-            // Debug.Log("시스템 언어 : " + Application.systemLanguage);
-            // switch (Application.systemLanguage)
-            // {
-            //     case SystemLanguage.Korean:
-            //         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
-            //         break;
-            //     case SystemLanguage.English:
-            //         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
-            //         break;
-            // }
-            // Get Current System Language Locale using CultureInfo
             var currentCulture = CultureInfo.InstalledUICulture;
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(currentCulture.Name);
         }
@@ -1020,16 +1009,17 @@ public class UIManager : MonoBehaviour
                     _optionTabs[0].interactable = false;
                     _optionTabs[1].interactable = true;
                     _optionTabs[2].interactable = true;
+                    _optionTabs[3].interactable = true;
 
                     _optionPanels[0].SetActive(true);
                     _optionPanels[1].SetActive(false);
                     _optionPanels[2].SetActive(false);
+                    _optionPanels[3].SetActive(false);
 
                     _soundSliders[0].value = DataManager.instance._data.musicVolume;
                     _soundSliders[1].value = DataManager.instance._data.effectVolume;
                     _soundTexts[0].text = DataManager.instance._data.musicVolume.ToString();
                     _soundTexts[1].text = DataManager.instance._data.effectVolume.ToString();
-                    _3dAudioToggle.isOn = DataManager.instance._data.is3dAudio;
                     break;
                 }
             case "video":
@@ -1041,10 +1031,12 @@ public class UIManager : MonoBehaviour
                     _optionTabs[0].interactable = true;
                     _optionTabs[1].interactable = false;
                     _optionTabs[2].interactable = true;
+                    _optionTabs[3].interactable = true;
 
                     _optionPanels[0].SetActive(false);
                     _optionPanels[1].SetActive(true);
                     _optionPanels[2].SetActive(false);
+                    _optionPanels[3].SetActive(false);
 
                     _fullScreenModeDropdown.options.Clear();
 
@@ -1084,6 +1076,25 @@ public class UIManager : MonoBehaviour
                     _resolutionLocked = false;
                     break;
                 }
+            case "accessibility":
+                {
+                    _deleteCount = 0;
+                    _deleteButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "options_delete");
+
+                    _optionTabs[0].interactable = true;
+                    _optionTabs[1].interactable = true;
+                    _optionTabs[2].interactable = false;
+                    _optionTabs[3].interactable = true;
+
+                    _optionPanels[0].SetActive(false);
+                    _optionPanels[1].SetActive(false);
+                    _optionPanels[2].SetActive(true);
+                    _optionPanels[3].SetActive(false);
+
+                    _3dAudioToggle.isOn = DataManager.instance._data.is3dAudio;
+                    _screenVibrationToggle.isOn = DataManager.instance._data.isScreenVibration;
+                    break;
+                }
             case "other":
                 {
                     _deleteCount = 0;
@@ -1092,11 +1103,13 @@ public class UIManager : MonoBehaviour
                     _resolutionLocked = true;
                     _optionTabs[0].interactable = true;
                     _optionTabs[1].interactable = true;
-                    _optionTabs[2].interactable = false;
+                    _optionTabs[2].interactable = true;
+                    _optionTabs[3].interactable = false;
 
                     _optionPanels[0].SetActive(false);
                     _optionPanels[1].SetActive(false);
-                    _optionPanels[2].SetActive(true);
+                    _optionPanels[2].SetActive(false);
+                    _optionPanels[3].SetActive(true);
 
                     _languageDropdown.options.Clear();
 
@@ -1152,6 +1165,7 @@ public class UIManager : MonoBehaviour
 
     public Slider[] _soundSliders;
     public Toggle _3dAudioToggle;
+    public Toggle _screenVibrationToggle;
     public TextMeshProUGUI[] _soundTexts;
 
     public void OnValueChange(string type)
@@ -1173,6 +1187,11 @@ public class UIManager : MonoBehaviour
             case "3dAudio":
                 {
                     DataManager.instance._data.is3dAudio = _3dAudioToggle.isOn;
+                    break;
+                }
+            case "screenvib":
+                {
+                    DataManager.instance._data.isScreenVibration = _screenVibrationToggle.isOn;
                     break;
                 }
         }

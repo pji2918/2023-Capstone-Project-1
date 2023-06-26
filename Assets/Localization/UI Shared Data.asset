@@ -263,6 +263,22 @@ MonoBehaviour:
     m_Key: options_deletewarn
     m_Metadata:
       m_Items: []
+  - m_Id: 14896530958974976
+    m_Key: options_accessibility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14896531000918016
+    m_Key: options_screenvibration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14896813592150016
+    m_Key: options_accessibility_audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14896813592150017
+    m_Key: options_accessibility_vfx
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

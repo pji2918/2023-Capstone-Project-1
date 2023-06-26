@@ -509,7 +509,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnDamage()
     {
-        StartCoroutine(CameraMovement());
+        if (DataManager.instance._data.isScreenVibration)
+        {
+            StartCoroutine(CameraMovement());
+        }
     }
 
     public IEnumerator CameraMovement()
