@@ -283,6 +283,22 @@ MonoBehaviour:
     m_Key: options_accessibility_damage
     m_Metadata:
       m_Items: []
+  - m_Id: 15179195213807616
+    m_Key: laser
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15179195247362048
+    m_Key: laser_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15179195247362049
+    m_Key: jangpung
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15179195247362050
+    m_Key: jangpung_desc
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

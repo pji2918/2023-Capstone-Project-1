@@ -236,6 +236,10 @@ MonoBehaviour:
     m_Localized: Show Damage
     m_Metadata:
       m_Items: []
+  - m_Id: 15179195213807616
+    m_Localized: Laser
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
