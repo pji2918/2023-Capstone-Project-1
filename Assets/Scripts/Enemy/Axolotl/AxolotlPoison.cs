@@ -23,6 +23,7 @@ public class AxolotlPoison : MonoBehaviour
     {
         if (other.CompareTag("Player") && currentTime >= coolTime)
         {
+            Debug.Log("독데미지");
             other.GetComponent<PlayerController>()._playerHp -= damage;
             currentTime = 0;
         }

@@ -98,7 +98,7 @@ public class Axolotl : MonsterController
         isDash = true;
         axolotlCollider.isTrigger = true;
         _agent.enabled = false;
-        spriteRenderer.color = new Color32(255, 255, 255, 100);
+        spriteRenderer.color = new Color32(255, 255, 255, 150);
 
         for (int i = 0; i < 3; i++)
         {
