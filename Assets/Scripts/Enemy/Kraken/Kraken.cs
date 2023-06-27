@@ -20,18 +20,23 @@ public class Kraken : MonoBehaviour
     [Space(10)]
     [SerializeField]
     private Slider hpBar;
-    [SerializeField]
-    public float hp;
+    private float hp;
     [SerializeField]
     private float maxHp;
 
     private void Update()
     {
+        hpBar.value = (float)hp / maxHp;
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
         Vector2 randCirclePos = Random.insideUnitCircle;
     }
 
     private void Start()
     {
+        hp = maxHp;
         StartCoroutine(SmallUpKrakenActive());
         StartCoroutine(EarthquakeActive());
     }
@@ -117,6 +122,9 @@ public class Kraken : MonoBehaviour
         Destroy(krakenUpLeg);
     }
 
-    //public void Hit(float dam  )
+    public void Hit(float damage)
+    {
+        hp -= damage;
+    }
 }
 

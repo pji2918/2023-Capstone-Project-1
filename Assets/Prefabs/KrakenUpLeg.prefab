@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 1081890749482688951}
   - component: {fileID: 6079427742234754054}
   - component: {fileID: 5023688267947459146}
+  - component: {fileID: 1352045360876435461}
   m_Layer: 0
   m_Name: KrakenLeg
   m_TagString: KrakenLeg
@@ -231,7 +232,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 667b4fc76dfde46438eb0ca42348b383, type: 3}
+  m_Sprite: {fileID: 917274241, guid: 2a3524b0e854c94448956316026b916a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -286,3 +287,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.39851385, y: 0.8964656}
   m_EdgeRadius: 0
+--- !u!95 &1352045360876435461
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8545232166451952219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e0537f5ada03b34b988db25f5b0dcc8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
