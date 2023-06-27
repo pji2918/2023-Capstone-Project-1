@@ -23,7 +23,7 @@ public class Data
     public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
     public Resolution resolution;
     public bool is3dAudio = true;
-    public bool isScreenVibration = true;
+    public bool isScreenVibration = true, displayDamage = true;
     public Language language = Language.Auto;
 
     public Dictionary<string, int> resources = new Dictionary<string, int>()

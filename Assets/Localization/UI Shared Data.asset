@@ -279,6 +279,10 @@ MonoBehaviour:
     m_Key: options_accessibility_vfx
     m_Metadata:
       m_Items: []
+  - m_Id: 15160329196666880
+    m_Key: options_accessibility_damage
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

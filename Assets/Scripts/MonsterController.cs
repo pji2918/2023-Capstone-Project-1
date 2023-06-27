@@ -125,9 +125,12 @@ public class MonsterController : MonoBehaviour
             damage = int.MaxValue;
         }
         currentHp -= damage;
-        var text = Instantiate(Resources.Load("Damage"), transform.position, Quaternion.identity) as GameObject;
-        text.GetComponent<TextMeshPro>().text = damage.ToString();
-        StartCoroutine(DamageEffectCoroutine());
+        if (DataManager.instance._data.displayDamage)
+        {
+            var text = Instantiate(Resources.Load("Damage"), transform.position, Quaternion.identity) as GameObject;
+            text.GetComponent<TextMeshPro>().text = damage.ToString();
+            StartCoroutine(DamageEffectCoroutine());
+        }
     }
 
     public IEnumerator DamageEffectCoroutine()

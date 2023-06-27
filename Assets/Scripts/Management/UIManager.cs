@@ -1165,7 +1165,7 @@ public class UIManager : MonoBehaviour
 
     public Slider[] _soundSliders;
     public Toggle _3dAudioToggle;
-    public Toggle _screenVibrationToggle;
+    public Toggle _screenVibrationToggle, _damageToggle;
     public TextMeshProUGUI[] _soundTexts;
 
     public void OnValueChange(string type)
@@ -1192,6 +1192,11 @@ public class UIManager : MonoBehaviour
             case "screenvib":
                 {
                     DataManager.instance._data.isScreenVibration = _screenVibrationToggle.isOn;
+                    break;
+                }
+            case "damage":
+                {
+                    DataManager.instance._data.displayDamage = _damageToggle.isOn;
                     break;
                 }
         }

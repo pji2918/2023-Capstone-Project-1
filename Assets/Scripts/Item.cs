@@ -34,13 +34,10 @@ public class Item : MonoBehaviour
             // 여기에 자원량을 추가하는 코드를 넣으십시오.
             ++DataManager.instance._data.resources[itemNum.ToString()];
             DataManager.instance.Save();
+
             PlayerController.instance.CallComplete();
+
             Destroy(gameObject);
         }
-    }
-
-    void OnDestroy()
-    {
-        PlayerController.instance.CallComplete();
     }
 }

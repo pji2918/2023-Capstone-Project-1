@@ -464,6 +464,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        CallComplete();
+
         // 플레이어의 쿨타임을 감소시킵니다.
         if (_dashCoolDown > 0)
         {
@@ -566,12 +568,15 @@ public class PlayerController : MonoBehaviour
 
     public void CallComplete()
     {
-        StartCoroutine(CheckisComplete());
+        if (!_isFinishing)
+        {
+            StartCoroutine(CheckisComplete());
+        }
     }
 
     public GameObject _completeFade;
 
-    IEnumerator CheckisComplete()
+    public IEnumerator CheckisComplete()
     {
         if (_timer >= 180
         || (InGameUI.instance._isQuestComplete[0]

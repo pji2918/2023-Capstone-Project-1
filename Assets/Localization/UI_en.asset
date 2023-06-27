@@ -232,6 +232,10 @@ MonoBehaviour:
     m_Localized: VFX
     m_Metadata:
       m_Items: []
+  - m_Id: 15160329196666880
+    m_Localized: Show Damage
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
