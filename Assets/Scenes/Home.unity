@@ -17761,7 +17761,7 @@ MonoBehaviour:
   - {fileID: 669113127}
   _3dAudioToggle: {fileID: 845873182}
   _screenVibrationToggle: {fileID: 1659578870}
-  _damageToggle: {fileID: 0}
+  _damageToggle: {fileID: 992438867}
   _soundTexts:
   - {fileID: 748258598}
   - {fileID: 736891844}
