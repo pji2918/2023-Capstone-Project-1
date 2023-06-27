@@ -11,17 +11,17 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
-            DataManager.instance._data.resources["iron"] = 10;
-            DataManager.instance._data.resources["concrete"] = 10;
-            DataManager.instance._data.resources["core"] = 10;
-            DataManager.instance._data.resources["bolt"] = 10;
-            DataManager.instance._data.resources["ingredient"] = 10;
-            DataManager.instance._data.resources["food"] = 10;
+            DataManager.instance._data.resources["iron"] = 99999;
+            DataManager.instance._data.resources["concrete"] = 99999;
+            DataManager.instance._data.resources["core"] = 99999;
+            DataManager.instance._data.resources["bolt"] = 99999;
+            DataManager.instance._data.resources["ingredient"] = 99999;
+            DataManager.instance._data.resources["food"] = 99999;
         }
 
-        if(Input.GetKeyDown(KeyCode.F2))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             DataManager.instance._data.resources["iron"] = 0;
             DataManager.instance._data.resources["concrete"] = 0;
@@ -31,13 +31,13 @@ public class InputManager : MonoBehaviour
             DataManager.instance._data.resources["food"] = 0;
         }
 
-        if(Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F3))
         {
             DataManager.instance._data.skillLevel = 0;
             DataManager.instance._data.buildLevel = 0;
         }
 
-        if(Input.GetKeyDown(KeyCode.F4))
+        if (Input.GetKeyDown(KeyCode.F4))
         {
             Debug.Log("스킬레벨 : " + DataManager.instance._data.skillLevel);
             Debug.Log("빌드레벨 : " + DataManager.instance._data.buildLevel);
