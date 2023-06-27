@@ -1093,6 +1093,7 @@ public class UIManager : MonoBehaviour
 
                     _3dAudioToggle.isOn = DataManager.instance._data.is3dAudio;
                     _screenVibrationToggle.isOn = DataManager.instance._data.isScreenVibration;
+                    _damageToggle.isOn = DataManager.instance._data.displayDamage;
                     break;
                 }
             case "other":
