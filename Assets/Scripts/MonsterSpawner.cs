@@ -72,7 +72,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             goto SetPosition;
         }
-        if (_monsterSpawnCap.Monsters[monsterIndex].MaxSpawn[DataManager.instance._data.day - 1] <= 0)
+        else if (_monsterSpawnCap.Monsters[monsterIndex].MaxSpawn[DataManager.instance._data.day - 1] <= 0)
         {
             goto SetMonster;
         }

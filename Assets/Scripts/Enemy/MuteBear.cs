@@ -28,7 +28,7 @@ public class MuteBear : MonsterController
     {
         if (_agent.enabled)
         {
-            if (Vector2.Distance(transform.position, _playerPosition) < 6 && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
+            if (Vector2.Distance(transform.position, _playerPosition) < _attackRange && !PlayerController.instance._isDash && !PlayerController.instance._isFinishing)
             {
                 _agent.speed = 0;
                 if (attackCurrentTime >= attackCoolTime)
@@ -47,7 +47,6 @@ public class MuteBear : MonsterController
 
     public void Attack()
     {
-        PlayerController.instance.CallCoroutine();
 
         GameObject stone;
         stone = Instantiate(stonePrefab, transform.position, transform.rotation);

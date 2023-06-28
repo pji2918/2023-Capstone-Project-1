@@ -45,7 +45,6 @@ public class KrakenUpLeg : MonsterController
 
     public void Attack()
     {
-        PlayerController.instance.CallCoroutine();
         PlayerController.instance._playerHp -= attack;
         attackCoolTime = thisAttackCoolTime;
         attackCurrentTime = 0;

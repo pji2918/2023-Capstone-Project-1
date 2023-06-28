@@ -26,6 +26,7 @@ public class MonsterController : MonoBehaviour
     protected int maxHp;
 
     protected bool doRotate = true;
+    protected double _attackRange = 1;
 
     public int Hp { get { return currentHp; } set { currentHp = value; } }
     protected bool _isKnockback = false;

@@ -54,7 +54,7 @@ public class Axolotl : MonsterController
 
         if (_agent.enabled)
         {
-            if (_agent.remainingDistance < 2 && !axolotlCollider.isTrigger)
+            if (_agent.remainingDistance < _attackRange && !axolotlCollider.isTrigger)
             {
                 _agent.speed = 0;
                 if (attackCurrentTime >= attackCoolTime)
@@ -73,7 +73,6 @@ public class Axolotl : MonsterController
 
     public void Attack()
     {
-        PlayerController.instance.CallCoroutine();
         PlayerController.instance._playerHp -= attack;
     }
 

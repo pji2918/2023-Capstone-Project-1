@@ -26,7 +26,7 @@ public class LightFish : MonsterController
     {
         if (_agent.enabled)
         {
-            if (Vector2.Distance(transform.position, _playerPosition) < 2 && !PlayerController.instance._isDash &&
+            if (Vector2.Distance(transform.position, _playerPosition) < _attackRange && !PlayerController.instance._isDash &&
             !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
             {
                 _agent.speed = 0;
@@ -49,7 +49,6 @@ public class LightFish : MonsterController
     {
         _isAttack = true;
         PlayerController.instance._playerHp -= attack;
-        PlayerController.instance.CallCoroutine();
         yield return new WaitForSeconds(0.8f);
         _isAttack = false;
     }

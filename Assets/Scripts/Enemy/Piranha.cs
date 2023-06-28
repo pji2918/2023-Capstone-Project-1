@@ -24,14 +24,14 @@ public class Piranha : MonsterController
     {
         if (this._agent.enabled)
         {
-            if (Vector3.Distance(transform.position, _playerPosition) < 2 && !PlayerController.instance._isDash &&
+            if (Vector3.Distance(transform.position, _playerPosition) < _attackRange && !PlayerController.instance._isDash &&
             !PlayerController.instance._isFinishing && !PlayerController.instance._isInvincible)
             {
                 this._agent.speed = 0;
                 if (this.attackCurrentTime >= attackCoolTime)
                 {
                     Attack();
-                    attackCurrentTime = 0;
+                    this.attackCurrentTime = 0;
                 }
             }
             else
@@ -45,7 +45,6 @@ public class Piranha : MonsterController
     public void Attack()
     {
         PlayerController.instance.OnDamage();
-        PlayerController.instance.CallCoroutine();
         PlayerController.instance._playerHp -= attack;
     }
 

@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour
 
     // 책 텍스트
     public TextMeshProUGUI _title, _desc;
+    public GameObject _letter;
 
     //음식 제작 게이지
     private Slider foodSlider;
@@ -404,6 +405,18 @@ public class UIManager : MonoBehaviour
         needWeaponTexts[1].text = DataManager.instance._data.weaponUpgrade["concrete"].ToString();
         needWeaponTexts[2].text = DataManager.instance._data.weaponUpgrade["bolt"].ToString();
         needWeaponTexts[3].text = DataManager.instance._data.weaponUpgrade["core"].ToString();
+
+        for (int i = 0; i <= 3; i++)
+        {
+            if (DataManager.instance._data.resources.ElementAt(i).Value < DataManager.instance._data.weaponUpgrade.ElementAt(i).Value)
+            {
+                needWeaponTexts[i].color = Color.red;
+            }
+            else
+            {
+                needWeaponTexts[i].color = Color.black;
+            }
+        }
     }
 
     //집 강화 재료 필요 개수 표시
@@ -474,6 +487,7 @@ public class UIManager : MonoBehaviour
         else if (DataManager.instance._data.day == 3)
         {
             _desc.text = string.Format("{0}\n\n{1}", LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03Text1"), LocalizationSettings.StringDatabase.GetLocalizedString("Story", "storyDay03Text2"));
+            _letter.SetActive(true);
             ShowStoryButton(ButtonType.Choice, 6);
         }
         else if (DataManager.instance._data.day == 5)
@@ -1018,8 +1032,8 @@ public class UIManager : MonoBehaviour
 
                     _soundSliders[0].value = DataManager.instance._data.musicVolume;
                     _soundSliders[1].value = DataManager.instance._data.effectVolume;
-                    _soundTexts[0].text = DataManager.instance._data.musicVolume.ToString();
-                    _soundTexts[1].text = DataManager.instance._data.effectVolume.ToString();
+                    _soundTexts[0].text = string.Format("{0}%", DataManager.instance._data.musicVolume);
+                    _soundTexts[1].text = string.Format("{0}%", DataManager.instance._data.effectVolume);
                     break;
                 }
             case "video":

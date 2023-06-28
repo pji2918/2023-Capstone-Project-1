@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 595099128535145315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2.0000005, z: 1.0000002}
+  m_LocalScale: {x: 1, y: 1, z: 1.0000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,8 +54,8 @@ MonoBehaviour:
   _playerPosition: {x: 0, y: 0}
   _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f, type: 3}
   thisSpeed: 2
-  thisAttack: 5
-  thisMaxHp: 50
+  thisAttack: 3
+  thisMaxHp: 30
   thisAttackCoolTime: 3
 --- !u!212 &595099128535145314
 SpriteRenderer:

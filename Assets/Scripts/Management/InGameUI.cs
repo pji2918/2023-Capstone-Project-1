@@ -18,9 +18,9 @@ public class InGameUI : MonoBehaviour
     }
 
     public Image _healthBar;
-    public Image[] _skillCoolDownBar;
+    public Image[] _skillIcon, _skillCoolDownBar;
     public Image _foodCoolDownBar;
-    public GameObject[] _statusPanel;
+    public GameObject[] _statusPanel, _skillLock;
     private bool[] _isHovering = new bool[5] { false, false, false, false, false };
     public GameObject[] _skillTooltip, _statusTooltip;
     public GameObject _foodTooltip;
@@ -1214,12 +1214,12 @@ public class InGameUI : MonoBehaviour
         _healthBar.fillAmount = (float)PlayerController.instance._playerHp / PlayerController.instance._playerMaxHp;
 
         #region 스킬 쿨타임 표시
-        _skillCoolDownBar[0].fillAmount = 1 - (PlayerController.instance._dashCoolDown / 7f);
-        _skillCoolDownBar[1].fillAmount = 1 - (PlayerController.instance._harpoonCoolDown / 8f);
-        _skillCoolDownBar[2].fillAmount = 1 - (PlayerController.instance._bubbleCoolDown / 15f);
-        _skillCoolDownBar[3].fillAmount = 1 - (PlayerController.instance._jangpungCoolDown / 13f);
-        _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
-        _skillCoolDownBar[4].fillAmount = 1 - (PlayerController.instance._mineCoolDown / 30f);
+        _skillCoolDownBar[0].fillAmount = (PlayerController.instance._dashCoolDown / 7f);
+        _skillCoolDownBar[1].fillAmount = (PlayerController.instance._harpoonCoolDown / 8f);
+        _skillCoolDownBar[2].fillAmount = (PlayerController.instance._bubbleCoolDown / 15f);
+        _skillCoolDownBar[3].fillAmount = (PlayerController.instance._jangpungCoolDown / 13f);
+        _skillCoolDownBar[4].fillAmount = (PlayerController.instance._mineCoolDown / 30f);
+        _skillCoolDownBar[4].fillAmount = (PlayerController.instance._mineCoolDown / 30f);
         _foodCoolDownBar.fillAmount = PlayerController.instance._foodCoolDown / 10f;
         #endregion
 
@@ -1229,57 +1229,57 @@ public class InGameUI : MonoBehaviour
 
         if (DataManager.instance._data.skillLevel >= 1)
         {
-            _skillCoolDownBar[0].GetComponent<EventTrigger>().enabled = true;
-            _skillCoolDownBar[0].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            _skillIcon[0].GetComponent<EventTrigger>().enabled = true;
+            _skillLock[0].SetActive(false);
         }
         else
         {
-            _skillCoolDownBar[0].GetComponent<EventTrigger>().enabled = false;
-            _skillCoolDownBar[0].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+            _skillIcon[0].GetComponent<EventTrigger>().enabled = false;
+            _skillLock[0].SetActive(true);
         }
 
         if (DataManager.instance._data.skillLevel >= 2)
         {
-            _skillCoolDownBar[1].GetComponent<EventTrigger>().enabled = true;
-            _skillCoolDownBar[1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            _skillIcon[1].GetComponent<EventTrigger>().enabled = true;
+            _skillLock[1].SetActive(false);
         }
         else
         {
-            _skillCoolDownBar[1].GetComponent<EventTrigger>().enabled = false;
-            _skillCoolDownBar[1].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+            _skillIcon[1].GetComponent<EventTrigger>().enabled = false;
+            _skillLock[1].SetActive(true);
         }
 
         if (DataManager.instance._data.skillLevel >= 3)
         {
-            _skillCoolDownBar[2].GetComponent<EventTrigger>().enabled = true;
-            _skillCoolDownBar[2].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            _skillIcon[2].GetComponent<EventTrigger>().enabled = true;
+            _skillLock[2].SetActive(false);
         }
         else
         {
-            _skillCoolDownBar[2].GetComponent<EventTrigger>().enabled = false;
-            _skillCoolDownBar[2].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+            _skillIcon[2].GetComponent<EventTrigger>().enabled = false;
+            _skillLock[2].SetActive(true);
         }
 
         if (DataManager.instance._data.skillLevel >= 4)
         {
-            _skillCoolDownBar[3].GetComponent<EventTrigger>().enabled = true;
-            _skillCoolDownBar[3].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            _skillIcon[3].GetComponent<EventTrigger>().enabled = true;
+            _skillLock[3].SetActive(false);
         }
         else
         {
-            _skillCoolDownBar[3].GetComponent<EventTrigger>().enabled = false;
-            _skillCoolDownBar[3].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+            _skillIcon[3].GetComponent<EventTrigger>().enabled = false;
+            _skillLock[3].SetActive(true);
         }
 
         if (DataManager.instance._data.skillLevel >= 5)
         {
-            _skillCoolDownBar[4].GetComponent<EventTrigger>().enabled = true;
-            _skillCoolDownBar[4].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            _skillIcon[4].GetComponent<EventTrigger>().enabled = true;
+            _skillLock[4].SetActive(false);
         }
         else
         {
-            _skillCoolDownBar[4].GetComponent<EventTrigger>().enabled = false;
-            _skillCoolDownBar[4].GetComponent<Image>().color = new Color32(94, 94, 94, 255);
+            _skillIcon[4].GetComponent<EventTrigger>().enabled = false;
+            _skillLock[4].SetActive(true);
         }
 
         if (DataManager.instance._data.resources["food"] <= 0)

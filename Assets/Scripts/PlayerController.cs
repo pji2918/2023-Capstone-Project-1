@@ -441,6 +441,8 @@ public class PlayerController : MonoBehaviour
             _timer += Time.deltaTime;
         }
 
+        CallCoroutine();
+
         // 플레이어가 움직이지 않으면, Idle 애니메이션을 재생합니다.
         if (_playerAgent.velocity == Vector3.zero)
         {
@@ -624,18 +626,17 @@ public class PlayerController : MonoBehaviour
     IEnumerator Eat()
     {
         DataManager.instance._data.resources["food"] -= 1;
-        DataManager.instance.Save();
         for (int i = 0; i < 15; i++)
         {
             if (_playerHp < _playerMaxHp)
             {
-                if (_playerHp + (int)(_playerMaxHp * 0.01) >= _playerMaxHp)
+                if (_playerHp + (int)(_playerMaxHp * 0.02) >= _playerMaxHp)
                 {
                     _playerHp = _playerMaxHp;
                 }
                 else
                 {
-                    _playerHp += (int)(_playerMaxHp * 0.01);
+                    _playerHp += (int)(_playerMaxHp * 0.02);
                 }
                 yield return new WaitForSeconds(0.3f);
             }

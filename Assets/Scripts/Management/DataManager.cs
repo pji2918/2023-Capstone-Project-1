@@ -123,10 +123,10 @@ public class DataManager : MonoBehaviour
 
     public void NeedHouseResourseChange(int iron, int concrete, int bolt, int core)
     {
-        _data.weaponUpgrade["iron"] = iron;
-        _data.weaponUpgrade["concrete"] = concrete;
-        _data.weaponUpgrade["bolt"] = bolt;
-        _data.weaponUpgrade["core"] = core;
+        _data.HouseUpgrade["iron"] = iron;
+        _data.HouseUpgrade["concrete"] = concrete;
+        _data.HouseUpgrade["bolt"] = bolt;
+        _data.HouseUpgrade["core"] = core;
 
         Save();
     }

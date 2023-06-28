@@ -2959,7 +2959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &252051981
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17731,6 +17731,7 @@ MonoBehaviour:
   _bookFit: {fileID: 563266693}
   _title: {fileID: 920210908}
   _desc: {fileID: 1360983813}
+  _letter: {fileID: 252051980}
   _cooker: {fileID: 1190833569}
   _optionTabs:
   - {fileID: 1090747138}
