@@ -292,6 +292,7 @@ public class PlayerController : MonoBehaviour
 
     public bool _isFinishing = false;
     public float _foodTimer = 0f;
+    Vector2 _clickPosition;
 
     public GameObject _clickAnimation;
 
@@ -304,7 +305,9 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Instantiate(_clickAnimation, mousePosition, Quaternion.identity);
-            PlayerController.instance._playerAgent.SetDestination(mousePosition);
+            _clickPosition = mousePosition;
+            PlayerController.instance._playerAgent.SetDestination(_clickPosition);
+            _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _clickPosition - (Vector2)transform.position);
         }
 
         // 왼쪽 Shift 키를 누르면 플레이어를 돌진시키는 함수를 실행합니다.
@@ -316,7 +319,6 @@ public class PlayerController : MonoBehaviour
         if (_playerAgent.velocity.magnitude > 0.1f)
         {
             _playerArrow.SetActive(true);
-            _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _playerAgent.velocity);
         }
         else
         {
@@ -459,10 +461,12 @@ public class PlayerController : MonoBehaviour
             if (_playerAgent.velocity.x > 1 || _playerRigidbody.velocity.x > 1)
             {
                 this.transform.localScale = new Vector3(-2, 2, 1);
+                _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _clickPosition - (Vector2)transform.position);
             }
             else if (_playerAgent.velocity.x < 1 || _playerRigidbody.velocity.x < 1)
             {
                 this.transform.localScale = new Vector3(2, 2, 1);
+                _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _clickPosition - (Vector2)transform.position);
             }
         }
 

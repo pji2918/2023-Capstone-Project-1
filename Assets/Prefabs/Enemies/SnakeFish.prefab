@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPosition: {x: 0, y: 0}
   _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f, type: 3}
+  _attackRange: 1.6
   ccTime: 1
   thisSpeed: 3
   thisAttack: 0
