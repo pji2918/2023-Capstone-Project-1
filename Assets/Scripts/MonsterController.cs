@@ -86,7 +86,7 @@ public class MonsterController : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.Log(e);
+            //Debug.Log(e);
         }
     }
 
