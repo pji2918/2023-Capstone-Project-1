@@ -2544,6 +2544,7 @@ GameObject:
   - component: {fileID: 299981253}
   - component: {fileID: 299981256}
   - component: {fileID: 299981255}
+  - component: {fileID: 299981257}
   m_Layer: 0
   m_Name: Whale
   m_TagString: Untagged
@@ -2570,10 +2571,11 @@ MonoBehaviour:
   thisMaxHp: 50
   thisAttackCoolTime: 0.1
   bulletPrefab: {fileID: 9041016207657785683, guid: 4bc402e5ed5f94346b983ce7ccc2e074, type: 3}
-  bulletCount1: 20
-  shotTime1: 5
+  bulletCount1: 100
+  shotTime1: 10
   shotAngle1: 60
-  bulletType1: 0
+  bulletType1: 1
+  hpBar: {fileID: 1416304736}
 --- !u!4 &299981254
 Transform:
   m_ObjectHideFlags: 0
@@ -2582,7 +2584,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299981252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.58121, y: -1.7, z: -0.61766917}
+  m_LocalPosition: {x: 0.08, y: -1.46, z: -0.61766917}
   m_LocalScale: {x: 2.605836, y: 2.605836, z: 2.605836}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2629,8 +2631,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7b75d2c0487b24e4f8084dacab943548, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -317428350, guid: a4635432e88a7264086c02ff6d32c283, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2663,6 +2665,27 @@ NavMeshAgent:
   m_BaseOffset: 0.3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &299981257
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299981252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37a3c561b6e62fe409f51e000ab59c9c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &316550672
 GameObject:
   m_ObjectHideFlags: 0
