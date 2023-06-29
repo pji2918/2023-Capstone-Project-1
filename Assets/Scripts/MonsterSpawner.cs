@@ -7,6 +7,8 @@ public class MonsterSpawner : MonoBehaviour
 
     private float _spawnCoolDown;
     public GameObject[] _monsterPrefab;
+    public GameObject[] _bossPrefab;
+    bool _bossSpawned = false;
 
 
     // Start is called before the first frame update
@@ -69,6 +71,24 @@ public class MonsterSpawner : MonoBehaviour
 
     void SpawnMonster()
     {
+        if (PlayerController.instance._timer >= 60 && !_bossSpawned)
+        {
+            if (DataManager.instance._data.day == 8)
+            {
+                Instantiate(_bossPrefab[0], new Vector3(8, 0, 0), Quaternion.identity);
+                _bossSpawned = true;
+            }
+            else if (DataManager.instance._data.day == 23)
+            {
+                Instantiate(_bossPrefab[1], new Vector3(8, 0, 0), Quaternion.identity);
+                _bossSpawned = true;
+            }
+            else if (DataManager.instance._data.day == 34)
+            {
+                Instantiate(_bossPrefab[2], new Vector3(8, 0, 0), Quaternion.identity);
+                _bossSpawned = true;
+            }
+        }
     SetMonster:
         int monsterIndex = Random.Range(0, 5);
         if (monsterIndex == 4)

@@ -32,6 +32,8 @@ public class Whale : MonsterController
         hpBarObj.SetActive(true);
         hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
 
+        InGameUI.instance._isBoss = true;
+
         speed = thisSpeed;
         attack = thisAttack;
         maxHp = thisMaxHp;
@@ -44,6 +46,7 @@ public class Whale : MonsterController
     {
         hpBarObj.SetActive(false);
         InGameUI.instance._timerText.gameObject.SetActive(true);
+        InGameUI.instance._isBoss = false;
     }
 
     // 공격

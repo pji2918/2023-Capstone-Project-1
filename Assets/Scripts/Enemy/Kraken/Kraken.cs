@@ -17,16 +17,18 @@ public class Kraken : MonoBehaviour
     [SerializeField]
     private float earthquakeTime;
 
-    [Space(10)]
-    [SerializeField]
     private Slider hpBar;
+    private GameObject hpBarObj;
     private float hp;
     [SerializeField]
     private float maxHp;
 
     private void Update()
     {
-        hpBar.value = (float)hp / maxHp;
+        if (hpBar is not null)
+        {
+            hpBar.value = (float)hp / maxHp;
+        }
         if (hp <= 0)
         {
             Destroy(gameObject);
@@ -36,9 +38,22 @@ public class Kraken : MonoBehaviour
 
     private void Start()
     {
+        InGameUI.instance._isBoss = true;
+        hpBarObj = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1).gameObject;
+        InGameUI.instance._timerText.gameObject.SetActive(false);
+        hpBarObj.SetActive(true);
+        hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
+
         hp = maxHp;
         StartCoroutine(SmallUpKrakenActive());
         StartCoroutine(EarthquakeActive());
+    }
+
+    void OnDestroy()
+    {
+        hpBarObj.SetActive(false);
+        InGameUI.instance._timerText.gameObject.SetActive(true);
+        InGameUI.instance._isBoss = false;
     }
 
     IEnumerator EarthquakeActive()

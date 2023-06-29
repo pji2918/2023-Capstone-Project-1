@@ -438,7 +438,7 @@ public class PlayerController : MonoBehaviour
         {
             CallComplete();
         }
-        else
+        else if (!InGameUI.instance._isBoss)
         {
             _timer += Time.deltaTime;
         }
