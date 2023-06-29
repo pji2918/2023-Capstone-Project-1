@@ -54,6 +54,10 @@ public class Whale : MonsterController
     #region shoot
     IEnumerator RotateShot(int bulletCount, float shotTime, BulletType bulletType)
     {
+        // bulletCount = 총알 갯수
+        // shotTime = 돌면서 발사하는 시간
+        // bulletType = 총알 타입
+
         for (int i = 0; i < 360; i += 360 / bulletCount)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, i));
@@ -80,6 +84,10 @@ public class Whale : MonsterController
 
     IEnumerator BuchaeShot(int bulletCount, float shotAngle, BulletType bulletType)
     {
+        // bulletCount = 총알 갯수
+        // shotAngle = 부채꼴 각도
+        // bulletType = 총알 타입
+
         float angle = AngleFunc(transform.position, PlayerController.instance.transform.position);
         float currentAngle = 0;
 
@@ -124,6 +132,7 @@ public class Whale : MonsterController
         }
     }
 
+    // 플레이어를 바라보는 각도를 구하는 함수
     public float AngleFunc(Vector2 self, Vector2 target)
     {
         float angle;
