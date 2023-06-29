@@ -65,6 +65,8 @@ public class MonsterController : MonoBehaviour
 
         if (currentHp <= 0)
         {
+            DataManager.instance.EnemyCount++;
+            Debug.Log("count : " + DataManager.instance.EnemyCount);
             itemSpawn.RandomItem();
             Instantiate(_dieEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);

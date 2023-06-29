@@ -83,6 +83,9 @@ public class UIManager : MonoBehaviour
     private bool _lookingStory = false;
     NeedResourse _needResourse = new NeedResourse();
 
+    public TextMeshProUGUI wLevel; //무기 강화 레벨 텍스트
+    public TextMeshProUGUI bLevel; // 쉘터 강화 레벨
+
     private int _deleteCount = 0;
 
     [SerializeField] private Button[] _optionTabs;
@@ -141,6 +144,8 @@ public class UIManager : MonoBehaviour
 
         foodText.text = "";
         foodSubText.text = "";
+        wLevel.text = "무기 레벨 :" + DataManager.instance._data.skillLevel;
+        bLevel.text = "쉘터 레벨 :" + DataManager.instance._data.buildLevel;
     }
 
     private void Update()
@@ -205,13 +210,7 @@ public class UIManager : MonoBehaviour
             DataManager.instance._data.resources["bolt"] -= DataManager.instance._data.weaponUpgrade["bolt"];
             DataManager.instance._data.resources["core"] -= DataManager.instance._data.weaponUpgrade["core"];
 
-            StartCoroutine(Typing(upgradeText, "강 화 중 . . .", 0.5f, upgradeText.gameObject, needWeaponResource));
-
-            DataManager.instance._data.skillLevel++;
-
-            ShowNeedWeaponResourse();
-
-            DataManager.instance.Save();
+            StartCoroutine(Typing(upgradeText, "강 화 중 . . .", 0.5f, upgradeText.gameObject, needWeaponResource, 1));
         }
         else if (DataManager.instance._data.skillLevel >= 15)
         {
@@ -248,13 +247,7 @@ public class UIManager : MonoBehaviour
             DataManager.instance._data.resources["bolt"] -= DataManager.instance._data.HouseUpgrade["bolt"];
             DataManager.instance._data.resources["core"] -= DataManager.instance._data.HouseUpgrade["core"];
 
-            StartCoroutine(Typing(buildText, "건 설 중 . . .", 0.5f, buildText.gameObject, needHouseResource));
-
-            DataManager.instance._data.buildLevel++;
-
-            ShowNeedBuildResourse();
-
-            DataManager.instance.Save();
+            StartCoroutine(Typing(buildText, "건 설 중 . . .", 0.5f, buildText.gameObject, needHouseResource, 2));
         }
         else if (DataManager.instance._data.buildLevel >= 10)
         {
@@ -406,6 +399,8 @@ public class UIManager : MonoBehaviour
         needWeaponTexts[2].text = DataManager.instance._data.weaponUpgrade["bolt"].ToString();
         needWeaponTexts[3].text = DataManager.instance._data.weaponUpgrade["core"].ToString();
 
+        wLevel.text = "무기 레벨 : " + DataManager.instance._data.skillLevel;
+
         for (int i = 0; i <= 3; i++)
         {
             if (DataManager.instance._data.resources.ElementAt(i).Value < DataManager.instance._data.weaponUpgrade.ElementAt(i).Value)
@@ -440,10 +435,30 @@ public class UIManager : MonoBehaviour
                 needBuildTexts[i].color = Color.black;
             }
         }
+
+        bLevel.text = "쉘터 레벨 : " + DataManager.instance._data.buildLevel;
+    }
+
+    private void ChangeWLevel()
+    {
+        DataManager.instance._data.skillLevel++;
+
+        DataManager.instance.Save();
+
+        ShowNeedWeaponResourse();
+    }
+
+    private void ChangeBLevel()
+    {
+        DataManager.instance._data.buildLevel++;
+
+        DataManager.instance.Save();
+
+        ShowNeedBuildResourse();
     }
 
     //타이핑 효과 코루틴
-    IEnumerator Typing(TextMeshProUGUI typingText, string message, float speed, GameObject popUp, GameObject window)
+    IEnumerator Typing(TextMeshProUGUI typingText, string message, float speed, GameObject popUp, GameObject window, int type)
     {
         for (int i = 0; i < message.Length; i++)
         {
@@ -455,6 +470,14 @@ public class UIManager : MonoBehaviour
         _upgradeButtons[0].interactable = true;
         _upgradeButtons[1].interactable = true;
         PopUpWidowChange(popUp, window);
+        if (type == 1)
+        {
+            ChangeWLevel();
+        }
+        else
+        {
+            ChangeBLevel();
+        }
     }
 
     //텍스트 1초 띄우기

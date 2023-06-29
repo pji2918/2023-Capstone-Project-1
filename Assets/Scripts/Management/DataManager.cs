@@ -57,6 +57,8 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
 
+    public int EnemyCount = 0;
+
     void Awake()
     {
         if (instance == null)
@@ -71,6 +73,7 @@ public class DataManager : MonoBehaviour
 
     void Start()
     {
+        EnemyCount = 0;
         _dataPath = Path.Combine(Application.persistentDataPath, "save.json");
         Load();
     }
