@@ -85,9 +85,9 @@ public class MonsterController : MonoBehaviour
                 this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
-        catch (System.Exception e)
+        catch
         {
-            //Debug.Log(e);
+
         }
     }
 

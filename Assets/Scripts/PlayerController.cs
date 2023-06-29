@@ -460,12 +460,12 @@ public class PlayerController : MonoBehaviour
         {
             if (_playerAgent.velocity.x > 1 || _playerRigidbody.velocity.x > 1)
             {
-                this.transform.localScale = new Vector3(-2, 2, 1);
+                this.transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _clickPosition - (Vector2)transform.position);
             }
             else if (_playerAgent.velocity.x < 1 || _playerRigidbody.velocity.x < 1)
             {
-                this.transform.localScale = new Vector3(2, 2, 1);
+                this.transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _clickPosition - (Vector2)transform.position);
             }
         }

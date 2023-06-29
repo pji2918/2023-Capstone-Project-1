@@ -23,7 +23,10 @@ public class MonsterSpawner : MonoBehaviour
         if (_spawnCoolDown <= 0)
         {
             _spawnCoolDown = 1f;
-            SpawnMonster();
+            if (!InGameUI.instance._isBoss)
+            {
+                SpawnMonster();
+            }
         }
     }
 
@@ -71,6 +74,10 @@ public class MonsterSpawner : MonoBehaviour
         if (monsterIndex == 4)
         {
             goto SetPosition;
+        }
+        else if (monsterIndex == 0 || monsterIndex == 1)
+        {
+            goto SetMonster;
         }
         else if (_monsterSpawnCap.Monsters[monsterIndex].MaxSpawn[DataManager.instance._data.day - 1] <= 0)
         {

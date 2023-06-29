@@ -32,6 +32,7 @@ public class InGameUI : MonoBehaviour
     public Slider[] _volumeSlider = new Slider[2];
     public TextMeshProUGUI[] _volumeText = new TextMeshProUGUI[2];
     public static InGameUI instance;
+    public bool _isBoss = false;
 
     void Awake()
     {

@@ -18,15 +18,19 @@ public class Whale : MonsterController
     [SerializeField] private float shotAngle1;
     [SerializeField] private BulletType bulletType1;
 
-    [Space(10)]
-    [SerializeField]
     private Slider hpBar;
+    private GameObject hpBarObj;
 
     // 스탯 설정
     protected override void Start()
     {
         StartCoroutine(RotateShot(bulletCount1, shotTime1, bulletType1));
         //StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, bulletType1));
+
+        hpBarObj = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1).gameObject;
+        InGameUI.instance._timerText.gameObject.SetActive(false);
+        hpBarObj.SetActive(true);
+        hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
 
         speed = thisSpeed;
         attack = thisAttack;
@@ -36,10 +40,19 @@ public class Whale : MonsterController
         base.Start();
     }
 
+    void OnDestroy()
+    {
+        hpBarObj.SetActive(false);
+        InGameUI.instance._timerText.gameObject.SetActive(true);
+    }
+
     // 공격
     protected override void Update()
     {
-        hpBar.value = (float)Hp / maxHp;
+        if (hpBar is not null)
+        {
+            hpBar.value = (float)Hp / maxHp;
+        }
 
         _agent.speed = speed;
 
