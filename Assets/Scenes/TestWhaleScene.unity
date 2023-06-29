@@ -2570,10 +2570,10 @@ MonoBehaviour:
   thisMaxHp: 50
   thisAttackCoolTime: 0.1
   bulletPrefab: {fileID: 9041016207657785683, guid: 4bc402e5ed5f94346b983ce7ccc2e074, type: 3}
-  bulletCount1: 10
-  shotTime1: 0
+  bulletCount1: 20
+  shotTime1: 5
   shotAngle1: 60
-  bulletType1: 1
+  bulletType1: 0
 --- !u!4 &299981254
 Transform:
   m_ObjectHideFlags: 0

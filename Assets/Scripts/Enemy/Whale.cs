@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Whale : MonsterController
 {
@@ -16,6 +17,10 @@ public class Whale : MonsterController
     [SerializeField] private float shotTime1;
     [SerializeField] private float shotAngle1;
     [SerializeField] private BulletType bulletType1;
+
+    [Space(10)]
+    [SerializeField]
+    private Slider hpBar;
 
     // 스탯 설정
     protected override void Start()
@@ -34,6 +39,8 @@ public class Whale : MonsterController
     // 공격
     protected override void Update()
     {
+        hpBar.value = (float)Hp / maxHp;
+
         _agent.speed = speed;
 
         base.Update();
