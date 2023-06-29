@@ -287,7 +287,18 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(Fade());
 
-        SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
+        if (DataManager.instance._data.day == 8) // 아홀로틀
+        {
+            SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Cute Digital Action Music Pack/Music/CDA_Oriental_Fever_FULL_Loop"));
+        }
+        else if (DataManager.instance._data.day == 23) // 고래
+        {
+            SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Meditative Puzzle Music Pack/Music/MP_SecretLabyrinth_60s_Loop"));
+        }
+        else // 평상시
+        {
+            SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
+        }
     }
 
     public bool _isFinishing = false;
