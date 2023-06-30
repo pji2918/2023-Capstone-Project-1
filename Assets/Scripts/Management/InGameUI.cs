@@ -1523,6 +1523,7 @@ public class InGameUI : MonoBehaviour
     {
         if (PlayerController.instance._playerHp <= 0)
         {
+            DataManager.instance.Delete();
             PlayerController.instance._isDying = true;
             PlayerController.instance._playerAgent.isStopped = true;
             PlayerController.instance._playerRigidbody.bodyType = RigidbodyType2D.Static;

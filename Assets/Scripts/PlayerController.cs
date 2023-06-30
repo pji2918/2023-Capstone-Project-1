@@ -594,7 +594,7 @@ public class PlayerController : MonoBehaviour
 
     public void CallComplete()
     {
-        if (!_isFinishing)
+        if (!_isFinishing && !_isDying)
         {
             StartCoroutine(CheckisComplete());
         }

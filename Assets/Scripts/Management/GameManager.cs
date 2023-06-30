@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public int foodCount = 0;
-
+    public float _currentCookingTime = 0;
+    public bool _isCooking = false;
     public int _healthReduce = 0;
 
     private void Awake()
@@ -34,7 +35,19 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        if (_isCooking)
+        {
+            if (_currentCookingTime < 30)
+            {
+                _currentCookingTime += Time.deltaTime;
+            }
+            else
+            {
+                foodCount += 2;
+                _isCooking = false;
+                _currentCookingTime = 0;
+            }
+        }
     }
 
     public void IncreseResource(string resourceName, int amount)

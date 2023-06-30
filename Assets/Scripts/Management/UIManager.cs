@@ -157,25 +157,21 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         ShowResource();
-        if (isCooking)
+        if (GameManager.instance._isCooking)
         {
-            currentCookingTime += Time.deltaTime;
+            foodSlider.value = GameManager.instance._currentCookingTime / cookingTime;
 
-            foodSlider.value = currentCookingTime / cookingTime;
+            foodText.text = "음식 제작중... 남은 시간: " + (int)(cookingTime - GameManager.instance._currentCookingTime) + "초";
 
-            foodText.text = "음식 제작중... 남은 시간 : " + (int)(cookingTime - currentCookingTime);
-
-            if (currentCookingTime >= cookingTime)
+            if (GameManager.instance._currentCookingTime >= cookingTime)
             {
                 StartCoroutine(TextClear(foodText, "제작이 완료되었습니다"));
 
-                GameManager.instance.foodCount += 2;
                 foodSlider.value = 0;
-                isCooking = false;
-                currentCookingTime = 0;
+                GameManager.instance._isCooking = false;
             }
         }
-        _cooker.SetBool("isCooking", isCooking);
+        _cooker.SetBool("isCooking", GameManager.instance._isCooking);
 
         if (Input.GetKeyDown(KeyCode.F10))
         {
@@ -443,12 +439,12 @@ public class UIManager : MonoBehaviour
     //음식 제작(재료 아이템 제거하는거 있음)
     public void OnClickFoodButton()
     {
-        if (DataManager.instance._data.resources["ingredient"] >= 5 && !isCooking)
+        if (DataManager.instance._data.resources["ingredient"] >= 5 && !GameManager.instance._isCooking)
         {
             GameManager.instance.ResourceReduction("ingredient", 5);
-            isCooking = true;
+            GameManager.instance._isCooking = true;
         }
-        else if (!isCooking)
+        else if (!GameManager.instance._isCooking)
         {
             StartCoroutine(TextClear(foodSubText, "재료가 부족합니다..."));
         }

@@ -15492,7 +15492,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB2E4\uC2DC \uC2DC\uC791\uD558\uAE30"
+  m_text: "\uB05D\uC740 \uC0C8\uB85C\uC6B4 \uC2DC\uC791\uC785\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a427231b113c95448b1ed6c2275746b, type: 2}
   m_sharedMaterial: {fileID: -187598000780568579, guid: 6a427231b113c95448b1ed6c2275746b, type: 2}
@@ -17352,7 +17352,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:eeb64497c13ff9947aca820a772ceecc
     m_TableEntryReference:
-      m_KeyId: 12682872652693504
+      m_KeyId: 12672688987439104
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
