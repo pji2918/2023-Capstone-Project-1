@@ -353,11 +353,11 @@ public class PlayerController : MonoBehaviour
                 // mousePosition이 플레이어의 왼쪽이면 플레이어를 왼쪽으로 바라보게 합니다.
                 if (mousePosition.x < transform.position.x)
                 {
-                    transform.localScale = new Vector3(2, 2, 1);
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 }
                 else if (mousePosition.x > transform.position.x)
                 {
-                    transform.localScale = new Vector3(-2, 2, 1);
+                    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 }
 
                 // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
