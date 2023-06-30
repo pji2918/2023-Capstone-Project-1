@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
+using UnityEngine.Localization.Settings;
 
 public class Axolotl : MonsterController
 {
@@ -40,6 +42,7 @@ public class Axolotl : MonsterController
         InGameUI.instance._timerText.gameObject.SetActive(false);
         hpBarObj.SetActive(true);
         hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
+        hpBarObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("BOSS: {0}", LocalizationSettings.StringDatabase.GetLocalizedString("UI", "boss_axolotl"));
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         axolotlCollider = gameObject.GetComponent<Collider2D>();

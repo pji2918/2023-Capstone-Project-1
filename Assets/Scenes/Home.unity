@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 25482752}
   - component: {fileID: 25482754}
   - component: {fileID: 25482753}
+  - component: {fileID: 25482755}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -333,6 +334,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25482751}
   m_CullTransparentMesh: 1
+--- !u!114 &25482755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25482751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 25482753}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1540332659}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnCloseStatButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &28906046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,9 +2429,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.049999997
+    y: 0
     width: 1
-    height: 0.9
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -7976,9 +8033,9 @@ RectTransform:
   - {fileID: 641607554}
   - {fileID: 1861892672}
   - {fileID: 139461731}
+  - {fileID: 1809381616}
   - {fileID: 1492254750}
   - {fileID: 1648148575}
-  - {fileID: 1809381616}
   m_Father: {fileID: 61745498}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19147,7 +19204,7 @@ RectTransform:
   - {fileID: 1247198442}
   - {fileID: 712235704}
   m_Father: {fileID: 646097721}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -19690,11 +19747,21 @@ MonoBehaviour:
   foodText: {fileID: 50962918}
   foodSubText: {fileID: 1477469873}
   foodCountText: {fileID: 1196563560}
+  _hpText:
+  - {fileID: 550391816}
+  - {fileID: 761103156}
+  _atkText:
+  - {fileID: 453916915}
+  - {fileID: 473878334}
+  _speedText:
+  - {fileID: 1605047195}
+  - {fileID: 2085809438}
   needWeaponResource: {fileID: 784860192}
   needHouseResource: {fileID: 1110105421}
   ResourceTextsParent: {fileID: 264597308}
   needWeaponResourceTextsParent: {fileID: 690791278}
   needHouseResourceTextsParent: {fileID: 333769595}
+  _statWindow: {fileID: 1809381615}
   _bookFit: {fileID: 563266693}
   _title: {fileID: 920210908}
   _desc: {fileID: 1360983813}
@@ -21572,7 +21639,7 @@ RectTransform:
   - {fileID: 1561913652}
   - {fileID: 548954223}
   m_Father: {fileID: 646097721}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23360,7 +23427,7 @@ RectTransform:
   - {fileID: 25482752}
   - {fileID: 1961549534}
   m_Father: {fileID: 646097721}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26099,7 +26166,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2055755466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1540332659}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnClickStatButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2055755466
 MonoBehaviour:
   m_ObjectHideFlags: 0

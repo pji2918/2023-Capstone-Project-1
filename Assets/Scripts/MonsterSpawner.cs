@@ -95,7 +95,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             goto SetPosition;
         }
-        else if (monsterIndex == 0 || monsterIndex == 1)
+        else if (monsterIndex == 1 || monsterIndex == 2)
         {
             goto SetMonster;
         }

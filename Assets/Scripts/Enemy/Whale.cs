@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Settings;
+using TMPro;
 
 public class Whale : MonsterController
 {
@@ -31,6 +33,8 @@ public class Whale : MonsterController
         InGameUI.instance._timerText.gameObject.SetActive(false);
         hpBarObj.SetActive(true);
         hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
+
+        hpBarObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("BOSS: {0}", LocalizationSettings.StringDatabase.GetLocalizedString("UI", "boss_axolotl"));
 
         InGameUI.instance._isBoss = true;
 

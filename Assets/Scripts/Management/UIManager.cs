@@ -39,6 +39,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]//제작 완료된 음식 개수 확인 텍스트
     private TextMeshProUGUI foodCountText;
 
+    [SerializeField] private TextMeshProUGUI[] _hpText = new TextMeshProUGUI[2];
+    [SerializeField] private TextMeshProUGUI[] _atkText = new TextMeshProUGUI[2];
+    [SerializeField] private TextMeshProUGUI[] _speedText = new TextMeshProUGUI[2];
+
     //재료 개수 확인 텍스트 모음
     private TextMeshProUGUI[] resourceTexts = new TextMeshProUGUI[6];
     //무기 필요 재료 확인 텍스트 모음
@@ -58,6 +62,8 @@ public class UIManager : MonoBehaviour
     private GameObject needWeaponResourceTextsParent;
     [SerializeField]//필요 재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트, 집 업글)
     private GameObject needHouseResourceTextsParent;
+    [SerializeField]
+    private GameObject _statWindow;
 
     [SerializeField]
     private RectTransform _bookFit;
@@ -191,6 +197,181 @@ public class UIManager : MonoBehaviour
         ShowNeedWeaponResourse();
 
         PopUpWidowChange(weaponWindow, upgradeWindow);
+    }
+
+    public void OnClickStatButton()
+    {
+        WindowPopUp(_statWindow);
+
+        ChangeStatsText();
+    }
+
+    public void OnCloseStatButton()
+    {
+        _statWindow.SetActive(false);
+    }
+
+    public void ChangeStatsText()
+    {
+        switch (DataManager.instance._data.buildLevel)
+        {
+            case 0:
+                {
+                    _hpText[0].text = 100.ToString();
+                    _speedText[0].text = 5f.ToString();
+                    break;
+                }
+            case 1:
+                {
+                    _hpText[0].text = 105.ToString();
+                    _speedText[0].text = 5.2f.ToString();
+                    break;
+                }
+            case 2:
+                {
+                    _hpText[0].text = 115.ToString();
+                    _speedText[0].text = 5.5f.ToString();
+                    break;
+                }
+            case 3:
+                {
+                    _hpText[0].text = 120.ToString();
+                    _speedText[0].text = 5.7f.ToString();
+                    break;
+                }
+            case 4:
+                {
+                    _hpText[0].text = 125.ToString();
+                    _speedText[0].text = 5.9f.ToString();
+                    break;
+                }
+            case 5:
+                {
+                    _hpText[0].text = 135.ToString();
+                    _speedText[0].text = 6.3f.ToString();
+                    break;
+                }
+            case 6:
+                {
+                    _hpText[0].text = 140.ToString();
+                    _speedText[0].text = 6.5f.ToString();
+                    break;
+                }
+            case 7:
+                {
+                    _hpText[0].text = 145.ToString();
+                    _speedText[0].text = 6.7f.ToString();
+                    break;
+                }
+            case 8:
+                {
+                    _hpText[0].text = 155.ToString();
+                    _speedText[0].text = 7f.ToString();
+                    break;
+                }
+            case 9:
+                {
+                    _hpText[0].text = 160.ToString();
+                    _speedText[0].text = 7.2f.ToString();
+                    break;
+                }
+            case 10:
+                {
+                    _hpText[0].text = 180.ToString();
+                    _speedText[0].text = 7.5f.ToString();
+                    break;
+                }
+        }
+
+        switch (DataManager.instance._data.skillLevel)
+        {
+            case 0:
+                {
+                    _atkText[0].text = 10.ToString();
+                    break;
+                }
+            case 1:
+                {
+                    _atkText[0].text = 11.ToString();
+                    break;
+                }
+            case 2:
+                {
+                    _atkText[0].text = 12.ToString();
+                    break;
+                }
+            case 3:
+                {
+                    _atkText[0].text = 14.ToString();
+                    break;
+                }
+            case 4:
+                {
+                    _atkText[0].text = 15.ToString();
+                    break;
+                }
+            case 5:
+                {
+                    _atkText[0].text = 16.ToString();
+                    break;
+                }
+            case 6:
+                {
+                    _atkText[0].text = 18.ToString();
+                    break;
+                }
+            case 7:
+                {
+                    _atkText[0].text = 19.ToString();
+                    break;
+                }
+            case 8:
+                {
+                    _atkText[0].text = 20.ToString();
+                    break;
+                }
+            case 9:
+                {
+                    _atkText[0].text = 23.ToString();
+                    break;
+                }
+            case 10:
+                {
+                    _atkText[0].text = 25.ToString();
+                    break;
+                }
+            case 11:
+                {
+                    _atkText[0].text = 28.ToString();
+                    break;
+                }
+            case 12:
+                {
+                    _atkText[0].text = 30.ToString();
+                    break;
+                }
+            case 13:
+                {
+                    _atkText[0].text = 33.ToString();
+                    break;
+                }
+            case 14:
+                {
+                    _atkText[0].text = 36.ToString();
+                    break;
+                }
+            case 15:
+                {
+                    _atkText[0].text = 40.ToString();
+                    break;
+                }
+            default:
+                {
+                    _atkText[0].text = 0.ToString();
+                    break;
+                }
+        }
+
     }
 
     //무기 강화 버튼 클릭

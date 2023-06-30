@@ -1239,7 +1239,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[0].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 2)
+        if (DataManager.instance._data.skillLevel >= 3)
         {
             _skillIcon[1].GetComponent<EventTrigger>().enabled = true;
             _skillLock[1].SetActive(false);
@@ -1250,7 +1250,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[1].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 3)
+        if (DataManager.instance._data.skillLevel >= 6)
         {
             _skillIcon[2].GetComponent<EventTrigger>().enabled = true;
             _skillLock[2].SetActive(false);
@@ -1261,7 +1261,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[2].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 4)
+        if (DataManager.instance._data.skillLevel >= 9)
         {
             _skillIcon[3].GetComponent<EventTrigger>().enabled = true;
             _skillLock[3].SetActive(false);
@@ -1272,7 +1272,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[3].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 5)
+        if (DataManager.instance._data.skillLevel >= 12)
         {
             _skillIcon[4].GetComponent<EventTrigger>().enabled = true;
             _skillLock[4].SetActive(false);
@@ -1289,6 +1289,8 @@ public class InGameUI : MonoBehaviour
         }
 
         #endregion
+
+
 
         #region 퀘스트 표시
         for (int i = 0; i < 5; i++)
@@ -1311,7 +1313,7 @@ public class InGameUI : MonoBehaviour
         }
         #endregion
 
-        _timerText.text = string.Format("{0:00}:{1:00}", (int)PlayerController.instance._timer / 60 % 60, (int)PlayerController.instance._timer % 60);
+        _timerText.text = string.Format("{0:00}:{1:00}", (180 - (int)PlayerController.instance._timer) / 60 % 60, (180 - (int)PlayerController.instance._timer) % 60);
 
         #region 상태 표시
         if (PlayerController.instance.isSlow)

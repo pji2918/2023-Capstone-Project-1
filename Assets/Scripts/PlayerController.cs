@@ -365,7 +365,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && DataManager.instance._data.skillLevel >= 2)
+        if (Input.GetKeyDown(KeyCode.Q) && DataManager.instance._data.skillLevel >= 3)
         {
             if (_harpoonCoolDown <= 0)
             {
@@ -377,7 +377,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && DataManager.instance._data.skillLevel >= 3)
+        if (Input.GetKeyDown(KeyCode.W) && DataManager.instance._data.skillLevel >= 6)
         {
             if (_bubbleCoolDown <= 0)
             {
@@ -387,7 +387,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && DataManager.instance._data.skillLevel >= 4)
+        if (Input.GetKeyDown(KeyCode.E) && DataManager.instance._data.skillLevel >= 9)
         {
             if (_jangpungCoolDown <= 0)
             {
@@ -401,7 +401,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && DataManager.instance._data.skillLevel >= 5)
+        if (Input.GetKeyDown(KeyCode.R) && DataManager.instance._data.skillLevel >= 12)
         {
             if (_mineCoolDown <= 0)
             {
@@ -438,7 +438,7 @@ public class PlayerController : MonoBehaviour
         {
             CallComplete();
         }
-        else if (!InGameUI.instance._isBoss)
+        else if (!InGameUI.instance._isBoss && !_isFinishing)
         {
             _timer += Time.deltaTime;
         }
@@ -609,7 +609,8 @@ public class PlayerController : MonoBehaviour
         && InGameUI.instance._isQuestComplete[1]
         && InGameUI.instance._isQuestComplete[2]
         && InGameUI.instance._isQuestComplete[3]
-        && InGameUI.instance._isQuestComplete[4]))
+        && InGameUI.instance._isQuestComplete[4])
+        && !InGameUI.instance._isBoss)
         {
             _isFinishing = true;
             _playerAgent.isStopped = true;
