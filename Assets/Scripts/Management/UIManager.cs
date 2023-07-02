@@ -168,7 +168,6 @@ public class UIManager : MonoBehaviour
                 StartCoroutine(TextClear(foodText, "제작이 완료되었습니다"));
 
                 foodSlider.value = 0;
-                GameManager.instance._isCooking = false;
             }
         }
         _cooker.SetBool("isCooking", GameManager.instance._isCooking);

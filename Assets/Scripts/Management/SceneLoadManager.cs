@@ -87,6 +87,13 @@ public class SceneLoadManager : MonoBehaviour
         StartCoroutine(LoadScene("Fighting"));
     }
 
+    public bool _isCursorOnTip = false;
+
+    public void Cursor(bool state)
+    {
+        _isCursorOnTip = state;
+    }
+
     IEnumerator LoadScene(string sceneName)
     {
         switch (SceneManager.GetActiveScene().name)
@@ -130,7 +137,7 @@ public class SceneLoadManager : MonoBehaviour
                 if (_loadingBar.value == 1f)
                 {
                     _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
-                    if (Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2))
+                    if (Input.anyKeyDown && !_isCursorOnTip)
                     {
                         _sceneChangeFade.SetActive(true);
                         for (int i = 0; i <= 255; i++)
