@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1520593842818092385}
   - component: {fileID: 1520593842818092384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Kraken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

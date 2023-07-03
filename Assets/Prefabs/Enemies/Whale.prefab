@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2994061554595746673}
   - component: {fileID: 2155146630453843361}
   - component: {fileID: 3190246704402909128}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Whale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,13 +50,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPosition: {x: 0, y: 0}
-  _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f, type: 3}
+  _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f,
+    type: 3}
   _attackRange: 1
   thisSpeed: 0
   thisAttack: 10
   thisMaxHp: 50
   thisAttackCoolTime: 0.1
-  bulletPrefab: {fileID: 9041016207657785683, guid: 4bc402e5ed5f94346b983ce7ccc2e074, type: 3}
+  bulletPrefab: {fileID: 9041016207657785683, guid: 4bc402e5ed5f94346b983ce7ccc2e074,
+    type: 3}
   bulletCount1: 5
   shotTime1: 10
   shotAngle1: 60

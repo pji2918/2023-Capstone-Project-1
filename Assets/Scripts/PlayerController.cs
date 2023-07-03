@@ -325,27 +325,15 @@ public class PlayerController : MonoBehaviour
             _playerArrow.SetActive(false);
         }
 
-
-
-        if (!_isDash)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _playerAgent.isStopped = true;
-                _playerAgent.velocity = Vector2.zero;
-            }
-            else if (Input.GetKeyUp(KeyCode.Space))
-            {
-                _playerAgent.isStopped = false;
-            }
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
             if (!_isDying && _attackCoolDown <= 0f)
             {
                 _attackCoolDown = 0.7f;
                 _isAttacking = true;
+
+                _playerAgent.isStopped = true;
+                _playerAgent.velocity = Vector2.zero;
 
                 _playerAnimator.SetTrigger("Attack");
 
@@ -362,6 +350,7 @@ public class PlayerController : MonoBehaviour
 
                 // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
                 StartCoroutine(AttackEffect());
+
             }
         }
 
@@ -571,6 +560,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         _playerAttackEffect.SetActive(false);
         _isAttacking = false;
+        _playerAgent.isStopped = false;
     }
 
     IEnumerator Fade()
@@ -666,9 +656,10 @@ public class PlayerController : MonoBehaviour
             _dashCoolDown = 7f;
             _isDash = true;
 
-            Physics2D.IgnoreLayerCollision(6, 7);
-            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
             _playerAgent.isStopped = true;
+            _playerAgent.enabled = false;
+            Physics2D.IgnoreLayerCollision(6, 7, true);
+            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
 
             // 마우스 방향으로 돌진합니다.
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -679,6 +670,8 @@ public class PlayerController : MonoBehaviour
 
             _playerRigidbody.velocity = Vector2.zero;
             this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            Physics2D.IgnoreLayerCollision(6, 7, false);
+            _playerAgent.enabled = true;
             _playerAgent.isStopped = false;
             _isDash = false;
         }
