@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2994061554595746687}
   - component: {fileID: 2994061554595746673}
   - component: {fileID: 2155146630453843361}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Whale
   m_TagString: Untagged
   m_Icon: {fileID: 0}

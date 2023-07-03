@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7533478185139717371}
   - component: {fileID: 7533478185139717372}
   - component: {fileID: 7533478185139717373}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Axolotl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
