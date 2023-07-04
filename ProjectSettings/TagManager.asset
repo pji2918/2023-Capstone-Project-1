@@ -50,6 +50,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Shadow
+    uniqueID: 1728580585
+    locked: 0
   - name: Entity
     uniqueID: 2265946137
     locked: 0
