@@ -49,6 +49,9 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI[] needWeaponTexts = new TextMeshProUGUI[4];
     //집 필요 재료 확인 텍스트 모음
     private TextMeshProUGUI[] needBuildTexts = new TextMeshProUGUI[4];
+
+    [SerializeField] private TextMeshProUGUI _shelterLevelText;
+    [SerializeField] private TextMeshProUGUI _weaponLevelText;
     #endregion
 
     #region 기타
@@ -81,10 +84,6 @@ public class UIManager : MonoBehaviour
 
     //음식 제작 시간
     private float cookingTime = 30;
-    //현재 제작 시간
-    private float currentCookingTime = 0;
-    //제작 상태
-    private bool isCooking = false;
 
     private bool _lookingStory = false;
     NeedResourse _needResourse = new NeedResourse();
@@ -206,167 +205,58 @@ public class UIManager : MonoBehaviour
         _statWindow.SetActive(false);
     }
 
+    [SerializeField] private GameObject[] _skillLocks;
+
     public void ChangeStatsText()
     {
-        switch (DataManager.instance._data.buildLevel)
+        if (DataManager.instance._data.skillLevel >= 1)
         {
-            case 0:
-                {
-                    _hpText[0].text = 100.ToString();
-                    _speedText[0].text = 5f.ToString();
-                    break;
-                }
-            case 1:
-                {
-                    _hpText[0].text = 105.ToString();
-                    _speedText[0].text = 5.2f.ToString();
-                    break;
-                }
-            case 2:
-                {
-                    _hpText[0].text = 115.ToString();
-                    _speedText[0].text = 5.5f.ToString();
-                    break;
-                }
-            case 3:
-                {
-                    _hpText[0].text = 120.ToString();
-                    _speedText[0].text = 5.7f.ToString();
-                    break;
-                }
-            case 4:
-                {
-                    _hpText[0].text = 125.ToString();
-                    _speedText[0].text = 5.9f.ToString();
-                    break;
-                }
-            case 5:
-                {
-                    _hpText[0].text = 135.ToString();
-                    _speedText[0].text = 6.3f.ToString();
-                    break;
-                }
-            case 6:
-                {
-                    _hpText[0].text = 140.ToString();
-                    _speedText[0].text = 6.5f.ToString();
-                    break;
-                }
-            case 7:
-                {
-                    _hpText[0].text = 145.ToString();
-                    _speedText[0].text = 6.7f.ToString();
-                    break;
-                }
-            case 8:
-                {
-                    _hpText[0].text = 155.ToString();
-                    _speedText[0].text = 7f.ToString();
-                    break;
-                }
-            case 9:
-                {
-                    _hpText[0].text = 160.ToString();
-                    _speedText[0].text = 7.2f.ToString();
-                    break;
-                }
-            case 10:
-                {
-                    _hpText[0].text = 180.ToString();
-                    _speedText[0].text = 7.5f.ToString();
-                    break;
-                }
+            _skillLocks[0].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 3)
+        {
+            _skillLocks[1].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 6)
+        {
+            _skillLocks[2].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 9)
+        {
+            _skillLocks[3].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 12)
+        {
+            _skillLocks[4].SetActive(false);
         }
 
-        switch (DataManager.instance._data.skillLevel)
+        _shelterLevelText.text = string.Format("쉘터 레벨 : {0}", DataManager.instance._data.buildLevel);
+        _weaponLevelText.text = string.Format("무기 레벨 : {0}", DataManager.instance._data.skillLevel);
+
+        _hpText[0].text = DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel].ToString();
+        _speedText[0].text = DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel].ToString();
+
+        if (DataManager.instance._data.buildLevel >= 10)
         {
-            case 0:
-                {
-                    _atkText[0].text = 10.ToString();
-                    break;
-                }
-            case 1:
-                {
-                    _atkText[0].text = 11.ToString();
-                    break;
-                }
-            case 2:
-                {
-                    _atkText[0].text = 12.ToString();
-                    break;
-                }
-            case 3:
-                {
-                    _atkText[0].text = 14.ToString();
-                    break;
-                }
-            case 4:
-                {
-                    _atkText[0].text = 15.ToString();
-                    break;
-                }
-            case 5:
-                {
-                    _atkText[0].text = 16.ToString();
-                    break;
-                }
-            case 6:
-                {
-                    _atkText[0].text = 18.ToString();
-                    break;
-                }
-            case 7:
-                {
-                    _atkText[0].text = 19.ToString();
-                    break;
-                }
-            case 8:
-                {
-                    _atkText[0].text = 20.ToString();
-                    break;
-                }
-            case 9:
-                {
-                    _atkText[0].text = 23.ToString();
-                    break;
-                }
-            case 10:
-                {
-                    _atkText[0].text = 25.ToString();
-                    break;
-                }
-            case 11:
-                {
-                    _atkText[0].text = 28.ToString();
-                    break;
-                }
-            case 12:
-                {
-                    _atkText[0].text = 30.ToString();
-                    break;
-                }
-            case 13:
-                {
-                    _atkText[0].text = 33.ToString();
-                    break;
-                }
-            case 14:
-                {
-                    _atkText[0].text = 36.ToString();
-                    break;
-                }
-            case 15:
-                {
-                    _atkText[0].text = 40.ToString();
-                    break;
-                }
-            default:
-                {
-                    _atkText[0].text = 0.ToString();
-                    break;
-                }
+            _hpText[1].gameObject.SetActive(false);
+            _speedText[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            _hpText[1].text = string.Format("+{0}", DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel + 1] - DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel]);
+            _speedText[1].text = string.Format("+{0}", DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel + 1] - DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel]);
         }
 
+        _atkText[0].text = DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel].ToString();
+
+        if (DataManager.instance._data.skillLevel >= 15)
+        {
+            _atkText[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            _atkText[1].text = string.Format("+{0}", DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel + 1] - DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel]);
+        }
     }
 
     //무기 강화 버튼 클릭

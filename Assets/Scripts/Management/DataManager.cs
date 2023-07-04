@@ -53,10 +53,37 @@ public class Data
     };
 }
 
+public struct PlayerStat
+{
+    public List<int> atk, maxHp;
+    public List<double> skillDamageMultiplier;
+    public List<float> moveSpeed;
+
+    public PlayerStat(int dummy)
+    {
+        atk = new List<int>()
+        {
+            10, 11, 12, 14, 15, 16, 18, 19, 20, 23, 25, 28, 30, 33, 36, 40
+        };
+        skillDamageMultiplier = new List<double>()
+        {
+            0, 0.2, 0.2, 0.3, 0.5, 0.5, 1, 1, 1, 1.5, 1.5, 1.7, 2, 2, 2, 2.5
+        };
+        maxHp = new List<int>()
+        {
+            100, 105, 115, 120, 125, 135, 140, 145, 155, 160, 180
+        };
+        moveSpeed = new List<float>()
+        {
+            5f, 5.2f, 5.5f, 5.7f, 5.9f, 6.3f, 6.5f, 6.7f, 7f, 7.2f, 7.5f
+        };
+    }
+}
+
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
-
+    public PlayerStat _playerStat = new PlayerStat(0);
     public int EnemyCount = 0;
 
     void Awake()
