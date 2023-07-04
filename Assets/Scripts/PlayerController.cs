@@ -566,10 +566,15 @@ public class PlayerController : MonoBehaviour
     IEnumerator Fade()
     {
         _completeFade.SetActive(true);
-        for (int i = 255; i >= 0; i--)
+        float elapsedTime = 0f;
+        float fadeTime = 1f; // fade time in seconds
+        Color32 startColor = new Color32(0, 0, 0, 255);
+        Color32 endColor = new Color32(0, 0, 0, 0);
+        while (elapsedTime < fadeTime)
         {
-            _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.000001f);
+            _completeFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
         _completeFade.SetActive(false);
     }
@@ -606,10 +611,15 @@ public class PlayerController : MonoBehaviour
             _playerAgent.isStopped = true;
             _playerRigidbody.bodyType = RigidbodyType2D.Static;
             _completeFade.SetActive(true);
-            for (int i = 0; i <= 255; i++)
+            float elapsedTime = 0f;
+            float fadeTime = 1f; // fade time in seconds
+            Color32 startColor = new Color32(0, 0, 0, 0);
+            Color32 endColor = new Color32(0, 0, 0, 255);
+            while (elapsedTime < fadeTime)
             {
-                _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                yield return new WaitForSeconds(0.01f);
+                _completeFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
             }
             yield return new WaitForSeconds(1f);
             DataManager.instance._data.day += 1;

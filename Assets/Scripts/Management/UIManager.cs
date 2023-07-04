@@ -544,10 +544,15 @@ public class UIManager : MonoBehaviour
     IEnumerator Fade()
     {
         _sceneChangeFade.SetActive(true);
-        for (int i = 0; i <= 255; i++)
+        float elapsedTime = 0f;
+        float fadeTime = 1f; // fade time in seconds
+        Color32 startColor = new Color32(0, 0, 0, 0);
+        Color32 endColor = new Color32(0, 0, 0, 255);
+        while (elapsedTime < fadeTime)
         {
-            _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.00005f);
+            _sceneChangeFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("Loading");

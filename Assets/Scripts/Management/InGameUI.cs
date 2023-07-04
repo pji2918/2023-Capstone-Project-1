@@ -1528,10 +1528,15 @@ public class InGameUI : MonoBehaviour
             PlayerController.instance._playerAgent.isStopped = true;
             PlayerController.instance._playerRigidbody.bodyType = RigidbodyType2D.Static;
             _dieFade.SetActive(true);
-            for (int i = 0; i <= 255; i++)
+            float elapsedTime = 0f;
+            float fadeTime = 0.255f; // fade time in seconds
+            Color32 startColor = new Color32(0, 0, 0, 0);
+            Color32 endColor = new Color32(0, 0, 0, 255);
+            while (elapsedTime < fadeTime)
             {
-                _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                yield return new WaitForSeconds(0.001f);
+                _dieFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
             }
             yield return new WaitForSecondsRealtime(2f);
             _gameOverUI.SetActive(true);
