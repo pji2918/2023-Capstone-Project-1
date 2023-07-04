@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2994061554595746687}
   - component: {fileID: 2994061554595746673}
   - component: {fileID: 2155146630453843361}
+  - component: {fileID: 3190246704402909128}
   m_Layer: 7
   m_Name: Whale
   m_TagString: Untagged
@@ -49,17 +50,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPosition: {x: 0, y: 0}
-  _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f, type: 3}
+  _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f,
+    type: 3}
   _attackRange: 1
   thisSpeed: 0
   thisAttack: 10
   thisMaxHp: 50
   thisAttackCoolTime: 0.1
-  bulletPrefab: {fileID: 9041016207657785683, guid: 4bc402e5ed5f94346b983ce7ccc2e074, type: 3}
-  bulletCount1: 100
+  bulletPrefab: {fileID: 9041016207657785683, guid: 4bc402e5ed5f94346b983ce7ccc2e074,
+    type: 3}
+  bulletCount1: 5
   shotTime1: 10
   shotAngle1: 60
-  bulletType1: 1
+  dir1: 1
+  bulletType1: 0
 --- !u!195 &2994061554595746672
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -181,3 +185,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7692395, y: 1.1075838}
   m_EdgeRadius: 0
+--- !u!114 &3190246704402909128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994061554595746684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6037a546a75ee004193f7be10941632a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _items:
+  - {fileID: 3486142746569286047, guid: 9a05b2cceb773e84e93079079c719e08, type: 3}
+  - {fileID: 7061767227500857499, guid: 9893f5e8a6da59741986491b3a703322, type: 3}
+  - {fileID: 2939001956757266134, guid: 3cb117bbde97bf94f9ecae968d2a89e6, type: 3}
+  - {fileID: 6996856977536663405, guid: 0ffa1c1d208fb014ea62f446030d58de, type: 3}
+  - {fileID: 489368551200082246, guid: ebb536ea5eda66e49b3009bd1fd8f121, type: 3}
+  _itemPercents:
+  - itemNum: 0
+    percent: 10
+  - itemNum: 1
+    percent: 10
+  - itemNum: 2
+    percent: 3
+  - itemNum: 3
+    percent: 15
+  - itemNum: 4
+    percent: 7
+  - itemNum: 5
+    percent: 55
