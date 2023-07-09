@@ -35,7 +35,7 @@ public class Whale : MonsterController
         hpBarObj.SetActive(true);
         hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
 
-        hpBarObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("BOSS: {0}", LocalizationSettings.StringDatabase.GetLocalizedString("UI", "boss_axolotl"));
+        hpBarObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("BOSS: {0}", LocalizationSettings.StringDatabase.GetLocalizedString("UI", "boss_whale"));
 
         InGameUI.instance._isBoss = true;
 
