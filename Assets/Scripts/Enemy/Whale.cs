@@ -27,8 +27,7 @@ public class Whale : MonsterController
     // 스탯 설정
     protected override void Start()
     {
-        StartCoroutine(SpinShot(bulletCount1, bulletType1, 1));
-        StartCoroutine(SpinShot(bulletCount1, bulletType1, -1));
+        StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, BulletType.bomb));
         //StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, bulletType1));
 
         hpBarObj = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1).gameObject;
@@ -145,7 +144,7 @@ public class Whale : MonsterController
 
         //Debug.Log(angle);
         yield return new WaitForSeconds(7.0f);
-        //StartCoroutine(BuchaeShot(bulletCount, shotAngle, bulletType));
+        StartCoroutine(BuchaeShot(bulletCount, shotAngle, bulletType));
     }
     #endregion
 
