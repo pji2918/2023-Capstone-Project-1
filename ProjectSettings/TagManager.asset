@@ -62,3 +62,6 @@ TagManager:
   - name: Indicator
     uniqueID: 3007531953
     locked: 0
+  - name: Overlay
+    uniqueID: 1311506133
+    locked: 0
