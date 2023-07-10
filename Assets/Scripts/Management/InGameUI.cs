@@ -57,7 +57,7 @@ public class InGameUI : MonoBehaviour
 
                     _quest[2]._type = ItemNum.bolt;
                     _quest[2]._amount = 0;
-                    _quest[2]._objectiveAmount = 3;
+                    _quest[2]._objectiveAmount = 4;
 
                     _quest[3]._type = ItemNum.ingredient;
                     _quest[3]._amount = 0;
