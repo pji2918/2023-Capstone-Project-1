@@ -23,11 +23,6 @@ public class UIManager : MonoBehaviour
     private GameObject Option;
     #endregion
 
-    [SerializeField]
-    private Image shelterImage;
-    [SerializeField]
-    private Sprite[] shelterSprites = new Sprite[4];
-
     #region 텍스트
     [SerializeField]//강화중...타이핑 텍스트
     private TextMeshProUGUI upgradeText;
@@ -96,6 +91,16 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI wLevel; //무기 강화 레벨 텍스트
     public TextMeshProUGUI bLevel; // 쉘터 강화 레벨
 
+    [SerializeField]
+    private Image weaponImage;
+    [SerializeField]
+    private Sprite[] weaponSprites = new Sprite[5];
+
+    [SerializeField]
+    private Image shelterImage;
+    [SerializeField]
+    private Sprite[] shelterSprites = new Sprite[4];
+
     private int _deleteCount = 0;
 
     [SerializeField] private Button[] _optionTabs;
@@ -157,15 +162,40 @@ public class UIManager : MonoBehaviour
         wLevel.text = "무기 레벨 :" + DataManager.instance._data.skillLevel;
         bLevel.text = "쉘터 레벨 :" + DataManager.instance._data.buildLevel;
 
+        switch (DataManager.instance._data.skillLevel)
+        {
+            case 1:
+                weaponImage.sprite = weaponSprites[0];
+                break;
+            case 3:
+                weaponImage.sprite = weaponSprites[1];
+                break;
+            case 6:
+                weaponImage.sprite = weaponSprites[2];
+                break;
+            case 9:
+                weaponImage.sprite = weaponSprites[3];
+                break;
+            case 12:
+                weaponImage.sprite = weaponSprites[4];
+                break;
+            default:
+                break;
+        }
         switch (DataManager.instance._data.buildLevel)
         {
             case 2:
+            case 3:
+            case 4:
                 shelterImage.sprite = shelterSprites[0];
                 break;
             case 5:
+            case 6:
+            case 7:
                 shelterImage.sprite = shelterSprites[1];
                 break;
             case 8:
+            case 9:
                 shelterImage.sprite = shelterSprites[2];
                 break;
             case 10:
@@ -559,7 +589,7 @@ public class UIManager : MonoBehaviour
             typingText.text = message.Substring(0, i + 1);
             yield return new WaitForSeconds(speed);
         }
-        typingText.text = "완료";
+        //TODO:effect anime
         yield return new WaitForSeconds(1);
         _upgradeButtons[0].interactable = true;
         _upgradeButtons[1].interactable = true;
@@ -573,6 +603,26 @@ public class UIManager : MonoBehaviour
             ChangeBLevel();
         }
 
+        switch (DataManager.instance._data.skillLevel)
+        {
+            case 1:
+                weaponImage.sprite = weaponSprites[0];
+                break;
+            case 3:
+                weaponImage.sprite = weaponSprites[1];
+                break;
+            case 6:
+                weaponImage.sprite = weaponSprites[2];
+                break;
+            case 9:
+                weaponImage.sprite = weaponSprites[3];
+                break;
+            case 12:
+                weaponImage.sprite = weaponSprites[4];
+                break;
+            default:
+                break;
+        }
         switch (DataManager.instance._data.buildLevel)
         {
             case 2:
