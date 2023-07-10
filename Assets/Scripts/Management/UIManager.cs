@@ -23,6 +23,11 @@ public class UIManager : MonoBehaviour
     private GameObject Option;
     #endregion
 
+    [SerializeField]
+    private Image shelterImage;
+    [SerializeField]
+    private Sprite[] shelterSprites = new Sprite[4];
+
     #region 텍스트
     [SerializeField]//강화중...타이핑 텍스트
     private TextMeshProUGUI upgradeText;
@@ -151,6 +156,24 @@ public class UIManager : MonoBehaviour
         foodSubText.text = "";
         wLevel.text = "무기 레벨 :" + DataManager.instance._data.skillLevel;
         bLevel.text = "쉘터 레벨 :" + DataManager.instance._data.buildLevel;
+
+        switch (DataManager.instance._data.buildLevel)
+        {
+            case 2:
+                shelterImage.sprite = shelterSprites[0];
+                break;
+            case 5:
+                shelterImage.sprite = shelterSprites[1];
+                break;
+            case 8:
+                shelterImage.sprite = shelterSprites[2];
+                break;
+            case 10:
+                shelterImage.sprite = shelterSprites[3];
+                break;
+            default:
+                break;
+        }
     }
 
     private void Update()
@@ -548,6 +571,24 @@ public class UIManager : MonoBehaviour
         else
         {
             ChangeBLevel();
+        }
+
+        switch (DataManager.instance._data.buildLevel)
+        {
+            case 2:
+                shelterImage.sprite = shelterSprites[0];
+                break;
+            case 5:
+                shelterImage.sprite = shelterSprites[1];
+                break;
+            case 8:
+                shelterImage.sprite = shelterSprites[2];
+                break;
+            case 10:
+                shelterImage.sprite = shelterSprites[3];
+                break;
+            default:
+                break;
         }
     }
 
@@ -1335,72 +1376,72 @@ public class NeedResourse
                 }
             case 1:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(14, 14, 20, 0);
+                    DataManager.instance.NeedWeaponResourseChange(12, 12, 16, 0);
                     break;
                 }
             case 2:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(24, 24, 31, 1);
+                    DataManager.instance.NeedWeaponResourseChange(14, 14, 18, 1);
                     break;
                 }
             case 3:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(21, 21, 28, 0);
+                    DataManager.instance.NeedWeaponResourseChange(16, 16, 19, 0);
                     break;
                 }
             case 4:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(29, 29, 36, 0);
+                    DataManager.instance.NeedWeaponResourseChange(17, 17, 21, 0);
                     break;
                 }
             case 5:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(39, 39, 45, 1);
+                    DataManager.instance.NeedWeaponResourseChange(18, 18, 25, 1);
                     break;
                 }
             case 6:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(45, 45, 51, 0);
+                    DataManager.instance.NeedWeaponResourseChange(20, 20, 27, 0);
                     break;
                 }
             case 7:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(53, 53, 66, 1);
+                    DataManager.instance.NeedWeaponResourseChange(22, 22, 30, 1);
                     break;
                 }
             case 8:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(68, 68, 81, 2);
+                    DataManager.instance.NeedWeaponResourseChange(27, 27, 35, 2);
                     break;
                 }
             case 9:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(84, 84, 103, 1);
+                    DataManager.instance.NeedWeaponResourseChange(29, 29, 38, 1);
                     break;
                 }
             case 10:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(98, 98, 124, 1);
+                    DataManager.instance.NeedWeaponResourseChange(32, 32, 42, 1);
                     break;
                 }
             case 11:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(117, 117, 148, 3);
+                    DataManager.instance.NeedWeaponResourseChange(35, 35, 49, 3);
                     break;
                 }
             case 12:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(142, 142, 178, 2);
+                    DataManager.instance.NeedWeaponResourseChange(38, 38, 53, 2);
                     break;
                 }
             case 13:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(167, 167, 197, 2);
+                    DataManager.instance.NeedWeaponResourseChange(42, 42, 59, 2);
                     break;
                 }
             case 14:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(201, 201, 214, 2);
+                    DataManager.instance.NeedWeaponResourseChange(48, 48, 71, 2);
                     break;
                 }
             default:
@@ -1416,52 +1457,52 @@ public class NeedResourse
         {
             case 0:
                 {
-                    DataManager.instance.NeedHouseResourseChange(35, 35, 25, 0);
+                    DataManager.instance.NeedHouseResourseChange(20, 20, 13, 0);
                     break;
                 }
             case 1:
                 {
-                    DataManager.instance.NeedHouseResourseChange(42, 42, 62, 1);
+                    DataManager.instance.NeedHouseResourseChange(26, 26, 21, 1);
                     break;
                 }
             case 2:
                 {
-                    DataManager.instance.NeedHouseResourseChange(56, 56, 41, 0);
+                    DataManager.instance.NeedHouseResourseChange(32, 32, 24, 0);
                     break;
                 }
             case 3:
                 {
-                    DataManager.instance.NeedHouseResourseChange(72, 72, 58, 0);
+                    DataManager.instance.NeedHouseResourseChange(39, 39, 25, 0);
                     break;
                 }
             case 4:
                 {
-                    DataManager.instance.NeedHouseResourseChange(95, 95, 102, 1);
+                    DataManager.instance.NeedHouseResourseChange(47, 47, 31, 1);
                     break;
                 }
             case 5:
                 {
-                    DataManager.instance.NeedHouseResourseChange(112, 112, 78, 1);
+                    DataManager.instance.NeedHouseResourseChange(58, 58, 35, 1);
                     break;
                 }
             case 6:
                 {
-                    DataManager.instance.NeedHouseResourseChange(134, 134, 110, 1);
+                    DataManager.instance.NeedHouseResourseChange(71, 71, 42, 1);
                     break;
                 }
             case 7:
                 {
-                    DataManager.instance.NeedHouseResourseChange(158, 158, 164, 2);
+                    DataManager.instance.NeedHouseResourseChange(84, 84, 49, 1);
                     break;
                 }
             case 8:
                 {
-                    DataManager.instance.NeedHouseResourseChange(174, 174, 154, 2);
+                    DataManager.instance.NeedHouseResourseChange(93, 93, 54, 2);
                     break;
                 }
             case 9:
                 {
-                    DataManager.instance.NeedHouseResourseChange(224, 224, 243, 3);
+                    DataManager.instance.NeedHouseResourseChange(106, 106, 58, 3);
                     break;
                 }
             default:
