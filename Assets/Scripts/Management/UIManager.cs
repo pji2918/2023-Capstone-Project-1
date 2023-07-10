@@ -1347,7 +1347,32 @@ public class UIManager : MonoBehaviour
     {
         if (!_resolutionLocked)
         {
-            DataManager.instance._data.fullScreenMode = (FullScreenMode)value + 1;
+            FullScreenMode mode = FullScreenMode.ExclusiveFullScreen;
+            switch (value)
+            {
+                case 0:
+                    {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+                        mode = FullScreenMode.ExclusiveFullScreen;
+#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+                        mode = FullScreenMode.MaximizedWindow;
+#elif UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+                        mode = FullScreenMode.FullScreenWindow;
+#endif
+                        break;
+                    }
+                case 1:
+                    {
+                        mode = FullScreenMode.FullScreenWindow;
+                        break;
+                    }
+                case 2:
+                    {
+                        mode = FullScreenMode.Windowed;
+                        break;
+                    }
+            }
+            DataManager.instance._data.fullScreenMode = mode;
             Screen.fullScreenMode = DataManager.instance._data.fullScreenMode;
         }
     }

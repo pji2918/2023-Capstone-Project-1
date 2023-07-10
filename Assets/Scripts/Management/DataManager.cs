@@ -20,7 +20,7 @@ public class Data
 
     public int musicVolume = 100;
     public int effectVolume = 100;
-    public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
+    public FullScreenMode fullScreenMode = FullScreenMode.ExclusiveFullScreen;
     public Resolution resolution;
     public bool is3dAudio = true;
     public bool isScreenVibration = true, displayDamage = true;
