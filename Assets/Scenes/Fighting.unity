@@ -5097,7 +5097,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617239692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.4, y: -4.9, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5139,9 +5139,9 @@ MonoBehaviour:
   - {fileID: 1827376385985832205, guid: f415a2a392601f54c8c81e6bc02bc1a8, type: 3}
   - {fileID: 595099128535145315, guid: 253a154ef30508c4da1f1b89ad616e62, type: 3}
   _bossPrefab:
+  - {fileID: 1520593842818092391, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
   - {fileID: 7533478185139717347, guid: 0528d116782a01443b300178e4e4ae6b, type: 3}
   - {fileID: 2994061554595746684, guid: 7f7ada96dad0f44499b51ef4aaaad45a, type: 3}
-  - {fileID: 1520593842818092391, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
 --- !u!50 &617239698
 Rigidbody2D:
   serializedVersion: 4
@@ -8992,7 +8992,6 @@ MonoBehaviour:
   _playerAnimator: {fileID: 937238579}
   _playerAttackEffect: {fileID: 579561806}
   _playerDashEffect: {fileID: 363231855}
-  _overlayMaterial: {fileID: 2100000, guid: 601de5b83a19e6940b23bd8dc56bc742, type: 2}
   slowCurrentTime: 0
   isSlow: 0
   _moveSpeed: 5

@@ -120,13 +120,13 @@ public class PlayerController : MonoBehaviour
         switch (DataManager.instance._data.day)
         {
             case 8:
-                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("CDA_Oriental_Fever_FULL_Loop"));
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Sounds/CDA_Oriental_Fever_FULL_Loop"));
                 break;
             case 23:
-                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("CDA_Ready_Steady_GO_FULL_Loop"));
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Sounds/CDA_Ready_Steady_GO_FULL_Loop"));
                 break;
             case 34:
-                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("MP_SecretLabyrinth_FULL_Loop"));
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Sounds/MP_SecretLabyrinth_FULL_Loop"));
                 break;
             default:
                 SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));

@@ -71,7 +71,7 @@ public class MonsterSpawner : MonoBehaviour
 
     void SpawnMonster()
     {
-        if (PlayerController.instance._timer >= 60 && !_bossSpawned)
+        if (!_bossSpawned)
         {
             if (DataManager.instance._data.day == 8)
             {

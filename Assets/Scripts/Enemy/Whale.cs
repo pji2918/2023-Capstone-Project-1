@@ -81,7 +81,7 @@ public class Whale : MonsterController
         }
 
         yield return new WaitForSeconds(5f);
-        StartCoroutine(SpinShot(bulletCount, bulletType, dir));
+        //StartCoroutine(SpinShot(bulletCount, bulletType, dir));
     }
 
     IEnumerator RotateShot(int bulletCount, float shotTime, BulletType bulletType, float startAngle)
@@ -144,7 +144,7 @@ public class Whale : MonsterController
 
         //Debug.Log(angle);
         yield return new WaitForSeconds(7.0f);
-        StartCoroutine(BuchaeShot(bulletCount, shotAngle, bulletType));
+        //StartCoroutine(BuchaeShot(bulletCount, shotAngle, bulletType));
     }
     #endregion
 
