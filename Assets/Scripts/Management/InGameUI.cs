@@ -42,7 +42,6 @@ public class InGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         #region 퀘스트 설정
         switch (DataManager.instance._data.day)
         {
@@ -1386,7 +1385,6 @@ public class InGameUI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SoundManager.instance.PauseOrResumeMusic();
             if (!_isPause)
             {
                 if (!PlayerController.instance._isDying || !PlayerController.instance._isFinishing)

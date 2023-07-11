@@ -8992,6 +8992,7 @@ MonoBehaviour:
   _playerAnimator: {fileID: 937238579}
   _playerAttackEffect: {fileID: 579561806}
   _playerDashEffect: {fileID: 363231855}
+  _overlayMaterial: {fileID: 2100000, guid: 601de5b83a19e6940b23bd8dc56bc742, type: 2}
   slowCurrentTime: 0
   isSlow: 0
   _moveSpeed: 5
@@ -9046,7 +9047,7 @@ NavMeshAgent:
   m_Height: 0.97
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 4
 --- !u!70 &937238583
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

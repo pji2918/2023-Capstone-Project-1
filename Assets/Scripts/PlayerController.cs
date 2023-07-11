@@ -77,15 +77,9 @@ public class PlayerController : MonoBehaviour
 
     public CinemachineImpulseSource _impulseSource;
 
-    static bool WantsToQuit()
-    {
-        return false;
-    }
-
     // 플레이어의 NavMeshAgent 컴포넌트를 가져옵니다.
     void Start()
     {
-        Application.wantsToQuit += WantsToQuit;
         // 플레이어의 NavMesh 에이전트 컴포넌트를 가져오고, 자동 회전을 끕니다.
         _playerAgent = GetComponent<NavMeshAgent>();
         _playerAgent.updateRotation = false;
@@ -98,7 +92,7 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
 
         _playerMaxHp = DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel];
-        _moveSpeed = (float)DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
+        _moveSpeed = DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
 
         _playerAtk = DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel];
         _skillDamageMultiplier = DataManager.instance._playerStat.skillDamageMultiplier[DataManager.instance._data.skillLevel];
@@ -438,8 +432,6 @@ public class PlayerController : MonoBehaviour
         && InGameUI.instance._isQuestComplete[4])
         && !InGameUI.instance._isBoss)
         {
-            DataManager.instance._data.isPlaying = false;
-            Application.wantsToQuit -= WantsToQuit;
             _isFinishing = true;
             _playerAgent.isStopped = true;
             _playerRigidbody.bodyType = RigidbodyType2D.Static;
