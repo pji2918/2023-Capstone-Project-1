@@ -56,7 +56,7 @@ MonoBehaviour:
   _dieEffect: {fileID: 7166721605698688239, guid: 15a86f20613932f44aff4a4f22dc580f, type: 3}
   _attackRange: 1.2
   thisSpeed: 2
-  thisAttack: 2
+  thisAttack: 1
   thisMaxHp: 30
   thisAttackCoolTime: 3
 --- !u!212 &595099128535145314
