@@ -135,6 +135,8 @@ public class MonsterController : MonoBehaviour
 
     protected void Damage(int damage)
     {
+        GameObject hitEffect = Instantiate(Resources.Load("HitEffect"), transform.position, Quaternion.identity) as GameObject;
+        hitEffect.transform.SetParent(this.transform);
         if (PlayerController.instance._isPowerUp)
         {
             damage = int.MaxValue;

@@ -4729,6 +4729,7 @@ GameObject:
   - component: {fileID: 579561808}
   - component: {fileID: 579561807}
   - component: {fileID: 579561809}
+  - component: {fileID: 579561811}
   - component: {fileID: 579561810}
   m_Layer: 0
   m_Name: Attack_Effect
@@ -4851,6 +4852,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.71, y: 0.43}
   m_EdgeRadius: 0
+--- !u!114 &579561811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579561806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27755bf62449e0a48932bf98f4cf7aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &593533653
 GameObject:
   m_ObjectHideFlags: 0
@@ -4863,7 +4876,7 @@ GameObject:
   - component: {fileID: 593533656}
   - component: {fileID: 593533655}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Shader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8997,6 +9010,7 @@ MonoBehaviour:
   _minePrefab: {fileID: 7844038219354228548, guid: c790cfa26f7db3d48a1ffe5837b658a2, type: 3}
   _mineCoolDown: 0
   _foodCoolDown: 0
+  _isAttacking: 0
   _isDying: 0
   _playerMaxHp: 0
   _playerHp: 0
