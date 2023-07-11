@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image weaponImage;
     [SerializeField]
-    private Sprite[] weaponSprites = new Sprite[5];
+    private Sprite[] weaponSprites = new Sprite[6];
 
     [SerializeField]
     private Image shelterImage;
@@ -164,22 +164,23 @@ public class UIManager : MonoBehaviour
 
         switch (DataManager.instance._data.skillLevel)
         {
-            case 1:
+            case 0:
                 weaponImage.sprite = weaponSprites[0];
                 break;
-            case 3:
+            case 2:
                 weaponImage.sprite = weaponSprites[1];
                 break;
-            case 6:
+            case 5:
                 weaponImage.sprite = weaponSprites[2];
                 break;
-            case 9:
+            case 8:
                 weaponImage.sprite = weaponSprites[3];
                 break;
-            case 12:
+            case 11:
                 weaponImage.sprite = weaponSprites[4];
                 break;
             default:
+                weaponImage.sprite = weaponSprites[5];
                 break;
         }
         switch (DataManager.instance._data.buildLevel)
@@ -605,22 +606,23 @@ public class UIManager : MonoBehaviour
 
         switch (DataManager.instance._data.skillLevel)
         {
-            case 1:
+            case 0:
                 weaponImage.sprite = weaponSprites[0];
                 break;
-            case 3:
+            case 2:
                 weaponImage.sprite = weaponSprites[1];
                 break;
-            case 6:
+            case 5:
                 weaponImage.sprite = weaponSprites[2];
                 break;
-            case 9:
+            case 8:
                 weaponImage.sprite = weaponSprites[3];
                 break;
-            case 12:
+            case 11:
                 weaponImage.sprite = weaponSprites[4];
                 break;
             default:
+                weaponImage.sprite = weaponSprites[5];
                 break;
         }
         switch (DataManager.instance._data.buildLevel)
