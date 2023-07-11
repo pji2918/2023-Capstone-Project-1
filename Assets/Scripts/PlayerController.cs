@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     public float _foodCoolDown;
 
-    bool _isAttacking;
+    public bool _isAttacking;
     public bool _isDying = false;
     public int _playerMaxHp;
     public int _playerHp;
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
 
         _playerMaxHp = DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel];
-        _moveSpeed = DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
+        _moveSpeed = (float)DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
 
         _playerAtk = DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel];
         _skillDamageMultiplier = DataManager.instance._playerStat.skillDamageMultiplier[DataManager.instance._data.skillLevel];
@@ -117,7 +117,22 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(Fade());
 
-        SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
+        switch (DataManager.instance._data.day)
+        {
+            case 8:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("CDA_Oriental_Fever_FULL_Loop"));
+                break;
+            case 23:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("CDA_Ready_Steady_GO_FULL_Loop"));
+                break;
+            case 34:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("MP_SecretLabyrinth_FULL_Loop"));
+                break;
+            default:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
+                break;
+        }
+
     }
 
     public bool _isFinishing = false;
@@ -177,10 +192,6 @@ public class PlayerController : MonoBehaviour
                 {
                     transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 }
-
-                // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
-                StartCoroutine(AttackEffect());
-
             }
         }
 
@@ -329,7 +340,7 @@ public class PlayerController : MonoBehaviour
         if (slowCurrentTime > _slowTime && isSlow)
         {
             isSlow = false;
-            PlayerController.instance._moveSpeed = 5f;
+            PlayerController.instance._moveSpeed = (float)DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
         }
     }
 
@@ -385,9 +396,8 @@ public class PlayerController : MonoBehaviour
         _playerAttackEffect.GetComponent<Animator>().Play("Attack");
     }
 
-    IEnumerator AttackEffect()
+    public void RemoveEffects()
     {
-        yield return new WaitForSeconds(0.5f);
         _playerAttackEffect.SetActive(false);
         _isAttacking = false;
         _playerAgent.isStopped = false;
