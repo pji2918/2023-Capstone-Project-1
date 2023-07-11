@@ -22,7 +22,7 @@ public class Data
     public int effectVolume = 100;
     public FullScreenMode fullScreenMode = FullScreenMode.ExclusiveFullScreen;
     public Resolution resolution;
-    public bool is3dAudio = true;
+    public bool is3dAudio = true, isPlaying = false;
     public bool isScreenVibration = true, displayDamage = true;
     public Language language = Language.Auto;
 
@@ -31,9 +31,9 @@ public class Data
         {"iron", 10},
         {"concrete", 10},
         {"bolt", 10},
-        {"core", 10},
-        {"ingredient", 10},
-        {"food", 10}
+        {"core", 0},
+        {"ingredient", 5},
+        {"food", 2}
     };
 
     public Dictionary<string, int> weaponUpgrade = new Dictionary<string, int>()
@@ -57,7 +57,7 @@ public struct PlayerStat
 {
     public List<int> atk, maxHp;
     public List<double> skillDamageMultiplier;
-    public List<float> moveSpeed;
+    public List<double> moveSpeed;
 
     public PlayerStat(int dummy)
     {
@@ -73,7 +73,7 @@ public struct PlayerStat
         {
             100, 105, 115, 120, 125, 135, 140, 145, 155, 160, 180
         };
-        moveSpeed = new List<float>()
+        moveSpeed = new List<double>()
         {
             5f, 5.2f, 5.5f, 5.7f, 5.9f, 6.3f, 6.5f, 6.7f, 7f, 7.2f, 7.5f
         };

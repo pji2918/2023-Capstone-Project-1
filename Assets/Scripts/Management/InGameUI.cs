@@ -42,6 +42,7 @@ public class InGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         #region 퀘스트 설정
         switch (DataManager.instance._data.day)
         {
