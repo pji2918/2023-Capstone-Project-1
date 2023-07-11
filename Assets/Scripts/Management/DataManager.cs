@@ -31,9 +31,9 @@ public class Data
         {"iron", 10},
         {"concrete", 10},
         {"bolt", 10},
-        {"core", 10},
-        {"ingredient", 10},
-        {"food", 10}
+        {"core", 0},
+        {"ingredient", 5},
+        {"food", 2}
     };
 
     public Dictionary<string, int> weaponUpgrade = new Dictionary<string, int>()
