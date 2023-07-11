@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     public float _foodCoolDown;
 
-    bool _isAttacking;
+    public bool _isAttacking;
     public bool _isDying = false;
     public int _playerMaxHp;
     public int _playerHp;
@@ -192,10 +192,6 @@ public class PlayerController : MonoBehaviour
                 {
                     transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 }
-
-                // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
-                StartCoroutine(AttackEffect());
-
             }
         }
 
@@ -344,7 +340,7 @@ public class PlayerController : MonoBehaviour
         if (slowCurrentTime > _slowTime && isSlow)
         {
             isSlow = false;
-            PlayerController.instance._moveSpeed = 5f;
+            PlayerController.instance._moveSpeed = (float)DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
         }
     }
 
@@ -400,9 +396,8 @@ public class PlayerController : MonoBehaviour
         _playerAttackEffect.GetComponent<Animator>().Play("Attack");
     }
 
-    IEnumerator AttackEffect()
+    public void RemoveEffects()
     {
-        yield return new WaitForSeconds(0.5f);
         _playerAttackEffect.SetActive(false);
         _isAttacking = false;
         _playerAgent.isStopped = false;
