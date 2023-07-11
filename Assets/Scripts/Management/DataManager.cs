@@ -57,7 +57,7 @@ public struct PlayerStat
 {
     public List<int> atk, maxHp;
     public List<double> skillDamageMultiplier;
-    public List<float> moveSpeed;
+    public List<double> moveSpeed;
 
     public PlayerStat(int dummy)
     {
@@ -73,9 +73,9 @@ public struct PlayerStat
         {
             100, 105, 115, 120, 125, 135, 140, 145, 155, 160, 180
         };
-        moveSpeed = new List<float>()
+        moveSpeed = new List<double>()
         {
-            5f, 5.2f, 5.5f, 5.7f, 5.9f, 6.3f, 6.5f, 6.7f, 7f, 7.2f, 7.5f
+            5, 5.2, 5.5, 5.7, 5.9, 6.3, 6.5, 6.7, 7, 7.2, 7.5
         };
     }
 }

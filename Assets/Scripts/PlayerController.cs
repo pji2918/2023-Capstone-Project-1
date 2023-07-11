@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
 
         _playerMaxHp = DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel];
-        _moveSpeed = DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
+        _moveSpeed = (float)DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
 
         _playerAtk = DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel];
         _skillDamageMultiplier = DataManager.instance._playerStat.skillDamageMultiplier[DataManager.instance._data.skillLevel];
