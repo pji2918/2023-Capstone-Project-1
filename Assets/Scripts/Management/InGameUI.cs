@@ -1386,6 +1386,7 @@ public class InGameUI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            SoundManager.instance.PauseOrResumeMusic();
             if (!_isPause)
             {
                 if (!PlayerController.instance._isDying || !PlayerController.instance._isFinishing)
