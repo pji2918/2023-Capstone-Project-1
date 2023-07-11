@@ -21030,7 +21030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1751218720156460179, guid: 494f695e05267f74e95d06973d91678e, type: 3}
       propertyPath: m_SortingOrder
-      value: 99
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2535826855907986249, guid: 494f695e05267f74e95d06973d91678e, type: 3}
       propertyPath: m_Bounds.m_Center.x
