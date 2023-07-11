@@ -2429,10 +2429,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.006237276
-    width: 1
-    height: 0.98752546
+    x: -0.07106261
+    y: 0
+    width: 1.1421252
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -14462,7 +14462,7 @@ GameObject:
   - component: {fileID: 1068713553}
   - component: {fileID: 1068713552}
   m_Layer: 5
-  m_Name: tableButton
+  m_Name: bookButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
