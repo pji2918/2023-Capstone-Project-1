@@ -143,15 +143,15 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             resourceTexts[i] = ResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
-            Debug.Log("재료 텍스트 : " + resourceTexts[i].name);
+            //Debug.Log("재료 텍스트 : " + resourceTexts[i].name);
 
             if (i < 4)
             {
                 needWeaponTexts[i] = needWeaponResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
                 needBuildTexts[i] = needHouseResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
 
-                Debug.Log("무기 강화 필요 재료 텍스트" + needWeaponTexts[i].name);
-                Debug.Log("쉘터 강화 필요 재료 텍스트" + needBuildTexts[i].name);
+                //Debug.Log("무기 강화 필요 재료 텍스트" + needWeaponTexts[i].name);
+                //Debug.Log("쉘터 강화 필요 재료 텍스트" + needBuildTexts[i].name);
             }
         }
 
@@ -214,7 +214,7 @@ public class UIManager : MonoBehaviour
         {
             foodSlider.value = GameManager.instance._currentCookingTime / cookingTime;
 
-            foodText.text = "음식 제작중... 남은 시간: " + (int)(cookingTime - GameManager.instance._currentCookingTime) + "초";
+            foodText.text = "음식 제작 중\n남은 시간: " + (int)(cookingTime - GameManager.instance._currentCookingTime) + "초";
 
             if (GameManager.instance._currentCookingTime >= cookingTime)
             {
@@ -389,14 +389,14 @@ public class UIManager : MonoBehaviour
         }
         else if (!GameManager.instance._isCooking)
         {
-            StartCoroutine(TextClear(foodSubText, "재료가 부족합니다..."));
+            StartCoroutine(TextClear(foodSubText, "재료가 부족합니다"));
         }
         else
         {
-            StartCoroutine(TextClear(foodSubText, "제작 중 추가 제작을 할 수 없습니다"));
+            StartCoroutine(TextClear(foodSubText, "요리 중 입니다"));
         }
 
-        Debug.Log("식량제작버튼 클릭");
+        //Debug.Log("식량제작버튼 클릭");
     }
 
     //식량 회수
@@ -409,10 +409,10 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TextClear(foodSubText, "제작 완료된 음식이 없습니다"));
+            StartCoroutine(TextClear(foodSubText, "제작된 음식이 없습니다"));
         }
 
-        Debug.Log("식량회수버튼 클릭");
+        //Debug.Log("식량회수버튼 클릭");
     }
 
     //스토리 팝업
