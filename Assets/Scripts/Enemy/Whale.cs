@@ -21,14 +21,20 @@ public class Whale : MonsterController
     [SerializeField] private int dir1;
     [SerializeField] private BulletType bulletType1;
 
+    [Space(10)]
+    [SerializeField] private float maxCoolTime;
+    [SerializeField] private float minCoolTime;
+    private float currentCoolTime;
+
     private Slider hpBar;
     private GameObject hpBarObj;
+
+    private Animator whaleAnimator;
 
     // 스탯 설정
     protected override void Start()
     {
-        StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, BulletType.bomb));
-        //StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, bulletType1));
+        whaleAnimator = gameObject.GetComponent<Animator>();
 
         hpBarObj = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1).gameObject;
         InGameUI.instance._timerText.gameObject.SetActive(false);
@@ -64,12 +70,37 @@ public class Whale : MonsterController
 
         _agent.speed = speed;
 
-        base.Update();
+        if (currentHp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void OnTriggerStay2D(Collider2D other)
     {
 
+    }
+
+    IEnumerator Shot()
+    {
+        currentCoolTime = Random.Range(minCoolTime, maxCoolTime);
+
+        yield return new WaitForSeconds(currentCoolTime);
+
+        int shootType = Random.Range(1, 4);
+
+        switch (shootType)
+        {
+            case 1:
+                BuchaeShot(3, 60, BulletType.normal);
+                break;
+            case 2:
+                RotateShot(10, 3, BulletType.normal, 0);
+                break;
+            case 3:
+                RotateShot(16, 0, BulletType.normal, 0);
+                break;
+        }
     }
 
     #region shoot
