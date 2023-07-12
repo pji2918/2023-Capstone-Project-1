@@ -1206,7 +1206,7 @@ public class InGameUI : MonoBehaviour
     }
 
     public bool[] _isQuestComplete = new bool[5] { false, false, false, false, false };
-
+    public TextMeshProUGUI _foodCount;
     public string[] _resourcename = new string[6] { "철근", "콘크리트", "코어", "볼트와 너트", "식재료", "null" };
 
     // Update is called once per frame
@@ -1225,6 +1225,7 @@ public class InGameUI : MonoBehaviour
         #endregion
 
         _foodCountText.text = string.Format(LocalizationSettings.StringDatabase.GetLocalizedString("UI", "skill_foodcount"), DataManager.instance._data.resources["food"]);
+        _foodCount.text = DataManager.instance._data.resources["food"].ToString();
 
         #region 스킬 활성화 여부 표시
 
