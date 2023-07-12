@@ -31,11 +31,9 @@ public class KrakenUpLeg : MonsterController
         if (currentHp <= 0)
         {
             Instantiate(_dieEffect, transform.position, Quaternion.identity);
-            if (GameObject.Find("Kraken(Clone)") != null)
-            {
-                GameObject kraken = GameObject.Find("Kraken(Clone)");
-                kraken.gameObject.GetComponent<Kraken>().Hit(5);
-            }
+            GameObject kraken = GameObject.Find("Kraken");
+            kraken.gameObject.GetComponent<Kraken>().Hit(5);
+
             Destroy(gameObject);
             return;
         }

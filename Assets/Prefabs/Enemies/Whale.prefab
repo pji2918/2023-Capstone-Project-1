@@ -84,37 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2268984835710381363
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6849294870301321056}
-  m_Layer: 7
-  m_Name: Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6849294870301321056
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2268984835710381363}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.206, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2994061554595746686}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2994061554595746684
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +99,6 @@ GameObject:
   - component: {fileID: 2994061554595746673}
   - component: {fileID: 2155146630453843361}
   - component: {fileID: 3190246704402909128}
-  - component: {fileID: -3752860126362587159}
   m_Layer: 7
   m_Name: Whale
   m_TagString: Untagged
@@ -151,7 +119,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2187445788922954346}
-  - {fileID: 6849294870301321056}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -172,12 +139,14 @@ MonoBehaviour:
   _attackRange: 1
   thisSpeed: 0
   thisAttack: 10
-  thisMaxHp: 1000
+  thisMaxHp: 50
   thisAttackCoolTime: 0.1
   bulletPrefab: {fileID: 9041016207657785683, guid: 4bc402e5ed5f94346b983ce7ccc2e074, type: 3}
-  maxCoolTime: 2.77
-  minCoolTime: 1.43
-  point: {fileID: 2268984835710381363}
+  bulletCount1: 5
+  shotTime1: 10
+  shotAngle1: 60
+  dir1: 1
+  bulletType1: 0
 --- !u!195 &2994061554595746672
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -187,7 +156,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2994061554595746684}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 60
   avoidancePriority: 50
@@ -196,8 +165,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 0.7
-  m_BaseOffset: 0.4
+  m_Height: 0.5
+  m_BaseOffset: 0.3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!212 &2994061554595746687
@@ -262,7 +231,7 @@ Animator:
   m_GameObject: {fileID: 2994061554595746684}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 35208e6447cf2344d89b04f2ae8d22fe, type: 2}
+  m_Controller: {fileID: 9100000, guid: 37a3c561b6e62fe409f51e000ab59c9c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -319,35 +288,14 @@ MonoBehaviour:
   - {fileID: 489368551200082246, guid: ebb536ea5eda66e49b3009bd1fd8f121, type: 3}
   _itemPercents:
   - itemNum: 0
-    percent: 0
+    percent: 10
   - itemNum: 1
-    percent: 0
+    percent: 10
   - itemNum: 2
-    percent: 0
+    percent: 3
   - itemNum: 3
-    percent: 0
+    percent: 15
   - itemNum: 4
-    percent: 0
+    percent: 7
   - itemNum: 5
-    percent: 0
---- !u!50 &-3752860126362587159
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2994061554595746684}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+    percent: 55

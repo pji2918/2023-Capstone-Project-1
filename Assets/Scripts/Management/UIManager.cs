@@ -12,9 +12,9 @@ public class UIManager : MonoBehaviour
 {
     #region 팝업창
     [SerializeField]//업그레이드창
-    private GameObject upgradeWindow;
+    public GameObject upgradeWindow;
     [SerializeField]//무기 업그레이드창
-    private GameObject weaponWindow;
+    public GameObject weaponWindow;
     [SerializeField]//집 업그레이드창
     private GameObject houseWindow;
     [SerializeField]//스토리 창
@@ -55,6 +55,8 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region 기타
+    [SerializeField]
+    Tutorial tutorial;
     [SerializeField]//무기 강화시 필요한 재료 확인 텍스트 묶음(빈 오브젝트)
     private GameObject needWeaponResource;
     [SerializeField]//집 강화시 필요한 재료 확인 텍스트 묶음(빈 오브젝트)
@@ -66,7 +68,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]//필요 재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트, 집 업글)
     private GameObject needHouseResourceTextsParent;
     [SerializeField]
-    private GameObject _statWindow;
+    public GameObject _statWindow;
 
     [SerializeField]
     private RectTransform _bookFit;
@@ -143,15 +145,15 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             resourceTexts[i] = ResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
-            //Debug.Log("재료 텍스트 : " + resourceTexts[i].name);
+            Debug.Log("재료 텍스트 : " + resourceTexts[i].name);
 
             if (i < 4)
             {
                 needWeaponTexts[i] = needWeaponResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
                 needBuildTexts[i] = needHouseResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
 
-                //Debug.Log("무기 강화 필요 재료 텍스트" + needWeaponTexts[i].name);
-                //Debug.Log("쉘터 강화 필요 재료 텍스트" + needBuildTexts[i].name);
+                Debug.Log("무기 강화 필요 재료 텍스트" + needWeaponTexts[i].name);
+                Debug.Log("쉘터 강화 필요 재료 텍스트" + needBuildTexts[i].name);
             }
         }
 
@@ -214,7 +216,7 @@ public class UIManager : MonoBehaviour
         {
             foodSlider.value = GameManager.instance._currentCookingTime / cookingTime;
 
-            foodText.text = "음식 제작 중\n남은 시간: " + (int)(cookingTime - GameManager.instance._currentCookingTime) + "초";
+            foodText.text = "음식 제작중... 남은 시간: " + (int)(cookingTime - GameManager.instance._currentCookingTime) + "초";
 
             if (GameManager.instance._currentCookingTime >= cookingTime)
             {
@@ -229,6 +231,12 @@ public class UIManager : MonoBehaviour
         {
             _storyNum = Random.Range(0, 5);
         }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            DataManager.instance._data.day = 1;
+            DataManager.instance.Save();
+        }
     }
 
     #region 버튼 함수
@@ -236,6 +244,11 @@ public class UIManager : MonoBehaviour
     //업그레이드 창 팝업
     public void OnClickUpgradeButton()
     {
+        if (DataManager.instance._data.day == 2)
+        {
+            tutorial.StepUp2();
+        }
+
         WindowPopUp(upgradeWindow);
     }
 
@@ -244,11 +257,21 @@ public class UIManager : MonoBehaviour
     {
         ShowNeedWeaponResourse();
 
+        if (DataManager.instance._data.day == 2)
+        {
+            tutorial.StepUp2();
+        }
+
         PopUpWidowChange(weaponWindow, upgradeWindow);
     }
 
     public void OnClickStatButton()
     {
+        if (DataManager.instance._data.day == 2)
+        {
+            tutorial.StepUp2();
+        }
+
         WindowPopUp(_statWindow);
 
         ChangeStatsText();
@@ -316,6 +339,11 @@ public class UIManager : MonoBehaviour
     //무기 강화 버튼 클릭
     public void OnClickweaponUpgradeButton()
     {
+        if (DataManager.instance._data.day == 2)
+        {
+            tutorial.StepUp2();
+        }
+
         StopCoroutine("Typing");
         if (DataManager.instance._data.resources["iron"] >= DataManager.instance._data.weaponUpgrade["iron"]
         && DataManager.instance._data.resources["concrete"] >= DataManager.instance._data.weaponUpgrade["concrete"]
@@ -389,14 +417,19 @@ public class UIManager : MonoBehaviour
         }
         else if (!GameManager.instance._isCooking)
         {
-            StartCoroutine(TextClear(foodSubText, "재료가 부족합니다"));
+            StartCoroutine(TextClear(foodSubText, "재료가 부족합니다..."));
         }
         else
         {
-            StartCoroutine(TextClear(foodSubText, "요리 중 입니다"));
+            StartCoroutine(TextClear(foodSubText, "제작 중 추가 제작을 할 수 없습니다"));
         }
 
-        //Debug.Log("식량제작버튼 클릭");
+        Debug.Log("식량제작버튼 클릭");
+
+        if (DataManager.instance._data.day == 2)
+        {
+            tutorial.StepUp2();
+        }
     }
 
     //식량 회수
@@ -409,10 +442,10 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TextClear(foodSubText, "제작된 음식이 없습니다"));
+            StartCoroutine(TextClear(foodSubText, "제작 완료된 음식이 없습니다"));
         }
 
-        //Debug.Log("식량회수버튼 클릭");
+        Debug.Log("식량회수버튼 클릭");
     }
 
     //스토리 팝업

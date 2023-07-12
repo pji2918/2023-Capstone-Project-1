@@ -10,7 +10,6 @@ public class EarthQuake : MonoBehaviour
     private void Start()
     {
         attackCurrentTime = attackCoolTime;
-        Destroy(gameObject, 3.0f);
     }
 
     private void Update()
