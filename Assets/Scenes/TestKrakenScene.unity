@@ -160,7 +160,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2613,7 +2613,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2659,56 +2659,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &321198435
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 321198437}
-  - component: {fileID: 321198436}
-  m_Layer: 0
-  m_Name: Kraken
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &321198436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321198435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc37e6694b67c64381f1dc796312cd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smallKrakenPrefab: {fileID: 2496858808156692367, guid: df6d6fa41f853eb479eae548c9805bdb, type: 3}
-  smallUpTime: 1
-  earthquakePrefab: {fileID: 5261454590438282514, guid: 9f5f8225e645e0d4ca1a32b8f5a5d355, type: 3}
-  earthquakeTime: 3
-  hpBar: {fileID: 1416304736}
-  maxHp: 100
---- !u!4 &321198437
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321198435}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &334986953
 GameObject:
@@ -3439,6 +3389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d23ea6ab0cd864183b86d60ef9478e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyCount: 0
 --- !u!1 &466892077
 GameObject:
   m_ObjectHideFlags: 0
@@ -4661,7 +4612,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5574,6 +5525,7 @@ MonoBehaviour:
   _playerRigidbody: {fileID: 545477778}
   _playerAnimator: {fileID: 545477777}
   _playerAttackEffect: {fileID: 775371829}
+  _playerDashEffect: {fileID: 0}
   slowCurrentTime: 0
   isSlow: 0
   _moveSpeed: 5
@@ -5598,9 +5550,11 @@ MonoBehaviour:
   _playerAtk: 0
   _skillDamageMultiplier: 0
   _timer: 0
+  _playerArrow: {fileID: 0}
   _impulseSource: {fileID: 545477773}
   _isFinishing: 0
   _foodTimer: 0
+  _clickAnimation: {fileID: 0}
   _slowTime: 0
   _isAttackedByKraken: 0
   _completeFade: {fileID: 2016611374}
@@ -5666,7 +5620,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12459,7 +12413,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14395,6 +14349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 692450276}
+  _skillIcon: []
   _skillCoolDownBar:
   - {fileID: 1050647944}
   - {fileID: 198978890}
@@ -14408,6 +14363,7 @@ MonoBehaviour:
   - {fileID: 1551275693}
   - {fileID: 480617020}
   - {fileID: 1221080438}
+  _skillLock: []
   _skillTooltip:
   - {fileID: 375456380}
   - {fileID: 1903574193}
@@ -14435,6 +14391,7 @@ MonoBehaviour:
   _volumeText:
   - {fileID: 1561448276}
   - {fileID: 657135990}
+  _isBoss: 0
   _isQuestComplete: 000000
   _resourcename:
   - "\uCCA0\uADFC"
@@ -17915,3 +17872,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116554173}
   m_CullTransparentMesh: 1
+--- !u!1001 &1520593843139154948
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092385, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520593842818092391, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}
+      propertyPath: m_Name
+      value: Kraken
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dba62d656bdba4e4ab05d1274ee3b9d1, type: 3}

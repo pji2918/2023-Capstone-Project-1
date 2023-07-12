@@ -39,12 +39,19 @@ public class UIManager : MonoBehaviour
     [SerializeField]//제작 완료된 음식 개수 확인 텍스트
     private TextMeshProUGUI foodCountText;
 
+    [SerializeField] private TextMeshProUGUI[] _hpText = new TextMeshProUGUI[2];
+    [SerializeField] private TextMeshProUGUI[] _atkText = new TextMeshProUGUI[2];
+    [SerializeField] private TextMeshProUGUI[] _speedText = new TextMeshProUGUI[2];
+
     //재료 개수 확인 텍스트 모음
     private TextMeshProUGUI[] resourceTexts = new TextMeshProUGUI[6];
     //무기 필요 재료 확인 텍스트 모음
     private TextMeshProUGUI[] needWeaponTexts = new TextMeshProUGUI[4];
     //집 필요 재료 확인 텍스트 모음
     private TextMeshProUGUI[] needBuildTexts = new TextMeshProUGUI[4];
+
+    [SerializeField] private TextMeshProUGUI _shelterLevelText;
+    [SerializeField] private TextMeshProUGUI _weaponLevelText;
     #endregion
 
     #region 기타
@@ -58,6 +65,8 @@ public class UIManager : MonoBehaviour
     private GameObject needWeaponResourceTextsParent;
     [SerializeField]//필요 재료 개수 확인 텍스트의 부모 오브젝트(빈 오브젝트, 집 업글)
     private GameObject needHouseResourceTextsParent;
+    [SerializeField]
+    private GameObject _statWindow;
 
     [SerializeField]
     private RectTransform _bookFit;
@@ -75,13 +84,22 @@ public class UIManager : MonoBehaviour
 
     //음식 제작 시간
     private float cookingTime = 30;
-    //현재 제작 시간
-    private float currentCookingTime = 0;
-    //제작 상태
-    private bool isCooking = false;
 
     private bool _lookingStory = false;
     NeedResourse _needResourse = new NeedResourse();
+
+    public TextMeshProUGUI wLevel; //무기 강화 레벨 텍스트
+    public TextMeshProUGUI bLevel; // 쉘터 강화 레벨
+
+    [SerializeField]
+    private Image weaponImage;
+    [SerializeField]
+    private Sprite[] weaponSprites = new Sprite[6];
+
+    [SerializeField]
+    private Image shelterImage;
+    [SerializeField]
+    private Sprite[] shelterSprites = new Sprite[4];
 
     private int _deleteCount = 0;
 
@@ -125,15 +143,15 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             resourceTexts[i] = ResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
-            Debug.Log("재료 텍스트 : " + resourceTexts[i].name);
+            //Debug.Log("재료 텍스트 : " + resourceTexts[i].name);
 
             if (i < 4)
             {
                 needWeaponTexts[i] = needWeaponResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
                 needBuildTexts[i] = needHouseResourceTextsParent.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
 
-                Debug.Log("무기 강화 필요 재료 텍스트" + needWeaponTexts[i].name);
-                Debug.Log("쉘터 강화 필요 재료 텍스트" + needBuildTexts[i].name);
+                //Debug.Log("무기 강화 필요 재료 텍스트" + needWeaponTexts[i].name);
+                //Debug.Log("쉘터 강화 필요 재료 텍스트" + needBuildTexts[i].name);
             }
         }
 
@@ -141,30 +159,71 @@ public class UIManager : MonoBehaviour
 
         foodText.text = "";
         foodSubText.text = "";
+        wLevel.text = "무기 레벨 :" + DataManager.instance._data.skillLevel;
+        bLevel.text = "쉘터 레벨 :" + DataManager.instance._data.buildLevel;
+
+        switch (DataManager.instance._data.skillLevel)
+        {
+            case 0:
+                weaponImage.sprite = weaponSprites[0];
+                break;
+            case 2:
+                weaponImage.sprite = weaponSprites[1];
+                break;
+            case 5:
+                weaponImage.sprite = weaponSprites[2];
+                break;
+            case 8:
+                weaponImage.sprite = weaponSprites[3];
+                break;
+            case 11:
+                weaponImage.sprite = weaponSprites[4];
+                break;
+            default:
+                weaponImage.sprite = weaponSprites[5];
+                break;
+        }
+        switch (DataManager.instance._data.buildLevel)
+        {
+            case 2:
+            case 3:
+            case 4:
+                shelterImage.sprite = shelterSprites[0];
+                break;
+            case 5:
+            case 6:
+            case 7:
+                shelterImage.sprite = shelterSprites[1];
+                break;
+            case 8:
+            case 9:
+                shelterImage.sprite = shelterSprites[2];
+                break;
+            case 10:
+                shelterImage.sprite = shelterSprites[3];
+                break;
+            default:
+                break;
+        }
     }
 
     private void Update()
     {
         ShowResource();
-        if (isCooking)
+        if (GameManager.instance._isCooking)
         {
-            currentCookingTime += Time.deltaTime;
+            foodSlider.value = GameManager.instance._currentCookingTime / cookingTime;
 
-            foodSlider.value = currentCookingTime / cookingTime;
+            foodText.text = "음식 제작 중\n남은 시간: " + (int)(cookingTime - GameManager.instance._currentCookingTime) + "초";
 
-            foodText.text = "음식 제작중... 남은 시간 : " + (int)(cookingTime - currentCookingTime);
-
-            if (currentCookingTime >= cookingTime)
+            if (GameManager.instance._currentCookingTime >= cookingTime)
             {
                 StartCoroutine(TextClear(foodText, "제작이 완료되었습니다"));
 
-                GameManager.instance.foodCount += 2;
                 foodSlider.value = 0;
-                isCooking = false;
-                currentCookingTime = 0;
             }
         }
-        _cooker.SetBool("isCooking", isCooking);
+        _cooker.SetBool("isCooking", GameManager.instance._isCooking);
 
         if (Input.GetKeyDown(KeyCode.F10))
         {
@@ -188,6 +247,72 @@ public class UIManager : MonoBehaviour
         PopUpWidowChange(weaponWindow, upgradeWindow);
     }
 
+    public void OnClickStatButton()
+    {
+        WindowPopUp(_statWindow);
+
+        ChangeStatsText();
+    }
+
+    public void OnCloseStatButton()
+    {
+        _statWindow.SetActive(false);
+    }
+
+    [SerializeField] private GameObject[] _skillLocks;
+
+    public void ChangeStatsText()
+    {
+        if (DataManager.instance._data.skillLevel >= 1)
+        {
+            _skillLocks[0].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 3)
+        {
+            _skillLocks[1].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 6)
+        {
+            _skillLocks[2].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 9)
+        {
+            _skillLocks[3].SetActive(false);
+        }
+        if (DataManager.instance._data.skillLevel >= 12)
+        {
+            _skillLocks[4].SetActive(false);
+        }
+
+        _shelterLevelText.text = string.Format("쉘터 레벨 : {0}", DataManager.instance._data.buildLevel);
+        _weaponLevelText.text = string.Format("무기 레벨 : {0}", DataManager.instance._data.skillLevel);
+
+        _hpText[0].text = DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel].ToString();
+        _speedText[0].text = DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel].ToString();
+
+        if (DataManager.instance._data.buildLevel >= 10)
+        {
+            _hpText[1].gameObject.SetActive(false);
+            _speedText[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            _hpText[1].text = string.Format("+{0}", DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel + 1] - DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel]);
+            _speedText[1].text = string.Format("+{0}", DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel + 1] - DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel]);
+        }
+
+        _atkText[0].text = DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel].ToString();
+
+        if (DataManager.instance._data.skillLevel >= 15)
+        {
+            _atkText[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            _atkText[1].text = string.Format("+{0}", DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel + 1] - DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel]);
+        }
+    }
+
     //무기 강화 버튼 클릭
     public void OnClickweaponUpgradeButton()
     {
@@ -205,13 +330,7 @@ public class UIManager : MonoBehaviour
             DataManager.instance._data.resources["bolt"] -= DataManager.instance._data.weaponUpgrade["bolt"];
             DataManager.instance._data.resources["core"] -= DataManager.instance._data.weaponUpgrade["core"];
 
-            StartCoroutine(Typing(upgradeText, "강 화 중 . . .", 0.5f, upgradeText.gameObject, needWeaponResource));
-
-            DataManager.instance._data.skillLevel++;
-
-            ShowNeedWeaponResourse();
-
-            DataManager.instance.Save();
+            StartCoroutine(Typing(upgradeText, "강 화 중 . . .", 0.5f, upgradeText.gameObject, needWeaponResource, 1));
         }
         else if (DataManager.instance._data.skillLevel >= 15)
         {
@@ -248,13 +367,7 @@ public class UIManager : MonoBehaviour
             DataManager.instance._data.resources["bolt"] -= DataManager.instance._data.HouseUpgrade["bolt"];
             DataManager.instance._data.resources["core"] -= DataManager.instance._data.HouseUpgrade["core"];
 
-            StartCoroutine(Typing(buildText, "건 설 중 . . .", 0.5f, buildText.gameObject, needHouseResource));
-
-            DataManager.instance._data.buildLevel++;
-
-            ShowNeedBuildResourse();
-
-            DataManager.instance.Save();
+            StartCoroutine(Typing(buildText, "건 설 중 . . .", 0.5f, buildText.gameObject, needHouseResource, 2));
         }
         else if (DataManager.instance._data.buildLevel >= 10)
         {
@@ -269,21 +382,21 @@ public class UIManager : MonoBehaviour
     //음식 제작(재료 아이템 제거하는거 있음)
     public void OnClickFoodButton()
     {
-        if (DataManager.instance._data.resources["ingredient"] >= 5 && !isCooking)
+        if (DataManager.instance._data.resources["ingredient"] >= 5 && !GameManager.instance._isCooking)
         {
             GameManager.instance.ResourceReduction("ingredient", 5);
-            isCooking = true;
+            GameManager.instance._isCooking = true;
         }
-        else if (!isCooking)
+        else if (!GameManager.instance._isCooking)
         {
-            StartCoroutine(TextClear(foodSubText, "재료가 부족합니다..."));
+            StartCoroutine(TextClear(foodSubText, "재료가 부족합니다"));
         }
         else
         {
-            StartCoroutine(TextClear(foodSubText, "제작 중 추가 제작을 할 수 없습니다"));
+            StartCoroutine(TextClear(foodSubText, "요리 중 입니다"));
         }
 
-        Debug.Log("식량제작버튼 클릭");
+        //Debug.Log("식량제작버튼 클릭");
     }
 
     //식량 회수
@@ -296,10 +409,10 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TextClear(foodSubText, "제작 완료된 음식이 없습니다"));
+            StartCoroutine(TextClear(foodSubText, "제작된 음식이 없습니다"));
         }
 
-        Debug.Log("식량회수버튼 클릭");
+        //Debug.Log("식량회수버튼 클릭");
     }
 
     //스토리 팝업
@@ -375,10 +488,15 @@ public class UIManager : MonoBehaviour
     IEnumerator Fade()
     {
         _sceneChangeFade.SetActive(true);
-        for (int i = 0; i <= 255; i++)
+        float elapsedTime = 0f;
+        float fadeTime = 1f; // fade time in seconds
+        Color32 startColor = new Color32(0, 0, 0, 0);
+        Color32 endColor = new Color32(0, 0, 0, 255);
+        while (elapsedTime < fadeTime)
         {
-            _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.00005f);
+            _sceneChangeFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene("Loading");
@@ -405,6 +523,8 @@ public class UIManager : MonoBehaviour
         needWeaponTexts[1].text = DataManager.instance._data.weaponUpgrade["concrete"].ToString();
         needWeaponTexts[2].text = DataManager.instance._data.weaponUpgrade["bolt"].ToString();
         needWeaponTexts[3].text = DataManager.instance._data.weaponUpgrade["core"].ToString();
+
+        wLevel.text = "무기 레벨 : " + DataManager.instance._data.skillLevel;
 
         for (int i = 0; i <= 3; i++)
         {
@@ -440,21 +560,88 @@ public class UIManager : MonoBehaviour
                 needBuildTexts[i].color = Color.black;
             }
         }
+
+        bLevel.text = "쉘터 레벨 : " + DataManager.instance._data.buildLevel;
+    }
+
+    private void ChangeWLevel()
+    {
+        DataManager.instance._data.skillLevel++;
+
+        DataManager.instance.Save();
+
+        ShowNeedWeaponResourse();
+    }
+
+    private void ChangeBLevel()
+    {
+        DataManager.instance._data.buildLevel++;
+
+        DataManager.instance.Save();
+
+        ShowNeedBuildResourse();
     }
 
     //타이핑 효과 코루틴
-    IEnumerator Typing(TextMeshProUGUI typingText, string message, float speed, GameObject popUp, GameObject window)
+    IEnumerator Typing(TextMeshProUGUI typingText, string message, float speed, GameObject popUp, GameObject window, int type)
     {
         for (int i = 0; i < message.Length; i++)
         {
             typingText.text = message.Substring(0, i + 1);
             yield return new WaitForSeconds(speed);
         }
-        typingText.text = "완료";
+        //TODO:effect anime
         yield return new WaitForSeconds(1);
         _upgradeButtons[0].interactable = true;
         _upgradeButtons[1].interactable = true;
         PopUpWidowChange(popUp, window);
+        if (type == 1)
+        {
+            ChangeWLevel();
+        }
+        else
+        {
+            ChangeBLevel();
+        }
+
+        switch (DataManager.instance._data.skillLevel)
+        {
+            case 0:
+                weaponImage.sprite = weaponSprites[0];
+                break;
+            case 2:
+                weaponImage.sprite = weaponSprites[1];
+                break;
+            case 5:
+                weaponImage.sprite = weaponSprites[2];
+                break;
+            case 8:
+                weaponImage.sprite = weaponSprites[3];
+                break;
+            case 11:
+                weaponImage.sprite = weaponSprites[4];
+                break;
+            default:
+                weaponImage.sprite = weaponSprites[5];
+                break;
+        }
+        switch (DataManager.instance._data.buildLevel)
+        {
+            case 2:
+                shelterImage.sprite = shelterSprites[0];
+                break;
+            case 5:
+                shelterImage.sprite = shelterSprites[1];
+                break;
+            case 8:
+                shelterImage.sprite = shelterSprites[2];
+                break;
+            case 10:
+                shelterImage.sprite = shelterSprites[3];
+                break;
+            default:
+                break;
+        }
     }
 
     //텍스트 1초 띄우기
@@ -1162,7 +1349,32 @@ public class UIManager : MonoBehaviour
     {
         if (!_resolutionLocked)
         {
-            DataManager.instance._data.fullScreenMode = (FullScreenMode)value + 1;
+            FullScreenMode mode = FullScreenMode.ExclusiveFullScreen;
+            switch (value)
+            {
+                case 0:
+                    {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+                        mode = FullScreenMode.ExclusiveFullScreen;
+#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+                        mode = FullScreenMode.MaximizedWindow;
+#elif UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+                        mode = FullScreenMode.FullScreenWindow;
+#endif
+                        break;
+                    }
+                case 1:
+                    {
+                        mode = FullScreenMode.FullScreenWindow;
+                        break;
+                    }
+                case 2:
+                    {
+                        mode = FullScreenMode.Windowed;
+                        break;
+                    }
+            }
+            DataManager.instance._data.fullScreenMode = mode;
             Screen.fullScreenMode = DataManager.instance._data.fullScreenMode;
         }
     }
@@ -1241,72 +1453,72 @@ public class NeedResourse
                 }
             case 1:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(14, 14, 20, 0);
+                    DataManager.instance.NeedWeaponResourseChange(12, 12, 16, 0);
                     break;
                 }
             case 2:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(24, 24, 31, 1);
+                    DataManager.instance.NeedWeaponResourseChange(14, 14, 18, 1);
                     break;
                 }
             case 3:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(21, 21, 28, 0);
+                    DataManager.instance.NeedWeaponResourseChange(16, 16, 19, 0);
                     break;
                 }
             case 4:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(29, 29, 36, 0);
+                    DataManager.instance.NeedWeaponResourseChange(17, 17, 21, 0);
                     break;
                 }
             case 5:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(39, 39, 45, 1);
+                    DataManager.instance.NeedWeaponResourseChange(18, 18, 25, 1);
                     break;
                 }
             case 6:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(45, 45, 51, 0);
+                    DataManager.instance.NeedWeaponResourseChange(20, 20, 27, 0);
                     break;
                 }
             case 7:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(53, 53, 66, 1);
+                    DataManager.instance.NeedWeaponResourseChange(22, 22, 30, 1);
                     break;
                 }
             case 8:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(68, 68, 81, 2);
+                    DataManager.instance.NeedWeaponResourseChange(27, 27, 35, 2);
                     break;
                 }
             case 9:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(84, 84, 103, 1);
+                    DataManager.instance.NeedWeaponResourseChange(29, 29, 38, 1);
                     break;
                 }
             case 10:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(98, 98, 124, 1);
+                    DataManager.instance.NeedWeaponResourseChange(32, 32, 42, 1);
                     break;
                 }
             case 11:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(117, 117, 148, 3);
+                    DataManager.instance.NeedWeaponResourseChange(35, 35, 49, 3);
                     break;
                 }
             case 12:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(142, 142, 178, 2);
+                    DataManager.instance.NeedWeaponResourseChange(38, 38, 53, 2);
                     break;
                 }
             case 13:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(167, 167, 197, 2);
+                    DataManager.instance.NeedWeaponResourseChange(42, 42, 59, 2);
                     break;
                 }
             case 14:
                 {
-                    DataManager.instance.NeedWeaponResourseChange(201, 201, 214, 2);
+                    DataManager.instance.NeedWeaponResourseChange(48, 48, 71, 2);
                     break;
                 }
             default:
@@ -1322,52 +1534,52 @@ public class NeedResourse
         {
             case 0:
                 {
-                    DataManager.instance.NeedHouseResourseChange(35, 35, 25, 0);
+                    DataManager.instance.NeedHouseResourseChange(20, 20, 13, 0);
                     break;
                 }
             case 1:
                 {
-                    DataManager.instance.NeedHouseResourseChange(42, 42, 62, 1);
+                    DataManager.instance.NeedHouseResourseChange(26, 26, 21, 1);
                     break;
                 }
             case 2:
                 {
-                    DataManager.instance.NeedHouseResourseChange(56, 56, 41, 0);
+                    DataManager.instance.NeedHouseResourseChange(32, 32, 24, 0);
                     break;
                 }
             case 3:
                 {
-                    DataManager.instance.NeedHouseResourseChange(72, 72, 58, 0);
+                    DataManager.instance.NeedHouseResourseChange(39, 39, 25, 0);
                     break;
                 }
             case 4:
                 {
-                    DataManager.instance.NeedHouseResourseChange(95, 95, 102, 1);
+                    DataManager.instance.NeedHouseResourseChange(47, 47, 31, 1);
                     break;
                 }
             case 5:
                 {
-                    DataManager.instance.NeedHouseResourseChange(112, 112, 78, 1);
+                    DataManager.instance.NeedHouseResourseChange(58, 58, 35, 1);
                     break;
                 }
             case 6:
                 {
-                    DataManager.instance.NeedHouseResourseChange(134, 134, 110, 1);
+                    DataManager.instance.NeedHouseResourseChange(71, 71, 42, 1);
                     break;
                 }
             case 7:
                 {
-                    DataManager.instance.NeedHouseResourseChange(158, 158, 164, 2);
+                    DataManager.instance.NeedHouseResourseChange(84, 84, 49, 1);
                     break;
                 }
             case 8:
                 {
-                    DataManager.instance.NeedHouseResourseChange(174, 174, 154, 2);
+                    DataManager.instance.NeedHouseResourseChange(93, 93, 54, 2);
                     break;
                 }
             case 9:
                 {
-                    DataManager.instance.NeedHouseResourseChange(224, 224, 243, 3);
+                    DataManager.instance.NeedHouseResourseChange(106, 106, 58, 3);
                     break;
                 }
             default:

@@ -240,6 +240,10 @@ MonoBehaviour:
     m_Localized: Laser
     m_Metadata:
       m_Items: []
+  - m_Id: 15179195247362049
+    m_Localized: Subaquatic Projectiles
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

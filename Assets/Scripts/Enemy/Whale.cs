@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Settings;
+using TMPro;
 
 public class Whale : MonsterController
 {
@@ -16,17 +18,32 @@ public class Whale : MonsterController
     [SerializeField] private int bulletCount1;
     [SerializeField] private float shotTime1;
     [SerializeField] private float shotAngle1;
+    [SerializeField] private int dir1;
     [SerializeField] private BulletType bulletType1;
 
     [Space(10)]
-    [SerializeField]
+    [SerializeField] private float maxCoolTime;
+    [SerializeField] private float minCoolTime;
+    private float currentCoolTime;
+
     private Slider hpBar;
+    private GameObject hpBarObj;
+
+    private Animator whaleAnimator;
 
     // 스탯 설정
     protected override void Start()
     {
-        StartCoroutine(RotateShot(bulletCount1, shotTime1, bulletType1));
-        //StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, bulletType1));
+        whaleAnimator = gameObject.GetComponent<Animator>();
+
+        hpBarObj = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1).gameObject;
+        InGameUI.instance._timerText.gameObject.SetActive(false);
+        hpBarObj.SetActive(true);
+        hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
+
+        hpBarObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("BOSS: {0}", LocalizationSettings.StringDatabase.GetLocalizedString("UI", "boss_whale"));
+
+        InGameUI.instance._isBoss = true;
 
         speed = thisSpeed;
         attack = thisAttack;
@@ -36,14 +53,27 @@ public class Whale : MonsterController
         base.Start();
     }
 
+    void OnDestroy()
+    {
+        hpBarObj.SetActive(false);
+        InGameUI.instance._timerText.gameObject.SetActive(true);
+        InGameUI.instance._isBoss = false;
+    }
+
     // 공격
     protected override void Update()
     {
-        hpBar.value = (float)Hp / maxHp;
+        if (hpBar is not null)
+        {
+            hpBar.value = (float)Hp / maxHp;
+        }
 
         _agent.speed = speed;
 
-        base.Update();
+        if (currentHp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void OnTriggerStay2D(Collider2D other)
@@ -51,8 +81,41 @@ public class Whale : MonsterController
 
     }
 
+    IEnumerator Shot()
+    {
+        currentCoolTime = Random.Range(minCoolTime, maxCoolTime);
+
+        yield return new WaitForSeconds(currentCoolTime);
+
+        int shootType = Random.Range(1, 4);
+
+        switch (shootType)
+        {
+            case 1:
+                BuchaeShot(3, 60, BulletType.normal);
+                break;
+            case 2:
+                RotateShot(10, 3, BulletType.normal, 0);
+                break;
+            case 3:
+                RotateShot(16, 0, BulletType.normal, 0);
+                break;
+        }
+    }
+
     #region shoot
-    IEnumerator RotateShot(int bulletCount, float shotTime, BulletType bulletType)
+    IEnumerator SpinShot(int bulletCount, BulletType bulletType, int dir)
+    {
+        for (int i = 0; i < 360; i += (dir * 360) / bulletCount)
+        {
+            StartCoroutine(RotateShot(50, 5, bulletType, i));
+        }
+
+        yield return new WaitForSeconds(5f);
+        //StartCoroutine(SpinShot(bulletCount, bulletType, dir));
+    }
+
+    IEnumerator RotateShot(int bulletCount, float shotTime, BulletType bulletType, float startAngle)
     {
         // bulletCount = 총알 갯수
         // shotTime = 돌면서 발사하는 시간
@@ -60,7 +123,7 @@ public class Whale : MonsterController
 
         for (int i = 0; i < 360; i += 360 / bulletCount)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, i));
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, i + startAngle));
 
             switch (bulletType)
             {
@@ -79,7 +142,7 @@ public class Whale : MonsterController
         }
 
         yield return new WaitForSeconds(3.0f);
-        StartCoroutine(RotateShot(bulletCount, shotTime, bulletType));
+        //StartCoroutine(RotateShot(bulletCount, shotTime, bulletType));
     }
 
     IEnumerator BuchaeShot(int bulletCount, float shotAngle, BulletType bulletType)
@@ -112,7 +175,7 @@ public class Whale : MonsterController
 
         //Debug.Log(angle);
         yield return new WaitForSeconds(7.0f);
-        StartCoroutine(BuchaeShot(bulletCount, shotAngle, bulletType));
+        //StartCoroutine(BuchaeShot(bulletCount, shotAngle, bulletType));
     }
     #endregion
 

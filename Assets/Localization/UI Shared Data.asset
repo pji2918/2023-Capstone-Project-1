@@ -299,6 +299,18 @@ MonoBehaviour:
     m_Key: jangpung_desc
     m_Metadata:
       m_Items: []
+  - m_Id: 16242404719427584
+    m_Key: boss_axolotl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16242404761370624
+    m_Key: boss_whale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16242404761370625
+    m_Key: boss_kraken
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -4540,7 +4540,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5474,7 +5474,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10736,6 +10736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 1271540047}
+  _skillIcon: []
   _skillCoolDownBar:
   - {fileID: 1060173585}
   - {fileID: 1509119325}
@@ -10749,6 +10750,7 @@ MonoBehaviour:
   - {fileID: 1368557438}
   - {fileID: 931852986}
   - {fileID: 164098075}
+  _skillLock: []
   _skillTooltip:
   - {fileID: 2000363785}
   - {fileID: 2090028472}
@@ -10776,6 +10778,7 @@ MonoBehaviour:
   _volumeText:
   - {fileID: 1127926147}
   - {fileID: 673638799}
+  _isBoss: 0
   _isQuestComplete: 000000
   _resourcename:
   - "\uCCA0\uADFC"
@@ -11941,7 +11944,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14529,6 +14532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d23ea6ab0cd864183b86d60ef9478e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyCount: 0
 --- !u!1 &1789096941
 GameObject:
   m_ObjectHideFlags: 0
@@ -15768,7 +15772,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16048,7 +16052,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17711,9 +17715,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7533478185139717369, guid: 0528d116782a01443b300178e4e4ae6b, type: 3}
-      propertyPath: hpBar
-      value: 
-      objectReference: {fileID: 99698274}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0528d116782a01443b300178e4e4ae6b, type: 3}

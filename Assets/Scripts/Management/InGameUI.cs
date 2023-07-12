@@ -32,6 +32,7 @@ public class InGameUI : MonoBehaviour
     public Slider[] _volumeSlider = new Slider[2];
     public TextMeshProUGUI[] _volumeText = new TextMeshProUGUI[2];
     public static InGameUI instance;
+    public bool _isBoss = false;
 
     void Awake()
     {
@@ -56,7 +57,7 @@ public class InGameUI : MonoBehaviour
 
                     _quest[2]._type = ItemNum.bolt;
                     _quest[2]._amount = 0;
-                    _quest[2]._objectiveAmount = 3;
+                    _quest[2]._objectiveAmount = 4;
 
                     _quest[3]._type = ItemNum.ingredient;
                     _quest[3]._amount = 0;
@@ -1238,7 +1239,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[0].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 2)
+        if (DataManager.instance._data.skillLevel >= 3)
         {
             _skillIcon[1].GetComponent<EventTrigger>().enabled = true;
             _skillLock[1].SetActive(false);
@@ -1249,7 +1250,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[1].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 3)
+        if (DataManager.instance._data.skillLevel >= 6)
         {
             _skillIcon[2].GetComponent<EventTrigger>().enabled = true;
             _skillLock[2].SetActive(false);
@@ -1260,7 +1261,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[2].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 4)
+        if (DataManager.instance._data.skillLevel >= 9)
         {
             _skillIcon[3].GetComponent<EventTrigger>().enabled = true;
             _skillLock[3].SetActive(false);
@@ -1271,7 +1272,7 @@ public class InGameUI : MonoBehaviour
             _skillLock[3].SetActive(true);
         }
 
-        if (DataManager.instance._data.skillLevel >= 5)
+        if (DataManager.instance._data.skillLevel >= 12)
         {
             _skillIcon[4].GetComponent<EventTrigger>().enabled = true;
             _skillLock[4].SetActive(false);
@@ -1288,6 +1289,8 @@ public class InGameUI : MonoBehaviour
         }
 
         #endregion
+
+
 
         #region 퀘스트 표시
         for (int i = 0; i < 5; i++)
@@ -1310,7 +1313,7 @@ public class InGameUI : MonoBehaviour
         }
         #endregion
 
-        _timerText.text = string.Format("{0:00}:{1:00}", (int)PlayerController.instance._timer / 60 % 60, (int)PlayerController.instance._timer % 60);
+        _timerText.text = string.Format("{0:00}:{1:00}", (180 - (int)PlayerController.instance._timer) / 60 % 60, (180 - (int)PlayerController.instance._timer) % 60);
 
         #region 상태 표시
         if (PlayerController.instance.isSlow)
@@ -1520,14 +1523,20 @@ public class InGameUI : MonoBehaviour
     {
         if (PlayerController.instance._playerHp <= 0)
         {
+            DataManager.instance.Delete();
             PlayerController.instance._isDying = true;
             PlayerController.instance._playerAgent.isStopped = true;
             PlayerController.instance._playerRigidbody.bodyType = RigidbodyType2D.Static;
             _dieFade.SetActive(true);
-            for (int i = 0; i <= 255; i++)
+            float elapsedTime = 0f;
+            float fadeTime = 0.255f; // fade time in seconds
+            Color32 startColor = new Color32(0, 0, 0, 0);
+            Color32 endColor = new Color32(0, 0, 0, 255);
+            while (elapsedTime < fadeTime)
             {
-                _dieFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                yield return new WaitForSeconds(0.001f);
+                _dieFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
             }
             yield return new WaitForSecondsRealtime(2f);
             _gameOverUI.SetActive(true);

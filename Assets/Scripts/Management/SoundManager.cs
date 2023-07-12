@@ -87,7 +87,7 @@ public class SoundManager : MonoBehaviour
         {
             case AudioClips.BeYourSelf:
                 {
-                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "Now,here", "Be yourself"));
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "Be yourself"));
                 }
             case AudioClips.Ocean_Boom:
                 {

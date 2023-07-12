@@ -47,11 +47,15 @@ public class SceneLoadManager : MonoBehaviour
 
     public IEnumerator ShowTip()
     {
+        float elapsedTime = 0f;
+        float fadeTime = 1f;
         _isTextFading = true;
-        for (int i = 255; i >= 0; i--)
+        while (elapsedTime < fadeTime)
         {
-            _tipText.color = new Color32(255, 255, 255, (byte)i);
-            yield return new WaitForSeconds(0.00001f);
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeTime);
+            _tipText.color = new Color32(255, 255, 255, (byte)(alpha * 255));
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
         var table = _table.GetTableAsync();
         _tipTimer = 5f;
@@ -67,24 +71,40 @@ public class SceneLoadManager : MonoBehaviour
             _tipText.text = LocalizationSettings.StringDatabase.GetLocalizedString("UI", "tiperror");
         }
 
-        for (int i = 0; i <= 255; i++)
+        elapsedTime = 0f;
+        while (elapsedTime < fadeTime)
         {
-            _tipText.color = new Color32(255, 255, 255, (byte)i);
-            yield return new WaitForSeconds(0.00001f);
+            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeTime);
+            _tipText.color = new Color32(255, 255, 255, (byte)(alpha * 255));
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
         _isTextFading = false;
     }
 
     IEnumerator Fade()
     {
-        for (int i = 255; i >= 0; i--)
+        _sceneChangeFade.SetActive(true);
+        float elapsedTime = 0f;
+        float fadeTime = 1f; // fade time in seconds
+        Color32 startColor = new Color32(0, 0, 0, 255);
+        Color32 endColor = new Color32(0, 0, 0, 0);
+        while (elapsedTime < fadeTime)
         {
-            _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.00001f);
+            _sceneChangeFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
         _sceneChangeFade.SetActive(false);
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(LoadScene("Fighting"));
+    }
+    public bool _isCursorOnTip = false;
+
+    public void Cursor(bool state)
+    {
+        _isCursorOnTip = state;
     }
 
     IEnumerator LoadScene(string sceneName)
@@ -130,13 +150,17 @@ public class SceneLoadManager : MonoBehaviour
                 if (_loadingBar.value == 1f)
                 {
                     _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
-                    if (Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2))
+                    if (Input.anyKeyDown && !_isCursorOnTip)
                     {
                         _sceneChangeFade.SetActive(true);
-                        for (int i = 0; i <= 255; i++)
+                        float elapsedTime = 0f;
+                        float fadeTime = 1f;
+                        while (elapsedTime < fadeTime)
                         {
-                            _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                            yield return new WaitForSeconds(0.00005f);
+                            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeTime);
+                            _sceneChangeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)(alpha * 255));
+                            elapsedTime += Time.deltaTime;
+                            yield return null;
                         }
                         asyncLoad.allowSceneActivation = true;
                         yield break;

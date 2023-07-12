@@ -50,6 +50,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Shadow
+    uniqueID: 1728580585
+    locked: 0
   - name: Entity
     uniqueID: 2265946137
     locked: 0
@@ -58,4 +61,7 @@ TagManager:
     locked: 0
   - name: Indicator
     uniqueID: 3007531953
+    locked: 0
+  - name: Overlay
+    uniqueID: 1311506133
     locked: 0

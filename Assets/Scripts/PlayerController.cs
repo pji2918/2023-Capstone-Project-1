@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     public float _foodCoolDown;
 
-    bool _isAttacking;
+    public bool _isAttacking;
     public bool _isDying = false;
     public int _playerMaxHp;
     public int _playerHp;
@@ -91,181 +91,11 @@ public class PlayerController : MonoBehaviour
         // 플레이어의 Animator 컴포넌트를 가져옵니다.
         _playerAnimator = GetComponent<Animator>();
 
-        switch (DataManager.instance._data.buildLevel) // 건물 레벨에 따라 플레이어의 최대 체력과 이동 속도를 설정합니다.
-        {
-            case 0:
-                {
-                    _playerMaxHp = 100;
-                    _moveSpeed = 5f;
-                    break;
-                }
-            case 1:
-                {
-                    _playerMaxHp = 105;
-                    _moveSpeed = 5.2f;
-                    break;
-                }
-            case 2:
-                {
-                    _playerMaxHp = 115;
-                    _moveSpeed = 5.5f;
-                    break;
-                }
-            case 3:
-                {
-                    _playerMaxHp = 120;
-                    _moveSpeed = 5.7f;
-                    break;
-                }
-            case 4:
-                {
-                    _playerMaxHp = 125;
-                    _moveSpeed = 5.9f;
-                    break;
-                }
-            case 5:
-                {
-                    _playerMaxHp = 135;
-                    _moveSpeed = 6.3f;
-                    break;
-                }
-            case 6:
-                {
-                    _playerMaxHp = 140;
-                    _moveSpeed = 6.5f;
-                    break;
-                }
-            case 7:
-                {
-                    _playerMaxHp = 145;
-                    _moveSpeed = 6.7f;
-                    break;
-                }
-            case 8:
-                {
-                    _playerMaxHp = 155;
-                    _moveSpeed = 7f;
-                    break;
-                }
-            case 9:
-                {
-                    _playerMaxHp = 160;
-                    _moveSpeed = 7.2f;
-                    break;
-                }
-            case 10:
-                {
-                    _playerMaxHp = 180;
-                    _moveSpeed = 7.5f;
-                    break;
-                }
-        }
+        _playerMaxHp = DataManager.instance._playerStat.maxHp[DataManager.instance._data.buildLevel];
+        _moveSpeed = (float)DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
 
-        switch (DataManager.instance._data.skillLevel) // 스킬 레벨에 따라 플레이어의 공격력을 설정합니다.
-        {
-            case 0:
-                {
-                    _playerAtk = 10;
-                    _skillDamageMultiplier = 0;
-                    break;
-                }
-            case 1:
-                {
-                    _playerAtk = 11;
-                    _skillDamageMultiplier = 0.2;
-                    break;
-                }
-            case 2:
-                {
-                    _playerAtk = 12;
-                    _skillDamageMultiplier = 0.2;
-                    break;
-                }
-            case 3:
-                {
-                    _playerAtk = 14;
-                    _skillDamageMultiplier = 0.3;
-                    break;
-                }
-            case 4:
-                {
-                    _playerAtk = 15;
-                    _skillDamageMultiplier = 0.5;
-                    break;
-                }
-            case 5:
-                {
-                    _playerAtk = 16;
-                    _skillDamageMultiplier = 0.5;
-                    break;
-                }
-            case 6:
-                {
-                    _playerAtk = 18;
-                    _skillDamageMultiplier = 1;
-                    break;
-                }
-            case 7:
-                {
-                    _playerAtk = 19;
-                    _skillDamageMultiplier = 1;
-                    break;
-                }
-            case 8:
-                {
-                    _playerAtk = 20;
-                    _skillDamageMultiplier = 1;
-                    break;
-                }
-            case 9:
-                {
-                    _playerAtk = 23;
-                    _skillDamageMultiplier = 1.5;
-                    break;
-                }
-            case 10:
-                {
-                    _playerAtk = 25;
-                    _skillDamageMultiplier = 1.5;
-                    break;
-                }
-            case 11:
-                {
-                    _playerAtk = 28;
-                    _skillDamageMultiplier = 1.7;
-                    break;
-                }
-            case 12:
-                {
-                    _playerAtk = 30;
-                    _skillDamageMultiplier = 2;
-                    break;
-                }
-            case 13:
-                {
-                    _playerAtk = 33;
-                    _skillDamageMultiplier = 2;
-                    break;
-                }
-            case 14:
-                {
-                    _playerAtk = 36;
-                    _skillDamageMultiplier = 2;
-                    break;
-                }
-            case 15:
-                {
-                    _playerAtk = 40;
-                    _skillDamageMultiplier = 2.5;
-                    break;
-                }
-            default:
-                {
-                    _playerAtk = 0;
-                    _skillDamageMultiplier = 0;
-                    break;
-                }
-        }
+        _playerAtk = DataManager.instance._playerStat.atk[DataManager.instance._data.skillLevel];
+        _skillDamageMultiplier = DataManager.instance._playerStat.skillDamageMultiplier[DataManager.instance._data.skillLevel];
 
         if (GameManager.instance is not null)
         {
@@ -287,18 +117,22 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(Fade());
 
-        if (DataManager.instance._data.day == 8) // 아홀로틀
+        switch (DataManager.instance._data.day)
         {
-            SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Cute Digital Action Music Pack/Music/CDA_Oriental_Fever_FULL_Loop"));
+            case 8:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Sounds/CDA_Oriental_Fever_FULL_Loop"));
+                break;
+            case 23:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Sounds/CDA_Ready_Steady_GO_FULL_Loop"));
+                break;
+            case 34:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Sounds/MP_SecretLabyrinth_FULL_Loop"));
+                break;
+            default:
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
+                break;
         }
-        else if (DataManager.instance._data.day == 23) // 고래
-        {
-            SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("Meditative Puzzle Music Pack/Music/MP_SecretLabyrinth_60s_Loop"));
-        }
-        else // 평상시
-        {
-            SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
-        }
+
     }
 
     public bool _isFinishing = false;
@@ -336,21 +170,6 @@ public class PlayerController : MonoBehaviour
             _playerArrow.SetActive(false);
         }
 
-
-
-        if (!_isDash)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _playerAgent.isStopped = true;
-                _playerAgent.velocity = Vector2.zero;
-            }
-            else if (Input.GetKeyUp(KeyCode.Space))
-            {
-                _playerAgent.isStopped = false;
-            }
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
             if (!_isDying && _attackCoolDown <= 0f)
@@ -358,25 +177,25 @@ public class PlayerController : MonoBehaviour
                 _attackCoolDown = 0.7f;
                 _isAttacking = true;
 
+                _playerAgent.isStopped = true;
+                _playerAgent.velocity = Vector2.zero;
+
                 _playerAnimator.SetTrigger("Attack");
 
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 // mousePosition이 플레이어의 왼쪽이면 플레이어를 왼쪽으로 바라보게 합니다.
                 if (mousePosition.x < transform.position.x)
                 {
-                    transform.localScale = new Vector3(2, 2, 1);
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 }
                 else if (mousePosition.x > transform.position.x)
                 {
-                    transform.localScale = new Vector3(-2, 2, 1);
+                    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 }
-
-                // 애니메이션이 끝나면, 플레이어의 공격 이펙트를 비활성화합니다.
-                StartCoroutine(AttackEffect());
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && DataManager.instance._data.skillLevel >= 2)
+        if (Input.GetKeyDown(KeyCode.Q) && DataManager.instance._data.skillLevel >= 3)
         {
             if (_harpoonCoolDown <= 0)
             {
@@ -388,7 +207,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && DataManager.instance._data.skillLevel >= 3)
+        if (Input.GetKeyDown(KeyCode.W) && DataManager.instance._data.skillLevel >= 6)
         {
             if (_bubbleCoolDown <= 0)
             {
@@ -398,7 +217,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && DataManager.instance._data.skillLevel >= 4)
+        if (Input.GetKeyDown(KeyCode.E) && DataManager.instance._data.skillLevel >= 9)
         {
             if (_jangpungCoolDown <= 0)
             {
@@ -412,7 +231,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && DataManager.instance._data.skillLevel >= 5)
+        if (Input.GetKeyDown(KeyCode.R) && DataManager.instance._data.skillLevel >= 12)
         {
             if (_mineCoolDown <= 0)
             {
@@ -449,7 +268,7 @@ public class PlayerController : MonoBehaviour
         {
             CallComplete();
         }
-        else
+        else if (!InGameUI.instance._isBoss && !_isFinishing)
         {
             _timer += Time.deltaTime;
         }
@@ -471,12 +290,12 @@ public class PlayerController : MonoBehaviour
         {
             if (_playerAgent.velocity.x > 1 || _playerRigidbody.velocity.x > 1)
             {
-                this.transform.localScale = new Vector3(-2, 2, 1);
+                this.transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _clickPosition - (Vector2)transform.position);
             }
             else if (_playerAgent.velocity.x < 1 || _playerRigidbody.velocity.x < 1)
             {
-                this.transform.localScale = new Vector3(2, 2, 1);
+                this.transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, 1);
                 _playerArrow.transform.rotation = Quaternion.LookRotation(Vector3.forward, _clickPosition - (Vector2)transform.position);
             }
         }
@@ -521,7 +340,7 @@ public class PlayerController : MonoBehaviour
         if (slowCurrentTime > _slowTime && isSlow)
         {
             isSlow = false;
-            PlayerController.instance._moveSpeed = 5f;
+            PlayerController.instance._moveSpeed = (float)DataManager.instance._playerStat.moveSpeed[DataManager.instance._data.buildLevel];
         }
     }
 
@@ -577,20 +396,25 @@ public class PlayerController : MonoBehaviour
         _playerAttackEffect.GetComponent<Animator>().Play("Attack");
     }
 
-    IEnumerator AttackEffect()
+    public void RemoveEffects()
     {
-        yield return new WaitForSeconds(0.5f);
         _playerAttackEffect.SetActive(false);
         _isAttacking = false;
+        _playerAgent.isStopped = false;
     }
 
     IEnumerator Fade()
     {
         _completeFade.SetActive(true);
-        for (int i = 255; i >= 0; i--)
+        float elapsedTime = 0f;
+        float fadeTime = 1f; // fade time in seconds
+        Color32 startColor = new Color32(0, 0, 0, 255);
+        Color32 endColor = new Color32(0, 0, 0, 0);
+        while (elapsedTime < fadeTime)
         {
-            _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-            yield return new WaitForSeconds(0.000001f);
+            _completeFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
         _completeFade.SetActive(false);
     }
@@ -605,7 +429,7 @@ public class PlayerController : MonoBehaviour
 
     public void CallComplete()
     {
-        if (!_isFinishing)
+        if (!_isFinishing && !_isDying)
         {
             StartCoroutine(CheckisComplete());
         }
@@ -620,16 +444,22 @@ public class PlayerController : MonoBehaviour
         && InGameUI.instance._isQuestComplete[1]
         && InGameUI.instance._isQuestComplete[2]
         && InGameUI.instance._isQuestComplete[3]
-        && InGameUI.instance._isQuestComplete[4]))
+        && InGameUI.instance._isQuestComplete[4])
+        && !InGameUI.instance._isBoss)
         {
             _isFinishing = true;
             _playerAgent.isStopped = true;
             _playerRigidbody.bodyType = RigidbodyType2D.Static;
             _completeFade.SetActive(true);
-            for (int i = 0; i <= 255; i++)
+            float elapsedTime = 0f;
+            float fadeTime = 1f; // fade time in seconds
+            Color32 startColor = new Color32(0, 0, 0, 0);
+            Color32 endColor = new Color32(0, 0, 0, 255);
+            while (elapsedTime < fadeTime)
             {
-                _completeFade.GetComponent<Image>().color = new Color32(0, 0, 0, (byte)i);
-                yield return new WaitForSeconds(0.01f);
+                _completeFade.GetComponent<Image>().color = Color32.Lerp(startColor, endColor, elapsedTime / fadeTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
             }
             yield return new WaitForSeconds(1f);
             DataManager.instance._data.day += 1;
@@ -676,9 +506,10 @@ public class PlayerController : MonoBehaviour
             _dashCoolDown = 7f;
             _isDash = true;
 
-            Physics2D.IgnoreLayerCollision(6, 7);
-            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
             _playerAgent.isStopped = true;
+            _playerAgent.enabled = false;
+            Physics2D.IgnoreLayerCollision(6, 7, true);
+            this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
 
             // 마우스 방향으로 돌진합니다.
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -689,6 +520,8 @@ public class PlayerController : MonoBehaviour
 
             _playerRigidbody.velocity = Vector2.zero;
             this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            Physics2D.IgnoreLayerCollision(6, 7, false);
+            _playerAgent.enabled = true;
             _playerAgent.isStopped = false;
             _isDash = false;
         }

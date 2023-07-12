@@ -65,6 +65,8 @@ public class MonsterController : MonoBehaviour
 
         if (currentHp <= 0)
         {
+            DataManager.instance.EnemyCount++;
+            Debug.Log("count : " + DataManager.instance.EnemyCount);
             itemSpawn.RandomItem();
             Instantiate(_dieEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -85,9 +87,9 @@ public class MonsterController : MonoBehaviour
                 this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
-        catch (System.Exception e)
+        catch
         {
-            //Debug.Log(e);
+
         }
     }
 
@@ -133,6 +135,8 @@ public class MonsterController : MonoBehaviour
 
     protected void Damage(int damage)
     {
+        GameObject hitEffect = Instantiate(Resources.Load("HitEffect"), transform.position, Quaternion.identity) as GameObject;
+        hitEffect.transform.SetParent(this.transform);
         if (PlayerController.instance._isPowerUp)
         {
             damage = int.MaxValue;

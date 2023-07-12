@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
+using UnityEngine.Localization.Settings;
 
 public class Axolotl : MonsterController
 {
@@ -28,13 +30,20 @@ public class Axolotl : MonsterController
     private Collider2D axolotlCollider;
     private SpriteRenderer spriteRenderer;
 
-    [Space(10)]
-    [SerializeField]
     private Slider hpBar;
+    private GameObject hpBarObj;
 
     // 스탯 설정
     protected override void Start()
     {
+        InGameUI.instance._isBoss = true;
+
+        hpBarObj = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1).gameObject;
+        InGameUI.instance._timerText.gameObject.SetActive(false);
+        hpBarObj.SetActive(true);
+        hpBar = hpBarObj.transform.GetChild(1).GetComponent<Slider>();
+        hpBarObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("BOSS: {0}", LocalizationSettings.StringDatabase.GetLocalizedString("UI", "boss_axolotl"));
+
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         axolotlCollider = gameObject.GetComponent<Collider2D>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -46,6 +55,13 @@ public class Axolotl : MonsterController
 
         StartCoroutine(Dash());
         StartCoroutine(Poison());
+    }
+
+    void OnDestroy()
+    {
+        hpBarObj.SetActive(false);
+        InGameUI.instance._timerText.gameObject.SetActive(true);
+        InGameUI.instance._isBoss = false;
     }
 
     protected override void Update()

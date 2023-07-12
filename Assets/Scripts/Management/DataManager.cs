@@ -20,7 +20,7 @@ public class Data
 
     public int musicVolume = 100;
     public int effectVolume = 100;
-    public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
+    public FullScreenMode fullScreenMode = FullScreenMode.ExclusiveFullScreen;
     public Resolution resolution;
     public bool is3dAudio = true;
     public bool isScreenVibration = true, displayDamage = true;
@@ -31,9 +31,9 @@ public class Data
         {"iron", 10},
         {"concrete", 10},
         {"bolt", 10},
-        {"core", 10},
-        {"ingredient", 10},
-        {"food", 10}
+        {"core", 0},
+        {"ingredient", 5},
+        {"food", 2}
     };
 
     public Dictionary<string, int> weaponUpgrade = new Dictionary<string, int>()
@@ -53,9 +53,38 @@ public class Data
     };
 }
 
+public struct PlayerStat
+{
+    public List<int> atk, maxHp;
+    public List<double> skillDamageMultiplier;
+    public List<double> moveSpeed;
+
+    public PlayerStat(int dummy)
+    {
+        atk = new List<int>()
+        {
+            10, 11, 12, 14, 15, 16, 18, 19, 20, 23, 25, 28, 30, 33, 36, 40
+        };
+        skillDamageMultiplier = new List<double>()
+        {
+            0, 0.2, 0.2, 0.3, 0.5, 0.5, 1, 1, 1, 1.5, 1.5, 1.7, 2, 2, 2, 2.5
+        };
+        maxHp = new List<int>()
+        {
+            100, 105, 115, 120, 125, 135, 140, 145, 155, 160, 180
+        };
+        moveSpeed = new List<double>()
+        {
+            5, 5.2, 5.5, 5.7, 5.9, 6.3, 6.5, 6.7, 7, 7.2, 7.5
+        };
+    }
+}
+
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
+    public PlayerStat _playerStat = new PlayerStat(0);
+    public int EnemyCount = 0;
 
     void Awake()
     {
@@ -71,6 +100,7 @@ public class DataManager : MonoBehaviour
 
     void Start()
     {
+        EnemyCount = 0;
         _dataPath = Path.Combine(Application.persistentDataPath, "save.json");
         Load();
     }

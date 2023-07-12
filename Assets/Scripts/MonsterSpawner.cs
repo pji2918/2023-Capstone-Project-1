@@ -7,6 +7,8 @@ public class MonsterSpawner : MonoBehaviour
 
     private float _spawnCoolDown;
     public GameObject[] _monsterPrefab;
+    public GameObject[] _bossPrefab;
+    bool _bossSpawned = false;
 
 
     // Start is called before the first frame update
@@ -22,8 +24,11 @@ public class MonsterSpawner : MonoBehaviour
 
         if (_spawnCoolDown <= 0)
         {
-            _spawnCoolDown = 1f;
-            SpawnMonster();
+            _spawnCoolDown = 0.5f;
+            if (!InGameUI.instance._isBoss)
+            {
+                SpawnMonster();
+            }
         }
     }
 
@@ -44,33 +49,55 @@ public class MonsterSpawner : MonoBehaviour
             new MonsterSpawnCap.MonsterList()
             {
                 Name = "MuteHuman",
-                MaxSpawn = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,8,9,10,12,12,15,15,15,18,18,22,25,30,33,36,40,45,50}
+                MaxSpawn = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,4,4,6,6,8,8,10,10,12,12,14,16,18,20,24,24,30,30,30,36,36,44,50,60,66,72,80,90,100}
             },
             new MonsterSpawnCap.MonsterList()
             {
                 Name = "MuteBear",
-                MaxSpawn = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,3,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,11,12,14,14,14,16,16,16,18,18,20,20,20,22,23,25,27}
+                MaxSpawn = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,2,2,4,4,4,6,6,6,8,8,10,10,12,12,14,14,16,18,18,18,20,22,24,28,28,28,32,32,32,32,32,40,40,40,44,46,50,54}
             },
             new MonsterSpawnCap.MonsterList()
             {
                 Name = "SnakeFish",
-                MaxSpawn = new int[]{ 0,0,0,0,0,0,3,3,5,0,5,6,7,8,8,9,9,10,10,12,12,12,14,14,14,16,16,18,18,21,21,23,23,25,25,27,27,27,29,29,30,30,33,33,33,35,37,40,45}
+                MaxSpawn = new int[]{ 0,0,0,0,0,0,12, 12, 20, 20, 24, 28, 32, 32, 36, 36, 40, 40, 48, 48, 48, 56, 56, 56, 64, 64, 72, 72, 84, 84, 92, 92, 100, 100, 108, 108, 108, 116, 116, 120, 120, 132, 132, 132, 140, 140, 148, 160, 180 }
             },
             new MonsterSpawnCap.MonsterList()
             {
                 Name = "LightFish",
-                MaxSpawn = new int[]{ 0,0,3,5,7,9,12,15,18,21,24,27,30,33,35,35,38,38,41,41,43,43,45,45,46,47,48,50,50,52,55,65,70,75,80,85,90,95,97,100,100,103,103,108,115,120,125 }
+                MaxSpawn = new int[]{ 0,0,6, 10, 14, 18, 24, 30, 36, 42, 48, 54, 60, 66, 70, 70, 70, 76, 76, 82, 82, 86, 86, 90, 90, 92, 94, 96, 100, 100, 104, 110, 130, 140, 150, 160, 170, 180, 190, 194, 200, 200, 206, 206, 206, 216, 216, 230, 240, 250 }
             }
         }
     };
 
     void SpawnMonster()
     {
+        if (!_bossSpawned)
+        {
+            if (DataManager.instance._data.day == 8)
+            {
+                Instantiate(_bossPrefab[0], new Vector3(8, 0, 0), Quaternion.identity);
+                _bossSpawned = true;
+            }
+            else if (DataManager.instance._data.day == 23)
+            {
+                Instantiate(_bossPrefab[1], new Vector3(8, 0, 0), Quaternion.identity);
+                _bossSpawned = true;
+            }
+            else if (DataManager.instance._data.day == 34)
+            {
+                Instantiate(_bossPrefab[2], new Vector3(8, 0, 0), Quaternion.identity);
+                _bossSpawned = true;
+            }
+        }
     SetMonster:
         int monsterIndex = Random.Range(0, 5);
         if (monsterIndex == 4)
         {
             goto SetPosition;
+        }
+        else if (monsterIndex == 1 || monsterIndex == 2)
+        {
+            goto SetMonster;
         }
         else if (_monsterSpawnCap.Monsters[monsterIndex].MaxSpawn[DataManager.instance._data.day - 1] <= 0)
         {
