@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Images/Animation/Whale.meta
 guid: ce4687a09104f3f4bb2896e7c58ced2c
 folderAsset: yes
 DefaultImporter:
+========
+guid: 8ff9016f4ff6cfd419c41acc02ee6d85
+NativeFormatImporter:
+>>>>>>>> origin/2023_07_11_main:Assets/Animations/Whale/WhaleAnimator.controller.meta
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
