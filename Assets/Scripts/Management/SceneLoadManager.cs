@@ -124,7 +124,6 @@ public class SceneLoadManager : MonoBehaviour
         }
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
-
         float timer = 0f;
 
         while (!asyncLoad.isDone)
@@ -149,8 +148,11 @@ public class SceneLoadManager : MonoBehaviour
 
                 if (_loadingBar.value == 1f)
                 {
-                    _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
-                    if (Input.anyKeyDown && !_isCursorOnTip)
+                    if (!DataManager.instance._data.skipLoading)
+                    {
+                        _loadingText.text = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", "pressakey").Result;
+                    }
+                    if ((Input.anyKeyDown && !_isCursorOnTip) || DataManager.instance._data.skipLoading)
                     {
                         _sceneChangeFade.SetActive(true);
                         float elapsedTime = 0f;

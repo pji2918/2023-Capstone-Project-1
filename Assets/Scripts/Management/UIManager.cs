@@ -1295,6 +1295,7 @@ public class UIManager : MonoBehaviour
                     _3dAudioToggle.isOn = DataManager.instance._data.is3dAudio;
                     _screenVibrationToggle.isOn = DataManager.instance._data.isScreenVibration;
                     _damageToggle.isOn = DataManager.instance._data.displayDamage;
+                    _skipLoadingToggle.isOn = DataManager.instance._data.skipLoading;
                     break;
                 }
             case "other":
@@ -1392,7 +1393,7 @@ public class UIManager : MonoBehaviour
 
     public Slider[] _soundSliders;
     public Toggle _3dAudioToggle;
-    public Toggle _screenVibrationToggle, _damageToggle;
+    public Toggle _screenVibrationToggle, _damageToggle, _skipLoadingToggle;
     public TextMeshProUGUI[] _soundTexts;
 
     public void OnValueChange(string type)
@@ -1424,6 +1425,11 @@ public class UIManager : MonoBehaviour
             case "damage":
                 {
                     DataManager.instance._data.displayDamage = _damageToggle.isOn;
+                    break;
+                }
+            case "skiploading":
+                {
+                    DataManager.instance._data.skipLoading = _skipLoadingToggle.isOn;
                     break;
                 }
         }

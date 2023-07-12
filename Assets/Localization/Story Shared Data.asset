@@ -310,7 +310,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17834422960135
-    m_Key: storyEndText
+    m_Key: storyFinalBossText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20621210063724544
+    m_Key: ending
     m_Metadata:
       m_Items: []
   m_Metadata:
