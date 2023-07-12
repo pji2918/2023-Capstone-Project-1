@@ -70,6 +70,7 @@ public class Kraken : MonoBehaviour
     IEnumerator Earthquake()
     {
         GameObject earthquake = Instantiate(earthquakePrefab);
+        earthquake.transform.SetParent(gameObject.transform);
 
         bool vertical = (Random.value > 0.5f);
         float ranNum = Random.Range(0, 30.0f);
@@ -101,14 +102,11 @@ public class Kraken : MonoBehaviour
         }
 
         earthquakeEffect.SetActive(true);
-
-        yield return new WaitForSeconds(3.0f);
-        Destroy(earthquake);
     }
 
     IEnumerator SmallUpKrakenActive()
     {
-        float ranNum = Random.Range(3.0f, 5.0f);
+        float ranNum = Random.Range(1.0f, 2.0f);
         yield return new WaitForSeconds(ranNum);
         StartCoroutine(UpKraken());
         StartCoroutine(SmallUpKrakenActive());
@@ -118,6 +116,7 @@ public class Kraken : MonoBehaviour
     {
         GameObject krakenUpLeg = Instantiate(smallKrakenPrefab);
         krakenUpLeg.transform.position = PlayerController.instance.transform.position;
+        krakenUpLeg.transform.SetParent(gameObject.transform);
 
         GameObject krakenLeg = krakenUpLeg.transform.GetChild(0).gameObject;
         krakenLeg.SetActive(false);

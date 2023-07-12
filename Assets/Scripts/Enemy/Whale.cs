@@ -9,26 +9,29 @@ public class Whale : MonsterController
 {
     [SerializeField] private float thisSpeed = 2.0f;
     [SerializeField] private int thisAttack = 10;
-    [SerializeField] private int thisMaxHp = 50;
+    [SerializeField] private int thisMaxHp = 1200;
     [SerializeField] private float thisAttackCoolTime = 0.1f;
 
     [SerializeField] private GameObject bulletPrefab;
 
     [Space(10)]
-    [SerializeField] private int bulletCount1;
-    [SerializeField] private float shotTime1;
-    [SerializeField] private float shotAngle1;
-    [SerializeField] private int dir1;
-    [SerializeField] private BulletType bulletType1;
+    [SerializeField] private float maxCoolTime;
+    [SerializeField] private float minCoolTime;
+    private float currentCoolTime;
 
     private Slider hpBar;
     private GameObject hpBarObj;
 
+    private Animator whaleAnimator;
+
+    private bool isAttack = false;
+
+    [SerializeField] private GameObject point;
+
     // 스탯 설정
     protected override void Start()
     {
-        StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, BulletType.bomb));
-        //StartCoroutine(BuchaeShot(bulletCount1, shotAngle1, bulletType1));
+        whaleAnimator = gameObject.GetComponent<Animator>();
 
         hpBarObj = GameObject.Find("Canvas").transform.GetChild(4).GetChild(1).gameObject;
         InGameUI.instance._timerText.gameObject.SetActive(false);
@@ -43,6 +46,9 @@ public class Whale : MonsterController
         attack = thisAttack;
         maxHp = thisMaxHp;
         attackCoolTime = thisAttackCoolTime;
+
+        StartCoroutine(Shot());
+        StartCoroutine(AttackOnOff());
 
         base.Start();
     }
@@ -64,12 +70,55 @@ public class Whale : MonsterController
 
         _agent.speed = speed;
 
-        base.Update();
+        if (currentHp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void OnTriggerStay2D(Collider2D other)
     {
 
+    }
+
+    IEnumerator Shot()
+    {
+        currentCoolTime = Random.Range(minCoolTime, maxCoolTime);
+
+        yield return new WaitForSeconds(currentCoolTime);
+
+        int shootType = Random.Range(1, 4);
+
+        if (isAttack)
+        {
+            switch (shootType)
+            {
+                case 1:
+                    StartCoroutine(BuchaeShot(3, 60, BulletType.normal));
+                    break;
+                case 2:
+                    StartCoroutine(RotateShot(10, 3, BulletType.normal, 0));
+                    break;
+                case 3:
+                    StartCoroutine(RotateShot(16, 0, BulletType.normal, 0));
+                    break;
+            }
+        }
+
+        StartCoroutine(Shot());
+    }
+
+    IEnumerator AttackOnOff()
+    {
+        yield return new WaitForSeconds(10f);
+        whaleAnimator.SetBool("isAttack", false);
+        isAttack = false;
+
+        yield return new WaitForSeconds(10f);
+        whaleAnimator.SetBool("isAttack", true);
+        isAttack = true;
+
+        StartCoroutine(AttackOnOff());
     }
 
     #region shoot
@@ -92,7 +141,7 @@ public class Whale : MonsterController
 
         for (int i = 0; i < 360; i += 360 / bulletCount)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, i + startAngle));
+            GameObject bullet = Instantiate(bulletPrefab, point.transform.position, Quaternion.Euler(0, 0, i + startAngle));
 
             switch (bulletType)
             {
@@ -125,7 +174,7 @@ public class Whale : MonsterController
 
         for (int i = 0; i < bulletCount; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position,
+            GameObject bullet = Instantiate(bulletPrefab, point.transform.position,
                 Quaternion.Euler(0, 0, angle - (currentAngle - (shotAngle / 2)) + 90));
 
             switch (bulletType)

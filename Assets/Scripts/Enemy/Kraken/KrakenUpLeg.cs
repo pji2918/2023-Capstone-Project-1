@@ -10,7 +10,7 @@ public class KrakenUpLeg : MonsterController
     [SerializeField] private int thisMaxHp = 50;
     [SerializeField] private float thisAttackCoolTime = 3f;
 
-    // ìŠ¤íƒ¯ ì„¤ì •
+    // ½ºÅÈ ¼³Á¤
     protected override void Start()
     {
         speed = thisSpeed;
@@ -23,7 +23,7 @@ public class KrakenUpLeg : MonsterController
         currentHp = maxHp;
     }
 
-    // ê³µê²©
+    // °ø°Ý
     protected override void Update()
     {
         attackCurrentTime += Time.deltaTime;
@@ -31,9 +31,11 @@ public class KrakenUpLeg : MonsterController
         if (currentHp <= 0)
         {
             Instantiate(_dieEffect, transform.position, Quaternion.identity);
-            GameObject kraken = GameObject.Find("Kraken(Clone)");
-            kraken.gameObject.GetComponent<Kraken>().Hit(5);
-
+            if (GameObject.Find("Kraken(Clone)") != null)
+            {
+                GameObject kraken = GameObject.Find("Kraken(Clone)");
+                kraken.gameObject.GetComponent<Kraken>().Hit(5);
+            }
             Destroy(gameObject);
             return;
         }
