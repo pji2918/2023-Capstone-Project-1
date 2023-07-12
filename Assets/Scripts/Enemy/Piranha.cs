@@ -44,6 +44,7 @@ public class Piranha : MonsterController
 
     public void Attack()
     {
+        SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Monster_Hit));
         PlayerController.instance.OnDamage();
         PlayerController.instance._playerHp -= attack;
     }

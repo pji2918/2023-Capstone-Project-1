@@ -32,6 +32,7 @@ public class Item : MonoBehaviour
                 ++InGameUI.instance._quest[System.Array.FindIndex(InGameUI.instance._quest, x => x._type == itemNum)]._amount;
             }
             // 여기에 자원량을 추가하는 코드를 넣으십시오.
+            SoundManager.instance.PlayPlayerEffects(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Get_Item));
             ++DataManager.instance._data.resources[itemNum.ToString()];
 
             PlayerController.instance.CallComplete();

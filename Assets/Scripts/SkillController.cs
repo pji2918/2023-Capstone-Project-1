@@ -31,6 +31,7 @@ public class SkillController : MonoBehaviour
         if (this.CompareTag("Mine") && other.CompareTag("Enemy"))
         {
             GameObject effect = Instantiate(_explosionEffect, this.transform.position, Quaternion.identity);
+            SoundManager.instance.AddAndPlayEffects(effect, SoundManager.instance.GetAudioClip(SoundManager.AudioClips.R_Skill2));
             Destroy(this.gameObject);
         }
     }

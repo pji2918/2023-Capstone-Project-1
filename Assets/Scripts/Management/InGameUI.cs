@@ -1386,6 +1386,7 @@ public class InGameUI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            SoundManager.instance.PauseOrResumeMusic();
             if (!_isPause)
             {
                 if (!PlayerController.instance._isDying || !PlayerController.instance._isFinishing)
@@ -1524,6 +1525,8 @@ public class InGameUI : MonoBehaviour
     {
         if (PlayerController.instance._playerHp <= 0)
         {
+            SoundManager.instance.StopMusic();
+            SoundManager.instance.PlayPlayerEffects(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Dead));
             DataManager.instance.Delete();
             PlayerController.instance._isDying = true;
             PlayerController.instance._playerAgent.isStopped = true;

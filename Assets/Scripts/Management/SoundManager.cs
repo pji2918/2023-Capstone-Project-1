@@ -85,13 +85,137 @@ public class SoundManager : MonoBehaviour
     {
         switch (clip)
         {
-            case AudioClips.BeYourSelf:
+            case AudioClips.Axolotl:
                 {
-                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "Be yourself"));
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Aholotle_CDA_Oriental_Fever_FULL_Loop"));
                 }
-            case AudioClips.Ocean_Boom:
+            case AudioClips.Ending1:
                 {
-                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "Ocean Game", "Ocean_Game_Weapons_Toolkit_Boom_01"));
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Ending1_MP_Enlightenment_FULL_Loop"));
+                }
+            case AudioClips.Ending2:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Ending2_Burning water"));
+                }
+            case AudioClips.Fight:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Fight_Be yourself"));
+                }
+            case AudioClips.Kraken:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Kraken_CDA_Ready_Steady_GO_FULL_Loop"));
+                }
+            case AudioClips.Lobby:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Lobby_You're my air"));
+                }
+            case AudioClips.Title:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Title_Midnight"));
+                }
+            case AudioClips.Whale:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "BGM", "Whale_MP_SecretLabyrinth_FULL_Loop"));
+                }
+            case AudioClips.Click:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Click"));
+                }
+            case AudioClips.Dead:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Dead"));
+                }
+            case AudioClips.E_Skill:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "E_Skill"));
+                }
+            case AudioClips.Get_Food:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Get_Food"));
+                }
+            case AudioClips.Get_Item:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Get_Item"));
+                }
+            case AudioClips.Q_Skill:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Q_Skill"));
+                }
+            case AudioClips.R_Skill:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "R_Skill"));
+                }
+            case AudioClips.R_Skill2:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "R_Skill2"));
+                }
+            case AudioClips.Slow:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Slow"));
+                }
+            case AudioClips.Upgrade:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "UP_SkillShelter"));
+                }
+            case AudioClips.W_Skill:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "W_Skill"));
+                }
+            case AudioClips.Axolotl_Damage:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Aholotle_Damage"));
+                }
+            case AudioClips.Axolotl_Dash:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Aholotle_Dash"));
+                }
+            case AudioClips.Kraken_Attack:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Kraken_Attack"));
+                }
+            case AudioClips.Kraken_BFlash:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Kraken_BackFlash"));
+                }
+            case AudioClips.Loop_BFlash:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Loop_BackFlash"));
+                }
+            case AudioClips.Loop_BFlash2:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Loop_BackFlash2"));
+                }
+            case AudioClips.Loop_BFlash3:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Loop_BackFlash3"));
+                }
+            case AudioClips.Loop_Background:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Loop_Background"));
+                }
+            case AudioClips.Loop_Background2:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Loop_Background2"));
+                }
+            case AudioClips.Monster_Damage:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Monster_Damage"));
+                }
+            case AudioClips.Monster_Hit:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Monster_Hit"));
+                }
+            case AudioClips.Whale_Attack:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Whale_Attack"));
+                }
+            case AudioClips.Whale_Damage:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Whale_Damage"));
+                }
+            case AudioClips.Whale_StartAttack:
+                {
+                    return Resources.Load<AudioClip>(Path.Combine("Sounds", "SFX", "Monster", "Whale_StartAtk"));
                 }
             default:
                 {
@@ -110,7 +234,40 @@ public class SoundManager : MonoBehaviour
     public enum AudioClips
     {
         BeYourSelf,
-        Ocean_Boom
+        Ocean_Boom,
+        Axolotl,
+        Ending1,
+        Ending2,
+        Fight,
+        Kraken,
+        Lobby,
+        Title,
+        Whale,
+        Click,
+        Dead,
+        E_Skill,
+        Get_Food,
+        Get_Item,
+        Q_Skill,
+        R_Skill,
+        R_Skill2,
+        Slow,
+        Upgrade,
+        W_Skill,
+        Axolotl_Damage,
+        Axolotl_Dash,
+        Kraken_Attack,
+        Kraken_BFlash,
+        Loop_BFlash,
+        Loop_BFlash2,
+        Loop_BFlash3,
+        Loop_Background,
+        Loop_Background2,
+        Monster_Damage,
+        Monster_Hit,
+        Whale_Attack,
+        Whale_Damage,
+        Whale_StartAttack
     }
 
     // Start is called before the first frame update
@@ -231,23 +388,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="clip">재생할 효과음을 여기에 지정하십시오.</param>
     public void PlayMonsterEffects(GameObject obj, AudioClip clip)
     {
-        if (SceneManager.GetActiveScene().name.Equals("Fighting")) // 전투 Scene에서만 사용할 수 있도록 함
+        obj.GetComponent<AudioSource>().volume = _effectVolume / 100f;
+        if (DataManager.instance._data.is3dAudio)
         {
-            obj.GetComponent<AudioSource>().volume = _effectVolume / 100f;
-            if (DataManager.instance._data.is3dAudio)
-            {
-                obj.GetComponent<AudioSource>().spatialBlend = 1f;
-            }
-            else
-            {
-                obj.GetComponent<AudioSource>().spatialBlend = 0f;
-            }
-            obj.GetComponent<AudioSource>().clip = clip;
-            obj.GetComponent<AudioSource>().Play();
+            obj.GetComponent<AudioSource>().spatialBlend = 1f;
         }
         else
         {
-            Debug.LogError("오류: 해당 기능은 전투 Scene에서만 사용할 수 있습니다.");
+            obj.GetComponent<AudioSource>().spatialBlend = 0f;
         }
+        obj.GetComponent<AudioSource>().clip = clip;
+        obj.GetComponent<AudioSource>().Play();
     }
 }

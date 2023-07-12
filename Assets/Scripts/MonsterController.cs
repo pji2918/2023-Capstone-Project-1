@@ -135,6 +135,28 @@ public class MonsterController : MonoBehaviour
 
     protected void Damage(int damage)
     {
+        switch (this.gameObject.name)
+        {
+            case "Whale(Clone)":
+                {
+                    SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Whale_Damage));
+                    break;
+                }
+            case "Axolotl(Clone)":
+                {
+                    SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Axolotl_Damage));
+                    break;
+                }
+            case "Kraken(Clone)":
+                {
+                    break;
+                }
+            default:
+                {
+                    SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Monster_Damage));
+                    break;
+                }
+        }
         GameObject hitEffect = Instantiate(Resources.Load("HitEffect"), transform.position, Quaternion.identity) as GameObject;
         hitEffect.transform.SetParent(this.transform);
         if (PlayerController.instance._isPowerUp)

@@ -141,6 +141,13 @@ public class UIManager : MonoBehaviour
             Screen.SetResolution(1280, 720, FullScreenMode.Windowed);
         }
 
+        if (DataManager.instance._data.isPlaying)
+        {
+            HomeToFighting();
+        }
+
+        SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Lobby));
+
         _storyNum = Random.Range(0, 5);
         for (int i = 0; i < 6; i++)
         {
@@ -512,6 +519,7 @@ public class UIManager : MonoBehaviour
     //씬 넘기기
     public void HomeToFighting()
     {
+        DataManager.instance._data.isPlaying = true;
         DataManager.instance.Save();
         StartCoroutine(Fade());
     }

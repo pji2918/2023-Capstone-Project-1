@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 595099128535145323}
   - component: {fileID: 7867489953561111811}
   - component: {fileID: 3752992191504275064}
-  - component: {fileID: 8513367453612953126}
+  - component: {fileID: -7889473276060314512}
   m_Layer: 7
   m_Name: Piranha
   m_TagString: Enemy
@@ -232,7 +232,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!82 &8513367453612953126
+--- !u!82 &-7889473276060314512
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,7 +288,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

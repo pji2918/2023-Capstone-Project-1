@@ -120,16 +120,16 @@ public class PlayerController : MonoBehaviour
         switch (DataManager.instance._data.day)
         {
             case 8:
-                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("CDA_Oriental_Fever_FULL_Loop"));
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Kraken));
                 break;
             case 23:
-                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("CDA_Ready_Steady_GO_FULL_Loop"));
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Axolotl));
                 break;
             case 34:
-                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip("MP_SecretLabyrinth_FULL_Loop"));
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Whale));
                 break;
             default:
-                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.BeYourSelf));
+                SoundManager.instance.PlayMusic(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Fight));
                 break;
         }
 
@@ -199,6 +199,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_harpoonCoolDown <= 0)
             {
+                SoundManager.instance.PlayPlayerEffects(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Q_Skill));
                 _harpoonCoolDown = 8f;
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 float angle = Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) * Mathf.Rad2Deg;
@@ -211,6 +212,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_bubbleCoolDown <= 0)
             {
+                SoundManager.instance.PlayPlayerEffects(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.W_Skill));
                 _bubbleCoolDown = 15f;
                 GameObject bub = Instantiate(_bubblePrefab, transform.position, Quaternion.identity);
                 Destroy(bub, 2f);
@@ -221,6 +223,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_jangpungCoolDown <= 0)
             {
+                SoundManager.instance.PlayPlayerEffects(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.E_Skill));
                 _jangpungOn = true;
                 _jangpungCoolDown = 13f;
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -235,6 +238,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_mineCoolDown <= 0)
             {
+                SoundManager.instance.PlayPlayerEffects(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.R_Skill));
                 _mineCoolDown = 30f;
                 GameObject mine = Instantiate(_minePrefab, transform.position, Quaternion.identity);
             }
@@ -244,6 +248,7 @@ public class PlayerController : MonoBehaviour
         {
             if (DataManager.instance._data.resources["food"] >= 1 && _foodCoolDown <= 0 && !_isDying)
             {
+                SoundManager.instance.PlayPlayerEffects(SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Get_Food));
                 _foodTimer = 4.5f;
                 _foodCoolDown = 10f;
                 StartCoroutine(Eat());
@@ -447,6 +452,7 @@ public class PlayerController : MonoBehaviour
         && InGameUI.instance._isQuestComplete[4])
         && !InGameUI.instance._isBoss)
         {
+            DataManager.instance._data.isPlaying = false;
             _isFinishing = true;
             _playerAgent.isStopped = true;
             _playerRigidbody.bodyType = RigidbodyType2D.Static;

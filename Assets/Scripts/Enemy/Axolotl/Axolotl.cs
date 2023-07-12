@@ -132,6 +132,8 @@ public class Axolotl : MonsterController
                 spriteRenderer.flipX = false;
             }
 
+            SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Axolotl_Dash));
+
             //transform.position = new Vector2(transform.position.x + dir.x, transform.position.y + dir.y);
             rb.DOMove(dir, 1f).SetEase(ease);
             yield return new WaitForSeconds(0.5f);

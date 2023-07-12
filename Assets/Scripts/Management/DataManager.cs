@@ -22,7 +22,7 @@ public class Data
     public int effectVolume = 100;
     public FullScreenMode fullScreenMode = FullScreenMode.ExclusiveFullScreen;
     public Resolution resolution;
-    public bool is3dAudio = true;
+    public bool is3dAudio = true, isPlaying = false;
     public bool isScreenVibration = true, displayDamage = true, skipLoading = true;
     public Language language = Language.Auto;
 
