@@ -115,6 +115,7 @@ public class Whale : MonsterController
         isAttack = false;
 
         yield return new WaitForSeconds(10f);
+        SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip(SoundManager.AudioClips.Whale_StartAttack));
         whaleAnimator.SetBool("isAttack", true);
         isAttack = true;
 
