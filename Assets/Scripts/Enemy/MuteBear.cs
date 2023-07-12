@@ -47,7 +47,6 @@ public class MuteBear : MonsterController
 
     public void Attack()
     {
-
         GameObject stone;
         stone = Instantiate(stonePrefab, transform.position, transform.rotation);
         SoundManager.instance.PlayMonsterEffects(this.gameObject, SoundManager.instance.GetAudioClip("Ocean_Game_Weapons_Toolkit_Boom_01"));

@@ -73,7 +73,7 @@ public class SoundManager : MonoBehaviour
     /// <returns>지정한 오디오 클립이 AudioClip 형식으로 반환됩니다.</returns>
     public AudioClip GetAudioClip(string name)
     {
-        return Resources.Load<AudioClip>(Path.Combine("Audio", name));
+        return Resources.Load<AudioClip>(Path.Combine("Sounds", name));
     }
 
     /// <summary>
